@@ -17,8 +17,10 @@ class ControladorUsuario extends ControladorIndex {
 	function ver_perfil ($params) {
 		$tpl = Template::getInstance();
 
-		$usuario = new Usuario("Alejandro","Peculio","25/07/1997",51117521,NULL,"alejandropeculio@gmail.com","lacontraseniadeale",true);
-		
+		//$usuario = (new Usuario())->getUserByCi("51117521");
+		//$usuario = (new Usuario())->getUserByCorreo("correo@gmail.com");
+		  $usuario = new Usuario();
+
 		$datos = array(
 			"usuario" => $usuario,
 		);

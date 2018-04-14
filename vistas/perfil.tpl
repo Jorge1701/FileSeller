@@ -49,7 +49,7 @@
 											<td>{$usuario->getApellido()}</td>
 										</tr>
 										<tr>
-											<th scope="row">Cedula</th>
+											<th scope="row">Cédula</th>
 											<td>{$usuario->getCi()}</td>
 										</tr>
 										<tr>
@@ -60,6 +60,14 @@
 											<th scope="row">Correo</th>
 											<td>{$usuario->getCorreo()}</td>
 										</tr>
+										<tr>
+											<th scope="row">Cuentas</th>
+											<td>{if "" eq $usuario->getCuentas()}No tiene medios de pago activos{/if}</td>
+										</tr>
+										<tr>
+											<th scope="row">Identificador de la cuenta</th>
+											<td>{$usuario->getId()}</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -68,6 +76,8 @@
 							</div>
 							<div id="editar" class="tab-pane slide-left">
 								<h4>Editar perfil</h4>
+
+								<h6>Esta función será implementada en el siguiente Sprint.</h6>
 							</div>
 						</div>
 					</div>	

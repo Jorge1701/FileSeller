@@ -1,29 +1,29 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-14 02:52:05
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-14 19:22:30
          compiled from "vistas\perfil.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:17597143095ad150b5306417-17279738%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:15211333165ad234926efad7-52806236%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c8fc84890c71f077006ece99ad9b3fe73e7ca25e' => 
     array (
       0 => 'vistas\\perfil.tpl',
-      1 => 1523666034,
+      1 => 1523726548,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '17597143095ad150b5306417-17279738',
+  'nocache_hash' => '15211333165ad234926efad7-52806236',
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5ad23492792ef2_36719293',
   'variables' => 
   array (
     'usuario' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ad150b5390cd0_81637897',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5ad150b5390cd0_81637897')) {function content_5ad150b5390cd0_81637897($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5ad23492792ef2_36719293')) {function content_5ad23492792ef2_36719293($_smarty_tpl) {?><!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -79,7 +79,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </td>
 										</tr>
 										<tr>
-											<th scope="row">Cedula</th>
+											<th scope="row">Cédula</th>
 											<td><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getCi();?>
 </td>
 										</tr>
@@ -93,6 +93,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 											<td><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getCorreo();?>
 </td>
 										</tr>
+										<tr>
+											<th scope="row">Cuentas</th>
+											<td><?php if (''==$_smarty_tpl->tpl_vars['usuario']->value->getCuentas()) {?>No tiene medios de pago activos<?php }?></td>
+										</tr>
+										<tr>
+											<th scope="row">Identificador de la cuenta</th>
+											<td><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getId();?>
+</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -101,6 +110,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 							</div>
 							<div id="editar" class="tab-pane slide-left">
 								<h4>Editar perfil</h4>
+
+								<h6>Esta función será implementada en el siguiente Sprint.</h6>
 							</div>
 						</div>
 					</div>	

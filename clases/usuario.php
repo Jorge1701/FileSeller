@@ -10,12 +10,13 @@ class Usuario extends ClaseBase{
 	private $apellido = "";
 	private $fNac = "";
 	private $ci = 0;
-	private $cuentas = NULL;
+	private $cuentas = "";
 	private $correo = "";
 	private $contrasenia = "";
 	private $activo = true;
+	private $id = "0";
 
-	public function __construct ($nombre = "",$apellido = "", $fNac = "", $ci = 0, $cuentas = NULL, $correo = "", $contrasenia = "", $activo = true){
+	public function __construct ($nombre = "Usuario",$apellido = "Prueba", $fNac = "1995-06-07", $ci = 0, $cuentas = "", $correo = "usuario@prueba.com", $contrasenia = "", $activo = true, $id = 0){
 		$this->nombre = $nombre;
 		$this->apellido = $apellido;
 		$this->fNac = $fNac;
@@ -24,9 +25,9 @@ class Usuario extends ClaseBase{
 		$this->correo = $correo;
 		$this->contrasenia = $contrasenia;
 		$this->activo = $activo;
+		$this->id = $id;
 
-		$tabla="usuarios";
-        parent::__construct($tabla);	
+        parent::__construct("usuarios");	
 
 	}
 
@@ -81,6 +82,29 @@ class Usuario extends ClaseBase{
 		return $this->activo;
 	}
 
+	public function getId(){
+		return $this->id;
+	}
+
+	public function getUserByCorreo($correo){
+		$sql="select * from usuarios where correo='$correo'";
+        $res=NULL;
+        $resultado =$this->db->query($sql) or die ("Fallo en la consulta");
+         if($fila = $resultado->fetch_object()) {
+           $res= new Usuario($fila->nombre,$fila->apellido,$fila->fnac,$fila->ci,$fila->cuentas,$fila->correo,$fila->contrasenia);
+        }
+        return $res;
+	}
+
+	public function getUserByCi($ci){
+		$sql="select * from usuarios where ci=$ci";
+        $res=NULL;
+        $resultado =$this->db->query($sql) or die ("Fallo en la consulta");
+         if($fila = $resultado->fetch_object()) {
+           $res= new Usuario($fila->nombre,$fila->apellido,$fila->fnac,$fila->ci,$fila->cuentas,$fila->correo,$fila->contrasenia,$fila->activo,$fila->id);
+        }
+        return $res;
+	}
 
 
 }
