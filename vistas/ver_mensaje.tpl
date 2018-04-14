@@ -52,7 +52,5 @@
 			</form>
 		</div>
 	</div>
-
-	<!-- Cambio Aqui -->
 </body>
 </html>
