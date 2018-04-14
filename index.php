@@ -1,7 +1,7 @@
 <?php
 
 ini_set ("display_errors", 1);
-error_reporting(E_ALL & ~E_NOTICE);
+error_reporting(E_ALL & ~E_DEPRECATED);
 //error_reporting (E_ERROR | E_PARSE);
 
 require "db/db.php";
