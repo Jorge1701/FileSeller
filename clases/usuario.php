@@ -13,10 +13,11 @@ class Usuario extends ClaseBase{
 	private $cuentas = "";
 	private $correo = "";
 	private $contrasenia = "";
+	private $imagen = "";
 	private $activo = true;
 	private $id = "0";
 
-	public function __construct ($nombre = "Usuario",$apellido = "Prueba", $fNac = "1995-06-07", $ci = 0, $cuentas = "", $correo = "usuario@prueba.com", $contrasenia = "", $activo = true, $id = 0){
+	public function __construct ($nombre = "Usuario",$apellido = "Prueba", $fNac = "1995-06-07", $ci = 0, $cuentas = "", $correo = "usuario@prueba.com", $contrasenia = "",$imagen = "../../img/user-default.png", $activo = true, $id = 0){
 		$this->nombre = $nombre;
 		$this->apellido = $apellido;
 		$this->fNac = $fNac;
@@ -24,6 +25,7 @@ class Usuario extends ClaseBase{
 		$this->cuentas = $cuentas;
 		$this->correo = $correo;
 		$this->contrasenia = $contrasenia;
+		$this->imagen = $imagen;
 		$this->activo = $activo;
 		$this->id = $id;
 
@@ -52,6 +54,11 @@ class Usuario extends ClaseBase{
 	public function setContrasenia($contrasenia){
 		$this->contrasenia = $contrasenia;
 	}
+
+	public function setImagen($imagen){
+		$this->imagen = $imagen;
+	}
+
 	public function setActivo($activo){
 		$this->activo = $activo;
 	}
@@ -78,6 +85,11 @@ class Usuario extends ClaseBase{
 	public function getContrasenia(){
 		return $this->contrasenia;
 	}
+
+	public function getImagen(){
+		return $this->imagen;
+	}
+
 	public function getActivo(){
 		return $this->activo;
 	}

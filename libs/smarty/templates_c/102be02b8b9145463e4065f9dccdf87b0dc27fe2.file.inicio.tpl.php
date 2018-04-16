@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 05:56:49
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 18:13:42
          compiled from "vistas\inicio.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:18322872835ad244987db1b7-96598732%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '102be02b8b9145463e4065f9dccdf87b0dc27fe2' => 
     array (
       0 => 'vistas\\inicio.tpl',
-      1 => 1523850965,
+      1 => 1523895221,
       2 => 'file',
     ),
   ),
@@ -51,6 +51,30 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 							<th scope="row">Vista previa</th>
 						</tr>
 						<tr>
+							<td>Arte urbano</td>
+							<td>Imagen</td>
+							<td>Fotografia de grafiti</td>
+							<td>2,3MB</td>
+							<td>20</td>
+							<td>No disp.</td>
+						</tr>
+							<tr>
+							<td>Arte urbano</td>
+							<td>Imagen</td>
+							<td>Fotografia de grafiti</td>
+							<td>2,3MB</td>
+							<td>20</td>
+							<td>No disp.</td>
+						</tr>
+							<tr>
+							<td>Arte urbano</td>
+							<td>Imagen</td>
+							<td>Fotografia de grafiti</td>
+							<td>2,3MB</td>
+							<td>20</td>
+							<td>No disp.</td>
+						</tr>
+							<tr>
 							<td>Arte urbano</td>
 							<td>Imagen</td>
 							<td>Fotografia de grafiti</td>

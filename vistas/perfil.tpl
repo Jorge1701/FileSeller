@@ -17,7 +17,7 @@
 	<div class="row">
 		<div class="col-sm-9 col-md-9 user-details mx-auto">
 			<div class="user-image">
-				<img src="../../img/user-default.png" title="Karan Singh Sisodia" class="rounded-circle" style="width: 80pt; height: 80pt">
+				<img src="{$usuario->getImagen()}" title="Karan Singh Sisodia" class="rounded-circle" style="width: 80pt; height: 80pt">
 			</div>
 			<div class="user-info-block card">
 				<div class="user-heading">

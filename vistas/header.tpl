@@ -19,9 +19,10 @@
 
 				<div class="dropdown-menu dropdown-menu-right" style="width: 400px">
 					<h6 style="margin: 10px 0px 0px 60px">Notificaciones</h6>
+					<hr>
 					<ul>
-						<li class="dropdown-item"><hr><i class="fa fa-circle-thin"></i> Gracias por formar parte de la comunidad</li>
-						<li class="dropdown-item"><hr><i class="fa fa-circle-thin"></i> Has vendido tu primer archivo</li>
+						<li class="dropdown-item"><i class="fa fa-circle-thin"></i> Gracias por formar parte de la comunidad<hr></li>
+						<li class="dropdown-item"><i class="fa fa-circle-thin"></i> Has vendido tu primer archivo<hr></li>
 					</ul>
 				</div>
 			</li>
@@ -50,7 +51,7 @@
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<img src="../../img/user-default.png" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
+					<img src="{$usuario->getImagen()}" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#" onClick="window.location='{$perfil}'"><i class="fa fa-user" style="margin-right: 5%" aria-hidden="true"></i>Perfil</a>

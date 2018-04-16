@@ -36,6 +36,30 @@
 							<td>20</td>
 							<td>No disp.</td>
 						</tr>
+							<tr>
+							<td>Arte urbano</td>
+							<td>Imagen</td>
+							<td>Fotografia de grafiti</td>
+							<td>2,3MB</td>
+							<td>20</td>
+							<td>No disp.</td>
+						</tr>
+							<tr>
+							<td>Arte urbano</td>
+							<td>Imagen</td>
+							<td>Fotografia de grafiti</td>
+							<td>2,3MB</td>
+							<td>20</td>
+							<td>No disp.</td>
+						</tr>
+							<tr>
+							<td>Arte urbano</td>
+							<td>Imagen</td>
+							<td>Fotografia de grafiti</td>
+							<td>2,3MB</td>
+							<td>20</td>
+							<td>No disp.</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>	

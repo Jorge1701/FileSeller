@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 18:10:04
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 18:26:07
          compiled from "vistas\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:20897764965ad23343f24628-38668979%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aef74919e67e38a43031b67b7e0065fa75124d55' => 
     array (
       0 => 'vistas\\header.tpl',
-      1 => 1523895003,
+      1 => 1523895965,
       2 => 'file',
     ),
   ),
@@ -21,6 +21,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'inicio' => 0,
     'nombre_proyecto' => 0,
+    'usuario' => 0,
     'perfil' => 0,
   ),
   'has_nocache_code' => false,
@@ -50,9 +51,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 				<div class="dropdown-menu dropdown-menu-right" style="width: 400px">
 					<h6 style="margin: 10px 0px 0px 60px">Notificaciones</h6>
+					<hr>
 					<ul>
-						<li class="dropdown-item"><hr><i class="fa fa-circle-thin"></i> Gracias por formar parte de la comunidad</li>
-						<li class="dropdown-item"><hr><i class="fa fa-circle-thin"></i> Has vendido tu primer archivo</li>
+						<li class="dropdown-item"><i class="fa fa-circle-thin"></i> Gracias por formar parte de la comunidad<hr></li>
+						<li class="dropdown-item"><i class="fa fa-circle-thin"></i> Has vendido tu primer archivo<hr></li>
 					</ul>
 				</div>
 			</li>
@@ -81,7 +83,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<img src="../../img/user-default.png" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
+					<img src="<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
+" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['perfil']->value;?>
