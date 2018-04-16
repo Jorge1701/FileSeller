@@ -19,7 +19,7 @@
 			<div class="user-image">
 				<img src="../../img/user-default.png" title="Karan Singh Sisodia" class="rounded-circle" style="width: 80pt; height: 80pt">
 			</div>
-			<div class="user-info-block">
+			<div class="user-info-block card">
 				<div class="user-heading">
 					<h3>{$usuario->getNombre ()} {$usuario->getApellido ()}</h3>
 					<span class="help-block">Paysandú, UY</span>
@@ -27,7 +27,7 @@
 				<div class="container">
 					<ul class="nav nav-tabs nav-tabs-fillup navigation">
 						<li class="nav-item"><a data-toggle="tab" class="active nav-link" href="#information">Datos personales<span class="fa fa-user-circle-o" style="margin-left: 8px"></span></a></li>
-						<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#archivos">Mis archivos <span class="fa fa-upload" style="margin-left: 8px"></span></a></li>
+						<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#archivos">Mis archivos <span class="fa fa-file" style="margin-left: 8px"></span></a></li>
 						<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#editar">Editar <span class="fa fa-edit" style="margin-left: 8px"></span></a></li>
 					</ul>
 					<div class="user-body">
@@ -97,6 +97,7 @@
 										</tr>
 									</tbody>
 								</table>
+								<button class="btn btn-info" href="#"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir nuevo</button>
 							</div>
 							<div id="editar" class="tab-pane slide-left">
 								<h4>Editar perfil</h4>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 05:17:58
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 06:35:50
          compiled from "vistas\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:20897764965ad23343f24628-38668979%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aef74919e67e38a43031b67b7e0065fa75124d55' => 
     array (
       0 => 'vistas\\header.tpl',
-      1 => 1523848677,
+      1 => 1523853349,
       2 => 'file',
     ),
   ),
@@ -52,12 +52,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Mi Cuenta
 							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['perfil']->value;?>
-'">Perfil</a>
-								<a class="dropdown-item" href="#">Subir archivo</a>
+'"><i class="fa fa-user text-right" style="margin-right: 5%" aria-hidden="true"></i>Perfil</a>
+								<a class="dropdown-item" href="#"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir archivo </a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Cerrar sesión</a>
+								<a class="dropdown-item" href="#"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
 							</div>
 						</li>
 					</ul>

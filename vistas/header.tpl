@@ -21,11 +21,11 @@
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Mi Cuenta
 							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#" onClick="window.location='{$perfil}'">Perfil</a>
-								<a class="dropdown-item" href="#">Subir archivo</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="#" onClick="window.location='{$perfil}'"><i class="fa fa-user text-right" style="margin-right: 5%" aria-hidden="true"></i>Perfil</a>
+								<a class="dropdown-item" href="#"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir archivo </a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Cerrar sesión</a>
+								<a class="dropdown-item" href="#"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
 							</div>
 						</li>
 					</ul>

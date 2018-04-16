@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 05:29:42
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 06:52:30
          compiled from "vistas\perfil.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:15211333165ad234926efad7-52806236%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c8fc84890c71f077006ece99ad9b3fe73e7ca25e' => 
     array (
       0 => 'vistas\\perfil.tpl',
-      1 => 1523849380,
+      1 => 1523854349,
       2 => 'file',
     ),
   ),
@@ -45,7 +45,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 			<div class="user-image">
 				<img src="../../img/user-default.png" title="Karan Singh Sisodia" class="rounded-circle" style="width: 80pt; height: 80pt">
 			</div>
-			<div class="user-info-block">
+			<div class="user-info-block card">
 				<div class="user-heading">
 					<h3><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getNombre();?>
  <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getApellido();?>
@@ -55,7 +55,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				<div class="container">
 					<ul class="nav nav-tabs nav-tabs-fillup navigation">
 						<li class="nav-item"><a data-toggle="tab" class="active nav-link" href="#information">Datos personales<span class="fa fa-user-circle-o" style="margin-left: 8px"></span></a></li>
-						<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#archivos">Mis archivos <span class="fa fa-upload" style="margin-left: 8px"></span></a></li>
+						<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#archivos">Mis archivos <span class="fa fa-file" style="margin-left: 8px"></span></a></li>
 						<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#editar">Editar <span class="fa fa-edit" style="margin-left: 8px"></span></a></li>
 					</ul>
 					<div class="user-body">
@@ -131,6 +131,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 										</tr>
 									</tbody>
 								</table>
+								<button class="btn btn-info" href="#"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir nuevo</button>
 							</div>
 							<div id="editar" class="tab-pane slide-left">
 								<h4>Editar perfil</h4>
