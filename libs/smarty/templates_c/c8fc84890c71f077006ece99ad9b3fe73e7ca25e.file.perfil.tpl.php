@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 18:23:02
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 21:55:28
          compiled from "vistas\perfil.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:15211333165ad234926efad7-52806236%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c8fc84890c71f077006ece99ad9b3fe73e7ca25e' => 
     array (
       0 => 'vistas\\perfil.tpl',
-      1 => 1523895777,
+      1 => 1523908523,
       2 => 'file',
     ),
   ),
@@ -77,11 +77,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 										<tr>
 											<th scope="row">Apellido</th>
 											<td><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getApellido();?>
-</td>
-										</tr>
-										<tr>
-											<th scope="row">Cédula</th>
-											<td><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getCi();?>
 </td>
 										</tr>
 										<tr>

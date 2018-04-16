@@ -49,10 +49,6 @@
 											<td>{$usuario->getApellido()}</td>
 										</tr>
 										<tr>
-											<th scope="row">Cédula</th>
-											<td>{$usuario->getCi()}</td>
-										</tr>
-										<tr>
 											<th scope="row">Fecha de nacimiento</th>
 											<td>{$usuario->getFnac()}</td>
 										</tr>

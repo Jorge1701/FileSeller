@@ -9,7 +9,6 @@ class Usuario extends ClaseBase{
 	private $nombre = "";
 	private $apellido = "";
 	private $fNac = "";
-	private $ci = 0;
 	private $cuentas = "";
 	private $correo = "";
 	private $contrasenia = "";
@@ -17,11 +16,10 @@ class Usuario extends ClaseBase{
 	private $activo = true;
 	private $id = "0";
 
-	public function __construct ($nombre = "Usuario",$apellido = "Prueba", $fNac = "1995-06-07", $ci = 0, $cuentas = "", $correo = "usuario@prueba.com", $contrasenia = "",$imagen = "../../img/user-default.png", $activo = true, $id = 0){
+	public function __construct ($nombre = "Usuario",$apellido = "Prueba", $fNac = "1995-06-07",$cuentas = "", $correo = "usuario@prueba.com", $contrasenia = "",$imagen = "../../img/user-default.png", $activo = true, $id = 0){
 		$this->nombre = $nombre;
 		$this->apellido = $apellido;
 		$this->fNac = $fNac;
-		$this->ci = $ci;
 		$this->cuentas = $cuentas;
 		$this->correo = $correo;
 		$this->contrasenia = $contrasenia;
@@ -41,9 +39,6 @@ class Usuario extends ClaseBase{
 	}
 	public function setFnac($fNac){
 		$this->fNac = $fNac;
-	}
-	public function setCi($ci){
-		$this->ci = $ci;
 	}
 	public function setCuentas($cuentas){
 		$this->cuentas = $cuentas;
@@ -73,9 +68,6 @@ class Usuario extends ClaseBase{
 	public function getFnac(){
 		return $this->fNac;
 	}	
-	public function getCi(){
-		return $this->ci; 
-	}
 	public function getCuentas(){
 		return $this->cuentas;
 	}
@@ -107,17 +99,6 @@ class Usuario extends ClaseBase{
         }
         return $res;
 	}
-
-	public function getUserByCi($ci){
-		$sql="select * from usuarios where ci=$ci";
-        $res=NULL;
-        $resultado =$this->db->query($sql) or die ("Fallo en la consulta");
-         if($fila = $resultado->fetch_object()) {
-           $res= new Usuario($fila->nombre,$fila->apellido,$fila->fnac,$fila->ci,$fila->cuentas,$fila->correo,$fila->contrasenia,$fila->activo,$fila->id);
-        }
-        return $res;
-	}
-
 
 }
 
