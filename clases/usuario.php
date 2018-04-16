@@ -112,6 +112,7 @@ class Usuario extends ClaseBase{
 		}else{
 			Session::init();
 			Session::set('usuario_email',$resultado->correo);
+			Session::set('usuario_correo',$resultado->correo);
 			Session::set('usuario_id', $resultado->id);
 
 			return true;
