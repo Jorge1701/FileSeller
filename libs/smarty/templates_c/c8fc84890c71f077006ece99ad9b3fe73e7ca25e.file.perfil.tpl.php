@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 19:39:19
+=======
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 21:57:52
+>>>>>>> 9c1a2cc5bc06fd77c414b613f2fae7afe0fd2510
          compiled from "vistas\perfil.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:15211333165ad234926efad7-52806236%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +11,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c8fc84890c71f077006ece99ad9b3fe73e7ca25e' => 
     array (
       0 => 'vistas\\perfil.tpl',
+<<<<<<< HEAD
       1 => 1523900357,
+=======
+      1 => 1523908666,
+>>>>>>> 9c1a2cc5bc06fd77c414b613f2fae7afe0fd2510
       2 => 'file',
     ),
   ),
@@ -43,7 +51,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 	<div class="row">
 		<div class="col-sm-9 col-md-9 user-details mx-auto">
 			<div class="user-image">
+<<<<<<< HEAD
 				<img src="../img/user-default.png" title="Karan Singh Sisodia" class="rounded-circle" style="width: 80pt; height: 80pt">
+=======
+				<img src="<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
+" class="rounded-circle" style="width: 80pt; height: 80pt">
+>>>>>>> 9c1a2cc5bc06fd77c414b613f2fae7afe0fd2510
 			</div>
 			<div class="user-info-block card">
 				<div class="user-heading">
@@ -76,11 +89,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 										<tr>
 											<th scope="row">Apellido</th>
 											<td><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getApellido();?>
-</td>
-										</tr>
-										<tr>
-											<th scope="row">Cédula</th>
-											<td><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getCi();?>
 </td>
 										</tr>
 										<tr>

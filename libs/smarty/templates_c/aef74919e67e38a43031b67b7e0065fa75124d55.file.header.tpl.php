@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 19:39:45
+=======
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 23:15:45
+>>>>>>> 9c1a2cc5bc06fd77c414b613f2fae7afe0fd2510
          compiled from "vistas\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:20897764965ad23343f24628-38668979%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +11,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aef74919e67e38a43031b67b7e0065fa75124d55' => 
     array (
       0 => 'vistas\\header.tpl',
+<<<<<<< HEAD
       1 => 1523900384,
+=======
+      1 => 1523913343,
+>>>>>>> 9c1a2cc5bc06fd77c414b613f2fae7afe0fd2510
       2 => 'file',
     ),
   ),
@@ -21,6 +29,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'inicio' => 0,
     'nombre_proyecto' => 0,
+    'usuario' => 0,
     'perfil' => 0,
   ),
   'has_nocache_code' => false,
@@ -45,14 +54,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				<a class="nav-link" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['inicio']->value;?>
 '">Inicio<span class="sr-only"></span></a>
 			</li>
+			<?php if (isset($_smarty_tpl->tpl_vars['usuario']->value)) {?>
 			<li class="nav-item dropdown">
 				<a class="nav-link" href="#" data-toggle="dropdown" title="Notificaciones"><i class="fa fa-bell-o nav-link" style="margin-right: 5%" aria-hidden="true"></i></a>
 
 				<div class="dropdown-menu dropdown-menu-right" style="width: 400px">
 					<h6 style="margin: 10px 0px 0px 60px">Notificaciones</h6>
+					<hr>
 					<ul>
-						<li class="dropdown-item"><hr><i class="fa fa-circle-thin"></i> Gracias por formar parte de la comunidad</li>
-						<li class="dropdown-item"><hr><i class="fa fa-circle-thin"></i> Has vendido tu primer archivo</li>
+						<li class="dropdown-item"><i class="fa fa-circle-thin"></i> Gracias por formar parte de la comunidad<hr></li>
+						<li class="dropdown-item"><i class="fa fa-circle-thin"></i> Has vendido tu primer archivo<hr></li>
 					</ul>
 				</div>
 			</li>
@@ -81,7 +92,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<<<<<<< HEAD
 					<img src="../img/user-default.png" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
+=======
+					<img src="<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
+" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
+>>>>>>> 9c1a2cc5bc06fd77c414b613f2fae7afe0fd2510
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['perfil']->value;?>
@@ -91,6 +107,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 					<a class="dropdown-item" href="#"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
 				</div>
 			</li>
+			<?php } else { ?>
+			<li class="nav-item">
+				<a class="nav-link" href="#" title="Iniciar sesión">Iniciar sesión</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#" title="Registrarse">Registrarse</a>
+			</li>
+			
+			<?php }?>
 			<li class="nav-item">
 				<a class="nav-link" href="#" title="Ayuda"><i class="fa fa-question-circle" style="margin-right: 5%"></i></a>
 			</li>

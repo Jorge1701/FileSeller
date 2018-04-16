@@ -14,14 +14,16 @@
 			<li class="nav-item">
 				<a class="nav-link" href="#" onClick="window.location='{$inicio}'">Inicio<span class="sr-only"></span></a>
 			</li>
+			{if isset($usuario)}
 			<li class="nav-item dropdown">
 				<a class="nav-link" href="#" data-toggle="dropdown" title="Notificaciones"><i class="fa fa-bell-o nav-link" style="margin-right: 5%" aria-hidden="true"></i></a>
 
 				<div class="dropdown-menu dropdown-menu-right" style="width: 400px">
 					<h6 style="margin: 10px 0px 0px 60px">Notificaciones</h6>
+					<hr>
 					<ul>
-						<li class="dropdown-item"><hr><i class="fa fa-circle-thin"></i> Gracias por formar parte de la comunidad</li>
-						<li class="dropdown-item"><hr><i class="fa fa-circle-thin"></i> Has vendido tu primer archivo</li>
+						<li class="dropdown-item"><i class="fa fa-circle-thin"></i> Gracias por formar parte de la comunidad<hr></li>
+						<li class="dropdown-item"><i class="fa fa-circle-thin"></i> Has vendido tu primer archivo<hr></li>
 					</ul>
 				</div>
 			</li>
@@ -50,7 +52,11 @@
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<<<<<<< HEAD
 					<img src="../img/user-default.png" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
+=======
+					<img src="{$usuario->getImagen()}" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
+>>>>>>> 9c1a2cc5bc06fd77c414b613f2fae7afe0fd2510
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#" onClick="window.location='{$perfil}'"><i class="fa fa-user" style="margin-right: 5%" aria-hidden="true"></i>Perfil</a>
@@ -59,6 +65,15 @@
 					<a class="dropdown-item" href="#"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
 				</div>
 			</li>
+			{else}
+			<li class="nav-item">
+				<a class="nav-link" href="#" title="Iniciar sesión">Iniciar sesión</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#" title="Registrarse">Registrarse</a>
+			</li>
+			
+			{/if}
 			<li class="nav-item">
 				<a class="nav-link" href="#" title="Ayuda"><i class="fa fa-question-circle" style="margin-right: 5%"></i></a>
 			</li>
