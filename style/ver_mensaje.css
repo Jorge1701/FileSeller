@@ -1,58 +1,118 @@
 .titulo {
-	background: #3f9684;
-	color: #FFF;
-	padding: 0px 25px 0px 25px;
+	text-align: center;
+	font-size: 25pt;
 }
 
-.mensajes {
-	background: #3f9684;
-	color: #FFF;
-	padding: 0px 25px 0px 25px;
+.panel-izq {
+	background-color: #FFF;
+	border-right: solid 1px #AAA;
+	padding-bottom: 1vh;
+}
+
+#contactos {
+	height: 70vh;
 	overflow: auto;
-	height: 80vh;
+	padding-right: 1vh;
 }
 
-.entrada {
-	background: #3f9684;
-	color: #FFF;
-	padding: 10px 25px 10px 25px;
-	text-align: right;
+.contacto {
+	padding: 5px;
+	margin: 3px 0;
+	font-size: 15pt;
+	border-radius: 2px;
 }
 
-.chat_linea {
-    border-bottom: 2px solid #a4c6b5;
-    height: 12px;
-    text-align: center;
+.contacto img {
+	margin-right: 15px;
 }
 
-.dia {
-	background-color: #3f9684;
-	padding: 0px 15px 0px 15px;
-	font-size: 20px;
+.contacto:hover {
+	/* Mouse sobre un contacto */
+	background-color: #AAA;
 }
 
-.msj {
-	margin-top: 15px;
-	border-radius: 5px;
-	padding: 0px 10px 0px 10px;
+.seleccionado {
+	/* Contacto Seleccionado */
+	background-color: #AAA;
 }
 
-.mio {
-	background-color: #f00;
-	margin-left: 25%
+.panel-der {
+	background-color: #FFF;
+	border-left: solid 1px #AAA;
 }
 
-.otro {
-	background-color: #0f0;
-	margin-right: 25%;
+#chat {
+	height: 62vh;
+	overflow: auto;
+	padding-right: 1vw;
+}
+
+.form-enviar {
+	padding-top: 1.5vh;
 }
 
 .mensaje {
-	font-size: 2em;
+	margin: 10px 0;
+	padding: 5px;
+	border-radius: 3.5px;
 }
 
-.hora {
-	font-size: 1em;
+.fecha {
+	text-align: center;
+}
+
+.mensaje-texto {
+	margin: 0px;
+	padding: 0px;
+	font-size: 15pt;
+}
+
+.mensaje-hora {
+	margin: 0px;
+	padding: 0px;
+	font-size: 8pt;
+}
+
+.mensaje-hora {
 	text-align: right;
-	color: #ccc;
+}
+
+.mio {
+	/* Fondo Mensaje propio */
+	background-color: #CCC;
+	margin-left: 25%;
+}
+
+.otro {
+	/* Fondo Mensaje del otro */
+	background-color: #AAA;
+	margin-right: 25%;
+}
+
+/* Estilo de la barra */
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #F90;	
+	background-image:
+	-webkit-linear-gradient(
+		45deg,
+		rgba(255, 255, 255, .2) 25%,
+		transparent 25%,
+		transparent 50%,
+		rgba(255, 255, 255, .2) 50%,
+		rgba(255, 255, 255, .2) 75%,
+		transparent 75%,
+		transparent
+	)
 }

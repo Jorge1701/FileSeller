@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
-	<img class="navbar-brand" style="width: 5%; height: 5%" src="../../img/icono.png" onclick="window.location='{$inicio}'">
+	<img class="navbar-brand" style="width: 5%; height: 5%" src="../img/icono.png" onclick="window.location='{$inicio}'">
 	<a class="navbar-brand font-weight-bold" style="font-size: 200%" href="#" title="Ir a inicio" onclick="window.location='{$inicio}'">{$nombre_proyecto}</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -50,7 +50,7 @@
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<img src="../../img/user-default.png" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
+					<img src="../img/user-default.png" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#" onClick="window.location='{$perfil}'"><i class="fa fa-user" style="margin-right: 5%" aria-hidden="true"></i>Perfil</a>

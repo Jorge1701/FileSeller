@@ -27,7 +27,7 @@ class Mensajes extends ClaseBase {
 		while ($fila = $resultado->fetch_object ())
 			$res[] = new M ($fila->dia, $fila->hora, $fila->mensaje, $fila->id_desde == $fila->id);
 
-		return $res;
+		return isset ($res) ? $res : [];
 	}
 
 	public function getDia () {

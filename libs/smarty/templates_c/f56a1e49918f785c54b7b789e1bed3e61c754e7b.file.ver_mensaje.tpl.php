@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-14 02:36:09
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 01:53:49
          compiled from "vistas\ver_mensaje.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:7085891935ad121697038b6-29183668%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f56a1e49918f785c54b7b789e1bed3e61c754e7b' => 
     array (
       0 => 'vistas\\ver_mensaje.tpl',
-      1 => 1523666110,
+      1 => 1523913145,
       2 => 'file',
     ),
   ),
@@ -20,9 +20,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'usuario' => 0,
-    'mensajes' => 0,
-    'm' => 0,
-    'ult' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -32,65 +29,191 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 	<title>Chat con <?php echo $_smarty_tpl->tpl_vars['usuario']->value;?>
 </title>
 
-	<link rel="stylesheet" type="text/css" href="../bootstrap/bootstrap.min.css">
-	<?php echo '<script'; ?>
- type="text/javascript" src="../bootstrap/jquery.min.js"><?php echo '</script'; ?>
->
-	<?php echo '<script'; ?>
- type="text/javascript" src="../bootstrap/bootstrap.min.js"><?php echo '</script'; ?>
->
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/perfil.css">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../style/ver_mensaje.css">
 </head>
-<body>
+<body background="../img/wallpaper.jpg">
+	<!-- Header -->
+	<?php echo $_smarty_tpl->getSubTemplate ("header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
 
 	<div class="container">
-		<div class="titulo">
-			<h1>Chat con <?php echo $_smarty_tpl->tpl_vars['usuario']->value;?>
-</h1>
-			<?php $_smarty_tpl->tpl_vars['ult'] = new Smarty_variable('', null, 0);?>
-		</div>
-		<div class="mensajes">
-			<?php  $_smarty_tpl->tpl_vars['m'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['m']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['mensajes']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['m']->key => $_smarty_tpl->tpl_vars['m']->value) {
-$_smarty_tpl->tpl_vars['m']->_loop = true;
-?>
-				<?php if ($_smarty_tpl->tpl_vars['m']->value->getDia()!=$_smarty_tpl->tpl_vars['ult']->value) {?>
-					<div class="row">
-						<div class="chat_linea">
-							<abbr class="dia"><?php echo $_smarty_tpl->tpl_vars['m']->value->getDia();?>
-</abbr>
+		<div class="row">
+			<div class="col-sm-5 panel-izq">
+				<div class="titulo">
+					Contactos
+				</div>
+				<!-- Lista de Contactos -->
+				<div id="contactos">
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Juan
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Pedro
+					</div>
+					<div class="contacto seleccionado">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Pepe
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Juan
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Pedro
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Pepe
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Juan
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Pedro
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Pepe
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-7 panel-der">
+				<div class="titulo">
+					Chat con <?php echo $_smarty_tpl->tpl_vars['usuario']->value;?>
+
+				</div>
+				<!-- Lista de Mensajes -->
+				<div id="chat">
+					<div class="mensaje otro">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje mio">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="fecha">
+						16 de Abril de 2018
+					</div>
+					<div class="mensaje otro">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje mio">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje otro">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje mio">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="fecha">
+						16 de Abril de 2018
+					</div>
+					<div class="mensaje otro">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje mio">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje otro">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje mio">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="fecha">
+						16 de Abril de 2018
+					</div>
+					<div class="mensaje otro">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje mio">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+				</div>
+				<!-- Responder Mensaje -->
+				<div class="form-enviar">
+					<form onsubmit="return false">
+						<div class="input-group">
+							<!-- Texto -->
+							<input type="text" class="form-control" placeholder="Mensaje" required>
+							<div class="input-group-btn">
+								<!-- Boton -->
+								<button class="btn btn-default" type="submit" id="btnEnviar">
+									<i class="fa fa-share-square"></i>
+								</button>
+							</div>
 						</div>
-					</div>
-					<?php $_smarty_tpl->tpl_vars['ult'] = new Smarty_variable($_smarty_tpl->tpl_vars['m']->value->getDia(), null, 0);?>
-				<?php }?>
-				<?php if ($_smarty_tpl->tpl_vars['m']->value->esPropio()) {?>
-				<div class="msj mio">
-				<?php } else { ?>
-				<div class="msj otro">
-				<?php }?>
-					<div class="mensaje">
-						<p>
-							<?php echo $_smarty_tpl->tpl_vars['m']->value->getMensaje();?>
-
-						</p>
-					</div>
-					<div class="hora">
-						<p>
-							<?php echo $_smarty_tpl->tpl_vars['m']->value->getHora();?>
-
-						</p>
-					</div>
+					</form>
 				</div>
-			<?php } ?>
-		</div>
-		<div class="entrada">
-			<form onsubmit="return false">
-				<div class="form-group">
-					<textarea class="form-control" rows="5" id="mensaje" style="resize: none"></textarea>
-			        <button class="btn btn-lg btn-success" type="button" id="btnEnviar">Enviar</button>
-				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </body>
