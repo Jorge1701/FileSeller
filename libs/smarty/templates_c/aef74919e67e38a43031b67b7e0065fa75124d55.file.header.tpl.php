@@ -1,30 +1,20 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 19:39:45
-=======
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 23:15:45
->>>>>>> 9c1a2cc5bc06fd77c414b613f2fae7afe0fd2510
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 01:58:54
          compiled from "vistas\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:20897764965ad23343f24628-38668979%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1778612225ad538bebf6f19-31220318%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'aef74919e67e38a43031b67b7e0065fa75124d55' => 
     array (
       0 => 'vistas\\header.tpl',
-<<<<<<< HEAD
-      1 => 1523900384,
-=======
-      1 => 1523913343,
->>>>>>> 9c1a2cc5bc06fd77c414b613f2fae7afe0fd2510
+      1 => 1523923055,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '20897764965ad23343f24628-38668979',
+  'nocache_hash' => '1778612225ad538bebf6f19-31220318',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ad23343f26536_65131726',
   'variables' => 
   array (
     'inicio' => 0,
@@ -33,8 +23,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'perfil' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5ad538bec04391_63466075',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5ad23343f26536_65131726')) {function content_5ad23343f26536_65131726($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
+<?php if ($_valid && !is_callable('content_5ad538bec04391_63466075')) {function content_5ad538bec04391_63466075($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
 	<img class="navbar-brand" style="width: 5%; height: 5%" src="../img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['inicio']->value;?>
 '">
 	<a class="navbar-brand font-weight-bold" style="font-size: 200%" href="#" title="Ir a inicio" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['inicio']->value;?>

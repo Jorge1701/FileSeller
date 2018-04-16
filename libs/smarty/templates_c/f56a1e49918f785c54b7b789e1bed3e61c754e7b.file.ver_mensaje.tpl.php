@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 01:53:49
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 01:58:54
          compiled from "vistas\ver_mensaje.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:7085891935ad121697038b6-29183668%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:6689035385ad538beb4dbc1-22763366%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,19 +11,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '7085891935ad121697038b6-29183668',
+  'nocache_hash' => '6689035385ad538beb4dbc1-22763366',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ad1216997bb03_90742282',
   'variables' => 
   array (
     'usuario' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5ad538beb8e743_98028822',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5ad1216997bb03_90742282')) {function content_5ad1216997bb03_90742282($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5ad538beb8e743_98028822')) {function content_5ad538beb8e743_98028822($_smarty_tpl) {?><!DOCTYPE html>
 <html>
 <head>
 	<title>Chat con <?php echo $_smarty_tpl->tpl_vars['usuario']->value;?>
