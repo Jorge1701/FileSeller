@@ -72,7 +72,31 @@
 								</table>
 							</div>
 							<div id="archivos" class="tab-pane slide-left">
-								<h4>Mis archivos subidos</h4>
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col"><h4>Mis archivos:</h4></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">Nombre</th>
+											<th scope="row">Tipo</th>
+											<th scope="row">Descripción</th>
+											<th scope="row">Tamaño</th>
+											<th scope="row">Precio($U)</th>
+											<th scope="row">Vista previa</th>
+										</tr>
+										<tr>
+											<td>Arte urbano</td>
+											<td>Imagen</td>
+											<td>Fotografia de grafiti</td>
+											<td>2,3MB</td>
+											<td>20</td>
+											<td>No disp.</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 							<div id="editar" class="tab-pane slide-left">
 								<h4>Editar perfil</h4>
