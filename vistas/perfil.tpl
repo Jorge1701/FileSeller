@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="../bootstrap/css/perfil.css">
+	<link rel="stylesheet" href="../../bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../../bootstrap/css/perfil.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	
 	<title>Inicio</title>
 </head>
-<body background="../img/wallpaper.jpg">
+<body background="../../img/wallpaper.jpg">
 	<!-- Header -->
 	{include file="header.tpl"}
 	<!------------------------------------------------------------------------------------------------ -->
@@ -17,7 +17,7 @@
 	<div class="row">
 		<div class="col-sm-9 col-md-9 user-details mx-auto">
 			<div class="user-image">
-				<img src="../img/user-default.png" title="Karan Singh Sisodia" class="rounded-circle" style="width: 80pt; height: 80pt">
+				<img src="../../img/user-default.png" title="Karan Singh Sisodia" class="rounded-circle" style="width: 80pt; height: 80pt">
 			</div>
 			<div class="user-info-block">
 				<div class="user-heading">
@@ -86,7 +86,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="../bootstrap/jquery/jquery-3.3.1.slim.js"></script>
-	<script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../bootstrap/jquery/jquery-3.3.1.slim.js"></script>
+	<script type="text/javascript" src="../../bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

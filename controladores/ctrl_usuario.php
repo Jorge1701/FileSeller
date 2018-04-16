@@ -14,17 +14,17 @@ class ControladorUsuario extends ControladorIndex {
 
 	}	
 
-	function ver_perfil ($params) {
-		$tpl = Template::getInstance();
-
+	function perfil ($params) {
+		
 		//$usuario = (new Usuario())->getUserByCi("51117521");
 		//$usuario = (new Usuario())->getUserByCorreo("correo@gmail.com");
-		  $usuario = new Usuario();
+		$usuario = new Usuario();
 
 		$datos = array(
 			"usuario" => $usuario,
+			"inicio" => $this->getUrl("inicio","principal"),
 		);
-
+		$tpl = Template::getInstance();
 		$tpl->mostrar("perfil", $datos);
 	}
 

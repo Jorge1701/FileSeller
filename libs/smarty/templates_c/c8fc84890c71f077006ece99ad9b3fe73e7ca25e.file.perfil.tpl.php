@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-14 19:22:30
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-14 20:35:53
          compiled from "vistas\perfil.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:15211333165ad234926efad7-52806236%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c8fc84890c71f077006ece99ad9b3fe73e7ca25e' => 
     array (
       0 => 'vistas\\perfil.tpl',
-      1 => 1523726548,
+      1 => 1523730953,
       2 => 'file',
     ),
   ),
@@ -27,13 +27,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="../bootstrap/css/perfil.css">
+	<link rel="stylesheet" href="../../bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../../bootstrap/css/perfil.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	
 	<title>Inicio</title>
 </head>
-<body background="../img/wallpaper.jpg">
+<body background="../../img/wallpaper.jpg">
 	<!-- Header -->
 	<?php echo $_smarty_tpl->getSubTemplate ("header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
@@ -43,7 +43,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 	<div class="row">
 		<div class="col-sm-9 col-md-9 user-details mx-auto">
 			<div class="user-image">
-				<img src="../img/user-default.png" title="Karan Singh Sisodia" class="rounded-circle" style="width: 80pt; height: 80pt">
+				<img src="../../img/user-default.png" title="Karan Singh Sisodia" class="rounded-circle" style="width: 80pt; height: 80pt">
 			</div>
 			<div class="user-info-block">
 				<div class="user-heading">
@@ -121,10 +121,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 	</div>
 
 	<?php echo '<script'; ?>
- type="text/javascript" src="../bootstrap/jquery/jquery-3.3.1.slim.js"><?php echo '</script'; ?>
+ type="text/javascript" src="../../bootstrap/jquery/jquery-3.3.1.slim.js"><?php echo '</script'; ?>
 >
 	<?php echo '<script'; ?>
- type="text/javascript" src="../bootstrap/js/bootstrap.js"><?php echo '</script'; ?>
+ type="text/javascript" src="../../bootstrap/js/bootstrap.js"><?php echo '</script'; ?>
 >
 </body>
 </html><?php }} ?>
