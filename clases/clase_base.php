@@ -1,9 +1,9 @@
 <?php
 class ClaseBase {
-	private $tabla;
-    private $db;
-    private $conectar;
-    private $modelo;
+	protected $tabla;
+    protected $db;
+    protected $conectar;
+    protected $modelo;
     
     public function __autoload($class) {
 	    print "autoloading $class\n";

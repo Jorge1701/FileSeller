@@ -1,7 +1,7 @@
 <?php
 
 ini_set ("display_errors", 1);
-error_reporting(E_ALL & ~E_NOTICE);
+error_reporting(E_ALL & ~E_DEPRECATED);
 //error_reporting (E_ERROR | E_PARSE);
 
 require "db/db.php";
@@ -18,15 +18,16 @@ $tpl->asignar ("nombre_proyecto", "File Seller");
 if (isset ($_GET["url"])) {
 	$partes = explode ('/', $_GET["url"]);
 	$controlador = !empty ($partes[0]) ? $partes[0] : "inicio";
-	$accion = !empty ($partes[1]) ? $partes[1] : "page_not_found";
+	$accion = !empty ($partes[1]) ? $partes[1] : "principal";
 	$params = array ();
 
 	for ($i = 2; $i < count ($partes); $i++)
 		$params[] = $partes[$i];
 } else {
 	$controlador = "inicio";
-	$accion = "page_not_found";
+	$accion = "principal";
 	$params = array ();
+	header("Location: " .$ctrlIndex->getUrl($controlador,$accion));
 }
 
 $ctrl = $ctrlIndex->cargarControlador ($controlador);

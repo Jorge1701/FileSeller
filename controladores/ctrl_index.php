@@ -31,11 +31,11 @@ class ControladorIndex {
 
 	function getUrl ($controlador = "inicio", $accion = "page_not_found", $params = array ()) {
 		$url = URL_BASE . $controlador . "/" . $accion . "/";
-
+		
 		foreach ($params as $key => $value)
 			$url .= $value . "/";
 
-		return url;
+		return $url;
 	}
 
 	function redirect ($controlador = "inicio", $accion = "page_not_found", $params = array ()) {

@@ -1,5 +1,5 @@
 <?php
-	define ("DB_HOST", "localhost");
+	define ("DB_HOST", "127.0.0.1");
 	define ("DB_USR", "root");
 	define ("DB_PASS", "rooteo");
 	define ("DB_DB", "fileseller");
