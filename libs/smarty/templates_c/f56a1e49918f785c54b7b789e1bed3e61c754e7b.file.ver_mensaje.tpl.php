@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-14 02:16:09
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-14 02:36:09
          compiled from "vistas\ver_mensaje.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:7085891935ad121697038b6-29183668%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f56a1e49918f785c54b7b789e1bed3e61c754e7b' => 
     array (
       0 => 'vistas\\ver_mensaje.tpl',
-      1 => 1523664968,
+      1 => 1523666110,
       2 => 'file',
     ),
   ),
