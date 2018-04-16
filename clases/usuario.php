@@ -1,7 +1,5 @@
 <?php 
 
-
-
 require_once ("clase_base.php");
 
 
@@ -27,7 +25,7 @@ class Usuario extends ClaseBase{
 		$this->activo = $activo;
 		$this->id = $id;
 
-        parent::__construct("usuarios");	
+		parent::__construct("usuarios");	
 
 	}
 
@@ -91,16 +89,42 @@ class Usuario extends ClaseBase{
 	}
 
 	public function getUserByCorreo($correo){
-		$sql="select * from usuarios where correo='$correo'";
-        $res=NULL;
-        $resultado =$this->db->query($sql) or die ("Fallo en la consulta");
-         if($fila = $resultado->fetch_object()) {
-           $res= new Usuario($fila->nombre,$fila->apellido,$fila->fnac,$fila->ci,$fila->cuentas,$fila->correo,$fila->contrasenia);
-        }
-        return $res;
+		$sql=$this->db->prepare("select * from usuarios where correo= ?");
+		$sql->bind_param("s",$correo);
+		$res=NULL;
+		$resultado =$this->db->query($sql) or die ("Fallo en la consulta");
+		if($fila = $resultado->fetch_object()) {
+			$res= new Usuario($fila->nombre,$fila->apellido,$fila->fnac,$fila->ci,$fila->cuentas,$fila->correo,$fila->contrasenia);
+		}
+		return $res;
+	}
+
+	public function login($correo,$pass){
+
+		$sql = $this->db->prepare("SELECT * FROM usuarios WHERE correo= ?");
+
+		$sql->bind_param("s",$correo);
+
+		$resultado = $this->db->query($sql) or die ("Fallo la consulta");
+
+		if($resultado->num_rows < 1){
+			return false;
+		}else{
+			Session::init();
+			Session::set('usuario_email',$resultado->correo);
+			Session::set('usuario_id', $resultado->id);
+
+			return true;
+		}
+
+	}
+
+	public function logout(){
+		Session::init();
+		Session::destroy();
 	}
 
 }
 
 
- ?>
+?>
