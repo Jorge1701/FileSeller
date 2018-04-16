@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 21:55:28
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 21:57:52
          compiled from "vistas\perfil.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:15211333165ad234926efad7-52806236%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c8fc84890c71f077006ece99ad9b3fe73e7ca25e' => 
     array (
       0 => 'vistas\\perfil.tpl',
-      1 => 1523908523,
+      1 => 1523908666,
       2 => 'file',
     ),
   ),
@@ -44,7 +44,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 		<div class="col-sm-9 col-md-9 user-details mx-auto">
 			<div class="user-image">
 				<img src="<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
-" title="Karan Singh Sisodia" class="rounded-circle" style="width: 80pt; height: 80pt">
+" class="rounded-circle" style="width: 80pt; height: 80pt">
 			</div>
 			<div class="user-info-block card">
 				<div class="user-heading">

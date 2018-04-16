@@ -14,6 +14,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="#" onClick="window.location='{$inicio}'">Inicio<span class="sr-only"></span></a>
 			</li>
+			{if isset($usuario)}
 			<li class="nav-item dropdown">
 				<a class="nav-link" href="#" data-toggle="dropdown" title="Notificaciones"><i class="fa fa-bell-o nav-link" style="margin-right: 5%" aria-hidden="true"></i></a>
 
@@ -60,6 +61,15 @@
 					<a class="dropdown-item" href="#"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
 				</div>
 			</li>
+			{else}
+			<li class="nav-item">
+				<a class="nav-link" href="#" title="Iniciar sesión">Iniciar sesión</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#" title="Registrarse">Registrarse</a>
+			</li>
+			
+			{/if}
 			<li class="nav-item">
 				<a class="nav-link" href="#" title="Ayuda"><i class="fa fa-question-circle" style="margin-right: 5%"></i></a>
 			</li>

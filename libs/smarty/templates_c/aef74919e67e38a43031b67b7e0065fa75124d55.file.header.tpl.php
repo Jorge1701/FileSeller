@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 18:26:07
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-16 23:15:45
          compiled from "vistas\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:20897764965ad23343f24628-38668979%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aef74919e67e38a43031b67b7e0065fa75124d55' => 
     array (
       0 => 'vistas\\header.tpl',
-      1 => 1523895965,
+      1 => 1523913343,
       2 => 'file',
     ),
   ),
@@ -46,6 +46,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				<a class="nav-link" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['inicio']->value;?>
 '">Inicio<span class="sr-only"></span></a>
 			</li>
+			<?php if (isset($_smarty_tpl->tpl_vars['usuario']->value)) {?>
 			<li class="nav-item dropdown">
 				<a class="nav-link" href="#" data-toggle="dropdown" title="Notificaciones"><i class="fa fa-bell-o nav-link" style="margin-right: 5%" aria-hidden="true"></i></a>
 
@@ -94,6 +95,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 					<a class="dropdown-item" href="#"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
 				</div>
 			</li>
+			<?php } else { ?>
+			<li class="nav-item">
+				<a class="nav-link" href="#" title="Iniciar sesión">Iniciar sesión</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#" title="Registrarse">Registrarse</a>
+			</li>
+			
+			<?php }?>
 			<li class="nav-item">
 				<a class="nav-link" href="#" title="Ayuda"><i class="fa fa-question-circle" style="margin-right: 5%"></i></a>
 			</li>
