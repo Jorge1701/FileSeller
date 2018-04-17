@@ -1,6 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
+<<<<<<< HEAD
 	<img class="navbar-brand" style="width: 5%; height: 5%" src="{$url_base}img/icono.png" onclick="window.location='{$inicio}'">
 	<a class="navbar-brand font-weight-bold" style="font-size: 200%" href="#" title="Ir a inicio" onclick="window.location='{$inicio}'">{$nombre_proyecto}</a>
+=======
+	<img class="navbar-brand" style="width: 5%; height: 5%" src="{$url_base}img/icono.png" onclick="window.location='{$url_inicio}'">
+	<a class="navbar-brand font-weight-bold" style="font-size: 200%" href="#" title="Ir a inicio" onclick="window.location='{$url_inicio}'">{$nombre_proyecto}</a>
+
+>>>>>>> b165b004bf904941b4a0ac939c6afa4d11a16e5e
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -12,7 +18,7 @@
 		</form>
 		<ul class="navbar-nav" style="font-size: 130%">
 			<li class="nav-item">
-				<a class="nav-link" href="#" onClick="window.location='{$inicio}'">Inicio<span class="sr-only"></span></a>
+				<a class="nav-link" href="#" onClick="window.location='{$url_inicio}'">Inicio<span class="sr-only"></span></a>
 			</li>
 			{if isset($usuario)}
 			<li class="nav-item dropdown">
@@ -52,26 +58,26 @@
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<img src="{$usuario->getImagen()}" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
+					<img src="{$url_base}{$usuario->getImagen()}" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#" onClick="window.location='{$perfil}'"><i class="fa fa-user" style="margin-right: 5%" aria-hidden="true"></i>Perfil</a>
-					<a class="dropdown-item" href="#"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir archivo </a>
+					<a class="dropdown-item" href="#" onClick="window.location='{$url_perfil}'"><i class="fa fa-user" style="margin-right: 5%" aria-hidden="true"></i>Perfil</a>
+					<a class="dropdown-item" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir archivo </a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
+					<a class="dropdown-item" href="#" onClick="window.location='{$url_logout}'"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
 				</div>
 			</li>
 			{else}
 			<li class="nav-item">
-				<a class="nav-link" href="#" title="Iniciar sesión">Iniciar sesión</a>
+				<a class="nav-link" href="#" title="Iniciar sesión" onClick="window.location='{$url_login}'">Iniciar sesión</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#" title="Registrarse">Registrarse</a>
+				<a class="nav-link" href="#" title="Registrarse" onClick="window.location='{$url_registro}'">Registrarse</a>
 			</li>
 			
 			{/if}
 			<li class="nav-item">
-				<a class="nav-link" href="#" title="Ayuda"><i class="fa fa-question-circle" style="margin-right: 5%"></i></a>
+				<a class="nav-link" href="#" title="Ayuda" onClick="window.location='{$url_ayuda}'"><i class="fa fa-question-circle" style="margin-right: 5%"></i></a>
 			</li>
 		</ul>
 	</div>

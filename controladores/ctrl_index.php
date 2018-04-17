@@ -1,4 +1,5 @@
 <?php
+require_once ("clases/template.php");
 
 class ControladorIndex {
 
@@ -43,7 +44,8 @@ class ControladorIndex {
 	}
 
 	function page_not_found () {
-		echo "pagina no encontrada";
+		$tpl = Template::getInstance();
+		$tpl->mostrar('error_page');
 	}
 }
 
