@@ -50,7 +50,6 @@ class Mensajes extends ClaseBase {
 	}
 
 	public function getChat ($usuario1, $usuario2) {
-		$stmt = DB::conexion ()->prepare ("SELECT dia, hora, mensaje, id_desde, u1.id AS 'id' FROM mensajes AS m, usuario AS u1, usuario AS u2 WHERE u1.nombre = \"" . $usuario1 . "\" AND u2.nombre = \"" . $usuario2 . "\" AND ((m.id_desde = u1.id AND m.id_para = u2.id) OR (m.id_desde = u2.id AND m.id_para = u1.id))");
 		DB::conexion ()->query ("SET lc_time_names = 'es_MX'");
 		$stmt = DB::conexion ()->prepare ("SELECT DATE_FORMAT(dia, '%d de %M del %Y') AS dia, TIME_FORMAT(hora, '%H:%i') AS hora, mensaje, id_desde, u1.id AS 'id', visto FROM mensajes AS m, usuario AS u1, usuario AS u2 WHERE u1.nombre = \"" . $usuario1 . "\" AND u2.nombre = \"" . $usuario2 . "\" AND ((m.id_desde = u1.id AND m.id_para = u2.id) OR (m.id_desde = u2.id AND m.id_para = u1.id))");
 
@@ -58,7 +57,6 @@ class Mensajes extends ClaseBase {
 		$resultado = $stmt->get_result ();
 
 		while ($fila = $resultado->fetch_object ())
-			$res[] = new M ($fila->dia, $fila->hora, $fila->mensaje, $fila->id_desde == $fila->id);
 			$res[] = new M ($fila->dia, $fila->hora, $fila->mensaje, $fila->id_desde == $fila->id, $fila->visto);
 
 		return isset ($res) ? $res : [];
@@ -96,7 +94,6 @@ class M {
 	public $propio = false;
 	public $visto = true;
 
-	public function __construct ($dia, $hora, $mensaje, $propio) {
 	public function __construct ($dia, $hora, $mensaje, $propio, $visto) {
 		$this->dia = $dia;
 		$this->hora = $hora;
