@@ -113,20 +113,33 @@ class Usuario extends ClaseBase{
 
 	public function login($correo,$pass){
 
-		$sql = $this->db->prepare("SELECT * FROM usuarios WHERE correo= ?");
+		ini_set("display_errors", 1);
+		error_reporting(E_ALL & ~E_NOTICE);
+
+		$sql = DB::conexion()->prepare("SELECT * FROM usuarios WHERE correo= ? ");
 
 		$sql->bind_param("s",$correo);
 
-		$resultado = $this->db->query($sql) or die ("Fallo la consulta");
+		$sql->execute();
+
+		$resultado = $sql->get_result();
 
 		if($resultado->num_rows < 1){
 			return false;
 		}else{
-			Session::init();
-			Session::set('usuario_correo',$resultado->correo);
-			Session::set('usuario_id', $resultado->id);
+			
+			while($fila=$resultado->fetch_object()) {
 
-			return true;
+				Session::init();
+				Session::set('usuario_correo',$fila->correo);
+				Session::set('usuario_id', $fila->id);
+				Session::set('usuario_nombre', $fila->nombre);
+				echo "<h1>".$fila->nombre."</h1>";
+				return true;
+
+			}
+
+			
 		}
 
 	}

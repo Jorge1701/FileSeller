@@ -18,17 +18,17 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon1">@</span>
 						</div>
-						<input id="correo" type="email" class="form-control" placeholder="Correo" aria-label="Correo" aria-describedby="basic-addon1" required="Ingrese su correo" autofocus title="Ingrese su correo">
+						<input name="correo" id="correo" type="email" class="form-control" placeholder="Correo" aria-label="Correo" aria-describedby="basic-addon1" required="Ingrese su correo" autofocus title="Ingrese su correo">
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text fa fa-lock" id="basic-addon1"></span>
 						</div>
-						<input id="password" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" autofocus title="Mínimo 6 / Máximo 21" required="Mínimo 6 / Máximo 21"/>
+						<input name="password" id="password" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" autofocus title="Mínimo 6 / Máximo 21" required="Mínimo 6 / Máximo 21"/>
 					</div>
 					<input id="check" type="checkbox" aria-label="Recordarme">Recordarme
 					<br>
-					<div id="btnLogin" class="btn btn-info" style="margin: 20px 0px ">Iniciar Sesión</div>
+					<button id="btnLogin" class="btn btn-success" style="margin: 20px 0px ">Iniciar Sesión</button>
 				</form>
 				<a href="#" style="margin: 5px 0px">Registrarse</a>
 			</div>
