@@ -3,53 +3,189 @@
 <head>
 	<title>Chat con {$usuario}</title>
 
-	<link rel="stylesheet" type="text/css" href="../bootstrap/bootstrap.min.css">
-	<script type="text/javascript" src="../bootstrap/jquery.min.js"></script>
-	<script type="text/javascript" src="../bootstrap/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/perfil.css">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../style/ver_mensaje.css">
 </head>
-<body>
-
+<body background="../img/wallpaper.jpg">
+	<!-- Header -->
+	{include file="header.tpl"}
+	
 	<div class="container">
-		<div class="titulo">
-			<h1>Chat con {$usuario}</h1>
-			{assign var=ult value=""}
-		</div>
-		<div class="mensajes">
-			{foreach from=$mensajes item=m}
-				{if $m->getDia () neq $ult}
-					<div class="row">
-						<div class="chat_linea">
-							<abbr class="dia">{$m->getDia ()}</abbr>
+		<div class="row">
+			<div class="col-sm-5 panel-izq">
+				<div class="titulo">
+					Contactos
+				</div>
+				<!-- Lista de Contactos -->
+				<div id="contactos">
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Juan
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Pedro
+					</div>
+					<div class="contacto seleccionado">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Pepe
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Juan
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Pedro
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Pepe
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Juan
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Pedro
+					</div>
+					<div class="contacto">
+						<img src="../img/user-default.png" class="rounded-circle" style="width: 40pt; height: 40pt">
+						Pepe
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-7 panel-der">
+				<div class="titulo">
+					Chat con {$usuario}
+				</div>
+				<!-- Lista de Mensajes -->
+				<div id="chat">
+					<div class="mensaje otro">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje mio">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="fecha">
+						16 de Abril de 2018
+					</div>
+					<div class="mensaje otro">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje mio">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje otro">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje mio">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="fecha">
+						16 de Abril de 2018
+					</div>
+					<div class="mensaje otro">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje mio">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje otro">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje mio">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="fecha">
+						16 de Abril de 2018
+					</div>
+					<div class="mensaje otro">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+					<div class="mensaje mio">
+						<p class="mensaje-texto">
+							Hola
+						</p>
+						<p class="mensaje-hora">
+							17:43
+						</p>
+					</div>
+				</div>
+				<!-- Responder Mensaje -->
+				<div class="form-enviar">
+					<form onsubmit="return false">
+						<div class="input-group">
+							<!-- Texto -->
+							<input type="text" class="form-control" placeholder="Mensaje" required>
+							<div class="input-group-btn">
+								<!-- Boton Enviar -->
+								<button class="btn btn-default" type="submit" id="btnEnviar">
+									<i class="fa fa-share-square"></i>
+								</button>
+							</div>
 						</div>
-					</div>
-					{assign var=ult value=$m->getDia ()}
-				{/if}
-				{if $m->esPropio ()}
-				<div class="msj mio">
-				{else}
-				<div class="msj otro">
-				{/if}
-					<div class="mensaje">
-						<p>
-							{$m->getMensaje ()}
-						</p>
-					</div>
-					<div class="hora">
-						<p>
-							{$m->getHora ()}
-						</p>
-					</div>
+					</form>
 				</div>
-			{/foreach}
-		</div>
-		<div class="entrada">
-			<form onsubmit="return false">
-				<div class="form-group">
-					<textarea class="form-control" rows="5" id="mensaje" style="resize: none"></textarea>
-			        <button class="btn btn-lg btn-success" type="button" id="btnEnviar">Enviar</button>
-				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </body>

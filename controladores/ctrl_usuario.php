@@ -37,13 +37,9 @@ class ControladorUsuario extends ControladorIndex {
 
 	function perfil ($params) {
 		
-		//$usuario = (new Usuario())->getUserByCi("51117521");
-		//$usuario = (new Usuario())->getUserByCorreo("correo@gmail.com");
-		$usuario = new Usuario();
-
+		$usuario = (new Usuario())->obtenerPorId($params);
 		$datos = array(
 			"usuario" => $usuario,
-			"inicio" => $this->getUrl("inicio","principal"),
 		);
 		$tpl = Template::getInstance();
 		$tpl->mostrar("perfil", $datos);
