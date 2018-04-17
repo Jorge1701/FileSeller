@@ -20,14 +20,6 @@ class ControladorInicio extends ControladorIndex {
 		$tpl = Template::getInstance();
 		$tpl->mostrar('inicio',$datos);
 	}
-
-	function login(){
-		$datos = array(
-			"titulo" => "Iniciar sesión",
-		);
-		$tpl = Template::getInstance();
-		$tpl->mostrar('login',$datos);
-	}
 }
 
 ?>

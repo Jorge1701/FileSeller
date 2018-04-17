@@ -90,7 +90,7 @@
 										</tr>
 									</tbody>
 								</table>
-								<button class="btn btn-info" href="#"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir nuevo</button>
+								<button class="btn btn-info" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir nuevo</button>
 							</div>
 							<div id="editar" class="tab-pane slide-left">
 								<h4>Editar perfil</h4>

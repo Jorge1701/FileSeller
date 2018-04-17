@@ -57,9 +57,9 @@
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#" onClick="window.location='{$url_perfil}'"><i class="fa fa-user" style="margin-right: 5%" aria-hidden="true"></i>Perfil</a>
-					<a class="dropdown-item" href="#"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir archivo </a>
+					<a class="dropdown-item" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir archivo </a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
+					<a class="dropdown-item" href="#" onClick="window.location='{$url_logout}'"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
 				</div>
 			</li>
 			{else}
