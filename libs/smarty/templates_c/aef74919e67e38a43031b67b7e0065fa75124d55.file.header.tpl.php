@@ -1,36 +1,46 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 02:57:29
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-18 00:13:23
          compiled from "vistas\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:20897764965ad23343f24628-38668979%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:16559362825ad671830ef4c3-62142585%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'aef74919e67e38a43031b67b7e0065fa75124d55' => 
     array (
       0 => 'vistas\\header.tpl',
-      1 => 1523926565,
+      1 => 1523999318,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '20897764965ad23343f24628-38668979',
+  'nocache_hash' => '16559362825ad671830ef4c3-62142585',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ad23343f26536_65131726',
   'variables' => 
   array (
+    'url_base' => 0,
     'url_inicio' => 0,
     'nombre_proyecto' => 0,
+    'active_inicio' => 0,
     'usuario' => 0,
+    'url_mensaje' => 0,
+    'active_perfil' => 0,
     'url_perfil' => 0,
+    'url_subir_archivo' => 0,
+    'url_logout' => 0,
+    'active_iniciarSesion' => 0,
     'url_login' => 0,
+    'active_registrarse' => 0,
     'url_registro' => 0,
+    'active_ayuda' => 0,
     'url_ayuda' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5ad671831373a0_63794163',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5ad23343f26536_65131726')) {function content_5ad23343f26536_65131726($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
-	<img class="navbar-brand" style="width: 5%; height: 5%" src="../../img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_inicio']->value;?>
+<?php if ($_valid && !is_callable('content_5ad671831373a0_63794163')) {function content_5ad671831373a0_63794163($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
+	<img class="navbar-brand" style="width: 5%; height: 5%" src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_inicio']->value;?>
 '">
 	<a class="navbar-brand font-weight-bold" style="font-size: 200%" href="#" title="Ir a inicio" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_inicio']->value;?>
 '"><?php echo $_smarty_tpl->tpl_vars['nombre_proyecto']->value;?>
@@ -46,13 +56,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar archivo</button>
 		</form>
 		<ul class="navbar-nav" style="font-size: 130%">
-			<li class="nav-item">
+			<li class="nav-item <?php if (isset($_smarty_tpl->tpl_vars['active_inicio']->value)) {?> <?php echo $_smarty_tpl->tpl_vars['active_inicio']->value;?>
+ <?php }?>">
 				<a class="nav-link" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_inicio']->value;?>
 '">Inicio<span class="sr-only"></span></a>
 			</li>
 			<?php if (isset($_smarty_tpl->tpl_vars['usuario']->value)) {?>
 			<li class="nav-item dropdown">
-				<a class="nav-link" href="#" data-toggle="dropdown" title="Notificaciones"><i class="fa fa-bell-o nav-link" style="margin-right: 5%" aria-hidden="true"></i></a>
+				<a class="nav-link fa fa-bell-o" href="#" title="Notificaciones" data-toggle="dropdown">
+					<span class="fa fa-comment"></span>
+					<span class="num">2</span>
+				</a>
 
 				<div class="dropdown-menu dropdown-menu-right" style="width: 400px">
 					<h6 style="margin: 10px 0px 0px 60px">Notificaciones</h6>
@@ -64,13 +78,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				</div>
 			</li>
 			<li class="nav-item dropdown">
-				<a class="nav-link" href="#" title="Mensajes" data-toggle="dropdown"><i class="fa fa-inbox nav-link" style="margin-right: 5%" aria-hidden="true"></i></a>
+				<a class="nav-link fa fa-inbox" href="#" title="Mensajes" data-toggle="dropdown">
+					<span class="fa fa-comment"></span>
+					<span class="num">2</span>
+				</a>
+
 
 				<div class="dropdown-menu dropdown-menu-right" style="width: 400px">
 					<h6 style="margin: 10px 0px 20px 60px">Mensajes</h6>
 					<table class="table">
 						<tbody>
-							<tr>
+							<tr onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_mensaje']->value;?>
+id'">
 								<th scope="row">Brian</th>
 								<td>hola como estas ?</td>
 							</tr>
@@ -87,31 +106,36 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				</div>
 			</li>
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<img src="<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
+				<a class="nav-link dropdown-toggle <?php if (isset($_smarty_tpl->tpl_vars['active_perfil']->value)) {?> <?php echo $_smarty_tpl->tpl_vars['active_perfil']->value;?>
+ <?php }?> " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<img src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;
+echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
 " title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_perfil']->value;?>
-?id=<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getId();?>
 '"><i class="fa fa-user" style="margin-right: 5%" aria-hidden="true"></i>Perfil</a>
-					<a class="dropdown-item" href="#"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir archivo </a>
+					<a class="dropdown-item" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_subir_archivo']->value;?>
+'"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir archivo </a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
+					<a class="dropdown-item" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_logout']->value;?>
+'"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
 				</div>
 			</li>
 			<?php } else { ?>
-			<li class="nav-item">
+			<li class="nav-item <?php if (isset($_smarty_tpl->tpl_vars['active_iniciarSesion']->value)) {?> <?php echo $_smarty_tpl->tpl_vars['active_iniciarSesion']->value;?>
+ <?php }?>">
 				<a class="nav-link" href="#" title="Iniciar sesión" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_login']->value;?>
 '">Iniciar sesión</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item <?php if (isset($_smarty_tpl->tpl_vars['active_registrarse']->value)) {?> <?php echo $_smarty_tpl->tpl_vars['active_registrarse']->value;?>
+ <?php }?>">
 				<a class="nav-link" href="#" title="Registrarse" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_registro']->value;?>
 '">Registrarse</a>
 			</li>
-			
 			<?php }?>
-			<li class="nav-item">
+			<li class="nav-item  <?php if (isset($_smarty_tpl->tpl_vars['active_ayuda']->value)) {?> <?php echo $_smarty_tpl->tpl_vars['active_ayuda']->value;?>
+ <?php }?>">
 				<a class="nav-link" href="#" title="Ayuda" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_ayuda']->value;?>
 '"><i class="fa fa-question-circle" style="margin-right: 5%"></i></a>
 			</li>

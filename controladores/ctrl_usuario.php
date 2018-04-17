@@ -7,25 +7,14 @@ require_once ("clases/session.php");
 
 class ControladorUsuario extends ControladorIndex {
 
-	function inicio () {
-		
-	}
 
-	function login(){
-		$datos = array(
-			"active_iniciarSesion" => "active",
-		);
-		$tpl = Template::getInstance();
-		$tpl->mostrar('login',$datos);
-	}
-
-	/*function registro () {
-		$datos = array(
-			"active_registrarse" => "active",
-		);
-		$tpl = Template::getInstance();
-		$tpl->mostrar("registro",$datos);
-	}*/	
+	function registro () {
+	$datos = array(
+		"active_registrarse" => "active",
+	);
+	$tpl = Template::getInstance();
+	$tpl->mostrar("registro",$datos);
+	}	
 
 	function perfil () {
 		$datos = array(
