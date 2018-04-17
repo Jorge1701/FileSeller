@@ -6,18 +6,18 @@ require_once ("clase_base.php");
 class Usuario extends ClaseBase{
 	private $nombre = "";
 	private $apellido = "";
-	private $fNac = "";
+	private $fnac = "";
 	private $cuentas = "";
 	private $correo = "";
 	private $contrasenia = "";
-	private $imagen = "";
+	private $imagen = "/img/user-default.png";
 	private $activo = true;
 	private $id = 0;
 
-	public function __construct ($nombre = "Usuario",$apellido = "Prueba", $fNac = "1995-06-07",$cuentas = "", $correo = "usuario@prueba.com", $contrasenia = "1234",$imagen = "../../img/user-default.png", $activo = true, $id = 0){
+	/*public function __construct ($nombre = "Usuario",$apellido = "Prueba", $fnac = "1995-06-07",$cuentas = "", $correo = "usuario@prueba.com", $contrasenia = "1234",$imagen = "../../img/user-default.png", $activo = true, $id = 0){
 		$this->nombre = $nombre;
 		$this->apellido = $apellido;
-		$this->fNac = $fNac;
+		$this->fnac = $fnac;
 		$this->cuentas = $cuentas;
 		$this->correo = $correo;
 		$this->contrasenia = $contrasenia;
@@ -27,7 +27,19 @@ class Usuario extends ClaseBase{
 
 		parent::__construct("usuarios");	
 
-	}
+	}*/
+
+	public function __construct($obj=NULL) {
+        //$this->db=DB::conexion();
+        if(isset($obj)){
+            foreach ($obj as $key => $value) {
+                $this->$key=$value;
+            }    
+        }
+
+        parent::__construct("usuarios");	
+
+    }
 
 	public function setNombre($nombre){
 		$this->nombre = $nombre;
@@ -35,8 +47,8 @@ class Usuario extends ClaseBase{
 	public function setApellido($apellido){
 		$this->apellido = $apellido;
 	}
-	public function setFnac($fNac){
-		$this->fNac = $fNac;
+	public function setfnac($fnac){
+		$this->fnac = $fnac;
 	}
 	public function setCuentas($cuentas){
 		$this->cuentas = $cuentas;
@@ -63,8 +75,8 @@ class Usuario extends ClaseBase{
 	public function getApellido(){
 		return $this->apellido;
 	}
-	public function getFnac(){
-		return $this->fNac;
+	public function getfnac(){
+		return $this->fnac;
 	}	
 	public function getCuentas(){
 		return $this->cuentas;

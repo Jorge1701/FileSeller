@@ -37,7 +37,7 @@ class ControladorUsuario extends ControladorIndex {
 
 	function perfil ($params) {
 		
-		$usuario = (new Usuario())->obtenerPorId($params);
+		$usuario = (new Usuario())->obtenerPorId($params[0]);
 		$datos = array(
 			"usuario" => $usuario,
 		);
