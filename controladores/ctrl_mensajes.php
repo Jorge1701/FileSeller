@@ -51,11 +51,6 @@ class ControladorMensajes extends ControladorIndex {
 		 		"mensajes" => $conversacion
 		    );
 
-	 	$datos = array(
-	 		"usuario" => "Pepe",
-	 		"mensajes" => $mensajes->getChat ("Juan", "Pepe")
-	    );
-	    
 	    $tpl->mostrar ("ver_mensaje", $datos);
 	}
 }

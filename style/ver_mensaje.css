@@ -58,16 +58,11 @@
 	padding-top: 1.5vh;
 }
 
-.mensaje {
-	margin: 10px 0;
-	padding: 5px;
-	border-radius: 3.5px;
 .fecha {
 	text-align: center;
 	margin-top: 2vh;
 }
 
-.fecha {
 .msj {
 	margin-top: 2px;
 	width: 50%;
@@ -115,14 +110,12 @@
 
 .mio {
 	/* Fondo Mensaje propio */
-	background-color: #CCC;
 	background-color: #AFA;
 	margin-left: 25%;
 }
 
 .otro {
 	/* Fondo Mensaje del otro */
-	background-color: #AAA;
 	background-color: #AAF;
 	margin-right: 25%;
 }
