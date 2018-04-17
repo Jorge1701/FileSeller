@@ -1,7 +1,33 @@
-<!DOCTYPE html>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 02:05:07
+         compiled from "vistas\ver_mensaje.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:6689035385ad538beb4dbc1-22763366%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'f56a1e49918f785c54b7b789e1bed3e61c754e7b' => 
+    array (
+      0 => 'vistas\\ver_mensaje.tpl',
+      1 => 1523923494,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '6689035385ad538beb4dbc1-22763366',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5ad538beb8e743_98028822',
+  'variables' => 
+  array (
+    'usuario' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5ad538beb8e743_98028822')) {function content_5ad538beb8e743_98028822($_smarty_tpl) {?><!DOCTYPE html>
 <html>
 <head>
-	<title>Chat con {$usuario}</title>
+	<title>Chat con <?php echo $_smarty_tpl->tpl_vars['usuario']->value;?>
+</title>
 
 	<link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="../bootstrap/css/perfil.css">
@@ -10,7 +36,8 @@
 </head>
 <body background="../img/wallpaper.jpg">
 	<!-- Header -->
-	{include file="header.tpl"}
+	<?php echo $_smarty_tpl->getSubTemplate ("header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
 	
 	<div class="container">
 		<div class="row">
@@ -60,7 +87,8 @@
 			</div>
 			<div class="col-sm-7 panel-der">
 				<div class="titulo">
-					Chat con {$usuario}
+					Chat con <?php echo $_smarty_tpl->tpl_vars['usuario']->value;?>
+
 				</div>
 				<!-- Lista de Mensajes -->
 				<div id="chat">
@@ -189,4 +217,4 @@
 		</div>
 	</div>
 </body>
-</html>
+</html><?php }} ?>
