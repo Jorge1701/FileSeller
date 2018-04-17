@@ -21,10 +21,6 @@ $tpl->asignar ("url_registro",$ctrlIndex->getUrl("usuario","registro"));
 $tpl->asignar ("url_ayuda", $ctrlIndex->getUrl("inicio","ayuda"));
 $tpl->asignar ("url_subir_archivo", $ctrlIndex->getUrl("archivo","subir"));
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c3d2d53796692ceeb1dcb0150b10ff0bb1ddf7e6
 if (isset ($_GET["url"])) {
 	$partes = explode ('/', $_GET["url"]);
 	$controlador = !empty ($partes[0]) ? $partes[0] : "inicio";
