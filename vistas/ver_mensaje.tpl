@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
 	{if isset ($seleccionado)}
 		<title>Conversacion con {$nom_usuario}</title>
 	{else}
@@ -11,6 +12,11 @@
 	<link rel="stylesheet" type="text/css" href="{$url_base}bootstrap/css/perfil.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{$url_base}style/ver_mensaje.css">
+=======
+	{include file="include_css.tpl"}
+	<link rel="stylesheet" type="text/css" href="{$url_base}style/ver_mensaje.css">
+	<title>Chat con {$usuario}</title>
+>>>>>>> b165b004bf904941b4a0ac939c6afa4d11a16e5e
 </head>
 <body background="{$url_base}img/wallpaper.jpg">
 	<!-- Header -->
@@ -114,5 +120,6 @@
 			</div>
 		</div>
 	</div>
+	{include file="include_js.tpl"}
 </body>
 </html>
