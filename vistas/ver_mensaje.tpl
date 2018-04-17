@@ -11,7 +11,7 @@
 <body background="../img/wallpaper.jpg">
 	<!-- Header -->
 	{include file="header.tpl"}
-
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-5 panel-izq">
@@ -177,7 +177,7 @@
 							<!-- Texto -->
 							<input type="text" class="form-control" placeholder="Mensaje" required>
 							<div class="input-group-btn">
-								<!-- Boton -->
+								<!-- Boton Enviar -->
 								<button class="btn btn-default" type="submit" id="btnEnviar">
 									<i class="fa fa-share-square"></i>
 								</button>

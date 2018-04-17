@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 02:00:42
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 02:05:07
          compiled from "vistas\ver_mensaje.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6689035385ad538beb4dbc1-22763366%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f56a1e49918f785c54b7b789e1bed3e61c754e7b' => 
     array (
       0 => 'vistas\\ver_mensaje.tpl',
-      1 => 1523923240,
+      1 => 1523923494,
       2 => 'file',
     ),
   ),
@@ -38,7 +38,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 	<!-- Header -->
 	<?php echo $_smarty_tpl->getSubTemplate ("header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-5 panel-izq">
@@ -205,7 +205,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 							<!-- Texto -->
 							<input type="text" class="form-control" placeholder="Mensaje" required>
 							<div class="input-group-btn">
-								<!-- Boton -->
+								<!-- Boton Enviar -->
 								<button class="btn btn-default" type="submit" id="btnEnviar">
 									<i class="fa fa-share-square"></i>
 								</button>
