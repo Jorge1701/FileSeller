@@ -1,12 +1,18 @@
 .titulo {
 	text-align: center;
 	font-size: 25pt;
+	border-bottom: solid 1.5px #AAA;
 }
 
 .panel-izq {
 	background-color: #FFF;
 	border-right: solid 1px #AAA;
 	padding-bottom: 1vh;
+}
+
+.img-usuario {
+	width: 40pt;
+	height: 40pt;
 }
 
 #contactos {
@@ -16,6 +22,7 @@
 }
 
 .contacto {
+	color: #000;
 	padding: 5px;
 	margin: 3px 0;
 	font-size: 15pt;
@@ -28,12 +35,12 @@
 
 .contacto:hover {
 	/* Mouse sobre un contacto */
-	background-color: #AAA;
+	background-color: #AAD;
 }
 
 .seleccionado {
 	/* Contacto Seleccionado */
-	background-color: #AAA;
+	background-color: #AAF;
 }
 
 .panel-der {
@@ -55,9 +62,32 @@
 	margin: 10px 0;
 	padding: 5px;
 	border-radius: 3.5px;
+.fecha {
+	text-align: center;
+	margin-top: 2vh;
 }
 
 .fecha {
+.msj {
+	margin-top: 2px;
+	width: 50%;
+	border-radius: 100px;
+	padding-bottom: 2px;
+	text-align: center;
+	margin-top: 2vh;
+}
+
+.no-leido {
+	/* Color mensajes de visto */
+	background-color: #FAA;
+}
+
+.visto {
+	/* Color mensajes de visto */
+	background-color: #AAF;
+}
+
+.msj-error {
 	text-align: center;
 }
 
@@ -77,16 +107,40 @@
 	text-align: right;
 }
 
+.mensaje {
+	margin: 10px 0;
+	padding: .5vw .4vw .5vw 1vw;
+	border-radius: 3.5px;
+}
+
 .mio {
 	/* Fondo Mensaje propio */
 	background-color: #CCC;
+	background-color: #AFA;
 	margin-left: 25%;
 }
 
 .otro {
 	/* Fondo Mensaje del otro */
 	background-color: #AAA;
+	background-color: #AAF;
 	margin-right: 25%;
+}
+
+.link-contacto:link {
+	text-decoration: none;
+}
+
+.link-contacto:active {
+	text-decoration: none;
+}
+
+.link-contacto:visited {
+	text-decoration: none;
+}
+
+.link-contacto:hover {
+	text-decoration: none;
 }
 
 /* Estilo de la barra */
@@ -115,4 +169,16 @@
 		transparent 75%,
 		transparent
 	)
+}
+
+.num-msj {
+	background-color: #F22;
+	color: #FFF;
+	display: inline-block;
+	font-size: .75em;
+	width: 2vw;
+	height: 1.5vw;
+	text-align: center;
+	border-radius: 1vw;
+	margin-left: 1.5vw;
 }

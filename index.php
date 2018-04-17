@@ -14,6 +14,7 @@ $ctrlIndex = new ControladorIndex ();
 $tpl = Template::getInstance ();
 $tpl->asignar ("url_base", "http://localhost/FileSeller/");
 $tpl->asignar ("nombre_proyecto", "File Seller");
+$tpl->asignar ("inicio", $ctrlIndex->getUrl ("inicio", "principal"));
 
 if (isset ($_GET["url"])) {
 	$partes = explode ('/', $_GET["url"]);

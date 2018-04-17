@@ -13,6 +13,7 @@ class Usuario extends ClaseBase{
 	private $imagen = "";
 	private $activo = true;
 	private $id = "0";
+	private $id = 0;
 
 	public function __construct ($nombre = "Usuario",$apellido = "Prueba", $fNac = "1995-06-07",$cuentas = "", $correo = "usuario@prueba.com", $contrasenia = "",$imagen = "../../img/user-default.png", $activo = true, $id = 0){
 		$this->nombre = $nombre;

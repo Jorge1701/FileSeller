@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 02:00:26
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 03:02:03
          compiled from "vistas\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1778612225ad538bebf6f19-31220318%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aef74919e67e38a43031b67b7e0065fa75124d55' => 
     array (
       0 => 'vistas\\header.tpl',
-      1 => 1523923224,
+      1 => 1523926878,
       2 => 'file',
     ),
   ),
@@ -19,6 +19,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_5ad538bec04391_63466075',
   'variables' => 
   array (
+    'url_base' => 0,
     'inicio' => 0,
     'nombre_proyecto' => 0,
     'usuario' => 0,
@@ -27,7 +28,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5ad538bec04391_63466075')) {function content_5ad538bec04391_63466075($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
-	<img class="navbar-brand" style="width: 5%; height: 5%" src="../img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['inicio']->value;?>
+	<img class="navbar-brand" style="width: 5%; height: 5%" src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['inicio']->value;?>
 '">
 	<a class="navbar-brand font-weight-bold" style="font-size: 200%" href="#" title="Ir a inicio" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['inicio']->value;?>
 '"><?php echo $_smarty_tpl->tpl_vars['nombre_proyecto']->value;?>
