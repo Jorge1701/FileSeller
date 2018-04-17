@@ -39,6 +39,7 @@ class ClaseBase {
         $res=NULL;
         $resultado =$this->db->query($sql)   
             or die ("Fallo en la consulta");
+            or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
          if($fila = $resultado->fetch_object()) {
            $res= new $this->modelo($fila);
         }

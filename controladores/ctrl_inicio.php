@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 require_once ("clases/usuario.php");
 require_once ("clases/auth.php");
 //require_once("clases/subir_imagen.php");
@@ -72,6 +73,12 @@ class ControladorInicio extends ControladorIndex {
 
 	function subirImagen(){
 
+class ControladorInicio extends ControladorIndex {
+	
+	function principal () {
+		$tpl = Template::getInstance();
+		$tpl->mostrar('inicio');
+>>>>>>> a43a9e85f6283e6dae9cd1898319345dbe24a450
 	}
 }
 

@@ -2,10 +2,12 @@
 
 require_once ("libs/smarty/Smarty.class.php");
 require_once ("config/config.php");
+require_once ("clases/auth.php");
+require_once ("clases/usuario.php");
 
 class Template {
 
-	private $_smarty;
+	public $_smarty;
 
 	public static function getInstance () {
 		static $instane = null;
@@ -33,6 +35,14 @@ class Template {
 	}
 
 	function mostrar ($template, $data = array ()) {
+		$id = Auth::estaLogueado();
+		$usuario = null;
+
+		if( $id != false){
+			$usuario = (new Usuario())->obtenerPorId($id);
+		}
+		
+		$this->asignar("usuario",$usuario);
 		foreach ($data as $key => $value)
 			$this->_smarty->assign ($key, $value);
 
@@ -42,6 +52,7 @@ class Template {
 	function asignar ($clave, $valor) {
 		$this->_smarty->assign ($clave, $valor);
 	}
+
 }
 
 ?>

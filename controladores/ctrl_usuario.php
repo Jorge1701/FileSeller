@@ -2,6 +2,7 @@
 
 require_once ("clases/usuario.php");
 require_once ("clases/template.php");
+require_once ("clases/session.php");
 
 
 class ControladorUsuario extends ControladorIndex {
@@ -10,18 +11,28 @@ class ControladorUsuario extends ControladorIndex {
 		
 	}
 
-	function registro () {
-
-	}	
-
-	function perfil ($params) {
-		
-		$usuario = (new Usuario())->obtenerPorId($params);
+	function login(){
 		$datos = array(
-			"usuario" => $usuario,
+			"titulo" => "Iniciar sesión",
 		);
 		$tpl = Template::getInstance();
-		$tpl->mostrar("perfil", $datos);
+		$tpl->mostrar('login',$datos);
+	}
+
+	/*function registro () {
+		$tpl = Template::getInstance();
+		$tpl->mostrar("registro");
+	}*/	
+
+	function perfil () {
+		$tpl = Template::getInstance();
+		$tpl->mostrar("perfil");
+	}
+
+	function logout(){
+		Session::init();
+		Session::destroy();
+		$this->redirect("inicio","principal");
 	}
 
 	function editar_perfil ($params) {
