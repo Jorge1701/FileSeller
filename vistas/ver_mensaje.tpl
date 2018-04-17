@@ -6,15 +6,8 @@
 	{else}
 		<title>Conversaciones</title>
 	{/if}
-<<<<<<< HEAD
 	{include file="include_css.tpl"}
 	<link rel="stylesheet" type="text/css" href="{$url_base}style/ver_mensaje.css">
-=======
-
-	{include file="include_css.tpl"}
-	<link rel="stylesheet" type="text/css" href="{$url_base}style/ver_mensaje.css">
-	<title>Chat con {$usuario}</title>
->>>>>>> c3d2d53796692ceeb1dcb0150b10ff0bb1ddf7e6
 </head>
 <body background="{$url_base}img/wallpaper.jpg">
 	<!-- Header -->
