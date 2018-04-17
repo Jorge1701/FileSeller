@@ -26,6 +26,10 @@
 						</div>
 						<input name="password" id="password" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" autofocus title="Mínimo 6 / Máximo 21" required="Mínimo 6 / Máximo 21"/>
 					</div>
+					{if isset($mensaje)} 
+						<div style="color: red">{$mensaje}</div>
+						<br>
+					 {/if}
 					<input id="check" type="checkbox" aria-label="Recordarme">Recordarme
 					<br>
 					<button id="btnLogin" class="btn btn-success" style="margin: 20px 0px ">Iniciar Sesión</button>

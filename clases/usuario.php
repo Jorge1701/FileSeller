@@ -126,9 +126,9 @@ class Usuario extends ClaseBase{
 		ini_set("display_errors", 1);
 		error_reporting(E_ALL & ~E_NOTICE);
 
-		$sql = DB::conexion()->prepare("SELECT * FROM usuarios WHERE correo= ? ");
+		$sql = DB::conexion()->prepare("SELECT * FROM usuarios WHERE correo= ? AND contrasenia= ?");
 
-		$sql->bind_param("s",$correo);
+		$sql->bind_param("ss",$correo,$pass);
 
 		$sql->execute();
 
