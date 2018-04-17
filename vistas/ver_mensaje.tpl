@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Chat con {$usuario}</title>
-
-	<link rel="stylesheet" href="{$url_base}bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="{$url_base}bootstrap/css/perfil.css">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	{include file="include_css.tpl"}
 	<link rel="stylesheet" type="text/css" href="{$url_base}style/ver_mensaje.css">
+	<title>Chat con {$usuario}</title>
 </head>
 <body background="{$url_base}img/wallpaper.jpg">
 	<!-- Header -->
@@ -188,5 +185,6 @@
 			</div>
 		</div>
 	</div>
+	{include file="include_js.tpl"}
 </body>
 </html>
