@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 01:58:06
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 02:57:29
          compiled from "vistas\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:20897764965ad23343f24628-38668979%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aef74919e67e38a43031b67b7e0065fa75124d55' => 
     array (
       0 => 'vistas\\header.tpl',
-      1 => 1523922922,
+      1 => 1523926565,
       2 => 'file',
     ),
   ),
@@ -19,19 +19,23 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_5ad23343f26536_65131726',
   'variables' => 
   array (
-    'inicio' => 0,
+    'url_inicio' => 0,
     'nombre_proyecto' => 0,
     'usuario' => 0,
-    'perfil' => 0,
+    'url_perfil' => 0,
+    'url_login' => 0,
+    'url_registro' => 0,
+    'url_ayuda' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5ad23343f26536_65131726')) {function content_5ad23343f26536_65131726($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
-	<img class="navbar-brand" style="width: 5%; height: 5%" src="../../img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['inicio']->value;?>
+	<img class="navbar-brand" style="width: 5%; height: 5%" src="../../img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_inicio']->value;?>
 '">
-	<a class="navbar-brand font-weight-bold" style="font-size: 200%" href="#" title="Ir a inicio" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['inicio']->value;?>
+	<a class="navbar-brand font-weight-bold" style="font-size: 200%" href="#" title="Ir a inicio" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_inicio']->value;?>
 '"><?php echo $_smarty_tpl->tpl_vars['nombre_proyecto']->value;?>
 </a>
+
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -43,7 +47,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 		</form>
 		<ul class="navbar-nav" style="font-size: 130%">
 			<li class="nav-item">
-				<a class="nav-link" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['inicio']->value;?>
+				<a class="nav-link" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_inicio']->value;?>
 '">Inicio<span class="sr-only"></span></a>
 			</li>
 			<?php if (isset($_smarty_tpl->tpl_vars['usuario']->value)) {?>
@@ -88,7 +92,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 " title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['perfil']->value;?>
+					<a class="dropdown-item" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_perfil']->value;?>
+?id=<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getId();?>
 '"><i class="fa fa-user" style="margin-right: 5%" aria-hidden="true"></i>Perfil</a>
 					<a class="dropdown-item" href="#"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir archivo </a>
 					<div class="dropdown-divider"></div>
@@ -97,15 +102,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 			</li>
 			<?php } else { ?>
 			<li class="nav-item">
-				<a class="nav-link" href="#" title="Iniciar sesión">Iniciar sesión</a>
+				<a class="nav-link" href="#" title="Iniciar sesión" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_login']->value;?>
+'">Iniciar sesión</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#" title="Registrarse">Registrarse</a>
+				<a class="nav-link" href="#" title="Registrarse" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_registro']->value;?>
+'">Registrarse</a>
 			</li>
 			
 			<?php }?>
 			<li class="nav-item">
-				<a class="nav-link" href="#" title="Ayuda"><i class="fa fa-question-circle" style="margin-right: 5%"></i></a>
+				<a class="nav-link" href="#" title="Ayuda" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_ayuda']->value;?>
+'"><i class="fa fa-question-circle" style="margin-right: 5%"></i></a>
 			</li>
 		</ul>
 	</div>

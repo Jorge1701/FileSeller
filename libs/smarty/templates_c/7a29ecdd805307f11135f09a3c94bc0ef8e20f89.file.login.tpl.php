@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 02:43:27
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 04:46:44
          compiled from "vistas\login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:18935338935ad5030e20b433-81934786%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7a29ecdd805307f11135f09a3c94bc0ef8e20f89' => 
     array (
       0 => 'vistas\\login.tpl',
-      1 => 1523925805,
+      1 => 1523929991,
       2 => 'file',
     ),
   ),
@@ -42,17 +42,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon1">@</span>
 						</div>
-						<input id="correo" type="email" class="form-control" placeholder="Correo" aria-label="Correo" aria-describedby="basic-addon1" required="Ingrese su correo" autofocus title="Ingrese su correo">
+						<input name="correo" id="correo" type="email" class="form-control" placeholder="Correo" aria-label="Correo" aria-describedby="basic-addon1" required="Ingrese su correo" autofocus title="Ingrese su correo">
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text fa fa-lock" id="basic-addon1"></span>
 						</div>
-						<input id="password" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" autofocus title="Mínimo 6 / Máximo 21" required="Mínimo 6 / Máximo 21"/>
+						<input name="password" id="password" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" autofocus title="Mínimo 6 / Máximo 21" required="Mínimo 6 / Máximo 21"/>
 					</div>
 					<input id="check" type="checkbox" aria-label="Recordarme">Recordarme
 					<br>
-					<div id="btnLogin" class="btn btn-info" style="margin: 20px 0px ">Iniciar Sesión</div>
+					<button id="btnLogin" class="btn btn-success" style="margin: 20px 0px ">Iniciar Sesión</button>
 				</form>
 				<a href="#" style="margin: 5px 0px">Registrarse</a>
 			</div>
