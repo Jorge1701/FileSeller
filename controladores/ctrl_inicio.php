@@ -73,6 +73,7 @@ class ControladorInicio extends ControladorIndex {
 
 	function subirImagen(){
 
+=======
 class ControladorInicio extends ControladorIndex {
 	
 	function principal () {
