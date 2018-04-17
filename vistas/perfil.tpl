@@ -2,7 +2,7 @@
 <html>
 <head>
 	{include file="include_css.tpl"}
-	<link rel="stylesheet" type="text/css" href="{$url_base}bootstrap/css/perfil.css">
+	<link rel="stylesheet" type="text/css" href="{$url_base}style/perfil.css">
 	<title>Inicio</title>
 </head>
 <body background="{$url_base}img/wallpaper.jpg">

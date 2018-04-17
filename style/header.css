@@ -1,0 +1,27 @@
+a.fa-inbox {
+  position: relative;
+  font-size: 30px;
+  color: grey;
+  cursor: pointer;
+}
+
+a.fa-bell-o {
+  position: relative;
+  font-size: 30px;
+  color: grey;
+  cursor: pointer;
+}
+span.fa-comment {
+  position: absolute;
+  font-size: 0.7em;
+  top: -4px;
+  color: red;
+  right: -4px;
+}
+span.num {
+  position: absolute;
+  font-size: 0.4em;
+  top: 1px;
+  color: #fff;
+  right: 2px;
+}

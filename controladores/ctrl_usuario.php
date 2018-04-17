@@ -34,20 +34,26 @@ class ControladorUsuario extends ControladorIndex {
 
 	function login(){
 		$datos = array(
-			"titulo" => "Iniciar sesión",
+			"active_iniciarSesion" => "active",
 		);
 		$tpl = Template::getInstance();
 		$tpl->mostrar('login',$datos);
 	}
 
 	/*function registro () {
+		$datos = array(
+			"active_registrarse" => "active",
+		);
 		$tpl = Template::getInstance();
-		$tpl->mostrar("registro");
+		$tpl->mostrar("registro",$datos);
 	}*/	
 
 	function perfil () {
+		$datos = array(
+			"active_perfil" => "active",
+		);
 		$tpl = Template::getInstance();
-		$tpl->mostrar("perfil");
+		$tpl->mostrar("perfil",$datos);
 	}
 
 	function logout(){

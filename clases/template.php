@@ -37,12 +37,15 @@ class Template {
 	function mostrar ($template, $data = array ()) {
 		$id = Auth::estaLogueado();
 		$usuario = null;
+		$ctrlIndex = new ControladorIndex(); 
 
 		if( $id != false){
 			$usuario = (new Usuario())->obtenerPorId($id);
 		}
 		
 		$this->asignar("usuario",$usuario);
+		$this->asignar("url_mensaje",$ctrlIndex->getUrl("mensajes","chat"));
+
 		foreach ($data as $key => $value)
 			$this->_smarty->assign ($key, $value);
 

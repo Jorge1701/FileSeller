@@ -12,12 +12,15 @@
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar archivo</button>
 		</form>
 		<ul class="navbar-nav" style="font-size: 130%">
-			<li class="nav-item">
+			<li class="nav-item {if isset($active_inicio)} {$active_inicio} {/if}">
 				<a class="nav-link" href="#" onClick="window.location='{$url_inicio}'">Inicio<span class="sr-only"></span></a>
 			</li>
 			{if isset($usuario)}
 			<li class="nav-item dropdown">
-				<a class="nav-link" href="#" data-toggle="dropdown" title="Notificaciones"><i class="fa fa-bell-o nav-link" style="margin-right: 5%" aria-hidden="true"></i></a>
+				<a class="nav-link fa fa-bell-o" href="#" title="Notificaciones" data-toggle="dropdown">
+					<span class="fa fa-comment"></span>
+					<span class="num">2</span>
+				</a>
 
 				<div class="dropdown-menu dropdown-menu-right" style="width: 400px">
 					<h6 style="margin: 10px 0px 0px 60px">Notificaciones</h6>
@@ -29,13 +32,17 @@
 				</div>
 			</li>
 			<li class="nav-item dropdown">
-				<a class="nav-link" href="#" title="Mensajes" data-toggle="dropdown"><i class="fa fa-inbox nav-link" style="margin-right: 5%" aria-hidden="true"></i></a>
+				<a class="nav-link fa fa-inbox" href="#" title="Mensajes" data-toggle="dropdown">
+					<span class="fa fa-comment"></span>
+					<span class="num">2</span>
+				</a>
+
 
 				<div class="dropdown-menu dropdown-menu-right" style="width: 400px">
 					<h6 style="margin: 10px 0px 20px 60px">Mensajes</h6>
 					<table class="table">
 						<tbody>
-							<tr>
+							<tr onClick="window.location='{$url_mensaje}id'">
 								<th scope="row">Brian</th>
 								<td>hola como estas ?</td>
 							</tr>
@@ -52,7 +59,7 @@
 				</div>
 			</li>
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<a class="nav-link dropdown-toggle {if isset($active_perfil)} {$active_perfil} {/if} " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<img src="{$url_base}{$usuario->getImagen()}" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -63,15 +70,14 @@
 				</div>
 			</li>
 			{else}
-			<li class="nav-item">
+			<li class="nav-item {if isset($active_iniciarSesion)} {$active_iniciarSesion} {/if}">
 				<a class="nav-link" href="#" title="Iniciar sesión" onClick="window.location='{$url_login}'">Iniciar sesión</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item {if isset($active_registrarse)} {$active_registrarse} {/if}">
 				<a class="nav-link" href="#" title="Registrarse" onClick="window.location='{$url_registro}'">Registrarse</a>
 			</li>
-			
 			{/if}
-			<li class="nav-item">
+			<li class="nav-item  {if isset($active_ayuda)} {$active_ayuda} {/if}">
 				<a class="nav-link" href="#" title="Ayuda" onClick="window.location='{$url_ayuda}'"><i class="fa fa-question-circle" style="margin-right: 5%"></i></a>
 			</li>
 		</ul>
