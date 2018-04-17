@@ -14,6 +14,11 @@ $ctrlIndex = new ControladorIndex ();
 $tpl = Template::getInstance ();
 $tpl->asignar ("url_base", "http://localhost/FileSeller/");
 $tpl->asignar ("nombre_proyecto", "File Seller");
+$tpl->asignar ("url_perfil",$ctrlIndex->getUrl("usuario","perfil"));
+$tpl->asignar ("url_inicio",$ctrlIndex->getUrl("inicio","principal"));
+$tpl->asignar ("url_login",$ctrlIndex->getUrl("inicio","login"));
+$tpl->asignar ("url_registro",$ctrlIndex->getUrl("inicio","registro"));
+$tpl->asignar ("url_ayuda", $ctrlIndex->getUrl("inicio","ayuda"));
 
 if (isset ($_GET["url"])) {
 	$partes = explode ('/', $_GET["url"]);
