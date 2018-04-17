@@ -1,12 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
-<<<<<<< HEAD
-	<img class="navbar-brand" style="width: 5%; height: 5%" src="{$url_base}img/icono.png" onclick="window.location='{$inicio}'">
-	<a class="navbar-brand font-weight-bold" style="font-size: 200%" href="#" title="Ir a inicio" onclick="window.location='{$inicio}'">{$nombre_proyecto}</a>
-=======
 	<img class="navbar-brand" style="width: 5%; height: 5%" src="{$url_base}img/icono.png" onclick="window.location='{$url_inicio}'">
 	<a class="navbar-brand font-weight-bold" style="font-size: 200%" href="#" title="Ir a inicio" onclick="window.location='{$url_inicio}'">{$nombre_proyecto}</a>
-
->>>>>>> b165b004bf904941b4a0ac939c6afa4d11a16e5e
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>

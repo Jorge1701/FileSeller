@@ -19,30 +19,23 @@ class Mensajes extends ClaseBase {
 	}
 
 	public function getChats ($usuario) {
-		$stmt = DB::conexion ()->prepare ("(SELECT u2.nombre FROM mensajes AS m, usuario AS u1, usuario AS u2 WHERE m.id_para = u1.id AND u1.nombre = \"" . $usuario . "\" AND m.id_desde = u2.id) UNION (SELECT u2.nombre FROM mensajes AS m, usuario AS u1, usuario AS u2 WHERE m.id_desde = u1.id AND u1.nombre = \"" . $usuario . "\" AND m.id_para = u2.id)");
+		$stmt = DB::conexion ()->prepare ("(SELECT u2.correo FROM mensajes AS m, usuarios AS u1, usuarios AS u2 WHERE m.id_para = u1.id AND u1.correo = \"" . $usuario . "\" AND m.id_desde = u2.id) UNION (SELECT u2.correo FROM mensajes AS m, usuarios AS u1, usuarios AS u2 WHERE m.id_desde = u1.id AND u1.correo = \"" . $usuario . "\" AND m.id_para = u2.id)");
 		
 		$stmt->execute ();
 		$resultado = $stmt->get_result ();
 
 		while ($fila = $resultado->fetch_object ())
-			$res[] = $fila->nombre;
+			$res[] = $fila->correo;
 
 		return isset ($res) ? $res : [];
 	}
 
 	public function enviarMensaje ($usuario1, $usuario2, $mensaje) {
-		$id1 = DB::conexion ()->prepare ("SELECT id FROM usuario WHERE nombre = \"" . $usuario1 . "\"");
-		$id1->execute ();
-		$res1 = $id1->get_result ();
-		$i1 = $res1->fetch_object ()->id;
+		$u1 = (new Usuario ())->obtenerPorCorreo ($usuario1);
+		$u2 = (new Usuario ())->obtenerPorCorreo ($usuario2);
 
-		$id2 = DB::conexion ()->prepare ("SELECT id FROM usuario WHERE nombre = \"" . $usuario2 . "\"");
-		$id2->execute ();
-		$res2 = $id2->get_result ();
-		$i2 = $res2->fetch_object ()->id;
-
-		if (isset ($i1) && isset ($i2)) {
-			$insert = DB::conexion ()->query ("INSERT INTO mensajes (id_desde, id_para, dia, hora, mensaje) VALUES (" . $i1 . ", " . $i2 . ", NOW(), CURTIME(), \"" . $mensaje . "\")");
+		if (isset ($u1) && isset ($u2)) {
+			$insert = DB::conexion ()->query ("INSERT INTO mensajes (id_desde, id_para, dia, hora, mensaje) VALUES (" . $u1->getId () . ", " . $u2->getId () . ", NOW(), CURTIME(), \"" . $mensaje . "\")");
 			return true;
 		}
 
@@ -51,13 +44,31 @@ class Mensajes extends ClaseBase {
 
 	public function getChat ($usuario1, $usuario2) {
 		DB::conexion ()->query ("SET lc_time_names = 'es_MX'");
-		$stmt = DB::conexion ()->prepare ("SELECT DATE_FORMAT(dia, '%d de %M del %Y') AS dia, TIME_FORMAT(hora, '%H:%i') AS hora, mensaje, id_desde, u1.id AS 'id', visto FROM mensajes AS m, usuario AS u1, usuario AS u2 WHERE u1.nombre = \"" . $usuario1 . "\" AND u2.nombre = \"" . $usuario2 . "\" AND ((m.id_desde = u1.id AND m.id_para = u2.id) OR (m.id_desde = u2.id AND m.id_para = u1.id))");
+		$stmt = DB::conexion ()->prepare ("SELECT DATE_FORMAT(dia, '%d de %M del %Y') AS dia, TIME_FORMAT(hora, '%H:%i') AS hora, mensaje, id_desde, u1.id AS 'id', visto FROM mensajes AS m, usuarios AS u1, usuarios AS u2 WHERE u1.correo = \"" . $usuario1 . "\" AND u2.correo = \"" . $usuario2 . "\" AND ((m.id_desde = u1.id AND m.id_para = u2.id) OR (m.id_desde = u2.id AND m.id_para = u1.id))");
 
 		$stmt->execute ();
 		$resultado = $stmt->get_result ();
 
 		while ($fila = $resultado->fetch_object ())
 			$res[] = new M ($fila->dia, $fila->hora, $fila->mensaje, $fila->id_desde == $fila->id, $fila->visto);
+
+		$u1 = (new Usuario ())->obtenerPorCorreo ($usuario1);
+		$u2 = (new Usuario ())->obtenerPorCorreo ($usuario2);
+
+		DB::conexion ()->query ("UPDATE mensajes SET visto = TRUE WHERE id_para = " . $u1->getId () . " AND id_desde = " . $u2->getId ());
+
+		return isset ($res) ? $res : [];
+	}
+
+	public function getNotificacionesMensajes ($correo) {
+		$stmt = DB::conexion ()->prepare ("SELECT u2.nombre, u2.apellido, u2.correo, mensaje FROM mensajes AS m, usuarios AS u, usuarios AS u2 WHERE u.correo = \"" . $correo . "\" AND u.id = m.id_para AND m.visto = FALSE AND m.id_desde = u2.id AND m.id_m =
+(SELECT MAX(m2.id_m) FROM mensajes AS m2 WHERE m2.id_desde = m.id_desde AND m2.id_para = m.id_para)");
+
+		$stmt->execute ();
+		$resultado = $stmt->get_result ();
+
+		while ($fila = $resultado->fetch_object ())
+			$res[] = new NotificacionMensaje ($fila->nombre . " " . $fila->apellido, $fila->correo, $fila->mensaje);
 
 		return isset ($res) ? $res : [];
 	}
@@ -136,6 +147,68 @@ class M {
 
 	public function estaVisto () {
 		return $this->visto;
+	}
+}
+
+class NotificacionMensaje {
+	public $nombre;
+	public $correo;
+	public $mensaje;
+
+	public function __construct ($nombre, $correo, $mensaje) {
+		$this->nombre = $nombre;
+		$this->correo = $correo;
+		$this->mensaje = $mensaje;
+	}
+
+	public function getNombre () {
+		return $this->nombre;
+	}
+	
+	public function setNombre ($nombre) {
+		$this->nombre = $nombre;
+	}
+
+	public function getCorreo () {
+		return $this->correo;
+	}
+	
+	public function setCorreo ($correo) {
+		$this->correo = $correo;
+	}
+
+	public function getMensaje () {
+		return $this->mensaje;
+	}
+	
+	public function setMensaje ($mensaje) {
+		$this->mensaje = $mensaje;
+	}
+}
+
+class C {
+	public $nombre = "";
+	public $cant = 0;
+
+	public function __construct ($nombre, $cant) {
+		$this->nombre = $nombre;
+		$this->cant = $cant;
+	}
+
+	public function getNombre () {
+		return $this->nombre;
+	}
+	
+	public function setNombre ($nombre) {
+		$this->nombre = $nombre;
+	}
+
+	public function getCant () {
+		return $this->cant;
+	}
+	
+	public function setCant ($cant) {
+		$this->cant = $cant;
 	}
 }
 

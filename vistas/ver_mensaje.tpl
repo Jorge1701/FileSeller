@@ -1,22 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
 	{if isset ($seleccionado)}
-		<title>Conversacion con {$nom_usuario}</title>
+		<title>Conversacion con {$seleccionado->getNombre ()} {$seleccionado->getApellido ()}</title>
 	{else}
 		<title>Conversaciones</title>
 	{/if}
-
-	<link rel="stylesheet" href="{$url_base}bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="{$url_base}bootstrap/css/perfil.css">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{$url_base}style/ver_mensaje.css">
-=======
 	{include file="include_css.tpl"}
 	<link rel="stylesheet" type="text/css" href="{$url_base}style/ver_mensaje.css">
-	<title>Chat con {$usuario}</title>
->>>>>>> b165b004bf904941b4a0ac939c6afa4d11a16e5e
 </head>
 <body background="{$url_base}img/wallpaper.jpg">
 	<!-- Header -->
@@ -33,7 +24,7 @@
 					{foreach $usuarios as $u}
 					<a href="{$url_base}mensajes/chat/{$u}" class="link-contacto">
 						{if isset ($seleccionado)}
-							{if $seleccionado eq $u}
+							{if $seleccionado->getCorreo () eq $u}
 								<div class="contacto seleccionado">
 							{else}
 								<div class="contacto">
@@ -52,7 +43,7 @@
 			<div class="col-sm-7 panel-der">
 				<div class="titulo">
 					{if isset ($seleccionado)}
-						Conversacion con {$seleccionado}
+						Conversacion con {$seleccionado->getNombre ()} {$seleccionado->getApellido ()}
 					{else}
 						Conversacion
 					{/if}
@@ -64,17 +55,19 @@
 						{assign "dia" ""}
 						{assign "visto" "no"}
 						{foreach $mensajes as $m}
-							{if $visto eq "no" && !$m->estaVisto ()}
-								{if $primero eq "si"}
-									<div class="mx-auto msj no-leido">
-										{$nom_usuario} no ha leido la conversacion <i class="fa fa-eye-slash"></i>
-									</div>
-								{else}
-									<div class="mx-auto msj visto">
-										{$nom_usuario} ha leido hasta aqui <i class="fa fa-eye"></i>
-									</div>
+							{if $m->esPropio ()}
+								{if $visto eq "no" && !$m->estaVisto ()}
+									{if $primero eq "si"}
+										<div class="mx-auto msj no-leido">
+											{$seleccionado->getNombre ()} {$seleccionado->getApellido ()} no ha leido la conversacion <i class="fa fa-eye-slash"></i>
+										</div>
+									{else}
+										<div class="mx-auto msj visto">
+											{$seleccionado->getNombre ()} {$seleccionado->getApellido ()} ha leido hasta aqui <i class="fa fa-eye"></i>
+										</div>
+									{/if}
+										{assign "visto" "si"}
 								{/if}
-									{assign "visto" "si"}
 							{/if}
 							{assign "primero" "no"}
 							{if $dia neq $m->getDia ()}
@@ -97,8 +90,17 @@
 							</div>
 						{/foreach}
 					{else}
-						<div class="msj-error">
-							No tiene mensajes con {$nom_usuario}
+						<div class="mx-auto msj error">
+							{if isset ($seleccionado)}
+								No tiene mensajes con {$seleccionado->getNombre ()} {$seleccionado->getApellido ()}
+							}
+							{else}
+								{if isset ($sin_seleccionar)}
+									Seleccione una conversacion
+								{else}
+									Ningun usuario registrado con el correo {$correo}
+								{/if}
+							{/if}
 						</div>
 					{/if}
 				</div>

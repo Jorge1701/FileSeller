@@ -1,60 +1,44 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 03:02:03
-=======
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 02:57:29
->>>>>>> b165b004bf904941b4a0ac939c6afa4d11a16e5e
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 23:48:09
          compiled from "vistas\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:20897764965ad23343f24628-38668979%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:17669389465ad664c882a890-78281478%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'aef74919e67e38a43031b67b7e0065fa75124d55' => 
     array (
       0 => 'vistas\\header.tpl',
-<<<<<<< HEAD
-      1 => 1523926878,
-=======
-      1 => 1523926565,
->>>>>>> b165b004bf904941b4a0ac939c6afa4d11a16e5e
+      1 => 1524001662,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '20897764965ad23343f24628-38668979',
+  'nocache_hash' => '17669389465ad664c882a890-78281478',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ad23343f26536_65131726',
+  'unifunc' => 'content_5ad664c8837800_50153370',
   'variables' => 
   array (
-<<<<<<< HEAD
     'url_base' => 0,
-    'inicio' => 0,
-=======
     'url_inicio' => 0,
->>>>>>> b165b004bf904941b4a0ac939c6afa4d11a16e5e
     'nombre_proyecto' => 0,
     'usuario' => 0,
     'url_perfil' => 0,
+    'url_subir_archivo' => 0,
+    'url_logout' => 0,
     'url_login' => 0,
     'url_registro' => 0,
     'url_ayuda' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<<<<<<< HEAD
-<?php if ($_valid && !is_callable('content_5ad538bec04391_63466075')) {function content_5ad538bec04391_63466075($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
+<?php if ($_valid && !is_callable('content_5ad664c8837800_50153370')) {function content_5ad664c8837800_50153370($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
 	<img class="navbar-brand" style="width: 5%; height: 5%" src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['inicio']->value;?>
-=======
-<?php if ($_valid && !is_callable('content_5ad23343f26536_65131726')) {function content_5ad23343f26536_65131726($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
-	<img class="navbar-brand" style="width: 5%; height: 5%" src="../../img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_inicio']->value;?>
->>>>>>> b165b004bf904941b4a0ac939c6afa4d11a16e5e
+img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_inicio']->value;?>
 '">
 	<a class="navbar-brand font-weight-bold" style="font-size: 200%" href="#" title="Ir a inicio" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_inicio']->value;?>
 '"><?php echo $_smarty_tpl->tpl_vars['nombre_proyecto']->value;?>
 </a>
-
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -107,16 +91,18 @@ img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['inic
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<img src="<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
+					<img src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;
+echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
 " title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_perfil']->value;?>
-?id=<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getId();?>
 '"><i class="fa fa-user" style="margin-right: 5%" aria-hidden="true"></i>Perfil</a>
-					<a class="dropdown-item" href="#"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir archivo </a>
+					<a class="dropdown-item" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_subir_archivo']->value;?>
+'"><i class="fa fa-upload" style="margin-right: 5%"></i>Subir archivo </a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
+					<a class="dropdown-item" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_logout']->value;?>
+'"><i class="fa fa-sign-out" style="margin-right: 5%"></i>Cerrar sesión</a>
 				</div>
 			</li>
 			<?php } else { ?>

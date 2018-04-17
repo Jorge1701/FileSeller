@@ -1,6 +1,5 @@
 <?php
 
-require_once ("clases/usuario.php");
 require_once ("clases/template.php");
 require_once ("clases/session.php");
 
@@ -9,14 +8,6 @@ class ControladorUsuario extends ControladorIndex {
 
 	function inicio () {
 		
-	}
-
-	function login(){
-		$datos = array(
-			"titulo" => "Iniciar sesión",
-		);
-		$tpl = Template::getInstance();
-		$tpl->mostrar('login',$datos);
 	}
 
 	/*function registro () {

@@ -2,7 +2,6 @@
 
 require_once ("clase_base.php");
 
-
 class Usuario extends ClaseBase{
 	private $nombre = "";
 	private $apellido = "";
@@ -111,6 +110,17 @@ class Usuario extends ClaseBase{
 		return $res;
 	}
 
+	public function obtenerPorCorreo($corre){
+	    $sql="select * from usuarios where correo='$corre'";
+	    $res=NULL;
+	    $resultado =$this->db->query($sql)   
+	        or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+	     if($fila = $resultado->fetch_object()) {
+	       $res= new $this->modelo($fila);
+	    }
+	    return $res;
+	}
+
 	public function login($correo,$pass){
 
 		ini_set("display_errors", 1);
@@ -134,7 +144,6 @@ class Usuario extends ClaseBase{
 				Session::set('usuario_correo',$fila->correo);
 				Session::set('usuario_id', $fila->id);
 				Session::set('usuario_nombre', $fila->nombre);
-				echo "<h1>".$fila->nombre."</h1>";
 				return true;
 
 			}

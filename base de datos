@@ -1,0 +1,3 @@
+CREATE TABLE usuarios (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR (256), apellido VARCHAR (256), correo VARCHAR (100), contrasenia VARCHAR (100), imagen VARCHAR (256), activo BOOLEAN, fnas DATE);
+
+CREATE TABLE mensajes (id_m INT AUTO_INCREMENT PRIMARY KEY, id_desde INT, id_para INT, dia DATE, hora TIME, mensaje VARCHAR (500), visto BOOLEAN);

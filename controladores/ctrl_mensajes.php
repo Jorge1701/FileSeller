@@ -1,57 +1,55 @@
 <?php
 
 require "clases/mensajes.php";
-require "clases/usuario.php";
 require_once "clases/template.php";
 
 class ControladorMensajes extends ControladorIndex {
 
 	function chat ($params = array ()) {
-		$usuario_logueado = "Jorge";
-		// TODO: Chequear si el param 0 esta ingresado
-		// Si no: Ingresarle el nombre del usuario
-		// TODO: Chequear si el param 1 esta ingresado
-		// Si no: Agregar dato para solo abrir listado de contactos
+		$usuario_logueado = (new Usuario ())->obtenerPorId (Auth::estaLogueado ());
 
 		$tpl = Template::getInstance();
+		if ($usuario_logueado == false) {
+			$this->redirect ("inicio", "principal");
+		} else {
+			$mensaje = new Mensajes ();
 
-		$mensajes = new Mensajes ();
-		$usuario = new Usuario ();
+			$conversaciones = $mensaje->getChats ($usuario_logueado->getCorreo ());
+			if (!isset ($params[0])) {
+				$datos = array(
+					"usuarios" => $conversaciones,
+					"sin_seleccionar" => "si"
+				);
+			} else {
+				if (isset ($_POST["mensaje"])) {
+					$mensaje->enviarMensaje ($usuario_logueado->getCorreo (), $params[0], $_POST["mensaje"]);
+				}
 
-		if (isset ($_POST["mensaje"])) {
-			$mensajes->enviarMensaje ($usuario_logueado, $params[0], $_POST["mensaje"]);
+				$existe = false;
+
+				foreach ($conversaciones as $c)
+					if ($c === $params[0]) {
+						$existe = true;
+						break;
+					}
+
+				if (!$existe)
+					$datos = array(
+						"usuarios" => $conversaciones,
+						"correo" => $params[0]
+					);
+				else {
+					$mensajes = $mensaje->getChat ($usuario_logueado->getCorreo (), $params[0]);
+					$datos = array(
+						"usuarios" => $conversaciones,
+						"seleccionado" => (new Usuario ())->obtenerPorCorreo ($params[0]),
+						"mensajes" => $mensajes
+					);
+				}
+			}
+
+			$tpl->mostrar ("ver_mensaje", $datos);
 		}
-
-		// TODO: chequear params[0] igual al nombre de usuario logueado
-		//Session::init ();
-		//if (Session::get ("usuario_nombre") === params[0]) {}
-
-	 	$chats = $mensajes->getChats ($usuario_logueado);
-
-	 	$existe = false;
-
-	 	foreach ($chats as $c)
-	 		if ($c === $params[0]) {
-	 			$existe = true;
-	 			break;
-	 		}
-
-	 	$conversacion = $mensajes->getChat ($usuario_logueado, $params[0]);
-
-	 	if (!$existe)
-		 	$datos = array(
-		 		"nom_usuario" => $params[0],
-		 		"usuarios" => $chats
-		    );
-	 	else
-		 	$datos = array(
-		 		"nom_usuario" => $params[0],
-		 		"usuarios" => $chats,
-		 		"seleccionado" => $params[0],
-		 		"mensajes" => $conversacion
-		    );
-
-	    $tpl->mostrar ("ver_mensaje", $datos);
 	}
 }
 

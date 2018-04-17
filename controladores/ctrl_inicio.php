@@ -1,6 +1,5 @@
 <?php
 
-<<<<<<< HEAD
 require_once ("clases/usuario.php");
 require_once ("clases/auth.php");
 //require_once("clases/subir_imagen.php");
@@ -30,7 +29,6 @@ class ControladorInicio extends ControladorIndex {
 			$usr = new Usuario();
 			$correo = $_POST["correo"]; 
 			$pass = sha1($_POST["password"]);
-
 			if($usr->login($correo,$pass)){
 				$datos= array();
 				$tpl = Template::getInstance();
@@ -47,10 +45,8 @@ class ControladorInicio extends ControladorIndex {
 			}
 
 		}else{
-			$mensaje = "Datos Incorrectos";
 			$datos = array(
 				"titulo" => "Iniciar sesión",
-				"mensaje" => $mensaje,
 			);
 			$tpl = Template::getInstance();
 			$tpl->mostrar('login',$datos);
@@ -72,14 +68,6 @@ class ControladorInicio extends ControladorIndex {
 	}
 
 	function subirImagen(){
-
-=======
-class ControladorInicio extends ControladorIndex {
-	
-	function principal () {
-		$tpl = Template::getInstance();
-		$tpl->mostrar('inicio');
->>>>>>> a43a9e85f6283e6dae9cd1898319345dbe24a450
 	}
 }
 

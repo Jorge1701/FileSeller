@@ -73,7 +73,7 @@
 }
 
 .no-leido {
-	/* Color mensajes de visto */
+	/* Color mensajes de no leido */
 	background-color: #FAA;
 }
 
@@ -82,8 +82,10 @@
 	background-color: #AAF;
 }
 
-.msj-error {
-	text-align: center;
+.error {
+	/* Color mensajes de visto */
+	background-color: #FAA;
+	width: 70%;
 }
 
 .mensaje-texto {
