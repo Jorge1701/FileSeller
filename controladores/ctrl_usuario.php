@@ -35,9 +35,10 @@ class ControladorUsuario extends ControladorIndex {
 
 	}	
 
-	function perfil ($params) {
+	function perfil () {
 		
-		$usuario = (new Usuario())->obtenerPorId($params[0]);
+		Session::init();
+		$usuario = (new Usuario())->obtenerPorId(Session::get("usuario_id"));
 		$datos = array(
 			"usuario" => $usuario,
 		);
