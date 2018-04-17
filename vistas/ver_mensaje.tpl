@@ -3,12 +3,12 @@
 <head>
 	<title>Chat con {$usuario}</title>
 
-	<link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="../bootstrap/css/perfil.css">
+	<link rel="stylesheet" href="{$url_base}bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="{$url_base}bootstrap/css/perfil.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../style/ver_mensaje.css">
+	<link rel="stylesheet" type="text/css" href="{$url_base}style/ver_mensaje.css">
 </head>
-<body background="../img/wallpaper.jpg">
+<body background="{$url_base}img/wallpaper.jpg">
 	<!-- Header -->
 	{include file="header.tpl"}
 	
