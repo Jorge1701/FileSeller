@@ -52,11 +52,7 @@
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<<<<<<< HEAD
-					<img src="../img/user-default.png" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
-=======
 					<img src="{$usuario->getImagen()}" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
->>>>>>> 9c1a2cc5bc06fd77c414b613f2fae7afe0fd2510
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#" onClick="window.location='{$perfil}'"><i class="fa fa-user" style="margin-right: 5%" aria-hidden="true"></i>Perfil</a>

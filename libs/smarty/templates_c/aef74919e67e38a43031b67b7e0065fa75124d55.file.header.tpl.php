@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 01:58:54
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 02:00:26
          compiled from "vistas\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1778612225ad538bebf6f19-31220318%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aef74919e67e38a43031b67b7e0065fa75124d55' => 
     array (
       0 => 'vistas\\header.tpl',
-      1 => 1523923055,
+      1 => 1523923224,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5ad538bec04391_63466075',
   'variables' => 
   array (
     'inicio' => 0,
@@ -23,8 +25,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'perfil' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ad538bec04391_63466075',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5ad538bec04391_63466075')) {function content_5ad538bec04391_63466075($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
 	<img class="navbar-brand" style="width: 5%; height: 5%" src="../img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['inicio']->value;?>
@@ -84,12 +84,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<<<<<<< HEAD
-					<img src="../img/user-default.png" title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
-=======
 					<img src="<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
 " title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
->>>>>>> 9c1a2cc5bc06fd77c414b613f2fae7afe0fd2510
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['perfil']->value;?>
