@@ -1,39 +1,20 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-17 23:48:09
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-18 02:06:32
          compiled from "vistas\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:17669389465ad664c882a890-78281478%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-=======
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-18 00:13:23
-         compiled from "vistas\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:16559362825ad671830ef4c3-62142585%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
->>>>>>> c3d2d53796692ceeb1dcb0150b10ff0bb1ddf7e6
+<?php /*%%SmartyHeaderCode:16358029025ad68c08e2e819-39835451%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'aef74919e67e38a43031b67b7e0065fa75124d55' => 
     array (
       0 => 'vistas\\header.tpl',
-<<<<<<< HEAD
-      1 => 1524001662,
+      1 => 1524009970,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '17669389465ad664c882a890-78281478',
+  'nocache_hash' => '16358029025ad68c08e2e819-39835451',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ad664c8837800_50153370',
-=======
-      1 => 1523999318,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '16559362825ad671830ef4c3-62142585',
-  'function' => 
-  array (
-  ),
->>>>>>> c3d2d53796692ceeb1dcb0150b10ff0bb1ddf7e6
   'variables' => 
   array (
     'url_base' => 0,
@@ -46,10 +27,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'url_perfil' => 0,
     'url_subir_archivo' => 0,
     'url_logout' => 0,
-<<<<<<< HEAD
-=======
     'active_iniciarSesion' => 0,
->>>>>>> c3d2d53796692ceeb1dcb0150b10ff0bb1ddf7e6
     'url_login' => 0,
     'active_registrarse' => 0,
     'url_registro' => 0,
@@ -58,13 +36,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ad671831373a0_63794163',
+  'unifunc' => 'content_5ad68c08e406e4_15771821',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<<<<<<< HEAD
-<?php if ($_valid && !is_callable('content_5ad664c8837800_50153370')) {function content_5ad664c8837800_50153370($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
-=======
-<?php if ($_valid && !is_callable('content_5ad671831373a0_63794163')) {function content_5ad671831373a0_63794163($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
->>>>>>> c3d2d53796692ceeb1dcb0150b10ff0bb1ddf7e6
+<?php if ($_valid && !is_callable('content_5ad68c08e406e4_15771821')) {function content_5ad68c08e406e4_15771821($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
 	<img class="navbar-brand" style="width: 5%; height: 5%" src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 img/icono.png" onclick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_inicio']->value;?>
 '">
@@ -131,12 +105,8 @@ id'">
 				</div>
 			</li>
 			<li class="nav-item dropdown">
-<<<<<<< HEAD
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-=======
 				<a class="nav-link dropdown-toggle <?php if (isset($_smarty_tpl->tpl_vars['active_perfil']->value)) {?> <?php echo $_smarty_tpl->tpl_vars['active_perfil']->value;?>
  <?php }?> " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
->>>>>>> c3d2d53796692ceeb1dcb0150b10ff0bb1ddf7e6
 					<img src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;
 echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
 " title="Cuenta de File Seller" class="rounded-circle" style="width: 25pt; height: 25pt">
@@ -171,4 +141,5 @@ echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
 		</ul>
 	</div>
 </nav>
-<hr style="border-color: hsl(226, 59%, 60%)";><?php }} ?>
+<hr style="border-color: hsl(226, 59%, 60%)";>
+<?php }} ?>
