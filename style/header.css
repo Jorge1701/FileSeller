@@ -1,3 +1,37 @@
+.separador {
+  border-color: hsl(226, 59%, 60%);
+}
+
+.menu-perfil{
+  margin-right: 5%;
+}
+
+.menu-notificaciones{
+  width: 400px;
+}
+
+.menu-notificaciones-titulo{
+  margin: 10px 0px 20px 60px;
+}
+
+.img-user{
+  width: 25pt;
+  height: 25pt;
+}
+
+.icono{
+  width: 5%; 
+  height: 5%;
+}
+
+.titulo{
+  font-size: 200%;
+}
+
+.menu{
+  font-size: 130%;
+}
+
 a.fa-inbox {
   position: relative;
   font-size: 30px;
@@ -25,3 +59,4 @@ span.num {
   color: #fff;
   right: 2px;
 }
+
