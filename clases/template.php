@@ -35,6 +35,10 @@ class Template {
 	}
 
 	function mostrar ($template, $data = array ()) {
+		if(isset($_COOKIE["correo"]) && isset($_COOKIE["password"])) {
+			(new Usuario ())->login ($_COOKIE["correo"], sha1 ($_COOKIE["password"]));
+		}
+
 		$id = Auth::estaLogueado();
 		$usuario = null;
 		$ctrlIndex = new ControladorIndex(); 

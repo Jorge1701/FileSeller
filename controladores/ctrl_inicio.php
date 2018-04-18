@@ -22,7 +22,10 @@ class ControladorInicio extends ControladorIndex {
 			$correo = $_POST["correo"]; 
 			$pass = sha1($_POST["password"]);
 			if($usr->login($correo,$pass)){
-				
+				if (isset ($_POST["check"])) {
+					setcookie("correo", $_POST["correo"], time() + (86400 * 30), "/");
+					setcookie("password", $_POST["password"], time() + (86400 * 30), "/");
+				}
 				$this->redirect("inicio","principal");
 			}else{
 				$mensaje = "Email/Contraseña incorrectos";

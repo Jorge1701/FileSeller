@@ -153,11 +153,6 @@ class Usuario extends ClaseBase{
 
 	}
 
-	public function logout(){
-		Session::init();
-		Session::destroy();
-	}
-
 }
 
 

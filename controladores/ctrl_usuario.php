@@ -25,6 +25,8 @@ class ControladorUsuario extends ControladorIndex {
 	function logout(){
 		Session::init();
 		Session::destroy();
+		setcookie("correo", "", time() - 3600, "/");
+		setcookie("password", "", time() - 3600, "/");
 		$this->redirect("inicio","principal");
 	}
 

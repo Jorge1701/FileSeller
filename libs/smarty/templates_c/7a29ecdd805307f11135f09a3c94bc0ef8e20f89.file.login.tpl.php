@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-18 02:07:07
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-18 02:18:17
          compiled from "vistas\login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:21444537065ad68c2b300014-13176559%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7a29ecdd805307f11135f09a3c94bc0ef8e20f89' => 
     array (
       0 => 'vistas\\login.tpl',
-      1 => 1524009312,
+      1 => 1524010693,
       2 => 'file',
     ),
   ),
@@ -15,14 +15,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5ad68c2b34e101_98079197',
   'variables' => 
   array (
     'url_base' => 0,
     'mensaje' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ad68c2b34e101_98079197',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5ad68c2b34e101_98079197')) {function content_5ad68c2b34e101_98079197($_smarty_tpl) {?><!DOCTYPE html>
 <html>
@@ -60,7 +60,7 @@ img/wallpaper.jpg">
 </div>
 						<br>
 					 <?php }?>
-					<input id="check" type="checkbox" aria-label="Recordarme">Recordarme
+					<input name="check" type="checkbox" aria-label="Recordarme" value="Algo">Recordarme
 					<br>
 					<button id="btnLogin" class="btn btn-success" style="margin: 20px 0px ">Iniciar Sesión</button>
 				</form>

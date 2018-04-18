@@ -30,7 +30,7 @@
 						<div style="color: red">{$mensaje}</div>
 						<br>
 					 {/if}
-					<input id="check" type="checkbox" aria-label="Recordarme">Recordarme
+					<input name="check" type="checkbox" aria-label="Recordarme" value="Algo">Recordarme
 					<br>
 					<button id="btnLogin" class="btn btn-success" style="margin: 20px 0px ">Iniciar Sesión</button>
 				</form>
