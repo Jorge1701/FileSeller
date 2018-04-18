@@ -6,6 +6,7 @@ require_once "clases/template.php";
 class ControladorMensajes extends ControladorIndex {
 
 	function chat ($params = array ()) {
+		// Cambio aqui
 		$id = Auth::estaLogueado ();
 
 		$tpl = Template::getInstance();
