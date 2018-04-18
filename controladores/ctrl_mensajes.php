@@ -6,12 +6,13 @@ require_once "clases/template.php";
 class ControladorMensajes extends ControladorIndex {
 
 	function chat ($params = array ()) {
-		$usuario_logueado = (new Usuario ())->obtenerPorId (Auth::estaLogueado ());
+		$id = Auth::estaLogueado ();
 
 		$tpl = Template::getInstance();
-		if ($usuario_logueado == false) {
+		if ($id == false) {
 			$this->redirect ("inicio", "principal");
 		} else {
+			$usuario_logueado = (new Usuario ())->obtenerPorId ($id);
 			$mensaje = new Mensajes ();
 
 			$conversaciones = $mensaje->getChats ($usuario_logueado->getCorreo ());
