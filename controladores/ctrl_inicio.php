@@ -1,9 +1,5 @@
 <?php
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c3d2d53796692ceeb1dcb0150b10ff0bb1ddf7e6
 require_once ("clases/usuario.php");
 require_once ("clases/auth.php");
 //require_once("clases/subir_imagen.php");
@@ -39,11 +35,7 @@ class ControladorInicio extends ControladorIndex {
 
 		}else{
 			$datos = array(
-<<<<<<< HEAD
-				"titulo" => "Iniciar sesión",
-=======
 			"active_iniciarSesion" => "active",
->>>>>>> c3d2d53796692ceeb1dcb0150b10ff0bb1ddf7e6
 			);
 			$tpl = Template::getInstance();
 			$tpl->mostrar('login',$datos);
@@ -65,8 +57,6 @@ class ControladorInicio extends ControladorIndex {
 	}
 
 	function subirImagen(){
-<<<<<<< HEAD
-=======
 	}
 
 
@@ -76,7 +66,6 @@ class ControladorInicio extends ControladorIndex {
 		);
 		$tpl = Template::getInstance();
 		$tpl->mostrar('ayuda',$datos);	
->>>>>>> c3d2d53796692ceeb1dcb0150b10ff0bb1ddf7e6
 	}
 }
 
