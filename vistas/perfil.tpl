@@ -68,7 +68,7 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th scope="col"><h4>Mis archivos:</h4></th>
+											<th scope="col"><h4>Mis archivos</h4></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -78,18 +78,27 @@
 											<th scope="row">Descripción</th>
 											<th scope="row">Tamaño</th>
 											<th scope="row">Precio($U)</th>
-											<th scope="row">Vista previa</th>
+											<th scope="row">Subido en</th>
 										</tr>
+										{if isset($archivos)}
+										{foreach $archivos as $archivo}
 										<tr>
-											<td>Arte urbano</td>
-											<td>Imagen</td>
-											<td>Fotografia de grafiti</td>
-											<td>2,3MB</td>
-											<td>20</td>
-											<td>No disp.</td>
+											<td>{$archivo->getNombre()}</td>
+											<td>{$archivo->getTipo()}</td>
+											<td>{$archivo->getDescripcion()}</td>
+											<td>{$archivo->getTamanio()}</td>
+											<td>{$archivo->getPrecio()}</td>
+											<td>{$archivo->getFecSubido()} {$archivo->getHoraSubido()}</td>
 										</tr>
+										{/foreach}
 									</tbody>
-								</table>
+									</table>
+										{else}	
+									</tbody>
+									</table>
+									<div class="sinArchivos">No tienes archivos subidos</div>
+									{/if}
+									
 								<button class="btn btn-info" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fa fa-upload btn-subir" ></i>Subir nuevo</button>
 							</div>
 							<div id="editar" class="tab-pane slide-left">

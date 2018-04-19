@@ -20,7 +20,8 @@ class ControladorMensajes extends ControladorIndex {
 			if (!isset ($params[0])) {
 				$datos = array(
 					"usuarios" => $conversaciones,
-					"sin_seleccionar" => "si"
+					"sin_seleccionar" => "si",
+					"active_mensajes" => "active"
 				);
 			} else {
 				if (isset ($_POST["mensaje"])) {
@@ -38,14 +39,16 @@ class ControladorMensajes extends ControladorIndex {
 				if (!$existe)
 					$datos = array(
 						"usuarios" => $conversaciones,
-						"correo" => $params[0]
+						"correo" => $params[0],
+						"active_mensajes" => "active"
 					);
 				else {
 					$mensajes = $mensaje->getChat ($usuario_logueado->getCorreo (), $params[0]);
 					$datos = array(
 						"usuarios" => $conversaciones,
 						"seleccionado" => (new Usuario ())->obtenerPorCorreo ($params[0]),
-						"mensajes" => $mensajes
+						"mensajes" => $mensajes,
+						"active_mensajes" => "active"
 					);
 				}
 			}

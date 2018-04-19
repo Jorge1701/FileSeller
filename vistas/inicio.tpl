@@ -13,7 +13,7 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th scope="col"><h4>Recomendaciones para vos:</h4></th>
+							<th scope="col"><h4>Recomendaciones para vos</h4></th>
 						</tr>
 					</thead>
 					<tbody>

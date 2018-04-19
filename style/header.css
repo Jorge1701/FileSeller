@@ -1,3 +1,8 @@
+.ver_conversaciones{
+  text-align: center;
+}
+
+
 .separador {
   border-color: hsl(226, 59%, 60%);
 }
@@ -9,9 +14,30 @@
 .menu-notificaciones{
   width: 400px;
 }
+.notification:hover {
+  background-color: hsla(0, 0%, 20%, 0.04);
+}
+
+.eliminar_notificacion{
+  width: 20pt;
+  height: 20pt;
+  text-align: center;
+  color: red;
+  border-radius: 6pt;
+  border-style: solid;
+  border-width: 1pt;
+  border-color: black;
+}
+
+.eliminar_notificacion:hover{
+  background-color: red;
+  color:white;
+}
 
 .menu-notificaciones-titulo{
-  margin: 10px 0px 20px 60px;
+  margin: 1px 0px 10px 20px;
+  font-size: 16pt;
+  text-align: left;
 }
 
 .img-user{

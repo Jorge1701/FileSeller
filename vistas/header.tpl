@@ -24,67 +24,80 @@
 
 				<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
 					<h6 class="menu-notificaciones-titulo">Notificaciones</h6>
-					<hr>
-					<ul>
-						<li class="dropdown-item"><i class="fa fa-circle-thin"></i> Gracias por formar parte de la comunidad<hr></li>
-						<li class="dropdown-item"><i class="fa fa-circle-thin"></i> Has vendido tu primer archivo<hr></li>
-					</ul>
-				</div>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link fa fa-inbox" href="#" title="Mensajes" data-toggle="dropdown">
-					{if isset($notificacionesMensaje)}
-					<span class="fa fa-comment"></span>
-					<span class="num">{count($notificacionesMensaje)}</span>
-					{/if}
-				</a>
-
-
-				<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
-					<h6 class="menu-notificaciones-titulo">Mensajes</h6>
 					<table class="table">
 						<tbody>
-							{if isset($notificacionesMensaje)}
-							{foreach $notificacionesMensaje as $notiMens}
-							<tr onClick="window.location='{$url_mensaje}/{$notiMens->getCorreo()}'">
-								<th scope="row">{$notiMens->getNombre()}</th>
-								<td>{$notiMens->getMensaje()}</td>
+							<tr class="notification" onClick="">
+								<th scope="row"><i class="fa fa-circle"></i></th>	
+								<td> Bienvenido a File seller, la mejor plataforma para vender tus archivos</td>
+								<td><div class="eliminar_notificacion"><i class="fa fa-times"></div></td>
 							</tr>
-							{/foreach}
-							{else}
-								<tr>
-									<th>No tienes mensajes nuevos</th>
-									<td><a onClick="window.location='{$url_mensaje}'" href="#">Ir al chat</a></td>
-								</tr>
-							{/if}
+							<tr class="notification" onClick="">
+								<th scope="row"><i class="fa fa-circle"></i></th>	
+								<td> Gracias por formar parte de la comunidad</td>
+								<td><div class="eliminar_notificacion"><i class="fa fa-times"></div></td>
+							</tr>
+							<tr class="notification" onClick="">
+								<th scope="row"><i class="fa fa-circle"></i></th>	
+								<td> Gracias por formar parte de la comunidad</td>
+								<td><div class="eliminar_notificacion"><i class="fa fa-times"></div></td>
+							</tr>
 						</tbody>
 					</table>
-				</div>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle {if isset($active_perfil)} {$active_perfil} {/if} " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<img src="{$url_base}{$usuario->getImagen()}" title="Cuenta de File Seller" class="rounded-circle img-user">
-				</a>
-				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#" onClick="window.location='{$url_perfil}'"><i class="fa fa-user menu-perfil" aria-hidden="true"></i>Perfil</a>
-					<a class="dropdown-item" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fa fa-upload menu-perfil" ></i>Subir archivo </a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#" onClick="window.location='{$url_logout}'"><i class="fa fa-sign-out menu-perfil"></i>Cerrar sesión</a>
-				</div>
-			</li>
-			{else}
-			<li class="nav-item {if isset($active_iniciarSesion)} {$active_iniciarSesion} {/if}">
-				<a class="nav-link" href="#" title="Iniciar sesión" onClick="window.location='{$url_login}'">Iniciar sesión</a>
-			</li>
-			<li class="nav-item {if isset($active_registrarse)} {$active_registrarse} {/if}">
-				<a class="nav-link" href="#" title="Registrarse" onClick="window.location='{$url_registro}'">Registrarse</a>
-			</li>
-			{/if}
-			<li class="nav-item  {if isset($active_ayuda)} {$active_ayuda} {/if}">
-				<a class="nav-link" href="#" title="Ayuda" onClick="window.location='{$url_ayuda}'"><i class="fa fa-question-circle"></i></a>
-			</li>
-		</ul>
-	</div>
-</nav>
-<hr class="separador">
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link fa fa-inbox {if isset($active_mensajes)} {$active_mensajes} {/if}" href="#" title="Mensajes" data-toggle="dropdown">
+						{if isset($notificacionesMensaje)}
+						<span class="fa fa-comment"></span>
+						<span class="num">{count($notificacionesMensaje)}</span>
+						{/if}
+					</a>
+
+
+					<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
+						<h6 class="menu-notificaciones-titulo">Mensajes</h6>
+						<table class="table">
+							<tbody>
+								{if isset($notificacionesMensaje)}
+								{foreach $notificacionesMensaje as $notiMens}
+								<tr class="notification" onClick="window.location='{$url_mensaje}/{$notiMens->getCorreo()}'">
+									<th scope="row">{$notiMens->getNombre()}</th>
+									<td>{$notiMens->getMensaje()}</td>
+								</tr>
+								{/foreach}
+								{else}
+								<tr>
+									<th>No tienes mensajes nuevos</th>
+								</tr>
+								{/if}
+							</tbody>
+						</table>
+						<div class="ver_conversaciones"><a onClick="window.location='{$url_mensaje}'" href="#">Ver conversaciones</a></div>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle {if isset($active_perfil)} {$active_perfil} {/if} " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<img src="{$url_base}{$usuario->getImagen()}" title="Cuenta de File Seller" class="rounded-circle img-user">
+					</a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#" onClick="window.location='{$url_perfil}'"><i class="fa fa-user menu-perfil" aria-hidden="true"></i>Perfil</a>
+						<a class="dropdown-item" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fa fa-upload menu-perfil" ></i>Subir archivo </a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#" onClick="window.location='{$url_logout}'"><i class="fa fa-sign-out menu-perfil"></i>Cerrar sesión</a>
+					</div>
+				</li>
+				{else}
+				<li class="nav-item {if isset($active_iniciarSesion)} {$active_iniciarSesion} {/if}">
+					<a class="nav-link" href="#" title="Iniciar sesión" onClick="window.location='{$url_login}'">Iniciar sesión</a>
+				</li>
+				<li class="nav-item {if isset($active_registrarse)} {$active_registrarse} {/if}">
+					<a class="nav-link" href="#" title="Registrarse" onClick="window.location='{$url_registro}'">Registrarse</a>
+				</li>
+				{/if}
+				<li class="nav-item  {if isset($active_ayuda)} {$active_ayuda} {/if}">
+					<a class="nav-link" href="#" title="Ayuda" onClick="window.location='{$url_ayuda}'"><i class="fa fa-question-circle"></i></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<hr class="separador">
 
