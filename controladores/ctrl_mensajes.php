@@ -1,6 +1,6 @@
 <?php
 
-require "clases/mensajes.php";
+require_once "clases/mensajes.php";
 require_once "clases/template.php";
 
 class ControladorMensajes extends ControladorIndex {

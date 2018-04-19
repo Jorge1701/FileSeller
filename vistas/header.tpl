@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
 	<img class="navbar-brand icono" src="{$url_base}img/icono.png" onclick="window.location='{$url_inicio}'">
-	<a class="navbar-brand font-weight-bold titulo" href="#" title="Ir a inicio" onclick="window.location='{$url_inicio}'">{$nombre_proyecto}</a>
+	<a class="navbar-brand font-weight-bold tituloheader" href="#" title="Ir a inicio" onclick="window.location='{$url_inicio}'">{$nombre_proyecto}</a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -33,8 +33,10 @@
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link fa fa-inbox" href="#" title="Mensajes" data-toggle="dropdown">
+					{if isset($notificacionesMensaje)}
 					<span class="fa fa-comment"></span>
-					<span class="num">2</span>
+					<span class="num">{count($notificacionesMensaje)}</span>
+					{/if}
 				</a>
 
 
@@ -42,18 +44,19 @@
 					<h6 class="menu-notificaciones-titulo">Mensajes</h6>
 					<table class="table">
 						<tbody>
-							<tr onClick="window.location='{$url_mensaje}id'">
-								<th scope="row">Brian</th>
-								<td>hola como estas ?</td>
+							{if isset($notificacionesMensaje)}
+							{foreach $notificacionesMensaje as $notiMens}
+							<tr onClick="window.location='{$url_mensaje}/{$notiMens->getCorreo()}'">
+								<th scope="row">{$notiMens->getNombre()}</th>
+								<td>{$notiMens->getMensaje()}</td>
 							</tr>
-							<tr>
-								<th scope="row">Luisito</th>
-								<td>que haces loco ? era para...</td>
-							</tr>
-							<tr>
-								<th scope="row">Jorge</th>
-								<td>te mando el archivo del coso...</td>
-							</tr>
+							{/foreach}
+							{else}
+								<tr>
+									<th>No tienes mensajes nuevos</th>
+									<td><a onClick="window.location='{$url_mensaje}'" href="#">Ir al chat</a></td>
+								</tr>
+							{/if}
 						</tbody>
 					</table>
 				</div>

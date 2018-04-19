@@ -70,7 +70,7 @@ class Mensajes extends ClaseBase {
 		while ($fila = $resultado->fetch_object ())
 			$res[] = new NotificacionMensaje ($fila->nombre . " " . $fila->apellido, $fila->correo, $fila->mensaje);
 
-		return isset ($res) ? $res : [];
+		return isset ($res) ? $res : null;
 	}
 
 	public function getDia () {
