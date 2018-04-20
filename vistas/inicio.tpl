@@ -7,6 +7,12 @@
 <body background="{$url_base}img/wallpaper.jpg">
 	{include file="header.tpl"}
 
+	{if isset($archivo_subido)}
+	<div class="alert alert-success text-center col-sm-9 col-md-9 mx-auto">
+  	<strong>Felicidades!</strong> {$archivo_subido}
+	</div>
+	{/if}
+
 	<div class="row">
 		<div class="col-sm-9 col-md-9 mx-auto">
 			<div id="archivos" class="card">

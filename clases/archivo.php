@@ -82,16 +82,60 @@ class Archivo extends ClaseBase{
     }
 
 
-	public function getArchivosUser($idUsuario){
-		$sql="select * from archivos where duenio=$idUsuario";
-	    $res=NULL;
-	    $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
-	     while($fila = $resultado->fetch_object()) {
-	       $res[] = new $this->modelo($fila);
-	    }
-	    return $res;
-	}
+    public function getArchivosUser($idUsuario){
+      $sql="select * from archivos where duenio=$idUsuario";
+      $res=NULL;
+      $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+      while($fila = $resultado->fetch_object()) {
+        $res[] = new $this->modelo($fila);
+    }
+    return $res;
+}
+
+public function subirArchivo($idDuenio){
+
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["archivo"]["name"]);
+    $uploadStatus = -1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    
+    $nombre = $_POST["nombre"];
+    $descripcion =  isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
+
+
+    $tamanio = round ($_FILES["archivo"]["size"] / 1024,2,PHP_ROUND_HALF_UP)."KB";
+    $tipo= explode(".",$_FILES["archivo"]["name"])[1];
+    $precio = $_POST["precio"];
+    date_default_timezone_set('America/Montevideo');
+    $fecSubido = date("Y-m-d");
+    $horaSubido = date("H:i:s");
+
+        // Checkear tamaño, limite 100MB en este caso
+    if ($_FILES["archivo"]["size"] > 100000000) {
+     $uploadStatus = 2;
+ } else {
+    if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {
+
+
+        ini_set("display_errors", 1);
+        error_reporting(E_ALL & ~E_NOTICE);
+
+        $sql = $this->db->prepare("INSERT INTO archivos (nombre,tipo,tamanio,precio,descripcion,ubicacion,duenio,fecSubido,horaSubido) VALUES( ?,?,?,?,?,?,?,?,?)");
+
+        $sql->bind_param("ssssssiss",$nombre,$tipo,$tamanio,$precio,$descripcion,$target_file,$idDuenio,$fecSubido,$horaSubido);
+
+        $sql->execute();
+
+        $uploadStatus = 0;
+    } else {
+        $uploadStatus = 1;
+    }
+}
+
+return $uploadStatus;
+
+}
 
 
 }
- ?>
+?>

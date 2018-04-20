@@ -32,6 +32,7 @@ class ControladorInicio extends ControladorIndex {
 				$datos = array(
 					"titulo" => "Iniciar sesión",
 					"mensaje" => $mensaje,
+					"active_iniciarSesion" => "active"
 				);
 				$tpl = Template::getInstance();
 				$tpl->mostrar('login',$datos);
