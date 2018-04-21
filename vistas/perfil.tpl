@@ -33,7 +33,7 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th scope="col"><h4>Datos personales:</h4></th>
+											<h4>Datos personales</h4>
 										</tr>
 									</thead>
 									<tbody>
@@ -66,10 +66,10 @@
 							</div>
 							<div id="archivos" class="tab-pane slide-left">
 								<table class="table">
-									<thead>
-										<tr>
-											<th scope="col"><h4>Mis archivos</h4></th>
-										</tr>
+									<thead>	
+											<tr>
+												<h4>Mis archivos</h4>
+											</tr>		
 									</thead>
 									<tbody>
 										<tr>
@@ -82,7 +82,7 @@
 										</tr>
 										{if isset($archivos)}
 										{foreach $archivos as $archivo}
-										<tr>
+										<tr class="fila_archivo">
 											<td>{$archivo->getNombre()}</td>
 											<td>{$archivo->getTipo()}</td>
 											<td>{$archivo->getDescripcion()}</td>

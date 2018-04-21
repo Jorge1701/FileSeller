@@ -83,3 +83,7 @@
 	font-family: inherit;
 	font-size: 13pt;
 }
+
+.fila_archivo:hover {
+	background-color: hsla(0, 0%, 20%, 0.04);
+}
