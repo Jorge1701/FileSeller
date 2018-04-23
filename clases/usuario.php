@@ -9,24 +9,9 @@ class Usuario extends ClaseBase{
 	private $cuentas = "";
 	private $correo = "";
 	private $contrasenia = "";
-	private $imagen = "/img/user-default.png";
+	private $imagen = "img/user-default.png";
 	private $activo = true;
 	private $id = 0;
-
-	/*public function __construct ($nombre = "Usuario",$apellido = "Prueba", $fnac = "1995-06-07",$cuentas = "", $correo = "usuario@prueba.com", $contrasenia = "1234",$imagen = "../../img/user-default.png", $activo = true, $id = 0){
-		$this->nombre = $nombre;
-		$this->apellido = $apellido;
-		$this->fnac = $fnac;
-		$this->cuentas = $cuentas;
-		$this->correo = $correo;
-		$this->contrasenia = $contrasenia;
-		$this->imagen = $imagen;
-		$this->activo = $activo;
-		$this->id = $id;
-
-		parent::__construct("usuarios");	
-
-	}*/
 
 	public function __construct($obj=NULL) {
         //$this->db=DB::conexion();
@@ -97,17 +82,6 @@ class Usuario extends ClaseBase{
 
 	public function getId(){
 		return $this->id;
-	}
-
-	public function getUserByCorreo($correo){
-		$sql=$this->db->prepare("select * from usuarios where correo= ?");
-		$sql->bind_param("s",$correo);
-		$res=NULL;
-		$resultado =$this->db->query($sql) or die ("Fallo en la consulta");
-		if($fila = $resultado->fetch_object()) {
-			$res= new Usuario($fila->nombre,$fila->apellido,$fila->fnac,$fila->ci,$fila->cuentas,$fila->correo,$fila->contrasenia);
-		}
-		return $res;
 	}
 
 	public function obtenerPorCorreo($corre){

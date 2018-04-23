@@ -2,6 +2,8 @@
 
 require_once ("clases/template.php");
 require_once ("clases/session.php");
+require_once ("clases/Archivo.php");
+require_once ("clases/Auth.php");
 
 
 class ControladorUsuario extends ControladorIndex {
@@ -15,8 +17,11 @@ class ControladorUsuario extends ControladorIndex {
 	}
 
 	function perfil () {
+		$archivos = (new Archivo())->getArchivosUser(Auth::estaLogueado());
+
 		$datos = array(
 			"active_perfil" => "active",
+			"archivos" => $archivos,
 		);
 		$tpl = Template::getInstance();
 		$tpl->mostrar("perfil",$datos);

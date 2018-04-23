@@ -2,6 +2,7 @@
 
 require_once ("clases/usuario.php");
 require_once ("clases/auth.php");
+require_once ("clases/archivo.php");
 //require_once("clases/subir_imagen.php");
 
 class ControladorInicio extends ControladorIndex {
@@ -9,6 +10,7 @@ class ControladorInicio extends ControladorIndex {
 	function principal () {
 		$datos = array(
 			"active_inicio" => "active",
+			"lista_archivos" => (new Archivo())->getListado(),
 		);
 		$tpl = Template::getInstance();
 		$tpl->mostrar('inicio',$datos);
@@ -32,6 +34,7 @@ class ControladorInicio extends ControladorIndex {
 				$datos = array(
 					"titulo" => "Iniciar sesión",
 					"mensaje" => $mensaje,
+					"active_iniciarSesion" => "active"
 				);
 				$tpl = Template::getInstance();
 				$tpl->mostrar('login',$datos);

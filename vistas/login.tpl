@@ -2,6 +2,7 @@
 <html>
 <head>
 	{include file="include_css.tpl"}
+	<link rel="stylesheet" type="text/css" href="{$url_base}style/login.css">
 	<title>Login</title>
 </head>
 <body background="{$url_base}img/wallpaper.jpg">
@@ -11,7 +12,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 mx-auto card text-center">
-				<div class="mx-auto" style="margin-top: 10px"><h4>Iniciar sesión</h4></div>
+				<div class="mx-auto is"><h4>Iniciar sesión</h4></div>
 				<hr>
 				<form method="post">
 					<div class="input-group mb-3">
@@ -27,14 +28,14 @@
 						<input name="password" id="password" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" autofocus title="Mínimo 6 / Máximo 21" required="Mínimo 6 / Máximo 21"/>
 					</div>
 					{if isset($mensaje)} 
-						<div style="color: red">{$mensaje}</div>
+						<div class="mensaje">{$mensaje}</div>
 						<br>
 					 {/if}
 					<input name="check" type="checkbox" aria-label="Recordarme" value="Algo">Recordarme
 					<br>
-					<button id="btnLogin" class="btn btn-success" style="margin: 20px 0px ">Iniciar Sesión</button>
+					<button id="btnLogin" class="btn btn-success btn-iniciar-sesion">Iniciar Sesión</button>
 				</form>
-				<a href="#" style="margin: 5px 0px">Registrarse</a>
+				<a class="registrarse" href="#">Registrarse</a>
 			</div>
 		</div>
 	</div>

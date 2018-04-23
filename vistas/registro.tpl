@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="../../bootstrap/css/bootstrap.css">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	{include file="include_css.tpl"}
+	<link rel="stylesheet" type="text/css" href="{$url_base}style/login.css">
 	<title>Registrarse</title>
 </head>
 <body background="../../img/wallpaper.jpg">
@@ -13,7 +12,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 mx-auto card text-center">
-				<div class="mx-auto" style="margin-top: 10px"><h4>Registrarse</h4></div>
+				<div class="mx-auto is"><h4>Registrarse</h4></div>
 				<hr>
 				<form method="post">
 					<div class="input-group mb-3">
@@ -72,10 +71,9 @@
 									<input accept="image/*" name="archivo" id="archivo" type="file" class="form-control" aria-label="Archivo" aria-describedby="basic-addon1" autofocus title="Seleccione una imagen"/>
 								</div>
 
-								<div class="input-group mb-3">
-									<button id="btnImagen" class="btn btn-success" style="margin: 20px 0px ">Subir Imagen</button>
+									<button id="btnImagen" class="btn btn-success btn-iniciar-sesion">Subir Imagen</button>
 									<p><strong>Nota:</strong> Solo .jpg, .jpeg, .gif, .png son los formatos permitidos con un máximo de 5Mb.</p>
-								</div>
+								
 							</form>
 
 
@@ -171,7 +169,7 @@
 
 							<!-- MODAL -->
 
-							<button id="btnRegistro" class="btn btn-success" style="margin: 20px 0px ">Aceptar</button>
+							<button id="btnRegistro" class="btn btn-success btn-iniciar-sesion">Aceptar</button>
 						</form>
 					</div>
 				</div>

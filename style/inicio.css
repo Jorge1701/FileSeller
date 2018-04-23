@@ -1,0 +1,15 @@
+.noArchivos{
+	text-align: center;
+	margin-top: 30pt;
+	margin-bottom: 20pt; 
+	font-family: inherit;
+	font-size: 13pt;
+}
+
+.fila_archivo_inicio:hover {
+	background-color: hsla(0, 0%, 20%, 0.04);
+}
+
+.titulo_lista_archivos{
+	padding: 10pt 0pt 10pt 10pt;
+}

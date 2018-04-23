@@ -1,0 +1,17 @@
+.is{
+	margin-top: 10px;
+}
+
+.mensaje{
+	color: red;
+}
+
+.btn-iniciar-sesion{
+ 	margin: 20px 0px;
+ 	object-position: center;
+ 	align-self: center;
+}
+
+.registrarse{
+	margin: 5px 0px;
+}

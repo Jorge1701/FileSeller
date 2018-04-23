@@ -1,3 +1,63 @@
+.ver_conversaciones{
+  text-align: center;
+}
+
+
+.separador {
+  border-color: hsl(226, 59%, 60%);
+}
+
+.menu-perfil{
+  margin-right: 5%;
+}
+
+.menu-notificaciones{
+  width: 400px;
+}
+.notification:hover {
+  background-color: hsla(0, 0%, 20%, 0.04);
+}
+
+.eliminar_notificacion{
+  width: 20pt;
+  height: 20pt;
+  text-align: center;
+  color: red;
+  border-radius: 6pt;
+  border-style: solid;
+  border-width: 1pt;
+  border-color: black;
+}
+
+.eliminar_notificacion:hover{
+  background-color: red;
+  color:white;
+}
+
+.menu-notificaciones-titulo{
+  margin: 1px 0px 10px 20px;
+  font-size: 16pt;
+  text-align: left;
+}
+
+.img-user{
+  width: 25pt;
+  height: 25pt;
+}
+
+.icono{
+  width: 5%; 
+  height: 5%;
+}
+
+.tituloheader{
+  font-size: 200%;
+}
+
+.menu{
+  font-size: 130%;
+}
+
 a.fa-inbox {
   position: relative;
   font-size: 30px;
@@ -25,3 +85,4 @@ span.num {
   color: #fff;
   right: 2px;
 }
+

@@ -4,6 +4,7 @@ require_once ("libs/smarty/Smarty.class.php");
 require_once ("config/config.php");
 require_once ("clases/auth.php");
 require_once ("clases/usuario.php");
+require_once ("clases/mensajes.php");
 
 class Template {
 
@@ -41,15 +42,19 @@ class Template {
 
 		$id = Auth::estaLogueado();
 		$usuario = null;
+		$notificacionesMensaje = null;
 		$ctrlIndex = new ControladorIndex(); 
 
 		if( $id != false){
 			$usuario = (new Usuario())->obtenerPorId($id);
+			$notificacionesMensaje = (new Mensajes())->getNotificacionesMensajes($usuario->getCorreo());
+
 		}
 		
 		$this->asignar("usuario",$usuario);
-		$this->asignar("url_mensaje",$ctrlIndex->getUrl("mensajes","chat"));
-
+		$this->asignar("notificacionesMensaje",$notificacionesMensaje);
+		$this->asignar("url_mensaje",substr($ctrlIndex->getUrl("mensajes","chat"),0,-1));
+		
 		foreach ($data as $key => $value)
 			$this->_smarty->assign ($key, $value);
 

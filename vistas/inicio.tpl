@@ -2,10 +2,17 @@
 <html>
 <head>
 	{include file="include_css.tpl"}
+	<link rel="stylesheet" type="text/css" href="{$url_base}style/inicio.css">
 	<title>Inicio</title>
 </head>
 <body background="{$url_base}img/wallpaper.jpg">
 	{include file="header.tpl"}
+
+	{if isset($archivo_subido)}
+	<div class="alert alert-success text-center col-sm-9 col-md-9 mx-auto">
+		<strong>Felicidades!</strong> {$archivo_subido}
+	</div>
+	{/if}
 
 	<div class="row">
 		<div class="col-sm-9 col-md-9 mx-auto">
@@ -13,7 +20,7 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th scope="col"><h4>Recomendaciones para vos:</h4></th>
+							<h4 class="titulo_lista_archivos">Recomendaciones para vos</h4>
 						</tr>
 					</thead>
 					<tbody>
@@ -21,47 +28,26 @@
 							<th scope="row">Nombre</th>
 							<th scope="row">Tipo</th>
 							<th scope="row">Descripción</th>
-							<th scope="row">Tamaño</th>
-							<th scope="row">Precio($U)</th>
-							<th scope="row">Vista previa</th>
+							
 						</tr>
-						<tr>
-							<td>Arte urbano</td>
-							<td>Imagen</td>
-							<td>Fotografia de grafiti</td>
-							<td>2,3MB</td>
-							<td>20</td>
-							<td>No disp.</td>
+						{if isset($lista_archivos)}
+						{foreach $lista_archivos as $a}
+						<tr class="fila_archivo_inicio">
+							<td>{$a->getNombre()}</td>
+							<td>{$a->getTipo()}</td>
+							<td>{$a->getDescripcion()}</td>
 						</tr>
-							<tr>
-							<td>Arte urbano</td>
-							<td>Imagen</td>
-							<td>Fotografia de grafiti</td>
-							<td>2,3MB</td>
-							<td>20</td>
-							<td>No disp.</td>
-						</tr>
-							<tr>
-							<td>Arte urbano</td>
-							<td>Imagen</td>
-							<td>Fotografia de grafiti</td>
-							<td>2,3MB</td>
-							<td>20</td>
-							<td>No disp.</td>
-						</tr>
-							<tr>
-							<td>Arte urbano</td>
-							<td>Imagen</td>
-							<td>Fotografia de grafiti</td>
-							<td>2,3MB</td>
-							<td>20</td>
-							<td>No disp.</td>
-						</tr>
+						{/foreach}
 					</tbody>
 				</table>
-			</div>	
-		</div>
-	</div>
-	{include file="include_js.tpl"}
+				{else}	
+			</tbody>
+		</table>
+		<div class="noArchivos">No hay archivos subidos en la pagina</div>
+		{/if}
+	</div>	
+</div>
+</div>
+{include file="include_js.tpl"}
 </body>
 </html>
