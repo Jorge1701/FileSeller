@@ -14,7 +14,7 @@
 	{include file="header.tpl"}
 	
 	<div class="container">
-		<div class="row" id="conversaciones">
+		<div class="row">
 			<div class="col-sm-5 panel-izq">
 				<div class="titulo">
 					Contactos

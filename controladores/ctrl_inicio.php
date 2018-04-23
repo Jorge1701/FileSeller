@@ -42,30 +42,12 @@ class ControladorInicio extends ControladorIndex {
 
 		}else{
 			$datos = array(
-			"active_iniciarSesion" => "active",
+				"active_iniciarSesion" => "active",
 			);
 			$tpl = Template::getInstance();
 			$tpl->mostrar('login',$datos);
 		}
 	}
-
-
-	function registro (){
-		//subirImagen();
-
-
-		$mensaje = "";
-		$datos = array(
-			"titulo" => "Registrarse",
-			"mensaje" => $mensaje,
-		);
-		$tpl = Template::getInstance();
-		$tpl->mostrar('registro',$datos);
-	}
-
-	function subirImagen(){
-	}
-
 
 	function ayuda () {
 		$datos = array(
