@@ -56,7 +56,7 @@
 						{if $seleccionado eq "si"}
 							{if $existe_seleccionado eq "si"}
 								<div class="mx-auto msj visto">
-									No tiene ningun mensaje con {$correo_seleccionado}
+									Mande un mensaje para iniciar una conversacion con {$correo_seleccionado}
 								</div>
 							{else}
 								<div class="mx-auto msj error">
