@@ -110,18 +110,18 @@ public function subirArchivo($idDuenio){
     if ($_FILES['archivo']['error'] === UPLOAD_ERR_OK) {//Chekear que se haya subido correctamte
         if ($_FILES["archivo"]["size"] > 104857600) {// Checkear tamaño, limite 100MB en este caso 
          $uploadStatus = 1;
-        } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {//Si el archivo se movio correctamente desde la carpeta temporal a la indicada guardarlo en la BD.
+        } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {//Si el archivo se movio correctamente desde la carpeta temporal a la indicada, guardarlo en la BD.
         $sql = $this->db->prepare("INSERT INTO archivos (nombre,tipo,tamanio,precio,descripcion,ubicacion,duenio,fecSubido,horaSubido) VALUES( ?,?,?,?,?,?,?,?,?)");
         $sql->bind_param("ssssssiss",$nombre,$tipo,$tamanio,$precio,$descripcion,$target_file,$idDuenio,$fecSubido,$horaSubido);
         $sql->execute();
 
         $uploadStatus = 0;
-        }else{
-            $uploadStatus = 2;
-        } 
     }else{
-        $uploadStatus = 2; 
-    }
+        $uploadStatus = 2;
+    } 
+}else{
+    $uploadStatus = 2; 
+}
 
 return $uploadStatus;
 
@@ -132,13 +132,33 @@ private function convertirTamanio($tamanio){
         return  $tamanio."Bytes";
 
     }elseif ($tamanio < pow(1024,2)) {  // Si el tamanio no llega a 1MB devolverlo en KB
-       return round ($tamanio / 1024,1,PHP_ROUND_HALF_UP)."KB";
+     return round ($tamanio / 1024,1,PHP_ROUND_HALF_UP)."KB";
 
-   }else{
+ }else{
         return round ($tamanio / pow(1024,2),1,PHP_ROUND_HALF_UP)."MB"; //Si el tamanio supera 1MB devolverlo en MB
     }
 }
 
+
+public function subirImagen(){
+
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["archivo"]["name"]);
+                //$uploadStatus = -1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+    if ($_FILES["archivo"]["size"] > 5000000) {
+        return -1;
+    }else{
+
+        if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {
+            return 1;
+        }else {
+            return 0;
+        }
+
+    }
+}
 
 }
 ?>

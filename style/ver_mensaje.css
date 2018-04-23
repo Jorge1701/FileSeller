@@ -17,7 +17,8 @@
 
 #contactos {
 	height: 70vh;
-	overflow: auto;
+    overflow-x: hidden;
+	overflow-y: auto;
 	padding-right: 1vh;
 }
 
@@ -50,7 +51,8 @@
 
 #chat {
 	height: 62vh;
-	overflow: auto;
+    overflow-x: hidden;
+	overflow-y: auto;
 	padding-right: 1vw;
 }
 
@@ -73,17 +75,22 @@
 }
 
 .no-leido {
-	/* Color mensajes de no leido */
+	/* Color de mensaje no leido */
 	background-color: #FAA;
 }
 
 .visto {
-	/* Color mensajes de visto */
+	/* Color de mensaje visto */
 	background-color: #AAF;
 }
 
+.nuevo {
+	/* Color de mensaje nuevo */
+	background-color: #FF5;
+}
+
 .error {
-	/* Color mensajes de visto */
+	/* Color de mensaje error */
 	background-color: #FAA;
 	width: 70%;
 }
@@ -138,6 +145,18 @@
 	text-decoration: none;
 }
 
+.num-msj {
+	background-color: #F22;
+	color: #FFF;
+	display: inline-block;
+	font-size: .75em;
+	width: 2vw;
+	height: 1.5vw;
+	text-align: center;
+	border-radius: 1vw;
+	margin-left: 1.5vw;
+}
+
 /* Estilo de la barra */
 ::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -164,16 +183,4 @@
 		transparent 75%,
 		transparent
 	)
-}
-
-.num-msj {
-	background-color: #F22;
-	color: #FFF;
-	display: inline-block;
-	font-size: .75em;
-	width: 2vw;
-	height: 1.5vw;
-	text-align: center;
-	border-radius: 1vw;
-	margin-left: 1.5vw;
 }

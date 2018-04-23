@@ -27,13 +27,13 @@ class ControladorArchivo extends ControladorIndex {
 			$subidoOK = (new Archivo())->subirArchivo($id);
 			if($subidoOK == 0){
 				$datos = array(
-				"archivo_subido" => "Su archivo fue subido exitosamente",
+					"archivo_subido" => "Su archivo fue subido exitosamente",
 				
-				"active_incio" => "active",//Activar el boton inicio del header
-				"lista_archivos" => (new Archivo())->getListado(),//Lista de futuras recomendaciones
-					
-			);
-			$tpl->mostrar("inicio",$datos);
+					"active_incio" => "active",//Activar el boton inicio del header
+					"lista_archivos" => (new Archivo())->getListado(),//Lista de futuras recomendaciones
+				);
+				$tpl->mostrar("inicio",$datos);
+				return;
 			}elseif ($subidoOK == 1) {
 				$mensaje = "El archivo excede el tamaño maximo soportado (100MB)";
 			}else{
