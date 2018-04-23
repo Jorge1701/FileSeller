@@ -14,7 +14,7 @@
 	{include file="header.tpl"}
 	
 	<div class="container">
-		<div class="row">
+		<div class="row" id="conversaciones">
 			<div class="col-sm-5 panel-izq">
 				<div class="titulo">
 					Contactos
@@ -56,7 +56,7 @@
 						{if $seleccionado eq "si"}
 							{if $existe_seleccionado eq "si"}
 								<div class="mx-auto msj visto">
-									No tiene ningun mensaje con {$correo_seleccionado}
+									Mande un mensaje para iniciar una conversacion con {$correo_seleccionado}
 								</div>
 							{else}
 								<div class="mx-auto msj error">
