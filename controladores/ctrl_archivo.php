@@ -20,10 +20,10 @@ class ControladorArchivo extends ControladorIndex {
 			);
 			$tpl->mostrar("inicio",$datos);
 			return;
-			}elseif ($subidoOK == 2) {
+			}elseif ($subidoOK == 1) {
 				$mensaje = "El archivo excede el tamaño maximo soportado (100MB)";
 			}else{
-				$mensaje = "Hubo un error al subir el archivo, Reintente";	
+				$mensaje = "Hubo un error al subir el archivo, es posible que haya un problema en la configuracion del servidor, o que no se haya podido mover el archivo.";	
 			}
 			$datos = array(
 				"active_subir_archivo" => "active",

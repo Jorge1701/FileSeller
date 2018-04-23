@@ -79,6 +79,7 @@
 											<th scope="row">Tamaño</th>
 											<th scope="row">Precio($U)</th>
 											<th scope="row">Subido en</th>
+											<th scope="row">Estado</th>
 										</tr>
 										{if isset($archivos)}
 										{foreach $archivos as $archivo}
@@ -88,7 +89,8 @@
 											<td>{$archivo->getDescripcion()}</td>
 											<td>{$archivo->getTamanio()}</td>
 											<td>{$archivo->getPrecio()}</td>
-											<td>{$archivo->getFecSubido()} {$archivo->getHoraSubido()}</td>
+											<td>{$archivo->getFecSubido()} | {$archivo->getHoraSubido()}</td>
+											<td>{if ($archivo->getVendido()==true)}Vendido {else}En venta{/if}</td>
 										</tr>
 										{/foreach}
 									</tbody>
