@@ -1,0 +1,1 @@
+document.getElementById ("chat").scrollTop = document.getElementById ("listaMsjs").getClientRects ()[0].height;

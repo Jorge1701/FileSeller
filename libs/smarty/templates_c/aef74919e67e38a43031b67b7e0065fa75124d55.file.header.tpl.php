@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-18 02:06:32
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2018-04-18 03:04:32
          compiled from "vistas\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16358029025ad68c08e2e819-39835451%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aef74919e67e38a43031b67b7e0065fa75124d55' => 
     array (
       0 => 'vistas\\header.tpl',
-      1 => 1524009970,
+      1 => 1524013321,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5ad68c08e406e4_15771821',
   'variables' => 
   array (
     'url_base' => 0,
@@ -35,8 +37,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'url_ayuda' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ad68c08e406e4_15771821',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5ad68c08e406e4_15771821')) {function content_5ad68c08e406e4_15771821($_smarty_tpl) {?><nav class="navbar navbar-expand-lg navbar-dark">
 	<img class="navbar-brand" style="width: 5%; height: 5%" src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
