@@ -4,6 +4,7 @@ require_once ("clases/template.php");
 require_once ("clases/session.php");
 require_once ("clases/Archivo.php");
 require_once ("clases/Auth.php");
+require_once ("controladores/ctrl_index.php");
 
 
 class ControladorUsuario extends ControladorIndex {
@@ -17,8 +18,11 @@ class ControladorUsuario extends ControladorIndex {
 	}
 
 	function perfil () {
-		$archivos = (new Archivo())->getArchivosUser(Auth::estaLogueado());
-
+		$id = Auth::estaLogueado();
+		if(!$id){
+			(new ControladorIndex())->redirect("inicio","principal");
+		}
+		$archivos = (new Archivo())->getArchivosUser($id);
 		$datos = array(
 			"active_perfil" => "active",
 			"archivos" => $archivos,

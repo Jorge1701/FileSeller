@@ -32,7 +32,7 @@
 						</tr>
 						{if isset($lista_archivos)}
 						{foreach $lista_archivos as $a}
-						<tr class="fila_archivo_inicio">
+						<tr class="fila_archivo_inicio" onclick="window.location='{$url_ver_archivo}{$a->getId()}'">
 							<td>{$a->getNombre()}</td>
 							<td>{$a->getTipo()}</td>
 							<td>{$a->getDescripcion()}</td>

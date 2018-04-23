@@ -20,6 +20,7 @@ $tpl->asignar ("url_logout", $ctrlIndex->getUrl("usuario","logout"));
 $tpl->asignar ("url_registro",$ctrlIndex->getUrl("usuario","registro"));
 $tpl->asignar ("url_ayuda", $ctrlIndex->getUrl("inicio","ayuda"));
 $tpl->asignar ("url_subir_archivo", $ctrlIndex->getUrl("archivo","subir"));
+$tpl->asignar ("url_ver_archivo", $ctrlIndex->getUrl("archivo","ver"));
 
 if (isset ($_GET["url"])) {
 	$partes = explode ('/', $_GET["url"]);

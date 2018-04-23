@@ -1,10 +1,17 @@
 <?php
 
 require_once ("clases/archivo.php");
+require_once ("controladores/ctrl_index.php");
 
 class ControladorArchivo extends ControladorIndex {
 
-	function ver ($params) {
+	function ver ($idArchivo) {
+		$tpl = Template::getInstance();
+		$archivo = (new Archivo())->obtenerPorId($idArchivo[0]);
+		$datos = array(
+			"archivo" => $archivo,
+		);
+		$tpl->mostrar("ver_archivo",$datos);
 
 	}
 
@@ -12,14 +19,21 @@ class ControladorArchivo extends ControladorIndex {
 		$tpl = Template::getInstance();
 
 		if(isset($_FILES["archivo"]) && isset($_POST["nombre"])){
-			$subidoOK = (new Archivo())->subirArchivo(Auth::estaLogueado());
+			$id = Auth::estaLogueado();
+			if(!$id){
+			(new ControladorIndex())->redirect("inicio","principal");
+			}
+
+			$subidoOK = (new Archivo())->subirArchivo($id);
 			if($subidoOK == 0){
 				$datos = array(
-				"active_incio" => "active",
 				"archivo_subido" => "Su archivo fue subido exitosamente",
+				
+				"active_incio" => "active",//Activar el boton inicio del header
+				"lista_archivos" => (new Archivo())->getListado(),//Lista de futuras recomendaciones
+					
 			);
 			$tpl->mostrar("inicio",$datos);
-			return;
 			}elseif ($subidoOK == 1) {
 				$mensaje = "El archivo excede el tamaño maximo soportado (100MB)";
 			}else{

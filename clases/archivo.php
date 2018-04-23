@@ -107,11 +107,10 @@ public function subirArchivo($idDuenio){
     $uploadStatus = -1;
 
 
-    if ($_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
-       // Checkear tamaño, limite 100MB en este caso 
-        if ($_FILES["archivo"]["size"] > 104857600) {
+    if ($_FILES['archivo']['error'] === UPLOAD_ERR_OK) {//Chekear que se haya subido correctamte
+        if ($_FILES["archivo"]["size"] > 104857600) {// Checkear tamaño, limite 100MB en este caso 
          $uploadStatus = 1;
-        } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {
+        } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {//Si el archivo se movio correctamente desde la carpeta temporal a la indicada guardarlo en la BD.
         $sql = $this->db->prepare("INSERT INTO archivos (nombre,tipo,tamanio,precio,descripcion,ubicacion,duenio,fecSubido,horaSubido) VALUES( ?,?,?,?,?,?,?,?,?)");
         $sql->bind_param("ssssssiss",$nombre,$tipo,$tamanio,$precio,$descripcion,$target_file,$idDuenio,$fecSubido,$horaSubido);
         $sql->execute();

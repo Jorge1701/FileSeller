@@ -3,7 +3,7 @@
 <head>
 	{include file="include_css.tpl"}
 	<link rel="stylesheet" type="text/css" href="{$url_base}style/perfil.css">
-	<title>Inicio</title>
+	<title>Perfil</title>
 </head>
 <body background="{$url_base}img/wallpaper.jpg">
 	<!-- Header -->
@@ -38,12 +38,8 @@
 									</thead>
 									<tbody>
 										<tr>
-											<th scope="row">Nombre</th>
-											<td>{$usuario->getNombre()}</td>
-										</tr>
-										<tr>
-											<th scope="row">Apellido</th>
-											<td>{$usuario->getApellido()}</td>
+											<th scope="row">Nombre completo</th>
+											<td>{$usuario->getNombre()} {$usuario->getApellido()}</td>
 										</tr>
 										<tr>
 											<th scope="row">Fecha de nacimiento</th>
@@ -83,7 +79,7 @@
 										</tr>
 										{if isset($archivos)}
 										{foreach $archivos as $archivo}
-										<tr class="fila_archivo">
+										<tr class="fila_archivo" onclick="window.location='{$url_ver_archivo}{$archivo->getId()}'">
 											<td>{$archivo->getNombre()}</td>
 											<td>{$archivo->getTipo()}</td>
 											<td>{$archivo->getDescripcion()}</td>
