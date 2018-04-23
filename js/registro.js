@@ -1,3 +1,18 @@
+// funcion que muestra u oculta el password
+
+function showPassword() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+        x.type = "text";
+        $('#eyePass').addClass('fa-eye-slash').removeClass('fa-eye');
+    } else {
+        x.type = "password";
+        $('#eyePass').addClass('fa-eye').removeClass('fa-eye-slash');
+    }
+
+}
+//fin 
+// fa fa-eye-slash
 //Comprobacion de fecha
 
 var correctoDia = false;
@@ -57,69 +72,51 @@ $("#mes").focusout(function () {
 
 //comprobar correo
 
-/*
-$("#correo").keyup(function () {
-
-    var correo = $("#correo").val().toString();
-
-    $("#correo2").attr("value", correo);
-
-    $("#correo2").trigger("change");
-
-    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-    if(correo === ""){
-     $('#correo').addClass('is-invalid').removeClass('is-valid');
- }else if(!filter.test(correo)){
-     $('#correo').addClass('is-invalid').removeClass('is-valid');
- }
-
-});
-*/
-
 var correctoEmail = false;
 
 
-$("#correo").focusout(function(){
+$("#correo").focusout(function () {
 
     var correo = $("#correo").val().toString();
     var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-    if(correo === ""){
-        
+    if (correo === "") {
+
         return correctoEmail = false;
 
-    }else if(!filter.test(correo)){
-     $('#correo').addClass('is-invalid').removeClass('is-valid');
-     document.getElementById('mensaje_correo').innerHTML = "Formate de correo incorrecto.";
-     $("#modal_correo").modal();
-     return correctoEmail = false;
- }
-
- $.ajax({
-    type: "POST",
-    url: "localhost/FileSeller/usuario/registro",
-    data: {"correo": $("#correo").val().toString(),
-    "check": "check"},
-
-    success: function (data) {
-
-     if (data.status == 'success') {
-        $('#correo').addClass('is-valid').removeClass('is-invalid');
-        return correctoEmail = true;
-
-    } else if(data.status == 'error'){
+    } else if (!filter.test(correo)) {
         $('#correo').addClass('is-invalid').removeClass('is-valid');
-        document.getElementById('mensaje_correo').innerHTML = "Ya existe un usuario con ese correo.";
+        document.getElementById('mensaje_correo').innerHTML = "Formate de correo incorrecto.";
         $("#modal_correo").modal();
         return correctoEmail = false;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "localhost/FileSeller/usuario/registro",
+        data: {"correo": $("#correo").val().toString(),
+            "check": "check"},
+
+        success: function (data) {
+
+            if (data.status == 'success') {
+                $('#correo').addClass('is-valid').removeClass('is-invalid');
+                return correctoEmail = true;
+
+            } else if (data.status == 'error') {
+                $('#correo').addClass('is-invalid').removeClass('is-valid');
+                document.getElementById('mensaje_correo').innerHTML = "Ya existe un usuario con ese correo.";
+                $("#modal_correo").modal();
+                return correctoEmail = false;
 
 
-    }else{alert("else"+":NADA");}
-},
-error: function(){
-    alert("ERROR AJAX");
-}
-});
+            } else {
+                alert("else" + ":NADA");
+            }
+        },
+        error: function () {
+            alert("ERROR AJAX");
+        }
+    });
 
 });
