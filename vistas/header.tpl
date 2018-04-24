@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark cabecera">
 	<img class="navbar-brand icono" src="{$url_base}img/icono.png" onclick="window.location='{$url_inicio}'">
 	<a class="navbar-brand font-weight-bold tituloheader" href="#" title="Ir a inicio" onclick="window.location='{$url_inicio}'">{$nombre_proyecto}</a>
 
@@ -99,5 +99,4 @@
 			</ul>
 		</div>
 	</nav>
-	<hr class="separador">
 

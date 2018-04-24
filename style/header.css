@@ -3,10 +3,6 @@
 }
 
 
-.separador {
-  border-color: hsl(226, 59%, 60%);
-}
-
 .menu-perfil{
   margin-right: 5%;
 }
@@ -46,8 +42,8 @@
 }
 
 .icono{
-  width: 5%; 
-  height: 5%;
+  width: 25.9998pt;
+  height: 33.46pt;
 }
 
 .tituloheader{
@@ -86,3 +82,11 @@ span.num {
   right: 2px;
 }
 
+.cabecera {
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+  border-color: hsl(226, 59%, 60%);
+  margin-bottom: 2vh;
+}
