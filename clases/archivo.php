@@ -13,9 +13,6 @@ class Archivo extends ClaseBase{
 	private $duenio = 0;
 	private $fecSubido = "";
 	private $horaSubido = "";
-	private $vendido = false;
-	private $fecVenido = "";
-	private $horaVendido = "";
 
 
 	public function __construct($obj=NULL) {
@@ -67,18 +64,6 @@ class Archivo extends ClaseBase{
 
     public function getHoraSubido(){
     	return $this->horaSubido; 	
-    }
-
-    public function getVendido(){
-    	return $this->vendido; 	
-    }
-
-    public function getFecVendido(){
-    	return $this->fecVenido; 	
-    }
-
-    public function getHoraVendido(){
-    	return $this->horaVendido; 	
     }
 
 

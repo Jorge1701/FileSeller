@@ -16,10 +16,7 @@ CREATE TABLE `archivos` (
   `ubicacion` varchar(300) NOT NULL,
   `duenio` int(11) NOT NULL,
   `fecSubido` date NOT NULL,
-  `horaSubido` time NOT NULL,
-  `vendido` tinyint(1) NOT NULL DEFAULT '0',
-  `fecVendido` date DEFAULT NULL,
-  `horaVendido` time DEFAULT NULL
+  `horaSubido` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
