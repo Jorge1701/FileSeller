@@ -17,7 +17,7 @@
 		<div class="row">
 			<div class="col-sm-5 panel-izq">
 				<div class="titulo">
-					Contactos
+					Conversaciones
 				</div>
 				<!-- Lista de Contactos -->
 				<div id="contactos">
@@ -32,7 +32,7 @@
 						{else}
 							<div class="contacto">
 						{/if}
-							<img src="{$url_base}img/user-default.png" class="rounded-circle img-usuario">
+							<img src="{$url_base}{$c->getImagen ()}" class="rounded-circle img-usuario">
 							{$c->getNombre ()}
 							{if $c->getCant () neq 0}
 								<span class="num-msj">{$c->getCant ()}</span>
@@ -74,6 +74,7 @@
 							{assign primero "si"}
 							{assign visto "si"}
 							{assign visto_otro "si"}
+							{assign ultimo ""}
 							{foreach $mensajes as $m}
 								<!-- Mostrar visto o no -->
 
@@ -113,8 +114,10 @@
 
 								<!-- Mostrar mensaje -->
 								{if $m->esPropio ()}
+								{assign ultimo "mio"}
 								<div class="mensaje mio">
 								{else}
+								{assign ultimo "otro"}
 								<div class="mensaje otro">
 								{/if}
 									<p class="mensaje-texto">
@@ -127,7 +130,7 @@
 							{/foreach}
 
 							<!-- Si el otro ha leido todos los mensajes -->
-							{if $visto eq "si" && $visto_otro eq "si"}
+							{if $visto eq "si" && $visto_otro eq "si" && $ultimo eq "mio"}
 								<div class="mx-auto msj visto">
 									{$usuario_seleccionado->getNombre ()} {$usuario_seleccionado->getApellido ()} ha leido todo <i class="fa fa-eye"></i>
 								</div>

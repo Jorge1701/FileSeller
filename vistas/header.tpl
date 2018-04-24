@@ -7,8 +7,8 @@
 	</button>
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<form class="form-inline my-2 my-lg-0 mx-auto">
-			<input class="form-control mr-sm-2" type="search" placeholder="Nombre, tipo o dueño" aria-label="Search">
+		<form class="form-inline my-2 my-lg-0 mx-auto" action="{$url_base}inicio/buscar" method="GET">
+			<input class="form-control mr-sm-2" type="search" placeholder="Nombre, tipo o dueño" aria-label="Search" name="busqueda">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar archivo</button>
 		</form>
 		<ul class="navbar-nav menu">

@@ -49,6 +49,21 @@ class ControladorInicio extends ControladorIndex {
 		}
 	}
 
+	function buscar ($params = array ()) {
+		// Obtener busqueda
+		$busqueda = NULL;
+		if (isset ($params[0]) && $params[0] !== "")
+			$busqueda = $params[0];
+
+		$busqueda = "texto_busqueda";
+
+		$tpl = Template::getInstance ();
+		$datos = array (
+			"busqueda" => $busqueda
+		);
+		$tpl->mostrar ("buscar", $datos);
+	}
+
 	function ayuda () {
 		$datos = array(
 			"active_ayuda" => "active",
