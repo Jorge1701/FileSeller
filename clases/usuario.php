@@ -6,7 +6,7 @@ class Usuario extends ClaseBase{
 	private $nombre = "";
 	private $apellido = "";
 	private $fnac = "";
-	private $cuentas = "";
+	private $cuentas = null;
 	private $correo = "";
 	private $contrasenia = "";
 	private $imagen = "img/user-default.png";
@@ -84,13 +84,14 @@ class Usuario extends ClaseBase{
 		return $this->id;
 	}
 
-	public function obtenerPorCorreo($corre){
-		$sql="select * from usuarios where correo='$corre'";
+	public function obtenerPorCorreo($correo){
+		$sql="select * from usuarios where correo='$correo'";
 		$res=NULL;
 		$resultado =$this->db->query($sql)   
 		or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
 		if($fila = $resultado->fetch_object()) {
 			$res= new $this->modelo($fila);
+			$res->setCuentas((new Cuenta())->obtenerPorDuenio($res->getId()));
 		}
 		return $res;
 	}
@@ -184,5 +185,62 @@ class Usuario extends ClaseBase{
 
 }
 
+
+class cuenta extends ClaseBase{
+	private $nroTarjeta=0;
+	private $fecVenc="";
+	private $cvv=000;
+	private $duenio = 0;
+	private $id = 0;
+
+	public function __construct($obj = NULL){
+		if(isset($obj)){
+			foreach ($obj as $key => $value) {
+				$this->$key=$value;
+			}    
+		}
+
+		parent::__construct("cuentas");
+	}
+
+
+	public function getNroTarjeta(){
+		return $this->nroTarjeta;
+	}
+
+	public function getFecVenc(){
+		return $this->fecVenc;
+	}
+
+	public function getCvv(){
+		return $this->cvv;
+	}
+
+	public function getId(){
+		return $this->id;
+	}
+
+
+	public function obtenerPorDuenio($idDuenio){
+		$sql="select * from cuentas where duenio=$idDuenio";
+    	$res=NULL;
+		$resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+      	while($fila = $resultado->fetch_object()) {
+        $res[] = new $this->modelo($fila);
+    }
+    return $res;
+	}
+
+	public function agregar($idDuenio){
+		$nroTarjeta = $_POST['numTajeta'];
+		$fecVenc = $_POST['fecVenc'];
+		$cvv = $_POST['cvv'];
+
+		$sql = $this->db->prepare("INSERT INTO cuentas (nroTarjeta,fecVenc,cvv,duenio) VALUES( ?,?,?,?)");
+        $sql->bind_param("ssss",$nroTarjeta,$fecVenc,$cvv,$idDuenio);
+        $sql->execute();
+	}
+
+}
 
 ?>

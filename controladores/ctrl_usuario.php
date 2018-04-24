@@ -115,6 +115,7 @@ class ControladorUsuario extends ControladorIndex {
         $datos = array(
             "active_perfil" => "active",
             "archivos" => $archivos,
+            "url_agregar_pago" => (new ControladorIndex())->getUrl("usuario","agregarCuenta"),
         );
         $tpl = Template::getInstance();
         $tpl->mostrar("perfil", $datos);
@@ -130,6 +131,15 @@ class ControladorUsuario extends ControladorIndex {
 
     function editar_perfil($params) {
         
+    }
+
+    function agregarCuenta(){
+        $id = Auth::estaLogueado();
+        if(!$id){
+             (new ControladorIndex())->redirect("inicio","principal");
+        }
+        (new Cuenta())->agregar($id);
+        (new ControladorIndex())->redirect("usuario","perfil");
     }
 
 }

@@ -1,4 +1,6 @@
 <?php
+require_once ("clases/usuario.php");
+
 class ClaseBase {
 	protected $tabla;
     protected $db;
@@ -41,6 +43,9 @@ class ClaseBase {
             or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
          if($fila = $resultado->fetch_object()) {
            $res= new $this->modelo($fila);
+           if($res instanceof Usuario){
+            $res->setCuentas((new Cuenta())->obtenerPorDuenio($res->getId()));
+           }
         }
         return $res;
     }

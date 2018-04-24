@@ -50,12 +50,40 @@
 											<td>{$usuario->getCorreo()}</td>
 										</tr>
 										<tr>
-											<th scope="row">Cuentas</th>
-											<td>{if "" eq $usuario->getCuentas()}No tiene medios de pago activos{/if}</td>
+											<th scope="row">Medios de pago</th>
+											<td><button class="btn btn-info ver" title="Ver medios de pago" data-toggle="collapse" data-target="#verCuentas">Ver <i class="fa fa-caret-down"></i></button>
+											</td>
 										</tr>
 										<tr>
-											<th scope="row">Identificador de la cuenta</th>
-											<td>{$usuario->getId()}</td>
+											<th scope="row"></th>
+											<td>
+												<div class="collapse text-center" id="verCuentas">
+													
+													{if $usuario->getCuentas() == null}
+													No tiene medios de pago activos
+													{else}
+													<ul>	
+														{foreach $usuario->getCuentas() as $cuenta}
+														<li>
+														<div class="input-group-prepend">
+															<input class="input-group-text nrot" type="password" value="{$cuenta->getNroTarjeta()}" readonly id=nrot{$cuenta->getId()}>
+															<span onclick="showPassword('nrot{$cuenta->getId()}','eyePass{$cuenta->getId()}');" class="input-group-text fa fa-eye" id="eyePass{$cuenta->getId()}"></span>
+															<div class="fecc">{$cuenta->getFecVenc()}</div>
+														</div>
+													</li>
+														{/foreach}
+													</ul>
+													{/if}
+													<hr>
+													<div><h5>Agregar</h5></div>
+													<form action="{$url_agregar_pago}" method="POST" >
+														<input class="input-group mb-3" type="number" name="numTajeta" placeholder="Nro de tarjeta">
+														<input class="input-group mb-3" title="Fecha de vencimiento" type="text" name="fecVenc" placeholder="Fecha de vencimiento">
+														<input class="input-group mb-3" type="number" name="cvv" placeholder="CVV">
+														<input class="btn btn-success" type="submit" value="Agregar">
+													</form>
+												</div>
+											</td>	
 										</tr>
 									</tbody>
 								</table>
@@ -63,9 +91,9 @@
 							<div id="archivos" class="tab-pane slide-left">
 								<table class="table">
 									<thead>	
-											<tr>
-												<h4>Mis archivos</h4>
-											</tr>		
+										<tr>
+											<h4>Mis archivos</h4>
+										</tr>		
 									</thead>
 									<tbody>
 										<tr>
@@ -90,26 +118,27 @@
 										</tr>
 										{/foreach}
 									</tbody>
-									</table>
-										{else}	
-									</tbody>
-									</table>
-									<div class="sinArchivos">No tienes archivos subidos</div>
-									{/if}
-									
-								<button class="btn btn-info" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fa fa-upload btn-subir" ></i>Subir nuevo</button>
-							</div>
-							<div id="editar" class="tab-pane slide-left">
-								<h4>Editar perfil</h4>
+								</table>
+								{else}	
+							</tbody>
+						</table>
+						<div class="sinArchivos">No tienes archivos subidos</div>
+						{/if}
 
-								<h6>Esta función será implementada en el siguiente Sprint.</h6>
-							</div>
-						</div>
-					</div>	
-				</div>	
-			</div>
-		</div>
+						<button class="btn btn-info" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fa fa-upload btn-subir" ></i>Subir nuevo</button>
+					</div>
+					<div id="editar" class="tab-pane slide-left">
+						<h4>Editar perfil</h4>
+
+						<h6>Esta función será implementada en el siguiente Sprint.</h6>
+					</div>
+				</div>
+			</div>	
+		</div>	
 	</div>
-	{include file="include_js.tpl"}
+</div>
+</div>
+{include file="include_js.tpl"}
+<script type="text/javascript" src="{$url_base}js/perfil.js"></script>
 </body>
 </html>
