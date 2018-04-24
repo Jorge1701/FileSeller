@@ -1,3 +1,4 @@
+DROP DATABASE fileseller;
 CREATE DATABASE fileseller CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -8,6 +9,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `archivos` (
   `id` int(11) NOT NULL,
+  `img` varchar(250) NOT NULL,
   `nombre` varchar(250) NOT NULL,
   `tipo` varchar(50) NOT NULL,
   `tamanio` varchar(25) NOT NULL,
