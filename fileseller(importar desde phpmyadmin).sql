@@ -23,6 +23,16 @@ CREATE TABLE `archivos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+
+CREATE TABLE `cuentas` (
+  `nroTarjeta` bigint(20) NOT NULL,
+  `fecVenc` varchar(50) NOT NULL,
+  `cvv` int(3) NOT NULL,
+  `duenio` int(11) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 CREATE TABLE `mensajes` (
   `id_m` int(11) NOT NULL,
   `id_desde` int(11) DEFAULT NULL,
@@ -32,6 +42,7 @@ CREATE TABLE `mensajes` (
   `mensaje` varchar(500) DEFAULT NULL,
   `visto` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 
 CREATE TABLE `usuarios` (
@@ -45,8 +56,15 @@ CREATE TABLE `usuarios` (
   `fnac` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
 ALTER TABLE `archivos`
   ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `cuentas`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nroTarjeta` (`nroTarjeta`),
+  ADD KEY `duenio` (`duenio`);
 
 ALTER TABLE `mensajes`
   ADD PRIMARY KEY (`id_m`);
@@ -57,11 +75,19 @@ ALTER TABLE `usuarios`
 
 
 ALTER TABLE `archivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+
+ALTER TABLE `cuentas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 ALTER TABLE `mensajes`
-  MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+
+ALTER TABLE `cuentas`
+  ADD CONSTRAINT `cuentas_ibfk_1` FOREIGN KEY (`duenio`) REFERENCES `usuarios` (`id`);
 COMMIT;
+
