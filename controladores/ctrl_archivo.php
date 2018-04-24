@@ -17,13 +17,8 @@ class ControladorArchivo extends ControladorIndex {
 
 	function subir () {
 		$tpl = Template::getInstance();
-
+		$id = Auth::estaLogueado();
 		if(isset($_FILES["archivo"]) && isset($_POST["nombre"])){
-			$id = Auth::estaLogueado();
-			if(!$id){
-			(new ControladorIndex())->redirect("inicio","principal");
-			}
-
 			$subidoOK = (new Archivo())->subirArchivo($id);
 			if($subidoOK == 0){
 				$datos = array(
@@ -48,6 +43,9 @@ class ControladorArchivo extends ControladorIndex {
 				);
 			$tpl->mostrar("subir_archivo",$datos);
 		}else{
+			if(!$id){
+				(new ControladorIndex())->redirect("inicio","principal");
+			}
 			$datos = array(
 				"active_perfil" => "active",
 			);
