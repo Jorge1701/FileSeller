@@ -65,7 +65,8 @@ class ControladorMensajes extends ControladorIndex {
 			"existe_seleccionado" => $existe_seleccionado,
 			"conversacion_abierta_con_seleccionado" => $conversacion_abierta_con_seleccionado,
 			"mensajes" => $mensajes,
-			"usuario_seleccionado" => $usuario_seleccionado
+			"usuario_seleccionado" => $usuario_seleccionado,
+			"active_mensajes" => "active"
 		);
 		$tpl->mostrar ("ver_mensaje", $datos);
 	}
