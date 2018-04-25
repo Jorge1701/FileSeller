@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark cabecera">
 	<img class="navbar-brand icono" src="{$url_base}img/icono.png" onclick="window.location='{$url_inicio}'">
 	<a class="navbar-brand font-weight-bold tituloheader" href="#" title="Ir a inicio" onclick="window.location='{$url_inicio}'" >{$nombre_proyecto}</a>
 
@@ -7,9 +7,16 @@
 	</button>
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<form class="form-inline my-2 my-lg-0 mx-auto">
-			<input class="form-control mr-sm-2" type="search" placeholder="Nombre, tipo o dueño" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar archivo</button>
+		<form class="form-inline mx-auto" action="{$url_base}inicio/buscar" method="GET" onsubmit="return false">
+  				<input type="text" hidden id="url_base" value="{$url_base}">
+  			<div class="input-group">
+				<input class="form-control" type="text" placeholder="Nombre, tipo o dueño" aria-label="Search" name="busqueda" id="busqueda">
+				<div class="input-group-btn">
+					<button class="btn btn-outline-success" id="btnBuscar" type="submit">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+			</div>
 		</form>
 		<ul class="navbar-nav menu">
 			<li class="nav-item {if isset($active_inicio)} {$active_inicio} {/if}">
@@ -99,5 +106,4 @@
 			</ul>
 		</div>
 	</nav>
-	<hr class="separador">
 

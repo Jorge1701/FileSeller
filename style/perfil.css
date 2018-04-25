@@ -87,3 +87,21 @@
 .fila_archivo:hover {
 	background-color: hsla(0, 0%, 20%, 0.04);
 }
+
+.ver{
+	height: 15%;
+	width: 80pt;
+}
+
+.nrot{
+	width: 55%; 
+}
+
+.fecc{
+	margin-left: 5%;
+	margin-top: 2%
+}
+
+#verCuentas{
+	width:300pt; 
+}

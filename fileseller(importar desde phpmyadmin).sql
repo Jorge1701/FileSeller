@@ -1,3 +1,4 @@
+DROP DATABASE fileseller;
 CREATE DATABASE fileseller CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -8,6 +9,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `archivos` (
   `id` int(11) NOT NULL,
+  `img` varchar(250) NOT NULL,
   `nombre` varchar(250) NOT NULL,
   `tipo` varchar(50) NOT NULL,
   `tamanio` varchar(25) NOT NULL,
@@ -16,11 +18,18 @@ CREATE TABLE `archivos` (
   `ubicacion` varchar(300) NOT NULL,
   `duenio` int(11) NOT NULL,
   `fecSubido` date NOT NULL,
-  `horaSubido` time NOT NULL,
-  `vendido` tinyint(1) NOT NULL DEFAULT '0',
-  `fecVendido` date DEFAULT NULL,
-  `horaVendido` time DEFAULT NULL
+  `horaSubido` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+CREATE TABLE `cuentas` (
+  `nroTarjeta` bigint(20) NOT NULL,
+  `fecVenc` varchar(50) NOT NULL,
+  `cvv` int(3) NOT NULL,
+  `duenio` int(11) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `mensajes` (
@@ -34,6 +43,7 @@ CREATE TABLE `mensajes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` varchar(256) NOT NULL,
@@ -45,8 +55,15 @@ CREATE TABLE `usuarios` (
   `fnac` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
 ALTER TABLE `archivos`
   ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `cuentas`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nroTarjeta` (`nroTarjeta`),
+  ADD KEY `duenio` (`duenio`);
 
 ALTER TABLE `mensajes`
   ADD PRIMARY KEY (`id_m`);
@@ -57,11 +74,19 @@ ALTER TABLE `usuarios`
 
 
 ALTER TABLE `archivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+
+ALTER TABLE `cuentas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 ALTER TABLE `mensajes`
-  MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+
+ALTER TABLE `cuentas`
+  ADD CONSTRAINT `cuentas_ibfk_1` FOREIGN KEY (`duenio`) REFERENCES `usuarios` (`id`);
 COMMIT;
+

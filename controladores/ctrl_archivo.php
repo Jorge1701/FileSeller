@@ -1,10 +1,18 @@
 <?php
 
 require_once ("clases/archivo.php");
+require_once ("controladores/ctrl_index.php");
+
 require_once ("clases/usuario.php");
 class ControladorArchivo extends ControladorIndex {
 
-	function ver ($params) {
+	function ver ($idArchivo) {
+		$tpl = Template::getInstance();
+		$archivo = (new Archivo())->obtenerPorId($idArchivo[0]);
+		$datos = array(
+			"archivo" => $archivo,
+		);
+		$tpl->mostrar("ver_archivo",$datos);
 
 		if( !empty($params[1]) ){
 			$ubicacion = $params[1]."/".$params[2];
@@ -30,20 +38,22 @@ class ControladorArchivo extends ControladorIndex {
 
 	function subir () {
 		$tpl = Template::getInstance();
-
+		$id = Auth::estaLogueado();
 		if(isset($_FILES["archivo"]) && isset($_POST["nombre"])){
-			$subidoOK = (new Archivo())->subirArchivo(Auth::estaLogueado());
+			$subidoOK = (new Archivo())->subirArchivo($id);
 			if($subidoOK == 0){
 				$datos = array(
-					"active_incio" => "active",
 					"archivo_subido" => "Su archivo fue subido exitosamente",
+				
+					"active_incio" => "active",//Activar el boton inicio del header
+					"lista_archivos" => (new Archivo())->getListado(),//Lista de futuras recomendaciones
 				);
 				$tpl->mostrar("inicio",$datos);
 				return;
-			}elseif ($subidoOK == 2) {
+			}elseif ($subidoOK == 1) {
 				$mensaje = "El archivo excede el tamaño maximo soportado (100MB)";
 			}else{
-				$mensaje = "Hubo un error al subir el archivo, Reintente";	
+				$mensaje = "Hubo un error al subir el archivo, es posible que haya un problema en la configuracion del servidor, o que no se haya podido mover el archivo.";	
 			}
 			$datos = array(
 				"active_subir_archivo" => "active",
@@ -54,6 +64,9 @@ class ControladorArchivo extends ControladorIndex {
 			);
 			$tpl->mostrar("subir_archivo",$datos);
 		}else{
+			if(!$id){
+				(new ControladorIndex())->redirect("inicio","principal");
+			}
 			$datos = array(
 				"active_perfil" => "active",
 			);

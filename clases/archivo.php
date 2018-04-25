@@ -13,9 +13,6 @@ class Archivo extends ClaseBase{
 	private $duenio = 0;
 	private $fecSubido = "";
 	private $horaSubido = "";
-	private $vendido = false;
-	private $fecVenido = "";
-	private $horaVendido = "";
 
 
 	public function __construct($obj=NULL) {
@@ -72,18 +69,6 @@ class Archivo extends ClaseBase{
     	return $this->horaSubido; 	
     }
 
-    public function getVendido(){
-    	return $this->vendido; 	
-    }
-
-    public function getFecVendido(){
-    	return $this->fecVenido; 	
-    }
-
-    public function getHoraVendido(){
-    	return $this->horaVendido; 	
-    }
-
 
     public function getArchivosUser($idUsuario){
       $sql="select * from archivos where duenio=$idUsuario";
@@ -134,49 +119,73 @@ public function bajarArchivo($name){
 }
 
 public function subirArchivo($idDuenio){
-
-    $target_dir = "uploads/";
-    $target_file = $target_dir . basename($_FILES["archivo"]["name"]);
-    $uploadStatus = -1;
-    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    
     $nombre = $_POST["nombre"];
     $descripcion =  isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
-
-
-    $tamanio = round ($_FILES["archivo"]["size"] / 1024,2,PHP_ROUND_HALF_UP)."KB";
-    $tipo= explode(".",$_FILES["archivo"]["name"])[1];
+    $tamanio = $this->convertirTamanio($_FILES["archivo"]["size"]);
+    $tipo=  $_FILES["archivo"]["type"];//explode(".",$_FILES["archivo"]["name"])[1];
     $precio = $_POST["precio"];
     date_default_timezone_set('America/Montevideo');
     $fecSubido = date("Y-m-d");
     $horaSubido = date("H:i:s");
 
-        // Checkear tamaño, limite 100MB en este caso
-    if ($_FILES["archivo"]["size"] > 100000000) {
-       $uploadStatus = 2;
-   } else {
-    if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {
+    $target_dir = "uploads/";
+    $target_file = $target_dir . $idDuenio ."_". $fecSubido ."_". str_replace(":","-",$horaSubido) ."_". basename($_FILES["archivo"]["name"]);
+    $target_file2 = $target_dir . "muestra/" . $idDuenio ."_". $fecSubido ."_". str_replace(":","-",$horaSubido) ."_". basename($_FILES["img"]["name"]);
+    $uploadStatus = -1;
 
 
-        ini_set("display_errors", 1);
-        error_reporting(E_ALL & ~E_NOTICE);
+    if ($_FILES['archivo']['error'] === UPLOAD_ERR_OK || $_FILES["img"]["error"] === UPLOAD_ERR_OK) {//Chekear que se haya subido correctamte
+        if ($_FILES["archivo"]["size"] > 104857600) {// Checkear tamaño, limite 100MB en este caso 
+         $uploadStatus = 1;
+        } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file) && move_uploaded_file($_FILES["img"]["tmp_name"], $target_file2)) {//Si el archivo se movio correctamente desde la carpeta temporal a la indicada, guardarlo en la BD.
+            $sql = $this->db->prepare("INSERT INTO archivos (nombre,tipo,tamanio,precio,descripcion,ubicacion,duenio,fecSubido,horaSubido,img) VALUES( ?,?,?,?,?,?,?,?,?,?)");
+            $sql->bind_param("ssssssisss",$nombre,$tipo,$tamanio,$precio,$descripcion,$target_file,$idDuenio,$fecSubido,$horaSubido,$target_file2);
+            $sql->execute();
 
-        $sql = $this->db->prepare("INSERT INTO archivos (nombre,tipo,tamanio,precio,descripcion,ubicacion,duenio,fecSubido,horaSubido) VALUES( ?,?,?,?,?,?,?,?,?)");
+            $uploadStatus = 0;
+        }else{
+            $uploadStatus = 2;
+        } 
+    }else{
+        $uploadStatus = 2; 
+    }
 
-        $sql->bind_param("ssssssiss",$nombre,$tipo,$tamanio,$precio,$descripcion,$target_file,$idDuenio,$fecSubido,$horaSubido);
+    return $uploadStatus;
 
-        $sql->execute();
+}
 
-        $uploadStatus = 0;
-    } else {
-        $uploadStatus = 1;
+private function convertirTamanio($tamanio){
+    if($tamanio < 1024){             //Si el tamanio no llega a 1KB devolverlo en Bytes
+        return  $tamanio."Bytes";
+
+    }elseif ($tamanio < pow(1024,2)) {  // Si el tamanio no llega a 1MB devolverlo en KB
+     return round ($tamanio / 1024,1,PHP_ROUND_HALF_UP)."KB";
+
+ }else{
+        return round ($tamanio / pow(1024,2),1,PHP_ROUND_HALF_UP)."MB"; //Si el tamanio supera 1MB devolverlo en MB
     }
 }
 
-return $uploadStatus;
 
+public function subirImagen(){
+
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["archivo"]["name"]);
+                //$uploadStatus = -1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+    if ($_FILES["archivo"]["size"] > 5000000) {
+        return -1;
+    }else{
+
+        if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {
+            return 1;
+        }else {
+            return 0;
+        }
+
+    }
 }
-
 
 }
 ?>

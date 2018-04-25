@@ -18,16 +18,30 @@ class Mensajes extends ClaseBase {
         parent::__construct($tabla);
 	}
 
-	public function getChats ($usuario) {
-		$stmt = DB::conexion ()->prepare ("(SELECT u2.correo FROM mensajes AS m, usuarios AS u1, usuarios AS u2 WHERE m.id_para = u1.id AND u1.correo = \"" . $usuario . "\" AND m.id_desde = u2.id) UNION (SELECT u2.correo FROM mensajes AS m, usuarios AS u1, usuarios AS u2 WHERE m.id_desde = u1.id AND u1.correo = \"" . $usuario . "\" AND m.id_para = u2.id)");
+	public function getConversaciones ($usuario) {
+		$stmt = DB::conexion ()->prepare ("(SELECT u2.nombre, u2.apellido, u2.correo, u2.imagen FROM mensajes AS m, usuarios AS u1, usuarios AS u2 WHERE m.id_para = u1.id AND u1.correo = \"" . $usuario . "\" AND m.id_desde = u2.id) UNION (SELECT u2.nombre, u2.apellido, u2.correo, u2.imagen FROM mensajes AS m, usuarios AS u1, usuarios AS u2 WHERE m.id_desde = u1.id AND u1.correo = \"" . $usuario . "\" AND m.id_para = u2.id)");
 		
 		$stmt->execute ();
 		$resultado = $stmt->get_result ();
 
 		while ($fila = $resultado->fetch_object ())
-			$res[] = $fila->correo;
+			$res[] = new C ($fila->nombre . " " . $fila->apellido, $fila->correo, $fila->imagen, 0);
+
+		if (!isset ($res))
+			return [];
+
+		foreach ($res as $r)
+			$r->setCant ($this->getCantSinVer ($usuario, $r->getCorreo ()));
 
 		return isset ($res) ? $res : [];
+	}
+
+	private function getCantSinVer ($u1, $u2) {
+		$stmt = DB::conexion ()->prepare ("SELECT COUNT(*) AS cant FROM mensajes AS m, usuarios AS u1, usuarios AS u2 WHERE u1.correo = \"" . $u1 . "\" AND u2.correo = \"" . $u2 . "\" AND m.id_desde = u2.id AND m.id_para = u1.id AND m.visto = FALSE");
+
+		$stmt->execute ();
+		$resultado = $stmt->get_result ();
+		return $resultado->fetch_object ()->cant;
 	}
 
 	public function enviarMensaje ($usuario1, $usuario2, $mensaje) {
@@ -42,7 +56,7 @@ class Mensajes extends ClaseBase {
 		return false;
 	}
 
-	public function getChat ($usuario1, $usuario2) {
+	public function getMensajes ($usuario1, $usuario2) {
 		DB::conexion ()->query ("SET lc_time_names = 'es_MX'");
 		$stmt = DB::conexion ()->prepare ("SELECT DATE_FORMAT(dia, '%d de %M del %Y') AS dia, TIME_FORMAT(hora, '%H:%i') AS hora, mensaje, id_desde, u1.id AS 'id', visto FROM mensajes AS m, usuarios AS u1, usuarios AS u2 WHERE u1.correo = \"" . $usuario1 . "\" AND u2.correo = \"" . $usuario2 . "\" AND ((m.id_desde = u1.id AND m.id_para = u2.id) OR (m.id_desde = u2.id AND m.id_para = u1.id))");
 
@@ -188,10 +202,14 @@ class NotificacionMensaje {
 
 class C {
 	public $nombre = "";
+	public $correo = "";
+	public $imagen = "";
 	public $cant = 0;
 
-	public function __construct ($nombre, $cant) {
+	public function __construct ($nombre, $correo, $imagen, $cant) {
 		$this->nombre = $nombre;
+		$this->correo = $correo;
+		$this->imagen = $imagen;
 		$this->cant = $cant;
 	}
 
@@ -201,6 +219,22 @@ class C {
 	
 	public function setNombre ($nombre) {
 		$this->nombre = $nombre;
+	}
+
+	public function getCorreo () {
+		return $this->correo;
+	}
+	
+	public function setCorreo ($correo) {
+		$this->correo = $correo;
+	}
+
+	public function getImagen () {
+		return $this->imagen;
+	}
+	
+	public function setImagen ($imagen) {
+		$this->imagen = $imagen;
 	}
 
 	public function getCant () {
