@@ -53,9 +53,12 @@ class Archivo extends ClaseBase{
     	return $this->descripcion;
     }
 
+
     public function getUbicacion(){
     	return $this->ubicacion; 	
     }
+
+
 
     public function getDuenio(){
     	return $this->duenio; 	
@@ -91,6 +94,44 @@ class Archivo extends ClaseBase{
     }
     return $res;
 }
+public function getArchivo($idArchivo){
+
+    $sql="select * from archivos where id=$idArchivo";
+    $res=NULL;
+    $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+    $fila = $resultado->fetch_object();
+    $res = new $this->modelo($fila);
+    return $res;
+
+}
+
+public function getListado(){
+    $sql = "select id,nombre,tipo,descripcion from archivos";
+    $res=NULL;
+    $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");while($fila = $resultado->fetch_object()) {
+        $res[] = new $this->modelo($fila);
+    }
+    return $res;    
+
+
+}
+
+public function bajarArchivo($name){
+    
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/force-download');
+    header("Content-Disposition: attachment; filename=\"" . basename($name) . "\";");
+    header('Content-Transfer-Encoding: binary');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize($name));
+    ob_clean();
+    flush();
+    readfile($name);
+    return 0;
+    
+}
 
 public function subirArchivo($idDuenio){
 
@@ -112,8 +153,8 @@ public function subirArchivo($idDuenio){
 
         // Checkear tamaño, limite 100MB en este caso
     if ($_FILES["archivo"]["size"] > 100000000) {
-     $uploadStatus = 2;
- } else {
+       $uploadStatus = 2;
+   } else {
     if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {
 
 

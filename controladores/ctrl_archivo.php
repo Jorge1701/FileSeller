@@ -1,12 +1,32 @@
 <?php
 
 require_once ("clases/archivo.php");
-
+require_once ("clases/usuario.php");
 class ControladorArchivo extends ControladorIndex {
 
 	function ver ($params) {
 
+		if( !empty($params[1]) ){
+			$ubicacion = $params[1]."/".$params[2];
+			$ok = (new Archivo())->bajarArchivo($ubicacion);
+		}else{
+			echo "vacio";
+
+		}
+
+		$archivo = (new Archivo())->getArchivo(current($params));
+
+		$user  = (new Usuario())->obtenerPorId($archivo->getDuenio());
+		$datos  = array('archivo' => $archivo ,
+			'user' => $user);
+
+		$tpl = Template::getInstance();
+
+		$tpl->mostrar("ver_archivo",$datos);
+
+
 	}
+
 
 	function subir () {
 		$tpl = Template::getInstance();
@@ -15,11 +35,11 @@ class ControladorArchivo extends ControladorIndex {
 			$subidoOK = (new Archivo())->subirArchivo(Auth::estaLogueado());
 			if($subidoOK == 0){
 				$datos = array(
-				"active_incio" => "active",
-				"archivo_subido" => "Su archivo fue subido exitosamente",
-			);
-			$tpl->mostrar("inicio",$datos);
-			return;
+					"active_incio" => "active",
+					"archivo_subido" => "Su archivo fue subido exitosamente",
+				);
+				$tpl->mostrar("inicio",$datos);
+				return;
 			}elseif ($subidoOK == 2) {
 				$mensaje = "El archivo excede el tamaño maximo soportado (100MB)";
 			}else{
@@ -31,7 +51,7 @@ class ControladorArchivo extends ControladorIndex {
 				"descripcion_archivo" => $_POST["descripcion"],
 				"precio_archivo" => $_POST["precio"],
 				"mensaje" => $mensaje,
-				);
+			);
 			$tpl->mostrar("subir_archivo",$datos);
 		}else{
 			$datos = array(

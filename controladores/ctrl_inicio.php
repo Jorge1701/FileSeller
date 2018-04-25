@@ -19,7 +19,7 @@ class ControladorInicio extends ControladorIndex {
 	function login(){
 
 		if(isset($_POST["correo"]) && isset($_POST["password"])){
-
+			
 			$usr = new Usuario();
 			$correo = $_POST["correo"]; 
 			$pass = sha1($_POST["password"]);

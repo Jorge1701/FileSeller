@@ -15,15 +15,15 @@ class Usuario extends ClaseBase{
 
 	public function __construct($obj=NULL) {
         //$this->db=DB::conexion();
-        if(isset($obj)){
-            foreach ($obj as $key => $value) {
-                $this->$key=$value;
-            }    
-        }
+		if(isset($obj)){
+			foreach ($obj as $key => $value) {
+				$this->$key=$value;
+			}    
+		}
 
-        parent::__construct("usuarios");	
+		parent::__construct("usuarios");	
 
-    }
+	}
 
 	public function setNombre($nombre){
 		$this->nombre = $nombre;
@@ -85,14 +85,24 @@ class Usuario extends ClaseBase{
 	}
 
 	public function obtenerPorCorreo($corre){
-	    $sql="select * from usuarios where correo='$corre'";
-	    $res=NULL;
-	    $resultado =$this->db->query($sql)   
-	        or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
-	     if($fila = $resultado->fetch_object()) {
-	       $res= new $this->modelo($fila);
-	    }
-	    return $res;
+		$sql="select * from usuarios where correo='$corre'";
+		$res=NULL;
+		$resultado =$this->db->query($sql)   
+		or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+		if($fila = $resultado->fetch_object()) {
+			$res= new $this->modelo($fila);
+		}
+		return $res;
+	}
+	public function obtenerPorId($id){
+		$sql="select * from usuarios where id='$id'";
+		$res=NULL;
+		$resultado =$this->db->query($sql)   
+		or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+		if($fila = $resultado->fetch_object()) {
+			$res= new $this->modelo($fila);
+		}
+		return $res;
 	}
 
 	public function login($correo,$pass){
