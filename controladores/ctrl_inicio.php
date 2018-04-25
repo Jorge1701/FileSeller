@@ -55,8 +55,6 @@ class ControladorInicio extends ControladorIndex {
 		if (isset ($params[0]) && $params[0] !== "")
 			$busqueda = $params[0];
 
-		$busqueda = "texto_busqueda";
-
 		$tpl = Template::getInstance ();
 		$datos = array (
 			"busqueda" => $busqueda
