@@ -47,13 +47,13 @@ h3{
 
 	<img src="{$url_base}img/breakingbad.jpg" class="rounded mx-auto d-block" id="imgArchivo"><br>
 	
-	<button onclick="window.location='{$url_ver_achivo}'+'{$archivo->getId()}'+'/'+'{$archivo->getUbicacion()}'">Descargar</button>
+	<button onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">Descargar</button>
 
 	<div  id="contenedor">
 		<div class="container">
 			<ul class="nav nav-tabs nav-tabs-fillup navigation">
-				<li class="nav-item"><a data-toggle="tab" class="active nav-link" href="#information">Datos Del Archivo<span class="fa fa-file pestaña-icono"></span></a></a></li>
-				<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#archivos">Datos Del Dueño<span class="fa fa-user-circle-o pestaña-icono"></span></li>
+				<li class="nav-item"><a data-toggle="tab" class="active nav-link" href="#information">Datos Del Archivo<span class="fa fa-file pestaña-icono"></span></a></li>
+				<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#archivos">Datos Del Dueño<span class="fa fa-user-circle-o pestaña-icono"></span></a></li>
 			</ul>
 			<div class="user-body">
 				<div class="tab-content">
@@ -110,6 +110,6 @@ h3{
 
 
 	</div>
+	{include file="include_js.tpl"}
 </body>
-{include file="include_js.tpl"}
 </html>

@@ -106,7 +106,7 @@
 										</tr>
 										{if isset($archivos)}
 										{foreach $archivos as $archivo}
-										<tr class="fila_archivo" onclick="window.location='{$url_ver_archivo}{$archivo->getId()}'">
+										<tr class="fila_archivo" onclick="window.location='{$url_ver_archivo}{$archivo->getId ()}'">
 											<td><img class="img-file" src="{$url_base}{$archivo->getImg()}"></td>
 											<td>{$archivo->getNombre()}</td>
 											<td>{$archivo->getTipo()}</td>

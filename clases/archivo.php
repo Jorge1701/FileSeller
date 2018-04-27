@@ -124,7 +124,6 @@ class Archivo extends ClaseBase{
     }
 
     public function bajarArchivo($name){
-        
         header('Content-Description: File Transfer');
         header('Content-Type: application/force-download');
         header("Content-Disposition: attachment; filename=\"" . basename($name) . "\";");
@@ -186,6 +185,7 @@ class Archivo extends ClaseBase{
     }
 
     private function obtenerDefault ($nombre) {
+    	echo $nombre;
         if (strpos ($nombre, ".cpp") !== false)
             return "img/iconos_archivos/def_cpp.png";
         if (strpos ($nombre, ".jpg") !== false || strpos ($nombre, ".jpeg") !== false)
@@ -204,6 +204,8 @@ class Archivo extends ClaseBase{
             return "img/iconos_archivos/def_rar.png";
         if (strpos ($nombre, ".txt") !== false)
             return "img/iconos_archivos/def_txt.png";
+        if (strpos ($nombre, ".exe") !== false)
+            return "img/iconos_archivos/def_exe.png";
 
         return "img/iconos_archivos/def_file.png";
     }
