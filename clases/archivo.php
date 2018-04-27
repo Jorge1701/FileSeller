@@ -158,7 +158,7 @@ class Archivo extends ClaseBase{
         $imgOk = false;
 
         if(($_FILES["img"]["error"]) == UPLOAD_ERR_NO_FILE){
-           $target_img = $this->obtenerDefault($_FILES["img"]["name"]);
+           $target_img = $this->obtenerDefault($_FILES["archivo"]["name"]);
            $imgOk = true;
         }else if($_FILES['img']['error'] === UPLOAD_ERR_OK){
             $target_img = $target_dir . "muestra/" . $idDuenio ."_". $fecSubido ."_". str_replace(":","-",$horaSubido) ."_". basename($_FILES["img"]["name"]);
