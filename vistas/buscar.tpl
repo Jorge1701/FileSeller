@@ -9,267 +9,35 @@
 	<!-- Header -->
 	{include file="header.tpl"}
 
-	<div class="row lista">
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="mx-auto archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
+	<div class="container encontrado">
+		Resultados para "{$busqueda}"
 	</div>
-
-	<div class="row lista">
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
+	{if !$encontrados}
+		<div class="container no-encontrado">
+			No se encontro ningun archivo.
 		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row lista">
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/user-default.png" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">
-						Descripcion del archivo sobre el que se esta apoyando el mouse
+	{else}
+		<div class="row lista">
+			{foreach $archivos as $a}
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 columna">
+					<div class="mx-auto archivo">
+						<a href="{$url_base}archivo/ver/{$a->getId ()}">
+							<img src="{$url_base}{$a->getImg ()}" class="imagen">
+						</a>
+						<div class="info">
+							<div class="calificacion">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star-half"></i>
+							</div>
+							<div class="descripcion">{$a->getDescripcion ()}</div>
+						</div>
 					</div>
 				</div>
-			</div>
+			{/foreach}
 		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-			<div class="archivo">
-				<img src="{$url_base}img/file-default.jpg" class="imagen">
-				<div class="info">
-					<div class="calificacion">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half"></i>
-					</div>
-					<div class="descripcion">Descripcion del archivo sobre el que se esta apoyando el mouse</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	{/if}
 
 	<!--<script type="text/javascript" src="{$url_base}js/buscar.js"></script>-->
 	{include file="include_js.tpl"}

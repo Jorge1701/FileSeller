@@ -37,7 +37,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text fa fa-camera" id="basic-addon1"></span>
 						</div>
-						<input accept="image/*" name="img" id="img" type="file" class="form-control" required="Seleccione una imagen de muestra" aria-label="img" aria-describedby="basic-addon1" autofocus title="Seleccionar una imagen de muestra"/>
+						<input accept="image/*" name="img" id="img" type="file" class="form-control" aria-label="img" aria-describedby="basic-addon1" autofocus title="Seleccionar una imagen de muestra"/>
 					</div>
 
 					<div class="input-group mb-3">

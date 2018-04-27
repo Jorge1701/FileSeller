@@ -8,6 +8,29 @@
 	padding: .2vw;
 }
 
+.no-encontrado {
+	background-color: #FFF;
+	border-radius: .3vw;
+	padding: 2vw;
+	font-size: 2em;
+	text-align: center;
+}
+
+.encontrado {
+	background-color: #FFF;
+	border-radius: .3vw;
+	padding: .5vw .5vw .5vw 2vw;
+	font-size: 1.3em;
+	margin-top: 2vh;
+	margin-bottom: 2vh;
+}
+
+.columna {
+	margin-bottom: 3vh;
+	margin-left: 1vw;
+	margin-right: 1vw;
+}
+
 .archivo:hover {
 	background-color: #CCC;
 }

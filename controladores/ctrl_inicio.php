@@ -17,7 +17,6 @@ class ControladorInicio extends ControladorIndex {
 	}
 
 	function login(){
-
 		if(isset($_POST["correo"]) && isset($_POST["password"])){
 			
 			$usr = new Usuario();
@@ -50,14 +49,17 @@ class ControladorInicio extends ControladorIndex {
 	}
 
 	function buscar ($params = array ()) {
-		// Obtener busqueda
 		$busqueda = NULL;
 		if (isset ($params[0]) && $params[0] !== "")
 			$busqueda = $params[0];
 
+		$archivos = (new Archivo ())->buscar ($busqueda);
+
 		$tpl = Template::getInstance ();
 		$datos = array (
-			"busqueda" => $busqueda
+			"busqueda" => $busqueda,
+			"encontrados" => isset ($archivos),
+			"archivos" => $archivos
 		);
 		$tpl->mostrar ("buscar", $datos);
 	}
