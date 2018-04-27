@@ -6,6 +6,10 @@ require_once ("controladores/ctrl_index.php");
 require_once ("clases/usuario.php");
 class ControladorArchivo extends ControladorIndex {
 
+	function descargar ($params = array ()) {
+		(new Archivo ())->bajarArchivo ("uploads/" . $params[1]);
+	}
+
 	function ver ($idArchivo) {
 		$tpl = Template::getInstance();
 		$archivo = (new Archivo())->obtenerPorId($idArchivo[0]);

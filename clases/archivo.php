@@ -124,7 +124,6 @@ class Archivo extends ClaseBase{
     }
 
     public function bajarArchivo($name){
-        
         header('Content-Description: File Transfer');
         header('Content-Type: application/force-download');
         header("Content-Disposition: attachment; filename=\"" . basename($name) . "\";");
@@ -158,7 +157,7 @@ class Archivo extends ClaseBase{
         $imgOk = false;
 
         if(($_FILES["img"]["error"]) == UPLOAD_ERR_NO_FILE){
-           $target_img = $this->obtenerDefault($_FILES["img"]["name"]);
+           $target_img = $this->obtenerDefault($_FILES["archivo"]["name"]);
            $imgOk = true;
         }else if($_FILES['img']['error'] === UPLOAD_ERR_OK){
             $target_img = $target_dir . "muestra/" . $idDuenio ."_". $fecSubido ."_". str_replace(":","-",$horaSubido) ."_". basename($_FILES["img"]["name"]);
@@ -186,6 +185,7 @@ class Archivo extends ClaseBase{
     }
 
     private function obtenerDefault ($nombre) {
+    	echo $nombre;
         if (strpos ($nombre, ".cpp") !== false)
             return "img/iconos_archivos/def_cpp.png";
         if (strpos ($nombre, ".jpg") !== false || strpos ($nombre, ".jpeg") !== false)
@@ -204,6 +204,8 @@ class Archivo extends ClaseBase{
             return "img/iconos_archivos/def_rar.png";
         if (strpos ($nombre, ".txt") !== false)
             return "img/iconos_archivos/def_txt.png";
+        if (strpos ($nombre, ".exe") !== false)
+            return "img/iconos_archivos/def_exe.png";
 
         return "img/iconos_archivos/def_file.png";
     }
