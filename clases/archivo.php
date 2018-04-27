@@ -144,7 +144,7 @@ class Archivo extends ClaseBase{
         $nombre = $_POST["nombre"];
         $descripcion =  isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
         $tamanio = $this->convertirTamanio($_FILES["archivo"]["size"]);
-        $tipo=  $_FILES["archivo"]["type"];//explode(".",$_FILES["archivo"]["name"])[1];
+        $tipo= explode(".",$_FILES["archivo"]["name"])[1];  //$_FILES["archivo"]["type"];
         $precio = $_POST["precio"];
         date_default_timezone_set('America/Montevideo');
         $fecSubido = date("Y-m-d");
@@ -152,16 +152,25 @@ class Archivo extends ClaseBase{
 
         $target_dir = "uploads/";
         $target_file = $target_dir . $idDuenio ."_". $fecSubido ."_". str_replace(":","-",$horaSubido) ."_". basename($_FILES["archivo"]["name"]);
-        $target_file2 = $target_dir . "muestra/" . $idDuenio ."_". $fecSubido ."_". str_replace(":","-",$horaSubido) ."_". basename($_FILES["img"]["name"]);
         $uploadStatus = -1;
 
+        $target_img = "";
+        $imgOk = false;
 
-        if ($_FILES['archivo']['error'] === UPLOAD_ERR_OK || $_FILES["img"]["error"] === UPLOAD_ERR_OK) {//Chekear que se haya subido correctamte
+        if(($_FILES["img"]["error"]) == UPLOAD_ERR_NO_FILE){
+           $target_img = $this->obtenerDefault($_FILES["img"]["name"]);
+           $imgOk = true;
+        }else if($_FILES['img']['error'] === UPLOAD_ERR_OK){
+            $target_img = $target_dir . "muestra/" . $idDuenio ."_". $fecSubido ."_". str_replace(":","-",$horaSubido) ."_". basename($_FILES["img"]["name"]);
+            $imgOk = move_uploaded_file($_FILES["img"]["tmp_name"], $target_img);
+        }
+
+        if ($_FILES['archivo']['error'] === UPLOAD_ERR_OK) {//Chekear que se haya subido correctamte
             if ($_FILES["archivo"]["size"] > 104857600) {// Checkear tamaño, limite 100MB en este caso 
              $uploadStatus = 1;
-            } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file) && move_uploaded_file($_FILES["img"]["tmp_name"], $target_file2)) {//Si el archivo se movio correctamente desde la carpeta temporal a la indicada, guardarlo en la BD.
+            } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file) && $imgOk) {//Si el archivo se movio correctamente desde la carpeta temporal a la indicada, guardarlo en la BD.
                 $sql = $this->db->prepare("INSERT INTO archivos (nombre,tipo,tamanio,precio,descripcion,ubicacion,duenio,fecSubido,horaSubido,img) VALUES( ?,?,?,?,?,?,?,?,?,?)");
-                $sql->bind_param("ssssssisss",$nombre,$tipo,$tamanio,$precio,$descripcion,$target_file,$idDuenio,$fecSubido,$horaSubido,$target_file2);
+                $sql->bind_param("ssssssisss",$nombre,$tipo,$tamanio,$precio,$descripcion,$target_file,$idDuenio,$fecSubido,$horaSubido,$target_img);
                 $sql->execute();
 
                 $uploadStatus = 0;

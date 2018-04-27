@@ -97,22 +97,22 @@
 									</thead>
 									<tbody>
 										<tr>
+											<th></th>
 											<th scope="row">Nombre</th>
 											<th scope="row">Tipo</th>
 											<th scope="row">Descripción</th>
 											<th scope="row">Tamaño</th>
 											<th scope="row">Precio($U)</th>
-											<th scope="row">Subido en</th>
 										</tr>
 										{if isset($archivos)}
 										{foreach $archivos as $archivo}
 										<tr class="fila_archivo" onclick="window.location='{$url_ver_archivo}{$archivo->getId()}'">
+											<td><img class="img-file" src="{$url_base}{$archivo->getImg()}"></td>
 											<td>{$archivo->getNombre()}</td>
 											<td>{$archivo->getTipo()}</td>
 											<td>{$archivo->getDescripcion()}</td>
 											<td>{$archivo->getTamanio()}</td>
 											<td>{$archivo->getPrecio()}</td>
-											<td>{$archivo->getFecSubido()} | {$archivo->getHoraSubido()}</td>
 										</tr>
 										{/foreach}
 									</tbody>
