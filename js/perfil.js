@@ -7,5 +7,4 @@ function showPassword(inputId, eyeId) {
         x.type = "password";
         $('#'+eyeId).addClass('fa-eye').removeClass('fa-eye-slash');
     }
-
 }

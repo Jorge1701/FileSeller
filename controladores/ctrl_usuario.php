@@ -116,6 +116,7 @@ class ControladorUsuario extends ControladorIndex {
             "active_perfil" => "active",
             "archivos" => $archivos,
             "url_agregar_pago" => (new ControladorIndex())->getUrl("usuario","agregarCuenta"),
+            "url_eliminar_usuario" => (new ControladorIndex())->getUrl("usuario","eliminarUsuario"),
         );
         $tpl = Template::getInstance();
         $tpl->mostrar("perfil", $datos);
@@ -140,6 +141,15 @@ class ControladorUsuario extends ControladorIndex {
         }
         (new Cuenta())->agregar($id);
         (new ControladorIndex())->redirect("usuario","perfil");
+    }
+
+    function eliminarUsuario(){
+        $id = Auth::estaLogueado();
+        if(!$id){
+             (new ControladorIndex())->redirect("inicio","principal");
+        }
+        (new Usuario())->eliminar($id);
+        $this->logout();
     }
 
 }

@@ -5,7 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="{$url_base}style/perfil.css">
 	<title>Perfil</title>
 </head>
-<body background="{$url_base}img/wallpaper.jpg">
+<body background="{$url_base}img/wallpaper.jpg" id="body">
 	<!-- Header -->
 	{include file="header.tpl"}
 	<!------------------------------------------------------------------------------------------------ -->
@@ -129,6 +129,28 @@
 						<h4>Editar perfil</h4>
 
 						<h6>Esta función será implementada en el siguiente Sprint.</h6>
+
+						<button data-toggle="modal" data-target="#confirmar" class="btn btn-danger">Eliminar cuenta</button>
+
+
+
+                        <div class="modal fade" id="confirmar" role="dialog" data-backdrop="static">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header mx-auto">
+                                        <h4>¿Está seguro?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    	<p>Esto resultará en la eliminación de toda su información incluidos sus archivos subidos.</p>
+                                    </div>
+                                    <div class="modal-footer mx-auto">
+                                    	<button class="btn btn-danger" onClick="window.location='{$url_eliminar_usuario}'">Confirmar</button>
+                                    	<button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
 					</div>
 				</div>
 			</div>	

@@ -111,9 +111,7 @@ class Usuario extends ClaseBase{
 		error_reporting(E_ALL & ~E_NOTICE);
 
 		$sql = DB::conexion()->prepare("SELECT * FROM usuarios WHERE correo= ? AND contrasenia= ?");
-
 		$sql->bind_param("ss",$correo,$pass);
-
 		$sql->execute();
 
 		$resultado = $sql->get_result();
@@ -124,6 +122,9 @@ class Usuario extends ClaseBase{
 			
 			while($fila=$resultado->fetch_object()) {
 
+				if($fila->activo == false){
+					return false;
+				}
 				Session::init();
 				Session::set('usuario_correo',$fila->correo);
 				Session::set('usuario_id', $fila->id);
@@ -189,6 +190,15 @@ class Usuario extends ClaseBase{
 		}else{
 			return true;
 		}
+	}
+
+
+	public function eliminar($idUsuario){
+		ini_set("display_errors", 1);
+		error_reporting(E_ALL & ~E_NOTICE);
+
+		$sql=$this->db->prepare("UPDATE `usuarios` SET `activo`= 0  WHERE id=$idUsuario");
+		$sql->execute();
 
 	}
 
