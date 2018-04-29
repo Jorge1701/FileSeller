@@ -10,33 +10,13 @@ class ControladorArchivo extends ControladorIndex {
 		(new Archivo ())->bajarArchivo ("uploads/" . $params[1]);
 	}
 
-	function ver ($idArchivo) {
+	function ver ($params = array ()) {
 		$tpl = Template::getInstance();
-		$archivo = (new Archivo())->obtenerPorId($idArchivo[0]);
+		$archivo = (new Archivo())->obtenerPorId ($params[0]);
 		$datos = array(
 			"archivo" => $archivo,
 		);
 		$tpl->mostrar("ver_archivo",$datos);
-
-		if( !empty($params[1]) ){
-			$ubicacion = $params[1]."/".$params[2];
-			$ok = (new Archivo())->bajarArchivo($ubicacion);
-		}else{
-			echo "vacio";
-
-		}
-
-		$archivo = (new Archivo())->getArchivo(current($params));
-
-		$user  = (new Usuario())->obtenerPorId($archivo->getDuenio());
-		$datos  = array('archivo' => $archivo ,
-			'user' => $user);
-
-		$tpl = Template::getInstance();
-
-		$tpl->mostrar("ver_archivo",$datos);
-
-
 	}
 
 

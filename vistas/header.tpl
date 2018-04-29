@@ -8,7 +8,7 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<form class="form-inline mx-auto" action="{$url_base}inicio/buscar" method="GET" onsubmit="return false">
-  				<input type="text" hidden id="url_base" value="{$url_base}">
+			<input type="text" hidden id="url_base" value="{$url_base}">
   			<div class="input-group">
 				<input class="form-control" type="text" placeholder="Nombre, tipo o dueño" aria-label="Search" name="busqueda" id="busqueda">
 				<div class="input-group-btn">
@@ -23,39 +23,40 @@
 				<a class="nav-link" href="#" onClick="window.location='{$url_inicio}'">Inicio<span class="sr-only"></span></a>
 			</li>
 			{if isset($usuario)}
-			<li class="nav-item dropdown">
-				<a class="nav-link fa fa-bell-o" href="#" title="Notificaciones" data-toggle="dropdown">
-					<span class="fa fa-comment"></span>
-					<span class="num">2</span>
-				</a>
+				<li class="nav-item dropdown">
+					<a class="nav-link fa fa-bell-o" href="#" title="Notificaciones" data-toggle="dropdown">
+						<span class="fa fa-comment"></span>
+						<span class="num">2</span>
+					</a>
 
-				<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
-					<h6 class="menu-notificaciones-titulo">Notificaciones</h6>
-					<table class="table">
-						<tbody>
-							<tr class="notification" onClick="">
-								<th scope="row"><i class="fa fa-circle"></i></th>	
-								<td> Bienvenido a File seller, la mejor plataforma para vender tus archivos</td>
-								<td><div class="eliminar_notificacion"><i class="fa fa-times"></div></td>
-							</tr>
-							<tr class="notification" onClick="">
-								<th scope="row"><i class="fa fa-circle"></i></th>	
-								<td> Gracias por formar parte de la comunidad</td>
-								<td><div class="eliminar_notificacion"><i class="fa fa-times"></div></td>
-							</tr>
-							<tr class="notification" onClick="">
-								<th scope="row"><i class="fa fa-circle"></i></th>	
-								<td> Gracias por formar parte de la comunidad</td>
-								<td><div class="eliminar_notificacion"><i class="fa fa-times"></div></td>
-							</tr>
-						</tbody>
-					</table>
+					<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
+						<h6 class="menu-notificaciones-titulo">Notificaciones</h6>
+						<table class="table">
+							<tbody>
+								<tr class="notification" onClick="">
+									<th scope="row"><i class="fa fa-circle"></i></th>	
+									<td> Bienvenido a File seller, la mejor plataforma para vender tus archivos</td>
+									<td><div class="eliminar_notificacion"><i class="fa fa-times"></i></div></td>
+								</tr>
+								<tr class="notification" onClick="">
+									<th scope="row"><i class="fa fa-circle"></i></th>	
+									<td> Gracias por formar parte de la comunidad</td>
+									<td><div class="eliminar_notificacion"><i class="fa fa-times"></i></div></td>
+								</tr>
+								<tr class="notification" onClick="">
+									<th scope="row"><i class="fa fa-circle"></i></th>	
+									<td> Gracias por formar parte de la comunidad</td>
+									<td><div class="eliminar_notificacion"><i class="fa fa-times"></i></div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div><!-- agregado -->
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link fa fa-inbox {if isset($active_mensajes)} {$active_mensajes} {/if}" href="#" title="Mensajes" data-toggle="dropdown">
 						{if isset($notificacionesMensaje)}
-						<span class="fa fa-comment"></span>
-						<span class="num">{count($notificacionesMensaje)}</span>
+							<span class="fa fa-comment"></span>
+							<span class="num">{count($notificacionesMensaje)}</span>
 						{/if}
 					</a>
 
@@ -65,16 +66,16 @@
 						<table class="table">
 							<tbody>
 								{if isset($notificacionesMensaje)}
-								{foreach $notificacionesMensaje as $notiMens}
-								<tr class="notification" onClick="window.location='{$url_mensaje}/{$notiMens->getCorreo()}'">
-									<th scope="row">{$notiMens->getNombre()}</th>
-									<td>{$notiMens->getMensaje()}</td>
-								</tr>
-								{/foreach}
+									{foreach $notificacionesMensaje as $notiMens}
+										<tr class="notification" onClick="window.location='{$url_mensaje}/{$notiMens->getCorreo()}'">
+											<th scope="row">{$notiMens->getNombre()}</th>
+											<td>{$notiMens->getMensaje()}</td>
+										</tr>
+									{/foreach}
 								{else}
-								<tr>
-									<th>No tienes mensajes nuevos</th>
-								</tr>
+									<tr>
+										<th>No tienes mensajes nuevos</th>
+									</tr>
 								{/if}
 							</tbody>
 						</table>
@@ -92,18 +93,18 @@
 						<a class="dropdown-item" href="#" onClick="window.location='{$url_logout}'"><i class="fa fa-sign-out menu-perfil"></i>Cerrar sesión</a>
 					</div>
 				</li>
-				{else}
+			{else}
 				<li class="nav-item {if isset($active_iniciarSesion)} {$active_iniciarSesion} {/if}">
 					<a class="nav-link" href="#" title="Iniciar sesión" onClick="window.location='{$url_login}'">Iniciar sesión</a>
 				</li>
 				<li class="nav-item {if isset($active_registrarse)} {$active_registrarse} {/if}">
 					<a class="nav-link" href="#" title="Registrarse" onClick="window.location='{$url_registro}'">Registrarse</a>
 				</li>
-				{/if}
-				<li class="nav-item  {if isset($active_ayuda)} {$active_ayuda} {/if}">
-					<a class="nav-link" href="#" title="Ayuda" onClick="window.location='{$url_ayuda}'"><i class="fa fa-question-circle"></i></a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+			{/if}
+			<li class="nav-item  {if isset($active_ayuda)} {$active_ayuda} {/if}">
+				<a class="nav-link" href="#" title="Ayuda" onClick="window.location='{$url_ayuda}'"><i class="fa fa-question-circle"></i></a>
+			</li>
+		</ul>
+	</div>
+</nav>
 

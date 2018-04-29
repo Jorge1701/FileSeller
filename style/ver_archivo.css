@@ -1,0 +1,42 @@
+.panelMain {
+	margin: 2vw 2vw 0 2vw;
+	background-color: white;
+}
+
+.panel {
+	border: solid 1px black;
+}
+
+#imgArchivo {
+	width: 100%;
+	padding: 5%;
+}
+
+#titulo {
+	margin-top: 4vh;
+	margin-bottom: 2vh;
+}
+
+#titulo, #tit_comentarios {
+	text-align: center;
+	color: black;
+	font-weight: bold;
+}
+
+#tit_comentarios {
+	clear: both;
+}
+
+#estrellas {
+	color: orange;
+}
+
+#btnDescargar {
+	float: right;
+	margin-top: 1vh;
+	margin-bottom: 2vh;
+}
+
+#comentarios {
+	clear: both;
+}
