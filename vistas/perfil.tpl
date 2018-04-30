@@ -100,9 +100,7 @@
 											<th></th>
 											<th scope="row">Nombre</th>
 											<th scope="row">Tipo</th>
-											<th scope="row">Descripción</th>
-											<th scope="row">Tamaño</th>
-											<th scope="row">Precio($U)</th>
+											<th scope="row">Precio</th>
 										</tr>
 										{if isset($archivos)}
 										{foreach $archivos as $archivo}
@@ -110,8 +108,6 @@
 											<td><img class="img-file" src="{$url_base}{$archivo->getImg()}"></td>
 											<td>{$archivo->getNombre()}</td>
 											<td>{$archivo->getTipo()}</td>
-											<td>{$archivo->getDescripcion()}</td>
-											<td>{$archivo->getTamanio()}</td>
 											<td>{$archivo->getPrecio()}</td>
 										</tr>
 										{/foreach}

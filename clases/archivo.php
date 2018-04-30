@@ -89,7 +89,7 @@ class Archivo extends ClaseBase{
         if ($filtro == NULL)
             return NULL;
 
-        $sql = "SELECT * FROM archivos";
+        $sql = "SELECT * FROM `archivos` WHERE duenio=(SELECT id from `usuarios` WHERE activo=1)";
         $res = NULL;
         $resultado = $this->db->query ($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
         
@@ -113,7 +113,7 @@ class Archivo extends ClaseBase{
     }
 
     public function getListado () {
-        $sql = "select id,nombre,tipo,descripcion from archivos";
+        $sql = "SELECT id,nombre,tipo,descripcion FROM `archivos` WHERE duenio=(SELECT id from `usuarios` WHERE activo=1)";
         $res=NULL;
         $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");while($fila = $resultado->fetch_object()) {
             $res[] = new $this->modelo($fila);
@@ -144,10 +144,11 @@ class Archivo extends ClaseBase{
         $descripcion =  isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
         $tamanio = $this->convertirTamanio($_FILES["archivo"]["size"]);
         $tipo= explode(".",$_FILES["archivo"]["name"])[1];  //$_FILES["archivo"]["type"];
-        $precio = $_POST["precio"];
+        $precio = $_POST["moneda"]." ".$_POST["precio"];
         date_default_timezone_set('America/Montevideo');
         $fecSubido = date("Y-m-d");
         $horaSubido = date("H:i:s");
+        
 
         $target_dir = "uploads/";
         $target_file = $target_dir . $idDuenio ."_". $fecSubido ."_". str_replace(":","-",$horaSubido) ."_". basename($_FILES["archivo"]["name"]);
@@ -212,13 +213,13 @@ class Archivo extends ClaseBase{
 
     private function convertirTamanio($tamanio){
         if($tamanio < 1024){             //Si el tamanio no llega a 1KB devolverlo en Bytes
-            return  $tamanio."Bytes";
+            return  $tamanio." Bytes";
 
         }elseif ($tamanio < pow(1024,2)) {  // Si el tamanio no llega a 1MB devolverlo en KB
-         return round ($tamanio / 1024,1,PHP_ROUND_HALF_UP)."KB";
+         return round ($tamanio / 1024,1,PHP_ROUND_HALF_UP)." KB";
 
      }else{
-            return round ($tamanio / pow(1024,2),1,PHP_ROUND_HALF_UP)."MB"; //Si el tamanio supera 1MB devolverlo en MB
+            return round ($tamanio / pow(1024,2),1,PHP_ROUND_HALF_UP)." MB"; //Si el tamanio supera 1MB devolverlo en MB
         }
     }
 

@@ -13,7 +13,7 @@
 		<div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 panel">
 			<img src="{$url_base}{$archivo->getImg ()}" id="imgArchivo">
 			<h4>
-				Precio: $U {$archivo->getPrecio ()}
+				Precio: {$archivo->getPrecio ()}
 			</h4>
 			<h5>
 				Puntuacion:
@@ -24,7 +24,7 @@
 				</span>
 			</h5>
 			<button id="btnDescargar" class="btn btn-success" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
-				Descargar
+				Descargar <span class="fa fa-download"></span>
 			</button>
 		</div>
 		<div class="col-lg-9 col-md-8 col-sm-7 col-xs-6 panel">
