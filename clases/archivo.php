@@ -113,7 +113,7 @@ class Archivo extends ClaseBase{
     }
 
     public function getListado () {
-        $sql = "SELECT id,nombre,tipo,descripcion FROM `archivos` WHERE duenio=(SELECT id from `usuarios` WHERE activo=1)";
+        $sql = "SELECT * FROM `archivos` WHERE duenio=(SELECT id from `usuarios` WHERE activo=1)";
         $res=NULL;
         $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");while($fila = $resultado->fetch_object()) {
             $res[] = new $this->modelo($fila);
@@ -186,7 +186,6 @@ class Archivo extends ClaseBase{
     }
 
     private function obtenerDefault ($nombre) {
-    	echo $nombre;
         if (strpos ($nombre, ".cpp") !== false)
             return "img/iconos_archivos/def_cpp.png";
         if (strpos ($nombre, ".jpg") !== false || strpos ($nombre, ".jpeg") !== false)
