@@ -266,7 +266,7 @@ class cuenta extends ClaseBase{
 
 	public function agregar($idDuenio){
 		$nroTarjeta = $_POST['numTajeta'];
-		$fecVenc = $_POST['fecVenc'];
+		$fecVenc = $_POST['venc_mes']."-".$_POST['venc_anio'];
 		$cvv = $_POST['cvv'];
 
 		$sql = $this->db->prepare("INSERT INTO cuentas (nroTarjeta,fecVenc,cvv,duenio) VALUES( ?,?,?,?)");
