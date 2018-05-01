@@ -117,6 +117,7 @@ class ControladorUsuario extends ControladorIndex {
             "archivos" => $archivos,
             "url_agregar_pago" => (new ControladorIndex())->getUrl("usuario","agregarCuenta"),
             "url_eliminar_usuario" => (new ControladorIndex())->getUrl("usuario","eliminarUsuario"),
+            "url_editar_perfil" =>(new ControladorIndex())->getUrl("usuario","editarPerfil"),
         );
         $tpl = Template::getInstance();
         $tpl->mostrar("perfil", $datos);
@@ -130,8 +131,40 @@ class ControladorUsuario extends ControladorIndex {
         $this->redirect("inicio", "principal");
     }
 
-    function editar_perfil($params) {
-        
+    function editarPerfil($params) {
+        $id = Auth::estaLogueado();
+        if(!$id){
+            (new ControladorIndex())->redirect("inicio","principal");
+        }
+        $usuario = new Usuario();
+        $usuario->setId($id);
+        $usuario->setNombre($_POST["nombre"]);
+        $usuario->setApellido($_POST["apellido"]);
+        $usuario->setCorreo($_POST["correo"]);
+        $usuario->setContrasenia((isset($_POST["password"]) && $_POST["password"] != "") ? sha1($_POST["password"]):$_POST["password_old"]);
+        $usuario->setfnac($_POST["anio"]."-".$_POST["mes"]."-".$_POST["dia"]);
+        $imgOK = -2;
+        echo isset($_FILES["archivo"]);
+        if($_FILES["archivo"]["error"] == UPLOAD_ERR_OK){
+            $imgOK = (new Archivo())->subirImagen();
+            if($imgOK == 1){
+                $usuario->setImagen("uploads/" . $_FILES["archivo"]["name"]);
+            }
+        }else if($_FILES["archivo"]["error"] == UPLOAD_ERR_NO_FILE || $imgOK != 1){
+            $usuario->setImagen($_POST["archivo_old"]);
+        }
+        $resultado = $usuario->editar();
+        if($resultado > 0){
+            $datos = array(
+                "mensaje_editar" => "Los datos fueron actualizados correctamente",
+            );
+        }else{
+            $datos = array(
+                "mensaje_editar" => "No se actualizó ningun dato",
+            );
+        }
+        $tpl = Template::getInstance();
+        $tpl->mostrar("perfil", $datos);
     }
 
     function agregarCuenta(){

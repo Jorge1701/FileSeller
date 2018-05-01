@@ -23,13 +23,13 @@
 				</div>
 				<div class="container">
 					<ul class="nav nav-tabs nav-tabs-fillup navigation">
-						<li class="nav-item"><a data-toggle="tab" class="active nav-link" href="#information">Datos personales<span class="fa fa-user-circle-o pestaña-icono"></span></a></li>
+						<li class="nav-item"><a data-toggle="tab" class="{if !isset($mensaje_editar)} active{/if} nav-link" href="#information">Datos personales<span class="fa fa-user-circle-o pestaña-icono"></span></a></li>
 						<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#archivos">Mis archivos <span class="fa fa-file pestaña-icono"></span></a></li>
-						<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#editar">Editar <span class="fa fa-edit pestaña-icono"></span></a></li>
+						<li class="nav-item"><a data-toggle="tab" class="{if isset($mensaje_editar)} active{/if} nav-link" href="#editar">Editar <span class="fa fa-edit pestaña-icono"></span></a></li>
 					</ul>
 					<div class="user-body">
 						<div class="tab-content">
-							<div id="information" class="tab-pane slide-left active">
+							<div id="information" class="tab-pane slide-left {if !isset($mensaje_editar)} active{/if}">
 								<table class="table">
 									<thead>
 										<tr>
@@ -65,19 +65,19 @@
 													<ul>	
 														{foreach $usuario->getCuentas() as $cuenta}
 														<li>
-														<div class="input-group-prepend">
-															<input class="input-group-text nrot" type="password" value="{$cuenta->getNroTarjeta()}" readonly id=nrot{$cuenta->getId()}>
-															<span onclick="showPassword('nrot{$cuenta->getId()}','eyePass{$cuenta->getId()}');" class="input-group-text fa fa-eye" id="eyePass{$cuenta->getId()}"></span>
-															<div class="fecc">{$cuenta->getFecVenc()}</div>
-														</div>
-													</li>
+															<div class="input-group-prepend">
+																<input class="input-group-text nrot" type="password" value="{$cuenta->getNroTarjeta()}" readonly id=nrot{$cuenta->getId()}>
+																<span onclick="showPassword('nrot{$cuenta->getId()}','eyePass{$cuenta->getId()}');" class="input-group-text fa fa-eye" id="eyePass{$cuenta->getId()}"></span>
+																<div class="fecc">{$cuenta->getFecVenc()}</div>
+															</div>
+														</li>
 														{/foreach}
 													</ul>
 													{/if}
 													<hr>
 													<div><h5>Agregar</h5></div>
 													<form action="{$url_agregar_pago}" method="POST" >
-														<input class="input-group mb-3" type="number" name="numTajeta" placeholder="Nro de tarjeta">
+														<input class="input-group mb-3" type="number" name="numTajeta" min="1000000000000000" max="9999999999999999" placeholder="Nro de tarjeta">
 														<input class="input-group mb-3" title="Fecha de vencimiento" type="text" name="fecVenc" placeholder="Fecha de vencimiento">
 														<input class="input-group mb-3" type="number" name="cvv" placeholder="CVV">
 														<input class="btn btn-success" type="submit" value="Agregar">
@@ -121,32 +121,205 @@
 
 						<button class="btn btn-info" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fa fa-upload btn-subir" ></i>Subir nuevo</button>
 					</div>
-					<div id="editar" class="tab-pane slide-left">
+					<div id="editar" class="tab-pane  {if isset($mensaje_editar)} active {/if}">
 						<h4>Editar perfil</h4>
+						{if isset($mensaje_editar)}
+						<div class="alert alert-success text-center">
+							<strong>{$mensaje_editar}</strong> 
+						</div>
+						{/if}
+						<form method="post" enctype="multipart/form-data" action="{$url_editar_perfil}" class="text-center">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text fa fa-address-book" id="basic-addon1"></span>
+								</div>
+								<input name="nombre" id="nombre" type="text" value="{$usuario->getNombre()}" class="form-control" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required="Ingrese su Nombre" autofocus title="Ingrese su Nombre">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text fa fa-address-book" id="basic-addon1"></span>
+								</div>
+								<input name="apellido" id="apellido" type="text" value="{$usuario->getApellido()}" class="form-control" placeholder="Apellido" aria-label="Apellido" aria-describedby="basic-addon1" required="Ingrese su Apellido" title="Ingrese su Apellido">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">@</span>
+								</div>
+								<input name="correo" id="correo" type="email" value="{$usuario->getCorreo()}" class="form-control" placeholder="Correo" aria-label="Correo" aria-describedby="basic-addon1" required="Ingrese su correo" title="Ingrese su correo">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text fa fa-lock" id="basic-addon1"></span>
+								</div>
+								<input name="password" id="password" type="password" class="form-control" placeholder="Contraseña (Sin cambios)" aria-label="Contraseña" aria-describedby="basic-addon1" title="Mínimo 6 / Máximo 21">
+								<input hidden name="password_old"  value="{$usuario->getContrasenia()}">
+								<!--ACA--><div class="input-group-prepend">
+									<span onclick="showPassword(); //return false;" class="input-group-text fa fa-eye" id="eyePass"></span>
+								</div>
+							</div>
 
-						<h6>Esta función será implementada en el siguiente Sprint.</h6>
+							{$fecha="-"|explode:$usuario->getFnac()} 
+
+							<div class="input-group mb-3">
+								<input required="Campo obligatorio" type="text" class="form-control" placeholder="Dia" id="dia" value="{$fecha[2]}" name="dia">
+								<select required="Campo obligatorio" class="form-control" id="mes" name="mes">
+									<option value="mes">Mes</option>
+									<option {if $fecha[1] == "01"} selected {/if} value="01">Enero</option>
+									<option {if $fecha[1] == "02"} selected {/if} value="02">Febrero</option>
+									<option {if $fecha[1] == "03"} selected {/if} value="03">Marzo</option>
+									<option {if $fecha[1] == "04"} selected {/if} value="04">Abril</option>
+									<option {if $fecha[1] == "05"} selected {/if} value="05">Mayo</option>
+									<option {if $fecha[1] == "06"} selected {/if} value="06">Junio</option>
+									<option {if $fecha[1] == "07"} selected {/if} value="07">Julio</option>
+									<option {if $fecha[1] == "08"} selected {/if} value="08">Agosto</option>
+									<option {if $fecha[1] == "09"} selected {/if} value="09">Setiembre</option>
+									<option {if $fecha[1] == "10"} selected {/if} value="10">Octubre</option>
+									<option {if $fecha[1] == "11"} selected {/if} value="11">Noviembre</option>
+									<option {if $fecha[1] == "12"} selected {/if} value="12">Diciembre</option>
+								</select>
+								<input required="Campo obligatorio"  type="text" class="form-control" placeholder="Año" id="anio" value="{$fecha[0]}" name="anio">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text fa fa-camera" id="basic-addon1"></span>
+								</div>
+								<input accept="image/*" name="archivo" id="archivo" type="file" class="form-control" aria-label="Archivo" aria-describedby="basic-addon1" title="Seleccione una imagen"/>
+								<input hidden name="archivo_old" id="archivo_old" value="{$usuario->getImagen()}" type="text"/>
+							</div>
+							<p><strong>Nota:</strong> Solo .jpg, .jpeg, .gif, .png son los formatos permitidos con un máximo de 5Mb.</p>
+
+							<!-- MODAL ERRORES DIA -->
+
+
+							<div class="modal fade" id="modal_dia" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<div class="modal-body">
+											<p id="mensaje_dia"></p>
+										</div>
+										<div class="modal-footer">
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+
+
+							<!-- MODAL -->
+
+							<!-- MODAL ERRORES MES -->
+
+
+							<div class="modal fade" id="modal_mes" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<div class="modal-body">
+											<p id="mensaje_mes"></p>
+										</div>
+										<div class="modal-footer">
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+
+
+							<!-- MODAL -->
+
+							<!-- MODAL ERRORES AÑO -->
+
+
+							<div class="modal fade" id="modal_anio" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<div class="modal-body">
+											<p id="mensaje_anio"></p>
+										</div>
+										<div class="modal-footer">
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+
+
+							<!-- MODAL -->
+
+							<!-- MODAL ERRORES Correo -->
+
+
+							<div class="modal fade" id="modal_correo" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<div class="modal-body">
+											<p id="mensaje_correo"></p>
+										</div>
+										<div class="modal-footer">
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							<!-- MODAL ERRORES DIA -->
+
+
+							<div class="modal fade" id="modal_ok" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<div class="modal-body">
+											<p id="mensaje_ok"></p>
+										</div>
+										<div class="modal-footer">
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<button id="btnRegistro" type="submit" class="btn btn-success">Actualizar datos</button>
+						</form>
+
+						<hr>
 
 						<button data-toggle="modal" data-target="#confirmar" class="btn btn-danger">Eliminar cuenta</button>
 
 
 
-                        <div class="modal fade" id="confirmar" role="dialog" data-backdrop="static">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header mx-auto">
-                                        <h4>¿Está seguro?</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                    	<p>Esto resultará en la eliminación de toda su información incluidos sus archivos subidos.</p>
-                                    </div>
-                                    <div class="modal-footer mx-auto">
-                                    	<button class="btn btn-danger" onClick="window.location='{$url_eliminar_usuario}'">Confirmar</button>
-                                    	<button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                    </div>
-                                </div>
+						<div class="modal fade" id="confirmar" role="dialog" data-backdrop="static">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header mx-auto">
+										<h4>¿Está seguro?</h4>
+									</div>
+									<div class="modal-body">
+										<p>Esto resultará en la eliminación de toda su información incluidos sus archivos subidos.</p>
+									</div>
+									<div class="modal-footer mx-auto">
+										<button class="btn btn-danger" onClick="window.location='{$url_eliminar_usuario}'">Confirmar</button>
+										<button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+									</div>
+								</div>
 
-                            </div>
-                        </div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>	
@@ -156,5 +329,6 @@
 </div>
 {include file="include_js.tpl"}
 <script type="text/javascript" src="{$url_base}js/perfil.js"></script>
+<script type="text/javascript" src="{$url_base}js/registro.js"></script>
 </body>
 </html>

@@ -25,6 +25,10 @@ class Usuario extends ClaseBase{
 
 	}
 
+	public function setId($id){
+		$this->id = $id;
+	}
+
 	public function setNombre($nombre){
 		$this->nombre = $nombre;
 	}
@@ -202,6 +206,16 @@ class Usuario extends ClaseBase{
 
 	}
 
+	public function editar(){
+		ini_set("display_errors", 1);
+		error_reporting(E_ALL & ~E_NOTICE);
+
+		$sql="UPDATE `usuarios` SET `nombre`='".$this->getNombre()."',`apellido`='".$this->getApellido()."',`correo`= '".$this->getCorreo()."',`contrasenia`='".$this->getContrasenia()."',`imagen`='".$this->getImagen()."',`fnac`='".$this->getfnac()."' WHERE `id` = ".$this->getId();
+        $this->db->query($sql)   
+            or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+		
+		return $this->db->affected_rows;
+	}
 }
 
 
