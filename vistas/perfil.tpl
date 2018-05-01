@@ -312,12 +312,12 @@
 
 								</div>
 							</div>
-							<button id="btnRegistro" type="submit" class="btn btn-success">Actualizar datos</button>
+							<button id="btnRegistro" type="submit" class="btn btn-success"><span class="fa fa-refresh"></span> Actualizar datos</button>
 						</form>
 
 						<hr>
 
-						<button data-toggle="modal" data-target="#confirmar" class="btn btn-danger">Eliminar cuenta</button>
+						<button data-toggle="modal" data-target="#confirmar" class="btn btn-danger"><span class="fa fa-trash"></span> Eliminar cuenta</button>
 
 
 

@@ -30,22 +30,17 @@
 					</a>
 
 					<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
-						<h6 class="menu-notificaciones-titulo">Notificaciones</h6>
+						<h6 class="menu-notificaciones-titulo"><span class="fa fa-bell"></span> Notificaciones</h6>
 						<table class="table">
 							<tbody>
 								<tr class="notification" onClick="">
-									<th scope="row"><i class="fa fa-circle"></i></th>	
+									<th scope="row"><i class="fa fa-dot-circle-o"></i></th>	
 									<td> Bienvenido a File seller, la mejor plataforma para vender tus archivos</td>
 									<td><div class="eliminar_notificacion"><i class="fa fa-times"></i></div></td>
 								</tr>
 								<tr class="notification" onClick="">
-									<th scope="row"><i class="fa fa-circle"></i></th>	
-									<td> Gracias por formar parte de la comunidad</td>
-									<td><div class="eliminar_notificacion"><i class="fa fa-times"></i></div></td>
-								</tr>
-								<tr class="notification" onClick="">
-									<th scope="row"><i class="fa fa-circle"></i></th>	
-									<td> Gracias por formar parte de la comunidad</td>
+									<th scope="row"><i class="fa fa-dot-circle-o"></i></th>	
+									<td> Bienvenido a File seller, la mejor plataforma para vender tus archivos</td>
 									<td><div class="eliminar_notificacion"><i class="fa fa-times"></i></div></td>
 								</tr>
 							</tbody>
@@ -62,7 +57,7 @@
 
 
 					<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
-						<h6 class="menu-notificaciones-titulo">Mensajes</h6>
+						<h6 class="menu-notificaciones-titulo"><span class="fa fa-inbox"></span> Mensajes</h6>
 						<table class="table">
 							<tbody>
 								{if isset($notificacionesMensaje)}

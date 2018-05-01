@@ -100,6 +100,7 @@ class ControladorUsuario extends ControladorIndex {
             $datos = array(
                 "titulo" => "Registrarse",
                 "mensaje" => "",
+                "active_registrarse" => "active",
             );
 
             $tpl->mostrar("registro", $datos);
