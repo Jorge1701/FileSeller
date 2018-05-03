@@ -89,7 +89,7 @@ class Archivo extends ClaseBase{
         if ($filtro == NULL)
             return NULL;
 
-        $sql = "SELECT * FROM `archivos` WHERE duenio=(SELECT id from `usuarios` WHERE activo=1)";
+        $sql = "SELECT * FROM `archivos` WHERE duenio IN (SELECT id from `usuarios` WHERE activo=1)";
         $res = NULL;
         $resultado = $this->db->query ($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
         
@@ -113,7 +113,7 @@ class Archivo extends ClaseBase{
     }
 
     public function getListado () {
-        $sql = "SELECT * FROM `archivos` WHERE duenio=(SELECT id from `usuarios` WHERE activo=1)";
+        $sql = "SELECT * FROM `archivos` WHERE duenio IN (SELECT id from `usuarios` WHERE activo=1)";
         $res=NULL;
         $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");while($fila = $resultado->fetch_object()) {
             $res[] = new $this->modelo($fila);

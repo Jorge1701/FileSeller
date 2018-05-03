@@ -139,7 +139,7 @@
 
 						<button class="btn btn-info" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fa fa-upload btn-subir" ></i>Subir nuevo</button>
 					</div>
-					<div id="editar" class="tab-pane  {if isset($mensaje_editar)} active {/if}">
+					<div id="editar" class="tab-pane slide-left {if isset($mensaje_editar)} active {/if}">
 						<h4>Editar perfil</h4>
 						{if isset($mensaje_editar)}
 						<div class="alert alert-success text-center">
