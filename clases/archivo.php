@@ -118,9 +118,7 @@ class Archivo extends ClaseBase{
         $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");while($fila = $resultado->fetch_object()) {
             $res[] = new $this->modelo($fila);
         }
-        return $res;    
-
-
+        return $res;
     }
 
     public function bajarArchivo($name){

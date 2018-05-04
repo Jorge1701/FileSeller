@@ -10,7 +10,7 @@
 	{include file="header.tpl"}
 
 	<div class="row panelMain">
-		<div class="col-lg-3 col-md-4 col-sm-5 col-xs-6">
+		<div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 pizq">
 			<img src="{$url_base}{$archivo->getImg ()}" id="imgArchivo">
 			<h4>
 				Precio: {$archivo->getPrecio ()}
@@ -34,10 +34,8 @@
 			</p>
 		</div>
 	</div>
-	<div class="row panelMain panel card">
-		<div>
-			<h2 id="tit_comentarios">Comentarios</h2>
-		</div>
+	<div class="row panelMain panel-mio">
+		<h2 id="tit_comentarios">Comentarios</h2>
 		<div id="comentarios">
 			En futuras actualizacions
 		</div>

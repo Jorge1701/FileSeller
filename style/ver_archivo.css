@@ -1,6 +1,20 @@
+@media screen and (max-width: 576px) {
+	.pizq {
+		border-bottom: solid 1px black;
+	}
+}
+
+@media screen and (min-width: 576px) {
+	.pizq {
+		border-right: solid 1px black;
+	}
+}
+
 .panelMain {
 	margin: 2vw 2vw 0 2vw;
 	background-color: white;
+	border: solid 1px black;
+	border-radius: 1vw;
 }
 
 .panel {
@@ -24,7 +38,8 @@
 }
 
 #tit_comentarios {
-	clear: both;
+	width: 100%;
+	text-align: center;
 }
 
 #estrellas {
@@ -38,5 +53,4 @@
 }
 
 #comentarios {
-	clear: both;
 }
