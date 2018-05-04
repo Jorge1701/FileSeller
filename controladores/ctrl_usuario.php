@@ -109,29 +109,34 @@ class ControladorUsuario extends ControladorIndex {
 
     function perfil($correoUsuario) {
         $id = Auth::estaLogueado();
-        if(!$id){
-            (new ControladorIndex())->redirect("inicio","principal");
-        }
-
         $usuarioOtro = null;
         $archivos = null;
         $ctrlIndex = new ControladorIndex();
         $urlIniciarConversacion = null;
         $active_archivo = null;
 
-        if ($correoUsuario[0] != null){
+        if ($correoUsuario[0] != null){     //Si una persona quiere consultar el perfil del duenio del archivo.           
             $usuarioOtro = (new Usuario())->obtenerPorCorreo($correoUsuario[0]);
-            if($usuarioOtro->getId() != $id){
+            if($usuarioOtro->getId() != $id){  //Si la persona que consulta no es el propio duenio. 
                 $archivos = (new Archivo())->getArchivosUser($usuarioOtro->getId());
-                $urlIniciarConversacion = $ctrlIndex->getUrl("mensajes","chat");
+                if(!$id){ //Si la persona que consulta no inicio session, redirigir al login al tratar de iniciar una conversacion
+                    $urlIniciarConversacion = $ctrlIndex->getUrl("inicio","login");
+                }else{
+                    $urlIniciarConversacion = $ctrlIndex->getUrl("mensajes","chat");
+                }
+                
             }else{
                 $usuarioOtro = null;
                 $archivos = (new Archivo())->getArchivosUser($id);
                 $active_archivo = "si";
             }
-        }else{
+        }else{      //Si el usuario esta consultando su propio perfil.
+            if(!$id){
+                $ctrlIndex->redirect("inicio","principal");
+            }
             $archivos = (new Archivo())->getArchivosUser($id);
         }
+
         $datos = array(
             "active_perfil" => "active",
             "active_archivo" => $active_archivo,
