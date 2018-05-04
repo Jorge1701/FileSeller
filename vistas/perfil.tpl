@@ -59,7 +59,7 @@
 											<td>
 												<div class="collapse text-center" id="verCuentas">
 													
-													{if $usuario->getCuentas() == null}
+													{if $usuario->getCuentas() !== null}
 													No tiene medios de pago activos
 													{else}
 													<ul>	

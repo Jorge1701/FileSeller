@@ -10,7 +10,7 @@
 	{include file="header.tpl"}
 
 	<div class="row panelMain">
-		<div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 panel">
+		<div class="col-lg-3 col-md-4 col-sm-5 col-xs-6">
 			<img src="{$url_base}{$archivo->getImg ()}" id="imgArchivo">
 			<h4>
 				Precio: {$archivo->getPrecio ()}
@@ -27,14 +27,14 @@
 				Descargar <span class="fa fa-download"></span>
 			</button>
 		</div>
-		<div class="col-lg-9 col-md-8 col-sm-7 col-xs-6 panel">
+		<div class="col-lg-9 col-md-8 col-sm-7 col-xs-6">
 			<h2 id="titulo">{$archivo->getNombre ()}</h2>
 			<p>
 				{$archivo->getDescripcion ()}
 			</p>
 		</div>
 	</div>
-	<div class="row panelMain panel">
+	<div class="row panelMain panel card">
 		<div>
 			<h2 id="tit_comentarios">Comentarios</h2>
 		</div>
