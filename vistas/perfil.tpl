@@ -3,7 +3,7 @@
 <head>
 	{include file="include_css.tpl"}
 	<link rel="stylesheet" type="text/css" href="{$url_base}style/perfil.css">
-	<title>Perfil</title>
+	<title> {if isset($usuarioOtro)}Perfil de {$usuarioOtro->getNombre()}{else}Tu perfil{/if}</title>
 </head>
 <body background="{$url_base}img/wallpaper.jpg" id="body">
 	<!-- Header -->
@@ -13,23 +13,96 @@
 	<!-- Perfil -->
 	<div class="row">
 		<div class="col-sm-9 col-md-9 user-details mx-auto">
+			<!-- Perfil de usuario no logueado -->
+			{if isset($usuarioOtro)}
+			<div class="user-image">
+				<img src="{$url_base}{$usuarioOtro->getImagen()}" class="rounded-circle img-user-perfil">
+			</div>
+			<div class="user-info-block card">
+				<div class="user-heading">
+					<h3>{$usuarioOtro->getNombre()} {$usuarioOtro->getApellido()}</h3>
+					<div class="btn btn-primary btn-seguir" id="btnSeguir">Seguir <span class="fa fa-user-plus"></span></div>
+					<div class="btn btn-secondary btn-dejar-seguir" hidden id="btnDejarSeguir">Dejar de seguir <span class="fa fa-user-times"></span></div>
+				</div>
+				<div class="container">
+					<ul class="nav nav-tabs nav-tabs-fillup navigation">
+						<li class="nav-item"><a data-toggle="tab" class=" active nav-link" href="#archivos">Sus archivos <span class="fa fa-file pestaña-icono"></span></a></li>
+						<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#contacto">Contacto<span class="fa fa-user-circle-o pestaña-icono"></span></a></li>
+					</ul>
+					<div class="user-body">
+						<div class="tab-content">
+							<div id="archivos" class="active tab-pane slide-left">
+								<table class="table">
+									<thead>	
+										<tr>
+											<h4>Sus archivos</h4>
+										</tr>		
+									</thead>
+									<tbody>
+										<tr>
+											<th></th>
+											<th scope="row">Nombre</th>
+											<th scope="row">Tipo</th>
+											<th scope="row">Precio</th>
+										</tr>
+										{if isset($archivos)}
+										{foreach $archivos as $archivo}
+										<tr class="fila_archivo" onclick="window.location='{$url_ver_archivo}{$archivo->getId ()}'">
+											<td><img class="img-file" src="{$url_base}{$archivo->getImg()}"></td>
+											<td>{$archivo->getNombre()}</td>
+											<td>{$archivo->getTipo()}</td>
+											<td>{$archivo->getPrecio()}</td>
+										</tr>
+										{/foreach}
+									</tbody>
+								</table>
+								{else}	
+							</tbody>
+						</table>
+						<div class="sinArchivos">No tiene archivos subidos</div>
+						{/if}
+					</div>
+					<div id="contacto" class="tab-pane slide-left">
+						<table class="table">
+							<thead>
+								<tr>
+									<h4>Información de contacto</h4>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">Nombre completo</th>
+									<td>{$usuarioOtro->getNombre()} {$usuarioOtro->getApellido()}</td>
+								</tr>
+								<tr>
+									<th scope="row">Correo</th>
+									<td>{$usuarioOtro->getCorreo()}</td>
+								</tr>
+							</tbody>
+						</table>
+						<button class="btn btn-info" href="#" onClick="window.location='{$url_iniciar_conversacion}{$usuarioOtro->getCorreo()}'"><i class="fa fa-envelope"></i> Iniciar conversación</button>
+					</div>
+				</div>
+			</div>
+			{else}
+			<!--Perfil del usuario logueado -->
 			<div class="user-image">
 				<img src="{$url_base}{$usuario->getImagen()}" class="rounded-circle img-user-perfil">
 			</div>
 			<div class="user-info-block card">
 				<div class="user-heading">
-					<h3>{$usuario->getNombre ()} {$usuario->getApellido ()}</h3>
+					<h3>{$usuario->getNombre()} {$usuario->getApellido()}</h3>
 					<span class="help-block">Paysandú, UY</span>
 				</div>
 				<div class="container">
 					<ul class="nav nav-tabs nav-tabs-fillup navigation">
-						<li class="nav-item"><a data-toggle="tab" class="{if !isset($mensaje_editar)} active{/if} nav-link" href="#information">Datos personales<span class="fa fa-user-circle-o pestaña-icono"></span></a></li>
-						<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#archivos">Mis archivos <span class="fa fa-file pestaña-icono"></span></a></li>
+						<li class="nav-item"><a data-toggle="tab" class="{if !isset($mensaje_editar) && !isset($active_archivo)} active{/if} nav-link" href="#information">Datos personales<span class="fa fa-user-circle-o pestaña-icono"></span></a></li>
+						<li class="nav-item"><a data-toggle="tab" class="{if isset($active_archivo)} active {/if}nav-link" href="#archivos">Mis archivos <span class="fa fa-file pestaña-icono"></span></a></li>
 						<li class="nav-item"><a data-toggle="tab" class="{if isset($mensaje_editar)} active{/if} nav-link" href="#editar">Editar <span class="fa fa-edit pestaña-icono"></span></a></li>
 					</ul>
 					<div class="user-body">
 						<div class="tab-content">
-							<div id="information" class="tab-pane slide-left {if !isset($mensaje_editar)} active{/if}">
+							<div id="information" class="tab-pane slide-left {if !isset($mensaje_editar) && !isset($active_archivo)} active{/if}">
 								<table class="table">
 									<thead>
 										<tr>
@@ -106,7 +179,7 @@
 									</tbody>
 								</table>
 							</div>
-							<div id="archivos" class="tab-pane slide-left">
+							<div id="archivos" class="tab-pane slide-left {if isset($active_archivo)} active {/if}">
 								<table class="table">
 									<thead>	
 										<tr>
@@ -343,6 +416,7 @@
 			</div>	
 		</div>	
 	</div>
+	{/if}
 </div>
 </div>
 {include file="include_js.tpl"}

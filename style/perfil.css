@@ -113,3 +113,13 @@
 	width: 30pt;
 	height: 30pt;
 }
+
+.btn-seguir{
+	margin:9pt;
+	padding:0pt 10pt 0pt 10pt;
+}
+
+.btn-dejar-seguir{
+	margin:9pt;
+	padding:0pt 10pt 0pt 10pt;
+}

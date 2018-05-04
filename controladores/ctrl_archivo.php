@@ -2,8 +2,8 @@
 
 require_once ("clases/archivo.php");
 require_once ("controladores/ctrl_index.php");
-
 require_once ("clases/usuario.php");
+
 class ControladorArchivo extends ControladorIndex {
 
 	function descargar ($params = array ()) {
@@ -13,8 +13,11 @@ class ControladorArchivo extends ControladorIndex {
 	function ver ($params = array ()) {
 		$tpl = Template::getInstance();
 		$archivo = (new Archivo())->obtenerPorId ($params[0]);
+		$duenio = (new usuario())->obtenerPorId($archivo->getDuenio());
 		$datos = array(
 			"archivo" => $archivo,
+			"duenio"  => $duenio,
+			"url_ver_perfil_duenio" => (new ControladorIndex())->getUrl("usuario","perfil"),
 		);
 		$tpl->mostrar("ver_archivo",$datos);
 	}
