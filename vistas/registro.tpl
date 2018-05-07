@@ -186,7 +186,7 @@
 
                         <!-- MODAL -->
 
-                        <button id="btnRegistro" class="btn btn-success btn-iniciar-sesion">Aceptar</button>
+                        <button id="btnRegistro" class="btn btn-success registrarse">Aceptar</button>
                     </form>
 
                     <!-- CHEQUEAR CORREO -->

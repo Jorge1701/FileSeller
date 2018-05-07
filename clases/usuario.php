@@ -25,6 +25,10 @@ class Usuario extends ClaseBase{
 
 	}
 
+	public function setId($id){
+		$this->id = $id;
+	}
+
 	public function setNombre($nombre){
 		$this->nombre = $nombre;
 	}
@@ -111,9 +115,7 @@ class Usuario extends ClaseBase{
 		error_reporting(E_ALL & ~E_NOTICE);
 
 		$sql = DB::conexion()->prepare("SELECT * FROM usuarios WHERE correo= ? AND contrasenia= ?");
-
 		$sql->bind_param("ss",$correo,$pass);
-
 		$sql->execute();
 
 		$resultado = $sql->get_result();
@@ -124,6 +126,9 @@ class Usuario extends ClaseBase{
 			
 			while($fila=$resultado->fetch_object()) {
 
+				if($fila->activo == false){
+					return false;
+				}
 				Session::init();
 				Session::set('usuario_correo',$fila->correo);
 				Session::set('usuario_id', $fila->id);
@@ -189,9 +194,28 @@ class Usuario extends ClaseBase{
 		}else{
 			return true;
 		}
+	}
+
+
+	public function eliminar($idUsuario){
+		ini_set("display_errors", 1);
+		error_reporting(E_ALL & ~E_NOTICE);
+
+		$sql=$this->db->prepare("UPDATE `usuarios` SET `activo`= 0  WHERE id=$idUsuario");
+		$sql->execute();
 
 	}
 
+	public function editar(){
+		ini_set("display_errors", 1);
+		error_reporting(E_ALL & ~E_NOTICE);
+
+		$sql="UPDATE `usuarios` SET `nombre`='".$this->getNombre()."',`apellido`='".$this->getApellido()."',`correo`= '".$this->getCorreo()."',`contrasenia`='".$this->getContrasenia()."',`imagen`='".$this->getImagen()."',`fnac`='".$this->getfnac()."' WHERE `id` = ".$this->getId();
+		$this->db->query($sql)   
+		or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+		
+		return $this->db->affected_rows;
+	}
 }
 
 
@@ -232,22 +256,28 @@ class cuenta extends ClaseBase{
 
 	public function obtenerPorDuenio($idDuenio){
 		$sql="select * from cuentas where duenio=$idDuenio";
-    	$res=NULL;
+		$res=NULL;
 		$resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
-      	while($fila = $resultado->fetch_object()) {
-        $res[] = new $this->modelo($fila);
-    }
-    return $res;
+		while($fila = $resultado->fetch_object()) {
+			$res[] = new $this->modelo($fila);
+		}
+		if(empty($res)){
+			return NULL;
+		}else{
+			return res;
+		}
+
+		
 	}
 
 	public function agregar($idDuenio){
 		$nroTarjeta = $_POST['numTajeta'];
-		$fecVenc = $_POST['fecVenc'];
+		$fecVenc = $_POST['venc_mes']."-".$_POST['venc_anio'];
 		$cvv = $_POST['cvv'];
 
 		$sql = $this->db->prepare("INSERT INTO cuentas (nroTarjeta,fecVenc,cvv,duenio) VALUES( ?,?,?,?)");
-        $sql->bind_param("ssss",$nroTarjeta,$fecVenc,$cvv,$idDuenio);
-        $sql->execute();
+		$sql->bind_param("ssss",$nroTarjeta,$fecVenc,$cvv,$idDuenio);
+		$sql->execute();
 	}
 
 }

@@ -29,9 +29,15 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text fa fa-money" id="basic-addon1"></span>
+							<span class="input-group-text fa fa-money"></span>
 						</div>
-						<input name="precio" id="precio" type="number" class="form-control" placeholder="Precio ($U)" aria-label="Precio" aria-describedby="basic-addon1" required="Ingrese un precio en pesos uruguayos" autofocus title="Precio del archivo" {if isset($precio_archivo)} value ="{$precio_archivo}" {/if}>
+						<input name="precio" id="precio" type="number" class="form-control" placeholder="Precio" aria-label="Precio" aria-describedby="basic-addon1" required="Ingrese un precio en pesos uruguayos" autofocus title="Precio del archivo" {if isset($precio_archivo)} value ="{$precio_archivo}" {/if}>
+						<div class="input-group-append">  
+							<select class="btn btn-outline-secondary" title="Seleccionar tipo de moneda" name="moneda">
+								<option title="Pesos uruguayos">$U</option>
+								<option title="Dolares estadounidenses">USD</option>
+							</select>	
+						</div>
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -48,9 +54,9 @@
 					</div>
 
 					{if isset($mensaje)} 
-						<div class="mensaje">{$mensaje}</div>
-						<br>
-					 {/if}
+					<div class="mensaje">{$mensaje}</div>
+					<br>
+					{/if}
 
 					<button id="btnLogin" class="btn btn-success btn-iniciar-sesion">Subir <i class="fa fa-upload"></i></button>
 				</form>

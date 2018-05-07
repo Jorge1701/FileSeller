@@ -35,7 +35,7 @@
 					<br>
 					<button id="btnLogin" class="btn btn-success btn-iniciar-sesion">Iniciar Sesión</button>
 				</form>
-				<a class="registrarse" href="#">Registrarse</a>
+				<a class="registrarse-link" href="{$url_registro}">Registrarse</a>
 			</div>
 		</div>
 	</div>

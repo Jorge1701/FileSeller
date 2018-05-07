@@ -100,22 +100,52 @@ class ControladorUsuario extends ControladorIndex {
             $datos = array(
                 "titulo" => "Registrarse",
                 "mensaje" => "",
+                "active_registrarse" => "active",
             );
 
             $tpl->mostrar("registro", $datos);
         }
     }
 
-    function perfil() {
+    function perfil($correoUsuario) {
         $id = Auth::estaLogueado();
-        if(!$id){
-            (new ControladorIndex())->redirect("inicio","principal");
+        $usuarioOtro = null;
+        $archivos = null;
+        $ctrlIndex = new ControladorIndex();
+        $urlIniciarConversacion = null;
+        $active_archivo = null;
+
+        if ($correoUsuario[0] != null){     //Si una persona quiere consultar el perfil del duenio del archivo.           
+            $usuarioOtro = (new Usuario())->obtenerPorCorreo($correoUsuario[0]);
+            if($usuarioOtro->getId() != $id){  //Si la persona que consulta no es el propio duenio. 
+                $archivos = (new Archivo())->getArchivosUser($usuarioOtro->getId());
+                if(!$id){ //Si la persona que consulta no inicio session, redirigir al login al tratar de iniciar una conversacion
+                    $urlIniciarConversacion = $ctrlIndex->getUrl("inicio","login");
+                }else{
+                    $urlIniciarConversacion = $ctrlIndex->getUrl("mensajes","chat");
+                }
+                
+            }else{
+                $usuarioOtro = null;
+                $archivos = (new Archivo())->getArchivosUser($id);
+                $active_archivo = "si";
+            }
+        }else{      //Si el usuario esta consultando su propio perfil.
+            if(!$id){
+                $ctrlIndex->redirect("inicio","principal");
+            }
+            $archivos = (new Archivo())->getArchivosUser($id);
         }
-        $archivos = (new Archivo())->getArchivosUser($id);
+
         $datos = array(
             "active_perfil" => "active",
+            "active_archivo" => $active_archivo,
+            "usuarioOtro" => $usuarioOtro,
             "archivos" => $archivos,
-            "url_agregar_pago" => (new ControladorIndex())->getUrl("usuario","agregarCuenta"),
+            "url_agregar_pago" => $ctrlIndex->getUrl("usuario","agregarCuenta"),
+            "url_eliminar_usuario" => $ctrlIndex->getUrl("usuario","eliminarUsuario"),
+            "url_editar_perfil" =>$ctrlIndex->getUrl("usuario","editarPerfil"),
+            "url_iniciar_conversacion" => $urlIniciarConversacion,
         );
         $tpl = Template::getInstance();
         $tpl->mostrar("perfil", $datos);
@@ -129,8 +159,39 @@ class ControladorUsuario extends ControladorIndex {
         $this->redirect("inicio", "principal");
     }
 
-    function editar_perfil($params) {
-        
+    function editarPerfil($params) {
+        $id = Auth::estaLogueado();
+        if(!$id){
+            (new ControladorIndex())->redirect("inicio","principal");
+        }
+        $usuario = new Usuario();
+        $usuario->setId($id);
+        $usuario->setNombre($_POST["nombre"]);
+        $usuario->setApellido($_POST["apellido"]);
+        $usuario->setCorreo($_POST["correo"]);
+        $usuario->setContrasenia((isset($_POST["password"]) && $_POST["password"] != "") ? sha1($_POST["password"]):$_POST["password_old"]);
+        $usuario->setfnac($_POST["anio"]."-".$_POST["mes"]."-".$_POST["dia"]);
+        $imgOK = -2;
+        if($_FILES["archivo"]["error"] == UPLOAD_ERR_OK){
+            $imgOK = (new Archivo())->subirImagen();
+            if($imgOK == 1){
+                $usuario->setImagen("uploads/" . $_FILES["archivo"]["name"]);
+            }
+        }else if($_FILES["archivo"]["error"] == UPLOAD_ERR_NO_FILE || $imgOK != 1){
+            $usuario->setImagen($_POST["archivo_old"]);
+        }
+        $resultado = $usuario->editar();
+        if($resultado > 0){
+            $datos = array(
+                "mensaje_editar" => "Los datos fueron actualizados correctamente",
+            );
+        }else{
+            $datos = array(
+                "mensaje_editar" => "No se actualizó ningun dato",
+            );
+        }
+        $tpl = Template::getInstance();
+        $tpl->mostrar("perfil", $datos);
     }
 
     function agregarCuenta(){
@@ -140,6 +201,15 @@ class ControladorUsuario extends ControladorIndex {
         }
         (new Cuenta())->agregar($id);
         (new ControladorIndex())->redirect("usuario","perfil");
+    }
+
+    function eliminarUsuario(){
+        $id = Auth::estaLogueado();
+        if(!$id){
+             (new ControladorIndex())->redirect("inicio","principal");
+        }
+        (new Usuario())->eliminar($id);
+        $this->logout();
     }
 
 }

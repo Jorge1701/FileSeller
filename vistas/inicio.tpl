@@ -11,12 +11,9 @@
 	overflow:scroll;
 	overflow-x: hidden;
 	max-height: 300px;
-
-
 }
-
-
 </style>
+
 <body background="{$url_base}img/wallpaper.jpg">
 	{include file="header.tpl"}
 
@@ -37,22 +34,21 @@
 					</thead>
 					
 					<tr>
+						<th scope="row"></th>
 						<th scope="row">Nombre</th>
 						<th scope="row">Tipo</th>
-						<th scope="row">Descripción</th>
-
 					</tr>
 				</table>
-				<div id="scroll" ">
+				<div id="scroll">
 					<table class="table" > 
 						<tbody>
 							{if isset($lista_archivos)}
 							{foreach $lista_archivos as $a}
 							<tr class="fila_archivo_inicio "  onclick="verArchivo(this)" >
-								<td hidden >{$a->getId()}</td>
-								<td >{$a->getNombre()}</td>
+								<td><img class="img-archivo" src="{$url_base}{$a->getImg()}"></td>
+								<td>{$a->getNombre()}</td>
 								<td>{$a->getTipo()}</td>
-								<td>{$a->getDescripcion()}</td>
+								<td hidden >{$a->getId()}</td>
 							</tr>
 
 							{/foreach}
@@ -71,7 +67,7 @@
 </body>
 <script >
 	function verArchivo(id){
-		window.location='{$url_ver_achivo}'+id.cells[0].innerHTML;
+		window.location='{$url_ver_archivo}'+id.cells[3].innerHTML;
 	}
 
 

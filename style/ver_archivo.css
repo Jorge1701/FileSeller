@@ -1,0 +1,56 @@
+@media screen and (max-width: 576px) {
+	.pizq {
+		border-bottom: solid 1px black;
+	}
+}
+
+@media screen and (min-width: 576px) {
+	.pizq {
+		border-right: solid 1px black;
+	}
+}
+
+.panelMain {
+	margin: 2vw 2vw 0 2vw;
+	background-color: white;
+	border: solid 1px black;
+	border-radius: 4pt;
+}
+
+.panel {
+	border: solid 1px black;
+}
+
+#imgArchivo {
+	width: 100%;
+	padding: 5%;
+}
+
+#titulo {
+	margin-top: 4vh;
+	margin-bottom: 2vh;
+}
+
+#titulo, #tit_comentarios {
+	text-align: center;
+	color: black;
+	font-weight: bold;
+}
+
+#tit_comentarios {
+	width: 100%;
+	text-align: center;
+}
+
+#estrellas {
+	color: orange;
+}
+
+#btnDescargar {
+	float: right;
+	margin-top: 1vh;
+	margin-bottom: 2vh;
+}
+
+#comentarios {
+}

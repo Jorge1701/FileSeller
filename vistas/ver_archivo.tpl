@@ -4,111 +4,46 @@
 	{include file="include_css.tpl"}
 
 	<title>File Seller - Ver Archivo</title>
+	<link rel="stylesheet" type="text/css" href="{$url_base}style/ver_archivo.css">
 </head>
-
-
-<style>
-
-h3{
-	color:#4AB0FF;
-	display: inline-block;
-	margin-right: 2%;
-}
-
-#contenedor{
-	background-color: #ffffff;
-	border-radius:3px;	
-	margin-left: 20%;
-	width: 60%;
-	margin-top: 5%;
-}
-
-#imgArchivo{
-	margin-top: 6%;
-	margin-left: 6%;
-	display: inline;
-	width: 12%;	
-	height: 12%;
-}
-
-#info{
-
-
-}
-
-
-</style>
-
-
-
 <body background="{$url_base}img/wallpaper.jpg">
 	{include file="header.tpl"}
 
+	<div class="row panelMain">
+		<div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 pizq">
+			<img src="{$url_base}{$archivo->getImg ()}" id="imgArchivo">
+			<h4>
+				Precio: {$archivo->getPrecio ()}
+			</h4>
+			<h5>
+				Puntuación:
+				<span id="estrellas">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star" aria-hidden="true"></i>
+					<i class="fa fa-star-half-full "></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+					2,5
+				</span>
+			</h5>
+			<h5>Vendedor: <a href="{$url_ver_perfil_duenio}{$duenio->getCorreo()}" title="Ver perfil de {$duenio->getNombre()} {$duenio->getApellido()}">{$duenio->getNombre()} {$duenio->getApellido()}</a></h5>
+			<button id="btnDescargar" class="btn btn-success" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
+				Descargar <span class="fa fa-download"></span>
+			</button>
 
-	<img src="{$url_base}img/breakingbad.jpg" class="rounded mx-auto d-block" id="imgArchivo"><br>
-	
-	<button onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">Descargar</button>
-
-	<div  id="contenedor">
-		<div class="container">
-			<ul class="nav nav-tabs nav-tabs-fillup navigation">
-				<li class="nav-item"><a data-toggle="tab" class="active nav-link" href="#information">Datos Del Archivo<span class="fa fa-file pestaña-icono"></span></a></li>
-				<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#archivos">Datos Del Dueño<span class="fa fa-user-circle-o pestaña-icono"></span></a></li>
-			</ul>
-			<div class="user-body">
-				<div class="tab-content">
-
-					<div  id="information" class="tab-pane slide-left active">
-						<table class="table">
-							<thead>
-								<tr>
-									<h4>Datos Del Archivo</h4>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th class="row">Nombre</th>
-									<th>{$archivo->getNombre()}</th>
-
-								</tr>
-								<tr>
-									<th class="row">Tipo</th>
-									<th>{$archivo->getTipo()}</th>
-
-								</tr>
-								<tr>
-									<th class="row">Tamaño</th>
-									<th>{$archivo->getTamanio()}</th>
-
-								</tr>
-								<tr>
-									<th class="row">Precio</th>
-									<th>{$archivo->getPrecio()}</th>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div id="archivos" class="tab-pane slide-left">
-						<table class="table">
-							<thead>	
-								<tr>
-									<h4>Datos Del Dueño</h4>
-								</tr>	
-							</thead>
-							<tbody>
-								<tr>
-									<th class="row">Nombre</th>
-									<th>{$user->getNombre()}</th>
-								</tr>
-	
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>	
-		</div>	
-
-
+		</div>
+		<div class="col-lg-9 col-md-8 col-sm-7 col-xs-6">
+			<h2 id="titulo">{$archivo->getNombre ()}</h2>
+			<p>
+				{$archivo->getDescripcion ()}
+			</p>
+		</div>
+	</div>
+	<div class="row panelMain panel-mio">
+		<h2 id="tit_comentarios">Comentarios</h2>
+		<div id="comentarios">
+			En futuras actualizacions
+		</div>
 	</div>
 	{include file="include_js.tpl"}
 </body>

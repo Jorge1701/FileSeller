@@ -13,5 +13,10 @@
 }
 
 .registrarse{
-	margin: 5px 0px;
+	margin-bottom:20px;
+	margin-top:-20px;
+}
+
+.registrarse-link{
+	margin-bottom: 5px;
 }

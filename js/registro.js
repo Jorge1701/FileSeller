@@ -111,7 +111,7 @@ $("#correo").focusout(function () {
 
 
             } else {
-                alert("else" + ":NADA");
+                
             }
         },
         error: function () {
