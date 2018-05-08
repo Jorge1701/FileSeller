@@ -211,8 +211,8 @@ class Usuario extends ClaseBase{
 		error_reporting(E_ALL & ~E_NOTICE);
 
 		$sql="UPDATE `usuarios` SET `nombre`='".$this->getNombre()."',`apellido`='".$this->getApellido()."',`correo`= '".$this->getCorreo()."',`contrasenia`='".$this->getContrasenia()."',`imagen`='".$this->getImagen()."',`fnac`='".$this->getfnac()."' WHERE `id` = ".$this->getId();
-        $this->db->query($sql)   
-            or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+		$this->db->query($sql)   
+		or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
 		
 		return $this->db->affected_rows;
 	}
@@ -256,12 +256,18 @@ class cuenta extends ClaseBase{
 
 	public function obtenerPorDuenio($idDuenio){
 		$sql="select * from cuentas where duenio=$idDuenio";
-    	$res=NULL;
+		$res=NULL;
 		$resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
-      	while($fila = $resultado->fetch_object()) {
-        $res[] = new $this->modelo($fila);
-    }
-    return $res;
+		while($fila = $resultado->fetch_object()) {
+			$res[] = new $this->modelo($fila);
+		}
+		if(empty($res)){
+			return NULL;
+		}else{
+			return res;
+		}
+
+		
 	}
 
 	public function agregar($idDuenio){
@@ -270,8 +276,8 @@ class cuenta extends ClaseBase{
 		$cvv = $_POST['cvv'];
 
 		$sql = $this->db->prepare("INSERT INTO cuentas (nroTarjeta,fecVenc,cvv,duenio) VALUES( ?,?,?,?)");
-        $sql->bind_param("ssss",$nroTarjeta,$fecVenc,$cvv,$idDuenio);
-        $sql->execute();
+		$sql->bind_param("ssss",$nroTarjeta,$fecVenc,$cvv,$idDuenio);
+		$sql->execute();
 	}
 
 }

@@ -19,7 +19,8 @@ CREATE TABLE `archivos` (
   `ubicacion` varchar(300) NOT NULL,
   `duenio` int(11) NOT NULL,
   `fecSubido` date NOT NULL,
-  `horaSubido` time NOT NULL
+  `horaSubido` time NOT NULL,
+   `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `cuentas` (

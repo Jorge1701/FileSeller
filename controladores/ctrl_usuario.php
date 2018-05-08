@@ -107,18 +107,45 @@ class ControladorUsuario extends ControladorIndex {
         }
     }
 
-    function perfil() {
+    function perfil($correoUsuario) {
         $id = Auth::estaLogueado();
-        if(!$id){
-            (new ControladorIndex())->redirect("inicio","principal");
+        $usuarioOtro = null;
+        $archivos = null;
+        $ctrlIndex = new ControladorIndex();
+        $urlIniciarConversacion = null;
+        $active_archivo = null;
+
+        if ($correoUsuario[0] != null){     //Si una persona quiere consultar el perfil del duenio del archivo.           
+            $usuarioOtro = (new Usuario())->obtenerPorCorreo($correoUsuario[0]);
+            if($usuarioOtro->getId() != $id){  //Si la persona que consulta no es el propio duenio. 
+                $archivos = (new Archivo())->getArchivosUser($usuarioOtro->getId());
+                if(!$id){ //Si la persona que consulta no inicio session, redirigir al login al tratar de iniciar una conversacion
+                    $urlIniciarConversacion = $ctrlIndex->getUrl("inicio","login");
+                }else{
+                    $urlIniciarConversacion = $ctrlIndex->getUrl("mensajes","chat");
+                }
+                
+            }else{
+                $usuarioOtro = null;
+                $archivos = (new Archivo())->getArchivosUser($id);
+                $active_archivo = "si";
+            }
+        }else{      //Si el usuario esta consultando su propio perfil.
+            if(!$id){
+                $ctrlIndex->redirect("inicio","principal");
+            }
+            $archivos = (new Archivo())->getArchivosUser($id);
         }
-        $archivos = (new Archivo())->getArchivosUser($id);
+
         $datos = array(
             "active_perfil" => "active",
+            "active_archivo" => $active_archivo,
+            "usuarioOtro" => $usuarioOtro,
             "archivos" => $archivos,
-            "url_agregar_pago" => (new ControladorIndex())->getUrl("usuario","agregarCuenta"),
-            "url_eliminar_usuario" => (new ControladorIndex())->getUrl("usuario","eliminarUsuario"),
-            "url_editar_perfil" =>(new ControladorIndex())->getUrl("usuario","editarPerfil"),
+            "url_agregar_pago" => $ctrlIndex->getUrl("usuario","agregarCuenta"),
+            "url_eliminar_usuario" => $ctrlIndex->getUrl("usuario","eliminarUsuario"),
+            "url_editar_perfil" =>$ctrlIndex->getUrl("usuario","editarPerfil"),
+            "url_iniciar_conversacion" => $urlIniciarConversacion,
         );
         $tpl = Template::getInstance();
         $tpl->mostrar("perfil", $datos);
@@ -145,7 +172,6 @@ class ControladorUsuario extends ControladorIndex {
         $usuario->setContrasenia((isset($_POST["password"]) && $_POST["password"] != "") ? sha1($_POST["password"]):$_POST["password_old"]);
         $usuario->setfnac($_POST["anio"]."-".$_POST["mes"]."-".$_POST["dia"]);
         $imgOK = -2;
-        echo isset($_FILES["archivo"]);
         if($_FILES["archivo"]["error"] == UPLOAD_ERR_OK){
             $imgOK = (new Archivo())->subirImagen();
             if($imgOK == 1){

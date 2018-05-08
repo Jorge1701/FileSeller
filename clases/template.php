@@ -43,6 +43,7 @@ class Template {
 		$id = Auth::estaLogueado();
 		$usuario = null;
 		$notificacionesMensaje = null;
+		
 		$ctrlIndex = new ControladorIndex(); 
 
 		if( $id != false){
@@ -53,6 +54,7 @@ class Template {
 		
 		$this->asignar("usuario",$usuario);
 		$this->asignar("notificacionesMensaje",$notificacionesMensaje);
+
 		$this->asignar("url_mensaje",substr($ctrlIndex->getUrl("mensajes","chat"),0,-1));
 		
 		foreach ($data as $key => $value)

@@ -16,16 +16,21 @@
 				Precio: {$archivo->getPrecio ()}
 			</h4>
 			<h5>
-				Puntuacion:
+				Puntuación:
 				<span id="estrellas">
 					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
+					<i class="fa fa-star" aria-hidden="true"></i>
+					<i class="fa fa-star-half-full "></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+					2,5
 				</span>
 			</h5>
+			<h5>Vendedor: <a href="{$url_ver_perfil_duenio}{$duenio->getCorreo()}" title="Ver perfil de {$duenio->getNombre()} {$duenio->getApellido()}">{$duenio->getNombre()} {$duenio->getApellido()}</a></h5>
 			<button id="btnDescargar" class="btn btn-success" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
 				Descargar <span class="fa fa-download"></span>
 			</button>
+
 		</div>
 		<div class="col-lg-9 col-md-8 col-sm-7 col-xs-6">
 			<h2 id="titulo">{$archivo->getNombre ()}</h2>
