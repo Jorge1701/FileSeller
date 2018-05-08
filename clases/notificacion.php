@@ -10,7 +10,7 @@ class Notificacion extends ClaseBase{
     private $fecha = "";
     private $hora = "";
 
-	public function __construct($obj=NULL) {
+    public function __construct($obj=NULL) {
         if(isset($obj)){
             foreach ($obj as $key => $value) {
                 $this->$key=$value;
@@ -60,7 +60,7 @@ class Notificacion extends ClaseBase{
         
     }
 
- 
+
     public function getNotif($idNotif){
 
         $sql="select * from notificaciones where id=$idNotif";
@@ -80,6 +80,25 @@ class Notificacion extends ClaseBase{
             $res[] = new $this->modelo($fila);
         }
         return $res;
+    }
+
+    public function agregarNotif($idUsuario,$contenido){
+
+        date_default_timezone_set('America/Montevideo');
+        $fecha = date("Y-m-d");
+        $hora = date("H:i:s");
+
+
+        $sql = $this->db->prepare("INSERT INTO notificaciones(idUsuario,contenido,fecha,hora) VALUES (?,?,?,?)");
+
+        $sql->bind_param("isss",$idUsuario,$contenido,$fecha,$hora);
+
+        if($sql->execute()){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
 }

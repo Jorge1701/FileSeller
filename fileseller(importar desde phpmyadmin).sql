@@ -23,14 +23,6 @@ CREATE TABLE `archivos` (
    `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `cuentas` (
-  `nroTarjeta` bigint(20) NOT NULL,
-  `fecVenc` varchar(50) NOT NULL,
-  `cvv` int(3) NOT NULL,
-  `duenio` int(11) NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `mensajes` (
   `id_m` int(11) NOT NULL,
   `id_desde` int(11) DEFAULT NULL,
@@ -56,11 +48,6 @@ CREATE TABLE `usuarios` (
 ALTER TABLE `archivos`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `cuentas`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nroTarjeta` (`nroTarjeta`),
-  ADD KEY `duenio` (`duenio`);
-
 ALTER TABLE `mensajes`
   ADD PRIMARY KEY (`id_m`);
 
@@ -70,15 +57,10 @@ ALTER TABLE `usuarios`
 ALTER TABLE `archivos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
-ALTER TABLE `cuentas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE `mensajes`
   MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
-ALTER TABLE `cuentas`
-  ADD CONSTRAINT `cuentas_ibfk_1` FOREIGN KEY (`duenio`) REFERENCES `usuarios` (`id`);
 COMMIT;

@@ -194,23 +194,16 @@ class ControladorUsuario extends ControladorIndex {
         $tpl->mostrar("perfil", $datos);
     }
 
-    function agregarCuenta(){
-        $id = Auth::estaLogueado();
-        if(!$id){
-             (new ControladorIndex())->redirect("inicio","principal");
-        }
-        (new Cuenta())->agregar($id);
-        (new ControladorIndex())->redirect("usuario","perfil");
-    }
 
-    function eliminarUsuario(){
-        $id = Auth::estaLogueado();
-        if(!$id){
-             (new ControladorIndex())->redirect("inicio","principal");
-        }
-        (new Usuario())->eliminar($id);
-        $this->logout();
-    }
+   function eliminarUsuario(){
+    $id = Auth::estaLogueado();
+    if(!$id){
+       (new ControladorIndex())->redirect("inicio","principal");
+   }
+   (new Usuario())->eliminar($id);
+   $this->logout();
+}
+
 
 }
 
