@@ -3,7 +3,6 @@
 require_once ("clases/usuario.php");
 require_once ("clases/auth.php");
 require_once ("clases/archivo.php");
-//require_once("clases/subir_imagen.php");
 
 class ControladorInicio extends ControladorIndex {
 	

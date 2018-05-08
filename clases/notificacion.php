@@ -46,13 +46,18 @@ class Notificacion extends ClaseBase{
     }
 
     public function getNotifUser($idUsuario){
-        $sql="select * from notificaciones where idUsuario=$idUsuario";
+        $sql="select * from notificaciones where idUsuario=$idUsuario WHERE vista = 0";
         $res=NULL;
         $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
         while($fila = $resultado->fetch_object()) {
             $res[] = new $this->modelo($fila);
         }
-        return $res;
+        if(empty($res)){
+            return null;
+        }else{
+            return $res;
+        }
+        
     }
 
  
