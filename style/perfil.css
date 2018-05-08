@@ -91,6 +91,10 @@
 	background-color: hsla(0, 0%, 20%, 0.04);
 }
 
+.fila_archivo:hover td {
+    cursor: pointer;
+}
+
 .ver{
 	height: 15%;
 	width: 80pt;

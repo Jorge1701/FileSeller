@@ -2,10 +2,10 @@
 
 require_once("clases/clase_base.php");
 
-class Archivo extends ClaseBase {
+class Notificacion extends ClaseBase {
 
     private $id = 0;
-    private $img = "";
+    private $usuario = 0;
     private $nombre = "";
     private $tipo = "";
     private $tamanio = "";
@@ -25,7 +25,8 @@ class Archivo extends ClaseBase {
 
         parent::__construct("archivos");
     }
-
+}
+    /*
     //Getters
     public function getId() {
         return $this->id;
@@ -250,6 +251,6 @@ class Archivo extends ClaseBase {
         }
     }
 
-}
+}*/
 
 ?>

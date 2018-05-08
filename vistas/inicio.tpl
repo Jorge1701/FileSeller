@@ -19,7 +19,7 @@
 
 	{if isset($archivo_subido)}
 	<div class="alert alert-success text-center col-sm-9 col-md-9 mx-auto">
-		<strong>Felicidades!</strong> {$archivo_subido}
+		<strong> {$archivo_subido} </strong>
 	</div>
 	{/if}
 
