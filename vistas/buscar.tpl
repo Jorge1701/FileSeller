@@ -17,23 +17,28 @@
 			No se encontro ningun archivo.
 		</div>
 	{else}
-		<div class="row lista">
+		<div id="listado">
 			{foreach $archivos as $a}
-				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 columna">
-					<div class="mx-auto archivo">
-						<a href="{$url_base}archivo/ver/{$a->getId ()}">
-							<img src="{$url_base}{$a->getImg ()}" class="imagen">
-						</a>
+			{assign puntaje 3.1416}
+				<div class="archivo">
+					<a href="{$url_base}archivo/ver/{$a->getId ()}">
+						<img src="{$url_base}{$a->getImg ()}" class="vista_previa">
+						<div class="nombre">{$a->getNombre ()}</div>
 						<div class="info">
 							<div class="calificacion">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star-half"></i>
+								{while $puntaje >= 1}
+								<div class="recortar">
+									<img src="{$url_base}img/llena.png" class="estrella">
+								</div>
+									<span style="display: none">{$puntaje--}</span>
+								{/while}
+								<div class="recortar" style="width: {$puntaje * 20}pt">
+									<img src="{$url_base}img/llena.png" class="estrella">
+								</div>
 							</div>
 							<div class="descripcion">{$a->getDescripcion ()}</div>
 						</div>
-					</div>
+					</a>
 				</div>
 			{/foreach}
 		</div>
