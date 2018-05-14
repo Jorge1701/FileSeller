@@ -42,7 +42,30 @@
 	<div class="row panelMain panel-mio">
 		<h2 id="tit_comentarios">Comentarios</h2>
 		<div id="comentarios">
-			En futuras actualizacions
+			{foreach $comentarios as $c}
+				<div class="comentario">
+					<p class="com_usuario">
+						{$c->getUsuario ()}
+					</p>
+					<p class="com_comentario">
+						{$c->getComentario ()}
+					</p>
+				</div>
+			{/foreach}
+		</div>
+		<div id="enviar_comentario">
+			<form method="POST">
+				<div class="input-group">
+					<!-- Texto -->
+					<input type="text" class="form-control" placeholder="Comentario" name="comentario" required autofocus>
+					<div class="input-group-btn">
+						<!-- Boton Enviar -->
+						<button class="btn btn-default" type="submit" id="btnEnviar">
+							<i class="fa fa-share-square"></i>
+						</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 	{include file="include_js.tpl"}

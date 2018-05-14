@@ -39,6 +39,7 @@
 
 #tit_comentarios {
 	width: 100%;
+	margin: 1vh 2vw 0 2vw;
 	text-align: center;
 }
 
@@ -53,4 +54,32 @@
 }
 
 #comentarios {
+	width: 100%;
+	margin: 0 2vw;
+	clear: both;
+}
+
+#enviar_comentario {
+	width: 100%;
+	margin: 0 2vw 3vh 2vw;
+}
+
+.comentario {
+	width: 100%;
+	display: block;
+	margin: 3vh 0;
+	padding: .5vh 0;
+	border-radius: 3.5px;
+	background-color: #AFA;
+}
+
+.com_usuario {
+	margin: 0;
+	padding: 0 1vw;
+}
+
+.com_comentario {
+	margin: 0;
+	padding: 0 3vw;
+	font-size: 1.3em;
 }
