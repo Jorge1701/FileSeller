@@ -81,8 +81,9 @@ class Archivo extends ClaseBase {
         return $res;
     }
 
-    public function getRecomendados(){
-        
+    public function getRecomendados($idUsuario){
+        //alto ranking
+        $sql = "SELECT bla bla bla FROM `user` ORDER BY `point` DESC";
     }
 
 
@@ -113,7 +114,7 @@ class Archivo extends ClaseBase {
     }
 
     public function eliminarArchivo($idArchivo) {
-        
+
         $sql = $this->db->prepare("UPDATE archivos SET activo=0 WHERE id=?");
         $sql->bind_param("i", $idArchivo);
         

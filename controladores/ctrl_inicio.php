@@ -7,6 +7,11 @@ require_once ("clases/archivo.php");
 class ControladorInicio extends ControladorIndex {
 	
 	function principal () {
+
+		//obtener el id de usuario, para obtener el ranking
+
+		//$id = Auth::estaLogueado();
+
 		$datos = array(
 			"active_inicio" => "active",
 			"lista_archivos" => (new Archivo())->getListado(),

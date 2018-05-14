@@ -1,13 +1,3 @@
-.lista {
-	margin: 0 5vw 5vh 5vw;
-}
-
-.archivo {
-	height: 100%;
-	background-color: #FFF;
-	padding: .2vw;
-}
-
 .no-encontrado {
 	background-color: #FFF;
 	border-radius: .3vw;
@@ -25,39 +15,106 @@
 	margin-bottom: 2vh;
 }
 
-.columna {
-	margin-bottom: 3vh;
-	margin-left: 1vw;
-	margin-right: 1vw;
+#listado {
+	display: grid;
+	margin: 0 1vw;
+	grid-template-columns: repeat(6, 1fr);
+	grid-gap: 1em;
+	grid-auto-rows: minmax(25vh, auto);
 }
 
-.archivo:hover {
-	background-color: #CCC;
+@media screen and (max-width: 1300px) {
+	#listado {
+		grid-template-columns: repeat(4, 1fr);
+	}
 }
 
-.archivo:hover .info {
-	display: block;
+@media screen and (max-width: 900px) {
+	#listado {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }
 
-.info {
+@media screen and (max-width: 550px) {
+	#listado {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (max-width: 300px) {
+	#listado {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+#listado a:hover {
+	text-decoration: none;
+}
+
+#listado .archivo {
+    position: relative;
+    display: inline-block;
+	border-radius: .3vw;
+	background: white;
+}
+
+#listado .archivo .vista_previa {
+	width: calc(100% - 2vw);
+	height: calc(100% - 2vw - 5vh);
+	margin: 1vw 1vw 0 1vw;
+}
+
+#listado .nombre {
+	width: 100%;
+	height: 5vh;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-size: 1.7em;
+	color: black;
+	font-weight: bold;
+}
+
+#listado .info {
     display: none;
     position: absolute;
-    background-color: #FFF;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.imagen {
 	width: 100%;
-	height: 100%;
+	height: 10vh;
+	background: white;
+	z-index: 1;
+	border: 1px solid black;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
-.calificacion {
-	text-align: center;
-	font-size: 2em;
+#listado a:hover .info {
+	width: 100%;
+	display: block;
+	height: auto;
+	border-radius: .3vw;
 }
 
-.descripcion {
-	margin: .2vw;
+#listado .calificacion {
+	width: 100%;
+	height: 20pt;
 	text-align: center;
+}
+
+#listado .calificacion .estrella {
+	display: inline-block;
+	width: 20pt;
+	height: 20pt;
+}
+
+#listado .descripcion {
+	max-height: 70pt;
+	color: black;
+	font-size: 15pt;
+	overflow: hidden;
+	margin: 5pt;
+}
+
+#listado .recortar {
+	display: inline-block;
+	width: 20pt;
+	overflow: hidden;
 }

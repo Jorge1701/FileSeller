@@ -4,11 +4,12 @@ require_once("clases/clase_base.php");
 
 class Notificacion extends ClaseBase{
 	private $id = 0;
-    private $idUsuario = 0;
-    private $contenido = "";
     private $vista = false;
+    private $contenido = "";
+    private $idusuario = 0;
     private $fecha = "";
     private $hora = "";
+    private $activa = "";
 
     public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -46,18 +47,14 @@ class Notificacion extends ClaseBase{
     }
 
     public function getNotifUser($idUsuario){
-        $sql="select * from notificaciones where idUsuario=$idUsuario WHERE vista = 0";
+        $sql="select * from notificaciones WHERE idusuario=$idUsuario AND vista=0";
         $res=NULL;
         $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
         while($fila = $resultado->fetch_object()) {
             $res[] = new $this->modelo($fila);
         }
-        if(empty($res)){
-            return null;
-        }else{
-            return $res;
-        }
         
+        return $res;
     }
 
 
@@ -87,11 +84,11 @@ class Notificacion extends ClaseBase{
         date_default_timezone_set('America/Montevideo');
         $fecha = date("Y-m-d");
         $hora = date("H:i:s");
+        $activa = 1;
 
+        $sql = $this->db->prepare("INSERT INTO notificaciones(idUsuario,contenido,fecha,hora,activa) VALUES (?,?,?,?,?)");
 
-        $sql = $this->db->prepare("INSERT INTO notificaciones(idUsuario,contenido,fecha,hora) VALUES (?,?,?,?)");
-
-        $sql->bind_param("isss",$idUsuario,$contenido,$fecha,$hora);
+        $sql->bind_param("isssi",$idUsuario,$contenido,$fecha,$hora,$activa);
 
         if($sql->execute()){
             return true;

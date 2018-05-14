@@ -45,6 +45,9 @@ class ControladorArchivo extends ControladorIndex {
 
 				if ((new Archivo())->eliminarArchivo($a->getId())) {
 
+
+					$nuevos_archivos = (new Archivo())->getArchivosUser($duenio->getId());
+					
 					if($flag){
 						$datos = array(
 							"archivo_subido" => "Archivo eliminado correctamente",
@@ -58,7 +61,6 @@ class ControladorArchivo extends ControladorIndex {
 						);
 					}
 
-					$nuevos_archivos = (new Archivo())->getArchivosUser($duenio->getId());
 					
 
 					$tpl->mostrar("inicio",$datos);

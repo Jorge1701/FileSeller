@@ -1,6 +1,7 @@
 <?php 
 
 require_once ("clase_base.php");
+require_once ("notificacion.php");
 
 class Usuario extends ClaseBase{
 	private $nombre = "";
@@ -12,7 +13,7 @@ class Usuario extends ClaseBase{
 	private $imagen = "img/user-default.png";
 	private $activo = true;
 	private $id = 0;
-	private $notificaciones = [];
+	private $notificaciones = null;
 
 	public function __construct($obj=NULL) {
         //$this->db=DB::conexion();
@@ -57,6 +58,10 @@ class Usuario extends ClaseBase{
 		$this->activo = $activo;
 	}
 
+	public function setNotificaciones($notificaciones){
+		$this->notificaciones = $notificaciones;
+	}
+
 
 	public function getNombre(){
 		return $this->nombre;
@@ -89,6 +94,10 @@ class Usuario extends ClaseBase{
 		return $this->id;
 	}
 
+	public function getNotificaciones(){
+		return $this->notificaciones;
+	}
+
 	public function obtenerPorCorreo($corre){
 		$sql="select * from usuarios where correo='$corre'";
 		$res=NULL;
@@ -106,6 +115,8 @@ class Usuario extends ClaseBase{
 		or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
 		if($fila = $resultado->fetch_object()) {
 			$res= new $this->modelo($fila);
+			$res->setNotificaciones((new Notificacion())->getNotifUser($res->getId()));
+           
 		}
 		return $res;
 	}

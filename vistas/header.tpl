@@ -24,25 +24,34 @@
 			</li>
 			{if isset($usuario)}
 				<li class="nav-item dropdown">
-					<a class="nav-link fa fa-bell-o" href="#" title="Notificaciones" data-toggle="dropdown">
-						<span class="fa fa-comment"></span>
-						<span class="num">2</span>
+					<a class="nav-link fa fa-bell-o" id="campanaNotif" href="#" title="Notificaciones" data-toggle="dropdown">
+						{$notifs = $usuario->getNotificaciones()}
+						{if !empty($notifs)}
+							<div id="notifAlert">
+								<span class="fa fa-comment"></span>
+								<span class="num" id="cantNotificaciones">{count($notifs)}</span>
+							</div>
+						{/if}
 					</a>
 
 					<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
 						<h6 class="menu-notificaciones-titulo"><span class="fa fa-bell"></span> Notificaciones</h6>
 						<table class="table">
 							<tbody>
-								<tr class="notification" onClick="">
-									<th scope="row"><i class="fa fa-dot-circle-o"></i></th>	
-									<td> Bienvenido a File seller, la mejor plataforma para vender tus archivos</td>
-									<td><div class="eliminar_notificacion"><i class="fa fa-times"></i></div></td>
-								</tr>
-								<tr class="notification" onClick="">
-									<th scope="row"><i class="fa fa-dot-circle-o"></i></th>	
-									<td> Bienvenido a File seller, la mejor plataforma para vender tus archivos</td>
-									<td><div class="eliminar_notificacion"><i class="fa fa-times"></i></div></td>
-								</tr>
+									{if !empty($notifs)}
+									{foreach $notifs as $notif}
+									<tr class="notification" id="{$notif->getId()}">
+										<th scope="row"><i class="fa fa-dot-circle-o"></i></th>	
+										<td>{$notif->getContenido()}</td>
+										<td><div class="eliminar_notificacion" onclick="eliminarNotificacion({$notif->getId()})"><i class="fa fa-times"></i></div></td>
+									</tr>
+									{/foreach}
+									{else}
+									<tr>
+										<th>No tienes notificaciones nuevas</th>
+									</tr>
+									{/if}
+						
 							</tbody>
 						</table>
 					</div><!-- agregado -->
