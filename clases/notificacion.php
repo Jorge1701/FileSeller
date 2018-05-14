@@ -4,9 +4,9 @@ require_once("clases/clase_base.php");
 
 class Notificacion extends ClaseBase{
 	private $id = 0;
-    private $idUsuario = 0;
-    private $contenido = "";
     private $vista = false;
+    private $contenido = "";
+    private $idusuario = 0;
     private $fecha = "";
     private $hora = "";
 
@@ -46,18 +46,14 @@ class Notificacion extends ClaseBase{
     }
 
     public function getNotifUser($idUsuario){
-        $sql="select * from notificaciones where idUsuario=$idUsuario WHERE vista = 0";
+        $sql="select * from notificaciones WHERE idusuario=$idUsuario AND vista=0";
         $res=NULL;
         $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
         while($fila = $resultado->fetch_object()) {
             $res[] = new $this->modelo($fila);
         }
-        if(empty($res)){
-            return null;
-        }else{
-            return $res;
-        }
         
+        return $res;
     }
 
  
