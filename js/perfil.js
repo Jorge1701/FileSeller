@@ -19,3 +19,7 @@ $('#btnDejarSeguir').click(function(){
 	$('#btnSeguir').show();
 	$('#btnDejarSeguir').hide();
 });
+
+function ir (correo) {
+    window.location.assign ("/FileSeller/mensajes/chat/" + correo);
+}

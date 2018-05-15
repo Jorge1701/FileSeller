@@ -42,16 +42,27 @@
 	<div class="row panelMain panel-mio">
 		<h2 id="tit_comentarios">Comentarios</h2>
 		<div id="comentarios">
-			{foreach $comentarios as $c}
-				<div class="comentario">
-					<p class="com_usuario">
-						{$c->getUsuario ()}
-					</p>
-					<p class="com_comentario">
-						{$c->getComentario ()}
-					</p>
+			{if isset ($comentarios)}
+				{foreach $comentarios as $c}
+					<div class="comentario {if $c->getDuenio ()}mio{else}otro{/if}">
+						<p class="com_usuario">
+							<a href="/FileSeller/usuario/perfil/{$c->getUsuario ()}">
+								{if $c->getDuenio ()}
+									[Dueño] 
+								{/if}
+								{$c->getNombre ()}
+							</a>
+						</p>
+						<p class="com_comentario">
+							{$c->getComentario ()}
+						</p>
+					</div>
+				{/foreach}
+			{else}
+				<div id="msjNoHayComents">
+					No hay comentarios, se el primero!
 				</div>
-			{/foreach}
+			{/if}
 		</div>
 		<div id="enviar_comentario">
 			<form method="POST">

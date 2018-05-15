@@ -28,6 +28,7 @@
                     <h3>{$usuarioOtro->getNombre()} {$usuarioOtro->getApellido()}</h3>
                     <div class="btn btn-primary btn-seguir" id="btnSeguir">Seguir <span class="fa fa-user-plus"></span></div>
                     <div class="btn btn-secondary btn-dejar-seguir" hidden id="btnDejarSeguir">Dejar de seguir <span class="fa fa-user-times"></span></div>
+                    <div class="btn btn-primary btn-seguir" id="btnMensaje" onclick="ir ('{$usuarioOtro->getCorreo ()}')">Mensaje Privado <span class="fa fa-envelope"></span></div>
                 </div>
                 <div class="container">
                     <ul class="nav nav-tabs nav-tabs-fillup navigation">
@@ -91,7 +92,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <button class="btn btn-info" href="#" onClick="window.location = '{$url_iniciar_conversacion}{$usuarioOtro->getCorreo()}'"><i class="fa fa-envelope"></i> Iniciar conversación</button>
                         </div>
                     </div>
                 </div>

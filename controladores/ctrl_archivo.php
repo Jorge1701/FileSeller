@@ -12,8 +12,12 @@ class ControladorArchivo extends ControladorIndex {
 	}
 
 	function ver($params = array()) {
-		if (isset ($_POST["comentario"]))
-			(new Comentarios ())->enviarComentario ($params[0], "jorge@gmail.com", $_POST["comentario"]);
+		if (isset ($_POST["comentario"])) {
+			$id = Auth::estaLogueado();
+			if ($id != null) {
+				(new Comentarios ())->enviarComentario ($params[0], (new Usuario ())->obtenerPorId ($id)->getCorreo (), $_POST["comentario"]);
+			}
+		}
 
 		$tpl = Template::getInstance();
 		$archivo = (new Archivo())->obtenerPorId($params[0]);
