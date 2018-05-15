@@ -46,7 +46,7 @@
 				{foreach $comentarios as $c}
 					<div class="comentario {if $c->getDuenio ()}mio{else}otro{/if}">
 						<p class="com_usuario">
-							<a href="/FileSeller/usuario/perfil/{$c->getUsuario ()}">
+							<a href="/FileSeller/usuario/perfil/{$c->getUsuario ()}" style="color: #{$c->getColor ()}">
 								{if $c->getDuenio ()}
 									[Dueño] 
 								{/if}

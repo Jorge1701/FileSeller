@@ -25,13 +25,13 @@ class Comentarios extends ClaseBase {
 	}
 
 	public function obtenerComentarios ($id_archivo) {
-		$stmt = DB::conexion ()->prepare ("SELECT u.correo AS correo, c.comentario AS comentario, c.duenio AS duenio, u.nombre AS nombre, u.apellido AS apellido FROM comentarios AS c, usuarios AS u WHERE c.id_usuario = u.id AND c.id_archivo = " . $id_archivo);
+		$stmt = DB::conexion ()->prepare ("SELECT u.correo AS correo, c.comentario AS comentario, c.duenio AS duenio, u.nombre AS nombre, u.apellido AS apellido, u.id AS id FROM comentarios AS c, usuarios AS u WHERE c.id_usuario = u.id AND c.id_archivo = " . $id_archivo);
 		
 		$stmt->execute ();
 		$resultado = $stmt->get_result ();
 
 		while ($fila = $resultado->fetch_object ())
-			$res[] = new Com ($fila->correo, $fila->nombre . " " . $fila->apellido, $fila->comentario, $fila->duenio);
+			$res[] = new Com ($fila->correo, $fila->nombre . " " . $fila->apellido, $fila->comentario, $fila->duenio, $fila->id);
 
 		return isset ($res) ? $res : null;
 	}
@@ -42,12 +42,20 @@ class Com {
 	private $nombre;
 	private $comentario;
 	private $duenio;
+	private $color;
 
-	public function __construct ($usuario, $nombre, $comentario, $duenio) {
+	public function __construct ($usuario, $nombre, $comentario, $duenio, $id) {
 		$this->usuario = $usuario;
 		$this->nombre = $nombre;
 		$this->comentario = $comentario;
 		$this->duenio = $duenio;
+
+		$hash = md5 ("function" . $id);
+		$this->color = substr ($hash, 0, 2) . substr ($hash, 2, 2). substr ($hash, 4, 2);
+	}
+
+	public function getColor () {
+		return $this->color;
 	}
 
 	public function getUsuario () {
