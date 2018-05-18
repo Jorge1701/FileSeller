@@ -56,16 +56,8 @@
 							</tr>
 							{/if}
 							{/foreach}
-							{if $nuevas == 0}
-							<tr>
-								<th colspan="3" style="text-align: center;">No tienes notificaciónes nuevas</th>
-							</tr>
-							{/if}
-							<tr style="text-align: center;"><th colspan="3">Anteriores</th></tr>
-							{$vistas = 0}
 							{foreach $notifs as $notif}
 							{if $notif->getVista() == true}
-							{$vistas = $vistas + 1}
 							<tr class="notification" id="{$notif->getId()}">
 								<th scope="row"><i class="fa fa-dot-circle-o"></i></th>	
 								<td>{$notif->getContenido()}</td>
@@ -73,11 +65,6 @@
 							</tr>
 							{/if}
 							{/foreach}
-							{if $vistas == 0}
-							<tr>
-								<th colspan="3" style="text-align: center;">No tienes notificaciónes anteriores</th>
-							</tr>
-							{/if}
 							{else}
 							<tr>
 								<th>No tienes ninguna notificación</th>

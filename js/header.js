@@ -3,8 +3,12 @@ $("#btnBuscar").click (function () {
 	window.location.assign($("#url_base").val () + "inicio/buscar/" + $("#busqueda").val ());
 });
 
-
+var vistas = false;
 $("#campanaNotif").click(function(){
+	if(vistas === true){
+		$(".notification").removeClass("nueva");
+		return;
+	}
 	$.ajax({
 		type: "POST",
 		dataType: "json",
@@ -13,6 +17,7 @@ $("#campanaNotif").click(function(){
 		success: function (data) {
 			if (data.status == 'success') {
 				$("#notifAlert").hide();
+				vistas = true;
 			}
 		},
 		error: function (data) {

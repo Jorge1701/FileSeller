@@ -1,27 +1,7 @@
-DROP DATABASE fileseller;
-CREATE DATABASE fileseller CHARACTER SET utf8 COLLATE utf8_general_ci;
-
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `fileseller`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `archivos`
---
 
 CREATE TABLE `archivos` (
   `id` int(11) NOT NULL,
@@ -38,26 +18,7 @@ CREATE TABLE `archivos` (
   `activo` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `comentarios`
---
-
-CREATE TABLE `comentarios` (
-  `id` int(11) NOT NULL,
-  `id_archivo` int(11) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  `comentario` varchar(256) DEFAULT NULL,
-  `duenio` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cuentas`
---
 
 CREATE TABLE `cuentas` (
   `nroTarjeta` bigint(20) NOT NULL,
@@ -67,11 +28,6 @@ CREATE TABLE `cuentas` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `mensajes`
---
 
 CREATE TABLE `mensajes` (
   `id_m` int(11) NOT NULL,
@@ -84,12 +40,6 @@ CREATE TABLE `mensajes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
--- --------------------------------------------------------
-
---
--- Table structure for table `notificaciones`
---
-
 CREATE TABLE `notificaciones` (
   `id` int(11) NOT NULL,
   `vista` tinyint(1) NOT NULL DEFAULT '0',
@@ -100,11 +50,12 @@ CREATE TABLE `notificaciones` (
   `activa` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `usuarios`
---
+CREATE TABLE `seguidos` (
+  `idSeguidor` int(11) NOT NULL,
+  `idSeguido` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
@@ -117,106 +68,66 @@ CREATE TABLE `usuarios` (
   `fnac` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Indexes for dumped tables
---
+CREATE TABLE `comentarios` (
+  `id` int(11) NOT NULL,
+  `id_archivo` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `comentario` varchar(256) DEFAULT NULL,
+  `duenio` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Indexes for table `archivos`
---
+
 ALTER TABLE `archivos`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `comentarios`
---
-ALTER TABLE `comentarios`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `cuentas`
---
 ALTER TABLE `cuentas`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nroTarjeta` (`nroTarjeta`),
   ADD KEY `duenio` (`duenio`);
 
---
--- Indexes for table `mensajes`
---
 ALTER TABLE `mensajes`
   ADD PRIMARY KEY (`id_m`);
 
---
--- Indexes for table `notificaciones`
---
 ALTER TABLE `notificaciones`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idusuario` (`idusuario`);
 
---
--- Indexes for table `usuarios`
---
+ALTER TABLE `seguidos`
+  ADD PRIMARY KEY (`idSeguidor`,`idSeguido`),
+  ADD KEY `idSeguido` (`idSeguido`);
+
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
+  ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT for table `archivos`
---
 ALTER TABLE `archivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
--- AUTO_INCREMENT for table `comentarios`
---
-ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `cuentas`
---
 ALTER TABLE `cuentas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT for table `mensajes`
---
 ALTER TABLE `mensajes`
-  MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
---
--- AUTO_INCREMENT for table `notificaciones`
---
 ALTER TABLE `notificaciones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- AUTO_INCREMENT for table `usuarios`
---
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
---
--- Constraints for dumped tables
---
+  ALTER TABLE `comentarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
---
--- Constraints for table `cuentas`
---
+
 ALTER TABLE `cuentas`
   ADD CONSTRAINT `cuentas_ibfk_1` FOREIGN KEY (`duenio`) REFERENCES `usuarios` (`id`);
 
---
--- Constraints for table `notificaciones`
---
 ALTER TABLE `notificaciones`
   ADD CONSTRAINT `notificaciones_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`id`);
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ALTER TABLE `seguidos`
+  ADD CONSTRAINT `seguidos_ibfk_1` FOREIGN KEY (`idSeguido`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `seguidos_ibfk_2` FOREIGN KEY (`idSeguidor`) REFERENCES `usuarios` (`id`);
+COMMIT;
