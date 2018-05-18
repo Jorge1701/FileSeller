@@ -39,6 +39,7 @@
 
 #tit_comentarios {
 	width: 100%;
+	margin: 1vh 2vw 0 2vw;
 	text-align: center;
 }
 
@@ -53,4 +54,62 @@
 }
 
 #comentarios {
+	width: 100%;
+	margin: 0 2vw;
+	clear: both;
+}
+
+#enviar_comentario {
+	width: 100%;
+	margin: 0 2vw 3vh 2vw;
+}
+
+.comentario {
+	width: 100%;
+	display: block;
+	margin: 3vh 0;
+	padding: .5vh 0;
+	border-radius: 3.5px;
+	background-color: #AFA;
+}
+
+.mio {
+	width: 75%;
+	margin-left: 25%;
+}
+
+.otro {
+	width: 75%;
+	background-color: #AAF;
+}
+
+.com_usuario {
+	margin: 0;
+	padding: 0 1vw;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.com_comentario {
+	margin: 0;
+	padding: 0 3vw;
+	font-size: 1.3em;
+	color: black;
+}
+
+#msjNoHayComents {
+	background: #CCC;
+	padding: 1vh 0;
+	text-align: center;
+	border-radius: .3em;
+	margin: 3vh 0;
+}
+
+#comentarios .com_usuario a {
+	color: black;
+	font-weight: bold;
+}
+
+#comentarios .com_usuario a:hover {
+	color: #666;
+	text-decoration: none;
 }

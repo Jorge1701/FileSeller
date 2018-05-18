@@ -3,6 +3,7 @@
 require_once ("clases/archivo.php");
 require_once ("controladores/ctrl_index.php");
 require_once ("clases/usuario.php");
+require_once ("clases/comentarios.php");
 
 class ControladorArchivo extends ControladorIndex {
 
@@ -11,6 +12,13 @@ class ControladorArchivo extends ControladorIndex {
 	}
 
 	function ver($params = array()) {
+		if (isset ($_POST["comentario"])) {
+			$id = Auth::estaLogueado();
+			if ($id != null) {
+				(new Comentarios ())->enviarComentario ($params[0], (new Usuario ())->obtenerPorId ($id)->getCorreo (), $_POST["comentario"]);
+			}
+		}
+
 		$tpl = Template::getInstance();
 		$archivo = (new Archivo())->obtenerPorId($params[0]);
 		$duenio = (new usuario())->obtenerPorId($archivo->getDuenio());
@@ -18,6 +26,7 @@ class ControladorArchivo extends ControladorIndex {
 			"archivo" => $archivo,
 			"duenio" => $duenio,
 			"url_ver_perfil_duenio" => (new ControladorIndex())->getUrl("usuario", "perfil"),
+			"comentarios" => (new Comentarios ())->obtenerComentarios ($params[0])
 		);
 		$tpl->mostrar("ver_archivo", $datos);
 	}

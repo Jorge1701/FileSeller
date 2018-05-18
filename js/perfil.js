@@ -48,3 +48,7 @@ function dejarSeguir(idSeguidor, idSeguido){
         }
     });
 }
+
+function ir (correo) {
+    window.location.assign ("/FileSeller/mensajes/chat/" + correo);
+}
