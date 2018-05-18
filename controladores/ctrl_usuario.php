@@ -212,6 +212,33 @@ class ControladorUsuario extends ControladorIndex {
         $this->logout();
     }
 
+    function seguir($params){
+        $usuario = new Usuario();
+        $usuario->setId($params[0]);
+        if($usuario->seguir($params[1])){
+            header('Content-type: application/json');
+            $response_array['status'] = 'success';
+            echo json_encode($response_array);
+        }else{
+            header('Content-type: application/json');
+            $response_array['status'] = 'error';
+            echo json_encode($response_array);
+        }
+    }
+
+    function dejarSeguir($params){
+        $usuario = new Usuario();
+        $usuario->setId($params[0]);
+        if($usuario->dejarSeguir($params[1])){
+            header('Content-type: application/json');
+            $response_array['status'] = 'success';
+            echo json_encode($response_array);
+        }else{
+            header('Content-type: application/json');
+            $response_array['status'] = 'error';
+            echo json_encode($response_array);
+        }
+    }
 }
 
 ?>

@@ -26,8 +26,14 @@
             <div class="user-info-block card">
                 <div class="user-heading">
                     <h3>{$usuarioOtro->getNombre()} {$usuarioOtro->getApellido()}</h3>
-                    <div class="btn btn-primary btn-seguir" id="btnSeguir">Seguir <span class="fa fa-user-plus"></span></div>
-                    <div class="btn btn-secondary btn-dejar-seguir" hidden id="btnDejarSeguir">Dejar de seguir <span class="fa fa-user-times"></span></div>
+                    {$seguido = false}
+                   {foreach $usuario->getSeguidos() as $seguidor}
+                        {if $seguidor->getId() == $usuarioOtro->getId()}
+                        {$seguido = true}
+                        {/if}
+                   {/foreach}
+                    <div class="btn btn-primary btn-seguir" {if $seguido == true} hidden {/if} id="btnSeguir" onclick="seguir('{$usuario->getId()}','{$usuarioOtro->getId()}')">Seguir <span class="fa fa-user-plus"></span></div>
+                    <div class="btn btn-secondary btn-dejar-seguir" {if $seguido == false} hidden {/if} id="btnDejarSeguir" onclick="dejarSeguir('{$usuario->getId()}','{$usuarioOtro->getId()}')">Dejar de seguir <span class="fa fa-user-times"></span></div>
                 </div>
                 <div class="container">
                     <ul class="nav nav-tabs nav-tabs-fillup navigation">

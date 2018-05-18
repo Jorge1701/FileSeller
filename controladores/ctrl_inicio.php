@@ -3,6 +3,7 @@
 require_once ("clases/usuario.php");
 require_once ("clases/auth.php");
 require_once ("clases/archivo.php");
+require_once ("clases/notificacion.php");
 
 class ControladorInicio extends ControladorIndex {
 	
@@ -69,6 +70,33 @@ class ControladorInicio extends ControladorIndex {
 		);
 		$tpl = Template::getInstance();
 		$tpl->mostrar('ayuda',$datos);	
+	}
+
+	function vistaNotificacion(){
+		if((new Notificacion())->vista()){
+			header('Content-type: application/json');
+			$response_array['status'] = 'success';
+			echo json_encode($response_array);
+		}else{
+			header('Content-type: application/json');
+			$response_array['status'] = 'error';
+			echo json_encode($response_array);
+		}
+	}
+
+	function eliminarNotificacion($params){
+		$idNotificacion =  $params[0];
+		$notificacion = new Notificacion();
+		$notificacion->setId($idNotificacion);
+		if($notificacion->eliminar()){
+			header('Content-type: application/json');
+			$response_array['status'] = 'success';
+			echo json_encode($response_array);
+		}else{
+			header('Content-type: application/json');
+			$response_array['status'] = 'error';
+			echo json_encode($response_array);
+		}
 	}
 }
 

@@ -1,14 +1,39 @@
 $("#btnBuscar").click (function () {
 	// window.location = "Location:";
-    window.location.assign($("#url_base").val () + "inicio/buscar/" + $("#busqueda").val ());
+	window.location.assign($("#url_base").val () + "inicio/buscar/" + $("#busqueda").val ());
 });
 
 
 $("#campanaNotif").click(function(){
-		$("#notifAlert").hide();
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "/FileSeller/inicio/vistaNotificacion",
+		data: {},
+		success: function (data) {
+			if (data.status == 'success') {
+				$("#notifAlert").hide();
+			}
+		},
+		error: function (data) {
+			console.log(data);
+		}
+	});
 });
 
 function eliminarNotificacion(idNotif){
-	$('#'+idNotif).hide();
-	
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "/FileSeller/inicio/eliminarNotificacion/"+idNotif,
+		data: {},
+		success: function (data) {
+			if (data.status == 'success') {
+				$('#'+idNotif).hide();
+			}
+		},
+		error: function (data) {
+			console.log(data);
+		}
+	});
 }
