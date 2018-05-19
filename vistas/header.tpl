@@ -21,7 +21,7 @@
 		<ul class="navbar-nav menu">
 			{if isset($usuario)}
 			<li class="nav-item dropdown">
-				<a class="nav-link fa fa-bell-o" id="campanaNotif" href="#" title="Notificaciones" data-toggle="dropdown">
+				<a class="nav-link fas fa-bell" id="campanaNotif" href="#" title="Notificaciones" data-toggle="dropdown">
 					{$notifs = $usuario->getNotificaciones()}
 					{if !empty($notifs)}
 					{$nuevas = 0}
@@ -32,7 +32,7 @@
 					{/foreach}
 					{if $nuevas != 0}
 					<div id="notifAlert">
-						<span class="fa fa-comment"></span>
+						<span class="fas fa-comment"></span>
 						<span class="num" id="cantNotificaciones">{$nuevas}</span>
 					</div>
 					{/if}
@@ -40,14 +40,14 @@
 				</a>
 
 				<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
-					<h6 class="menu-notificaciones-titulo"><span class="fa fa-bell"></span> Notificaciónes</h6>
+					<h6 class="menu-notificaciones-titulo"><span class="fas fa-bell"></span> Notificaciónes</h6>
 					<table class="table">
 						<tbody>
 							{if !empty($notifs)}
 							{foreach $notifs as $notif}
 							{if $notif->getVista() == false}
 							<tr class="notification nueva" id="{$notif->getId()}">
-								<th scope="row"><i class="fa fa-dot-circle-o"></i></th>	
+								<th scope="row"><i class="fa fa-dot-circle"></i></th>	
 								<td>{$notif->getContenido()}</td>
 								<td><div class="eliminar_notificacion" onclick="eliminarNotificacion({$notif->getId()})"><i class="fa fa-times"></i></div></td>
 							</tr>
@@ -56,7 +56,7 @@
 							{foreach $notifs as $notif}
 							{if $notif->getVista() == true}
 							<tr class="notification" id="{$notif->getId()}">
-								<th scope="row"><i class="fa fa-dot-circle-o"></i></th>	
+								<th scope="row"><i class="fa fa-dot-circle"></i></th>	
 								<td>{$notif->getContenido()}</td>
 								<td><div class="eliminar_notificacion" onclick="eliminarNotificacion({$notif->getId()})"><i class="fa fa-times"></i></div></td>
 							</tr>
@@ -73,9 +73,9 @@
 				</div><!-- agregado -->
 			</li>
 			<li class="nav-item dropdown">
-				<a class="nav-link fa fa-inbox {if isset($active_mensajes)} {$active_mensajes} {/if}" href="#" title="Mensajes" data-toggle="dropdown">
+				<a class="nav-link fas fa-inbox {if isset($active_mensajes)} {$active_mensajes} {/if}" href="#" title="Mensajes" data-toggle="dropdown">
 					{if isset($notificacionesMensaje)}
-					<span class="fa fa-comment"></span>
+					<span class="fas fa-comment"></span>
 					<span class="num">{count($notificacionesMensaje)}</span>
 					{/if}
 				</a>
@@ -110,7 +110,7 @@
 					<a class="dropdown-item" href="#" onClick="window.location='{$url_perfil}'"><i class="fa fa-user menu-perfil" aria-hidden="true"></i>Perfil</a>
 					<a class="dropdown-item" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fa fa-upload menu-perfil" ></i>Subir archivo </a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#" onClick="window.location='{$url_logout}'"><i class="fa fa-sign-out menu-perfil"></i>Cerrar sesión</a>
+					<a class="dropdown-item" href="#" onClick="window.location='{$url_logout}'"><i class="fas fa-sign-out-alt menu-perfil"></i>Cerrar sesión</a>
 				</div>
 			</li>
 			{else}

@@ -99,7 +99,7 @@
 								<!-- Si los mensajes son nuevos y no los ha visto el usuario logueado -->
 								{if !$m->esPropio () && !$m->estaVisto () && $visto_otro eq "si"}
 									<div class="mx-auto msj nuevo">
-										Mensajes nuevos <i class="fa fa-level-down"></i>
+										Mensajes nuevos <i class="fas fa-level-down-alt"></i>
 									</div>
 									{assign visto_otro "no"}
 								{/if}

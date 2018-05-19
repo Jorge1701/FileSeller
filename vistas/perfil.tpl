@@ -42,7 +42,7 @@
                 <div class="container">
                     <ul class="nav nav-tabs nav-tabs-fillup navigation">
                         <li class="nav-item"><a data-toggle="tab" class=" active nav-link" href="#archivos">Sus archivos <span class="fa fa-file pestaña-icono"></span></a></li>
-                        <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#contacto">Contacto<span class="fa fa-user-circle-o pestaña-icono"></span></a></li>
+                        <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#contacto">Contacto<span class="fas fa-user-circle pestaña-icono"></span></a></li>
                     </ul>
                     <div class="user-body">
                         <div class="tab-content">
@@ -116,7 +116,7 @@
                     </div>
                     <div class="container">
                         <ul class="nav nav-tabs nav-tabs-fillup navigation">
-                            <li class="nav-item"><a data-toggle="tab" class="{if !isset($mensaje_editar) && !isset($active_archivo)} active{/if} nav-link" href="#information">Datos personales<span class="fa fa-user-circle-o pestaña-icono"></span></a></li>
+                            <li class="nav-item"><a data-toggle="tab" class="{if !isset($mensaje_editar) && !isset($active_archivo)} active{/if} nav-link" href="#information">Datos personales<span class="fas fa-user pestaña-icono"></span></a></li>
                             <li class="nav-item"><a data-toggle="tab" class="{if isset($active_archivo)} active {/if}nav-link" href="#archivos">Mis archivos <span class="fa fa-file pestaña-icono"></span></a></li>
                             <li class="nav-item"><a data-toggle="tab" class="{if isset($mensaje_editar)} active{/if} nav-link" href="#editar">Editar <span class="fa fa-edit pestaña-icono"></span></a></li>
                         </ul>
@@ -223,7 +223,7 @@
                                                 <td onclick="window.location = '{$url_ver_archivo}{$archivo->getId ()}'">{$archivo->getTipo()}</td>
                                                 <td onclick="window.location = '{$url_ver_archivo}{$archivo->getId ()}'">{$archivo->getPrecio()}</td>
                                                 <td><button onclick="window.location = '{$url_eliminar_archivo}{$archivo->getId ()}'" class="btn btn-default btn-xs">
-                                                    <span class="fa fa-close"></span></td>
+                                                    <span class="fas fa-times"></span></td>
                                                 </tr>
                                                 {/foreach}
                                             </tbody>
@@ -409,7 +409,7 @@
 
                                                                                             </div>
                                                                                         </div>
-                                                                                        <button id="btnRegistro" type="submit" class="btn btn-success"><span class="fa fa-refresh"></span> Actualizar datos</button>
+                                                                                        <button id="btnRegistro" type="submit" class="btn btn-success"><span class="fas fa-sync"></span> Actualizar datos</button>
                                                                                     </form>
 
                                                                                     <hr>

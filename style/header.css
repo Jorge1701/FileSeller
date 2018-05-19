@@ -59,29 +59,18 @@
   font-size: 130%;
 }
 
-a.fa-inbox {
-  position: relative;
-  font-size: 30px;
-  color: grey;
-  cursor: pointer;
-}
 
-a.fa-bell-o {
-  position: relative;
-  font-size: 30px;
-  color: grey;
-  cursor: pointer;
-}
+
 span.fa-comment {
   position: absolute;
-  font-size: 0.7em;
+  font-size: 0.9em;
   top: -4px;
   color: red;
   right: -4px;
 }
 span.num {
   position: absolute;
-  font-size: 0.4em;
+  font-size: 0.7em;
   top: 1px;
   color: #fff;
   right: 2px;
@@ -94,4 +83,8 @@ span.num {
   border-bottom-width: 1px;
   border-color: hsl(226, 59%, 60%);
   margin-bottom: 2vh;
+}
+
+.fas{
+  margin-top: 5px;
 }
