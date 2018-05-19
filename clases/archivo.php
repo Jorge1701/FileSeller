@@ -218,6 +218,8 @@ class Archivo extends ClaseBase {
             return "img/iconos_archivos/def_txt.png";
         if (strpos($nombre, ".exe") !== false)
             return "img/iconos_archivos/def_exe.png";
+        if (strpos($nombre, ".pdf") !== false)
+            return "img/iconos_archivos/def_pdf.png";
 
         return "img/iconos_archivos/def_file.png";
     }
@@ -236,16 +238,18 @@ class Archivo extends ClaseBase {
 
         $target_dir = "uploads/";
         $target_file = $target_dir . basename($_FILES["archivo"]["name"]);
-        //$uploadStatus = -1;
+        $permitido = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-        if ($_FILES["archivo"]["size"] > 5000000) {
+        
+        if($_FILES["archivo"]["size"] > 5000000){
             return -1;
-        } else {
+        }else if(!array_key_exists($imageFileType,$permitido)){
+            return 0;
+        }else{
 
             if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {
                 return 1;
-            } else {
+            }else{
                 return 0;
             }
         }
