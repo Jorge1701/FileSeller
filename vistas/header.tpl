@@ -19,9 +19,6 @@
 			</div>
 		</form>
 		<ul class="navbar-nav menu">
-			<li class="nav-item {if isset($active_inicio)} {$active_inicio} {/if}">
-				<a class="nav-link" href="#" onClick="window.location='{$url_inicio}'">Inicio<span class="sr-only"></span></a>
-			</li>
 			{if isset($usuario)}
 			<li class="nav-item dropdown">
 				<a class="nav-link fa fa-bell-o" id="campanaNotif" href="#" title="Notificaciones" data-toggle="dropdown">
@@ -124,9 +121,6 @@
 				<a class="nav-link" href="#" title="Registrarse" onClick="window.location='{$url_registro}'">Registrarse</a>
 			</li>
 			{/if}
-			<li class="nav-item  {if isset($active_ayuda)} {$active_ayuda} {/if}">
-				<a class="nav-link" href="#" title="Ayuda" onClick="window.location='{$url_ayuda}'"><i class="fa fa-question-circle"></i></a>
-			</li>
 		</ul>
 	</div>
 </nav>
