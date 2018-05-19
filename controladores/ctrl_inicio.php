@@ -73,7 +73,7 @@ class ControladorInicio extends ControladorIndex {
 	}
 
 	function vistaNotificacion(){
-		if((new Notificacion())->vista()){
+		if((new Notificacion())->vista(Auth::estaLogueado())){
 			header('Content-type: application/json');
 			$response_array['status'] = 'success';
 			echo json_encode($response_array);
