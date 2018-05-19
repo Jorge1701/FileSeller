@@ -14,6 +14,7 @@ class Usuario extends ClaseBase{
 	private $activo = true;
 	private $id = 0;
 	private $notificaciones = null;
+	private $seguidos = null;
 
 	public function __construct($obj=NULL) {
         //$this->db=DB::conexion();
@@ -62,6 +63,10 @@ class Usuario extends ClaseBase{
 		$this->notificaciones = $notificaciones;
 	}
 
+	public function setSeguidos($seguidos){
+		$this->seguidos = $seguidos;
+	}
+
 
 	public function getNombre(){
 		return $this->nombre;
@@ -98,6 +103,10 @@ class Usuario extends ClaseBase{
 		return $this->notificaciones;
 	}
 
+	public function getSeguidos(){
+		return $this->seguidos;
+	}
+
 	public function obtenerPorCorreo($corre){
 		$sql="select * from usuarios where correo='$corre'";
 		$res=NULL;
@@ -116,7 +125,7 @@ class Usuario extends ClaseBase{
 		if($fila = $resultado->fetch_object()) {
 			$res= new $this->modelo($fila);
 			$res->setNotificaciones((new Notificacion())->getNotifUser($res->getId()));
-           
+			$res->setSeguidos($res->obtenerSeguidos());
 		}
 		return $res;
 	}
@@ -227,6 +236,45 @@ class Usuario extends ClaseBase{
 		or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
 		
 		return $this->db->affected_rows;
+	}
+
+	public function seguir($idSeguido){
+		$idSeguidor = $this->getId();
+		$sql2 = $this->db->prepare("INSERT INTO seguidos(idSeguidor,idSeguido) VALUES(?,?)");
+		$sql2->bind_param("ss",$idSeguidor,$idSeguido);
+
+		if($sql2->execute()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function dejarSeguir($idSeguido){
+		$idSeguidor = $this->getId();
+		$sql2 = $this->db->prepare("DELETE FROM `seguidos` WHERE `idSeguidor` = $idSeguidor AND `idSeguido` = $idSeguido");
+		
+		if($sql2->execute()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function obtenerSeguidos(){
+		$sql="SELECT * FROM usuarios WHERE id IN (SELECT idSeguido FROM seguidos WHERE idSeguidor = $this->id)";
+    	$resultados=array();
+
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+
+        while ( $fila = $resultado->fetch_object() )
+        {
+            
+            $objeto= new $this->modelo($fila);
+            $resultados[]=$objeto;
+        } 
+     return $resultados; 
 	}
 }
 

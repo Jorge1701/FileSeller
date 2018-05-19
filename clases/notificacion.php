@@ -46,8 +46,12 @@ class Notificacion extends ClaseBase{
     	return $this->hora; 	
     }
 
+    public function setId($id){
+        $this->id = $id;
+    }
+
     public function getNotifUser($idUsuario){
-        $sql="select * from notificaciones WHERE idusuario=$idUsuario AND vista=0";
+        $sql="select * from notificaciones WHERE idusuario=$idUsuario AND activa = 1";
         $res=NULL;
         $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
         while($fila = $resultado->fetch_object()) {
@@ -69,8 +73,9 @@ class Notificacion extends ClaseBase{
 
     }
 
+
     public function getListado () {
-        $sql = "SELECT * FROM `notificaciones` WHERE idUsuario IN (SELECT id from `usuarios` WHERE activo=1)";
+        $sql = "SELECT * FROM `notificaciones` WHERE activa = 1 AND idUsuario IN (SELECT id from `usuarios` WHERE activo=1)";
         $res=NULL;
         $resultado =$this->db->query($sql) or die ("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
         while($fila = $resultado->fetch_object()) {
@@ -79,24 +84,30 @@ class Notificacion extends ClaseBase{
         return $res;
     }
 
-    public function agregarNotif($idUsuario,$contenido){
+    public function vista(){
+        ini_set("display_errors", 1);
+        error_reporting(E_ALL & ~E_NOTICE);
 
-        date_default_timezone_set('America/Montevideo');
-        $fecha = date("Y-m-d");
-        $hora = date("H:i:s");
-        $activa = 1;
-
-        $sql = $this->db->prepare("INSERT INTO notificaciones(idUsuario,contenido,fecha,hora,activa) VALUES (?,?,?,?,?)");
-
-        $sql->bind_param("isssi",$idUsuario,$contenido,$fecha,$hora,$activa);
-
-        if($sql->execute()){
+        $sql=$this->db->prepare("UPDATE `notificaciones` SET `vista`= 1");
+        $sql->execute();
+        if ($this->db->affected_rows >= 1){
             return true;
         }else{
             return false;
         }
-
     }
 
+    public function eliminar(){
+        ini_set("display_errors", 1);
+        error_reporting(E_ALL & ~E_NOTICE);
+
+        $sql=$this->db->prepare("UPDATE `notificaciones` SET `activa`= 0  WHERE id=".$this->getId());
+        $sql->execute();
+        if ($this->db->affected_rows == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 ?>

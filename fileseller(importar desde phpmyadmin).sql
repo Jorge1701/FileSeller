@@ -1,6 +1,3 @@
-DROP DATABASE fileseller;
-CREATE DATABASE fileseller CHARACTER SET utf8 COLLATE utf8_general_ci;
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -52,9 +49,12 @@ CREATE TABLE `notificaciones` (
   `activa` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `notificaciones` (`id`, `vista`, `contenido`, `idusuario`, `fecha`, `hora`, `activa`) VALUES
-(1, 0, 'Su archivo a sido borrado por contenido indebido', 12, '2018-05-15', '05:06:19', 1),
-(2, 0, 'Otra notificacion', 12, '2018-05-09', '13:16:22', 1);
+
+CREATE TABLE `seguidos` (
+  `idSeguidor` int(11) NOT NULL,
+  `idSeguido` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
@@ -65,6 +65,14 @@ CREATE TABLE `usuarios` (
   `imagen` varchar(256) NOT NULL,
   `activo` tinyint(1) NOT NULL,
   `fnac` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `comentarios` (
+  `id` int(11) NOT NULL,
+  `id_archivo` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `comentario` varchar(256) DEFAULT NULL,
+  `duenio` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `correo`, `contrasenia`, `imagen`, `activo`, `fnac`) VALUES
@@ -83,7 +91,14 @@ ALTER TABLE `notificaciones`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idusuario` (`idusuario`);
 
+ALTER TABLE `seguidos`
+  ADD PRIMARY KEY (`idSeguidor`,`idSeguido`),
+  ADD KEY `idSeguido` (`idSeguido`);
+
 ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+  ALTER TABLE `comentarios`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `archivos`
@@ -96,12 +111,19 @@ ALTER TABLE `notificaciones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+  ALTER TABLE `comentarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+
+ALTER TABLE `cuentas`
+  ADD CONSTRAINT `cuentas_ibfk_1` FOREIGN KEY (`duenio`) REFERENCES `usuarios` (`id`);
 
 ALTER TABLE `notificaciones`
   ADD CONSTRAINT `notificaciones_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`id`);
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ALTER TABLE `seguidos`
+  ADD CONSTRAINT `seguidos_ibfk_1` FOREIGN KEY (`idSeguido`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `seguidos_ibfk_2` FOREIGN KEY (`idSeguidor`) REFERENCES `usuarios` (`id`);
+COMMIT;
