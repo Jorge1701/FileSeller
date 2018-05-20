@@ -83,11 +83,11 @@ class Notificacion extends ClaseBase{
         return $res;
     }
 
-    public function vista(){
+    public function vista($idUsuario){
         ini_set("display_errors", 1);
         error_reporting(E_ALL & ~E_NOTICE);
 
-        $sql=$this->db->prepare("UPDATE `notificaciones` SET `vista`= 1");
+        $sql=$this->db->prepare("UPDATE `notificaciones` SET `vista`= 1 WHERE idusuario = $idUsuario");
         $sql->execute();
         if ($this->db->affected_rows >= 1){
             return true;
