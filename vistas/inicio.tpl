@@ -29,7 +29,7 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<h4 class="titulo_lista_archivos">Recomendaciones para vos</h4>
+							<h4 class="titulo_lista_archivos">Archivos</h4>
 						</tr>
 					</thead>
 					
