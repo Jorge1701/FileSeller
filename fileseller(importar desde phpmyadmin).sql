@@ -18,11 +18,6 @@ CREATE TABLE `archivos` (
   `activo` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `archivos` (`id`, `img`, `nombre`, `tipo`, `tamanio`, `precio`, `descripcion`, `ubicacion`, `duenio`, `fecSubido`, `horaSubido`, `activo`) VALUES
-(1, 'img/iconos_archivos/def_file.png', 'coso', 'ico', '30.2 KB', '$U 2', '', 'uploads/13_2018-05-03_20-35-44_favicon.ico', 13, '2018-05-03', '20:35:44', 1),
-(2, 'img/iconos_archivos/def_file.png', 'coso', 'ico', '30.2 KB', '$U 2', '', 'uploads/13_2018-05-03_20-37-45_favicon.ico', 13, '2018-05-03', '20:37:45', 1),
-(3, 'img/iconos_archivos/def_file.png', 'al', 'php', '260 Bytes', '$U 12', 'dsalk', 'uploads/12_2018-05-03_21-42-16_index.php', 12, '2018-05-03', '21:42:16', 1);
-
 CREATE TABLE `mensajes` (
   `id_m` int(11) NOT NULL,
   `id_desde` int(11) DEFAULT NULL,
@@ -32,12 +27,6 @@ CREATE TABLE `mensajes` (
   `mensaje` varchar(500) DEFAULT NULL,
   `visto` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO `mensajes` (`id_m`, `id_desde`, `id_para`, `dia`, `hora`, `mensaje`, `visto`) VALUES
-(1, 12, 12, '2018-05-04', '01:57:59', 'glm', 1),
-(2, 12, 12, '2018-05-04', '01:58:03', 's,fbsdk', 1),
-(3, 12, 12, '2018-05-04', '01:58:05', 'asdasdas', 1),
-(4, 12, 12, '2018-05-04', '01:58:07', 'sda', 1);
 
 CREATE TABLE `notificaciones` (
   `id` int(11) NOT NULL,
@@ -75,55 +64,45 @@ CREATE TABLE `comentarios` (
   `duenio` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `correo`, `contrasenia`, `imagen`, `activo`, `fnac`) VALUES
-(11, '', '', '', '', '', 1, '0000-00-00'),
-(12, 'Ale', 'Pe', 'alejandropeculio@gmail.com', '356a192b7913b04c54574d18c28d46e6395428ab', 'uploads/favicon.ico', 1, '1950-01-25'),
-(13, 'ale', 'pecu', 'alepecu@gmail.co', '356a192b7913b04c54574d18c28d46e6395428ab', 'img/user-default.png', 0, '1998-02-12'),
-(14, 'Luis', 'Etcheabrne', 'luis@gmail.com', '356a192b7913b04c54574d18c28d46e6395428ab', 'img/user-default.png', 1, '1989-01-12');
-
 ALTER TABLE `archivos`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `mensajes`
-  ADD PRIMARY KEY (`id_m`);
+ADD PRIMARY KEY (`id_m`);
 
 ALTER TABLE `notificaciones`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idusuario` (`idusuario`);
+ADD PRIMARY KEY (`id`),
+ADD KEY `idusuario` (`idusuario`);
 
 ALTER TABLE `seguidos`
-  ADD PRIMARY KEY (`idSeguidor`,`idSeguido`),
-  ADD KEY `idSeguido` (`idSeguido`);
+ADD PRIMARY KEY (`idSeguidor`,`idSeguido`),
+ADD KEY `idSeguido` (`idSeguido`);
 
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`);
 
-  ALTER TABLE `comentarios`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `comentarios`
+ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `archivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 ALTER TABLE `mensajes`
-  MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 ALTER TABLE `notificaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
-  ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
-
-ALTER TABLE `cuentas`
-  ADD CONSTRAINT `cuentas_ibfk_1` FOREIGN KEY (`duenio`) REFERENCES `usuarios` (`id`);
+ALTER TABLE `comentarios`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 ALTER TABLE `notificaciones`
-  ADD CONSTRAINT `notificaciones_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`id`);
+ADD CONSTRAINT `notificaciones_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`id`);
 
 ALTER TABLE `seguidos`
-  ADD CONSTRAINT `seguidos_ibfk_1` FOREIGN KEY (`idSeguido`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `seguidos_ibfk_2` FOREIGN KEY (`idSeguidor`) REFERENCES `usuarios` (`id`);
+ADD CONSTRAINT `seguidos_ibfk_1` FOREIGN KEY (`idSeguido`) REFERENCES `usuarios` (`id`),
+ADD CONSTRAINT `seguidos_ibfk_2` FOREIGN KEY (`idSeguidor`) REFERENCES `usuarios` (`id`);
 COMMIT;
