@@ -23,19 +23,20 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text fa fa-file-text-o" id="basic-addon1"></span>
+							<span class="input-group-text fa fa-file-alt" id="basic-addon1"></span>
 						</div>
 						<textarea placeholder="Descripción" id="descripcion" name ="descripcion" class="form-control" title="Descripción del archivo">{if isset($descripcion_archivo)}{$descripcion_archivo}{/if}</textarea>
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text fa fa-money"></span>
+							<span class="input-group-text fa fa-dollar-sign"></span>
 						</div>
-						<input name="precio" id="precio" type="number" class="form-control" placeholder="Precio" aria-label="Precio" aria-describedby="basic-addon1" required="Ingrese un precio en pesos uruguayos" autofocus title="Precio del archivo" {if isset($precio_archivo)} value ="{$precio_archivo}" {/if}>
+						<input disabled name="precio" id="precio" type="number" class="form-control" placeholder="Precio" aria-label="Precio" aria-describedby="basic-addon1" autofocus title="Precio del archivo" {if isset($precio_archivo)} value ="{$precio_archivo}" {/if}>
 						<div class="input-group-append">  
-							<select class="btn btn-outline-secondary" title="Seleccionar tipo de moneda" name="moneda">
-								<option title="Pesos uruguayos">$U</option>
-								<option title="Dolares estadounidenses">USD</option>
+							<select class="btn btn-outline-secondary" id="moneda" title="Seleccionar tipo de moneda" name="moneda">
+								<option title="Gratis" value="Gratis">Gratis</option>
+								<option title="Pesos uruguayos" value="URU">$U</option>
+								<option title="Dolares estadounidenses" value="USD">USD</option>
 							</select>	
 						</div>
 					</div>
@@ -66,5 +67,6 @@
 </div>
 
 {include file="include_js.tpl"}
+<script type="text/javascript" src="{$url_base}js/subir_archivo.js"></script>
 </body>
 </html>

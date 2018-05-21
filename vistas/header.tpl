@@ -19,9 +19,6 @@
 			</div>
 		</form>
 		<ul class="navbar-nav menu">
-			<li class="nav-item {if isset($active_inicio)} {$active_inicio} {/if}">
-				<a class="nav-link" href="#" onClick="window.location='{$url_inicio}'">Inicio<span class="sr-only"></span></a>
-			</li>
 			{if isset($usuario)}
 			<li class="nav-item dropdown">
 				<a class="nav-link fas fa-bell" id="campanaNotif" href="#" title="Notificaciones" data-toggle="dropdown">
@@ -110,8 +107,8 @@
 					<img src="{$url_base}{$usuario->getImagen()}" title="Cuenta de File Seller" class="rounded-circle img-user">
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#" onClick="window.location='{$url_perfil}'"><i class="fa fa-user menu-perfil" aria-hidden="true"></i>Perfil</a>
-					<a class="dropdown-item" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fa fa-upload menu-perfil" ></i>Subir archivo </a>
+					<a class="dropdown-item" href="#" onClick="window.location='{$url_perfil}'"><i class="fas fa-user menu-perfil" aria-hidden="true"></i>Perfil</a>
+					<a class="dropdown-item" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fas fa-upload menu-perfil" ></i>Subir archivo </a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="#" onClick="window.location='{$url_logout}'"><i class="fas fa-sign-out-alt menu-perfil"></i>Cerrar sesión</a>
 				</div>
@@ -124,9 +121,6 @@
 				<a class="nav-link" href="#" title="Registrarse" onClick="window.location='{$url_registro}'">Registrarse</a>
 			</li>
 			{/if}
-			<li class="nav-item  {if isset($active_ayuda)} {$active_ayuda} {/if}">
-				<a class="nav-link" href="#" title="Ayuda" onClick="window.location='{$url_ayuda}'"><i class="fa fa-question-circle"></i></a>
-			</li>
 		</ul>
 	</div>
 </nav>
