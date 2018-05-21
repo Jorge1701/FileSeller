@@ -75,7 +75,7 @@ class ControladorUsuario extends ControladorIndex {
                 } else {
                     $datos = array(
                         "titulo" => "Registrarse",
-                        "mensaje" => "No se pudo subir su imagen.",
+                        "mensaje" => "Ocurrió un error al procesar su archivo, verifique el formato.",
                     );
                     $tpl->mostrar("registro", $datos);
                 }
@@ -197,11 +197,12 @@ class ControladorUsuario extends ControladorIndex {
     function eliminarUsuario(){
         $id = Auth::estaLogueado();
         if(!$id){
-             (new ControladorIndex())->redirect("inicio","principal");
-        }
-        (new Usuario())->eliminar($id);
-        $this->logout();
-    }
+         (new ControladorIndex())->redirect("inicio","principal");
+     }
+     (new Usuario())->eliminar($id);
+     $this->logout();
+ }
+
 
     function seguir($params){
         $usuario = new Usuario();

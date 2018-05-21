@@ -34,6 +34,7 @@ class ControladorArchivo extends ControladorIndex {
 	function eliminar($params = array()) {
 		$tpl = Template::getInstance();
 		$usuario_logueado =  (new usuario())->obtenerPorId(Auth::estaLogueado());
+		$flag = false;
 
 		if($usuario_logueado != null){
 
@@ -42,14 +43,34 @@ class ControladorArchivo extends ControladorIndex {
 
 			if($usuario_logueado->getId() == $duenio->getId() || $usuario_logueado->getCorreo() == 'admin@prueba.com'){
 
+				if($usuario_logueado->getCorreo() == 'admin@prueba.com'){
+
+					$contenido = "Su archivo: ".$a->getNombre()." ha sido eliminado por un admin, por mas info contactenos.";
+
+					if((new Notificacion())->agregarNotif($duenio->getId(),$contenido)){
+						$flag = true;
+					}
+				}
 
 				if ((new Archivo())->eliminarArchivo($a->getId())) {
 
+
 					$nuevos_archivos = (new Archivo())->getArchivosUser($duenio->getId());
-					$datos = array(
-						"archivo_subido" => "Archivo eliminado correctamente",
-						"lista_archivos" => $nuevos_archivos,
-					);
+					
+					if($flag){
+						$datos = array(
+							"archivo_subido" => "Archivo eliminado correctamente",
+							"lista_archivos" => $nuevos_archivos,
+						);
+
+					}else{
+						$datos = array(
+							"archivo_subido" => "Archivo eliminado correctamente(Fallo notificar)",
+							"lista_archivos" => $nuevos_archivos,
+						);
+					}
+
+					
 
 					$tpl->mostrar("inicio",$datos);
 

@@ -9,8 +9,9 @@ class Notificacion extends ClaseBase{
     private $idusuario = 0;
     private $fecha = "";
     private $hora = "";
+    private $activa = "";
 
-	public function __construct($obj=NULL) {
+    public function __construct($obj=NULL) {
         if(isset($obj)){
             foreach ($obj as $key => $value) {
                 $this->$key=$value;
@@ -60,7 +61,7 @@ class Notificacion extends ClaseBase{
         return $res;
     }
 
- 
+
     public function getNotif($idNotif){
 
         $sql="select * from notificaciones where id=$idNotif";

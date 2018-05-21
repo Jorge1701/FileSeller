@@ -18,7 +18,6 @@ CREATE TABLE `archivos` (
   `activo` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `mensajes` (
   `id_m` int(11) NOT NULL,
   `id_desde` int(11) DEFAULT NULL,
@@ -28,7 +27,6 @@ CREATE TABLE `mensajes` (
   `mensaje` varchar(500) DEFAULT NULL,
   `visto` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `notificaciones` (
   `id` int(11) NOT NULL,
@@ -66,46 +64,45 @@ CREATE TABLE `comentarios` (
   `duenio` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 ALTER TABLE `archivos`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `mensajes`
-  ADD PRIMARY KEY (`id_m`);
+ADD PRIMARY KEY (`id_m`);
 
 ALTER TABLE `notificaciones`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idusuario` (`idusuario`);
+ADD PRIMARY KEY (`id`),
+ADD KEY `idusuario` (`idusuario`);
 
 ALTER TABLE `seguidos`
-  ADD PRIMARY KEY (`idSeguidor`,`idSeguido`),
-  ADD KEY `idSeguido` (`idSeguido`);
+ADD PRIMARY KEY (`idSeguidor`,`idSeguido`),
+ADD KEY `idSeguido` (`idSeguido`);
 
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`);
 
-  ALTER TABLE `comentarios`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `comentarios`
+ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `archivos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 ALTER TABLE `mensajes`
-  MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 ALTER TABLE `notificaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
   ALTER TABLE `comentarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 ALTER TABLE `notificaciones`
-  ADD CONSTRAINT `notificaciones_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`id`);
+ADD CONSTRAINT `notificaciones_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`id`);
 
 ALTER TABLE `seguidos`
-  ADD CONSTRAINT `seguidos_ibfk_1` FOREIGN KEY (`idSeguido`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `seguidos_ibfk_2` FOREIGN KEY (`idSeguidor`) REFERENCES `usuarios` (`id`);
+ADD CONSTRAINT `seguidos_ibfk_1` FOREIGN KEY (`idSeguido`) REFERENCES `usuarios` (`id`),
+ADD CONSTRAINT `seguidos_ibfk_2` FOREIGN KEY (`idSeguidor`) REFERENCES `usuarios` (`id`);
 COMMIT;
