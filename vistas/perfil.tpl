@@ -171,60 +171,6 @@
                                                 <th scope="row">Correo</th>
                                                 <td>{$usuario->getCorreo()}</td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">Medios de pago</th>
-                                                <td><button class="btn btn-info ver" title="Ver medios de pago" data-toggle="collapse" data-target="#verCuentas">Ver <i class="fa fa-caret-down"></i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td>
-                                                    <div class="collapse text-center" id="verCuentas">
-
-                                                        {if $usuario->getCuentas() !== null}
-                                                        No tiene medios de pago activos
-                                                        {else}
-                                                        <ul>	
-                                                            {foreach $usuario->getCuentas() as $cuenta}
-                                                            <li>
-                                                                <div class="input-group-prepend">
-                                                                    <input class="input-group-text nrot" type="password" value="{$cuenta->getNroTarjeta()}" readonly id=nrot{$cuenta->getId()}>
-                                                                    <span onclick="showPassword('nrot{$cuenta->getId()}', 'eyePass{$cuenta->getId()}');" class="input-group-text fa fa-eye" id="eyePass{$cuenta->getId()}"></span>
-                                                                    <div class="fecc">{$cuenta->getFecVenc()}</div>
-                                                                </div>
-                                                            </li>
-                                                            {/foreach}
-                                                        </ul>
-                                                        {/if}
-                                                        <hr>
-                                                        <h5>Agregar</h5>
-                                                        <form action="{$url_agregar_pago}" method="POST" >
-                                                            <input class="form-control mb-3" required="Campo obligatorio" type="number" name="numTajeta" min="1000000000000000" max="9999999999999999" placeholder="Nro de tarjeta">
-                                                            <div class="input-group mb-3">
-                                                                <select required="Campo obligatorio" class="form-control" title="Mes de vencimiento" id="venc_mes" name="venc_mes">
-                                                                    <option value="mes">Mes</option>
-                                                                    <option value="01">Enero</option>
-                                                                    <option value="02">Febrero</option>
-                                                                    <option value="03">Marzo</option>
-                                                                    <option value="04">Abril</option>
-                                                                    <option value="05">Mayo</option>
-                                                                    <option value="06">Junio</option>
-                                                                    <option value="07">Julio</option>
-                                                                    <option value="08">Agosto</option>
-                                                                    <option value="09">Setiembre</option>
-                                                                    <option value="10">Octubre</option>
-                                                                    <option value="11">Noviembre</option>
-                                                                    <option value="12">Diciembre</option>
-                                                                </select>
-                                                                <input required="Campo obligatorio"  type="text" class="form-control" title="Año de vencimiento" placeholder="Año" id="venc_anio" name="venc_anio">
-                                                            </div>
-                                                            <input class="form-control mb-3" type="number" name="cvv" placeholder="CVV">
-                                                            <input class="btn btn-success" type="submit" value="Agregar">
-                                                        </form>
-                                                        <hr>
-                                                    </div>
-                                                </td>	
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
