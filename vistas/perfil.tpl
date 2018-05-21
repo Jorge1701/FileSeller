@@ -44,13 +44,13 @@
                 <div class="container">
                     <ul class="nav nav-tabs nav-tabs-fillup navigation">
                         <li class="nav-item">
-                            <a data-toggle="tab" class="nav-link" href="#archivos">Sus archivos
+                            <a data-toggle="tab" class="nav-link active" href="#archivos">Sus archivos
                                 <span class="fas fa-file pestaña-icono"></span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a data-toggle="tab" class="nav-link" href="#contacto">Contacto
-                                <span class="fas fa-user-circle pestaña-icono"></span>
+                                <span class="fas fa-user pestaña-icono"></span>
                             </a>
                         </li>
                     </ul>
