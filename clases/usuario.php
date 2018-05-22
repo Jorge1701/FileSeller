@@ -15,6 +15,7 @@ class Usuario extends ClaseBase{
 	private $id = 0;
 	private $notificaciones = null;
 	private $seguidos = null;
+	private $admin = false;
 
 	public function __construct($obj=NULL) {
         //$this->db=DB::conexion();
@@ -93,6 +94,14 @@ class Usuario extends ClaseBase{
 
 	public function getActivo(){
 		return $this->activo;
+	}
+
+	public function getAdmin () {
+		return $this->admin;
+	}
+	
+	public function setAdmin ($admin) {
+		$this->admin = $admin;
 	}
 
 	public function getId(){

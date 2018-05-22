@@ -53,7 +53,8 @@ CREATE TABLE `usuarios` (
   `contrasenia` varchar(256) NOT NULL,
   `imagen` varchar(256) NOT NULL,
   `activo` tinyint(1) NOT NULL,
-  `fnac` date NOT NULL
+  `fnac` date NOT NULL,
+  `admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `comentarios` (
