@@ -4,6 +4,7 @@ require_once ("clases/template.php");
 require_once ("clases/session.php");
 require_once("clases/usuario.php");
 require_once ("clases/Archivo.php");
+require_once ("clases/strike.php");
 require_once ("clases/Auth.php");
 require_once ("controladores/ctrl_index.php");
 
@@ -115,7 +116,7 @@ class ControladorUsuario extends ControladorIndex {
         $urlIniciarConversacion = null;
         $active_archivo = null;
 
-        if ($correoUsuario[0] != null){     //Si una persona quiere consultar el perfil del duenio del archivo.           
+        if (isset ($correoUsuario[0]) && $correoUsuario[0] != null){     //Si una persona quiere consultar el perfil del duenio del archivo.           
             $usuarioOtro = (new Usuario())->obtenerPorCorreo($correoUsuario[0]);
             if($usuarioOtro->getId() != $id){  //Si la persona que consulta no es el propio duenio. 
                 $archivos = (new Archivo())->getArchivosUser($usuarioOtro->getId());
@@ -146,6 +147,7 @@ class ControladorUsuario extends ControladorIndex {
             "url_eliminar_usuario" => $ctrlIndex->getUrl("usuario","eliminarUsuario"),
             "url_editar_perfil" =>$ctrlIndex->getUrl("usuario","editarPerfil"),
             "url_iniciar_conversacion" => $urlIniciarConversacion,
+            "strikes" => (new Strike ())->obtenerStrikesId (Auth::estaLogueado ())
         );
         $tpl = Template::getInstance();
         $tpl->mostrar("perfil", $datos);
@@ -230,6 +232,15 @@ class ControladorUsuario extends ControladorIndex {
             $response_array['status'] = 'error';
             echo json_encode($response_array);
         }
+    }
+
+    function strike ($params = array ()) {
+        header('Content-type: application/json');
+        if (!isset ($params[0]) || !isset ($params[1]))
+            $response_array["status"] = "ERR";
+        else
+            $response_array["status"] = (new Strike ())->registrarStrike ($params[0], $params[1]);
+        echo json_encode($response_array);
     }
 }
 

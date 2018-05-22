@@ -52,3 +52,27 @@ function dejarSeguir(idSeguidor, idSeguido){
 function ir (correo) {
     window.location.assign ("/FileSeller/mensajes/chat/" + correo);
 }
+
+function strike (correo) {
+    preguntaMensaje ("Seguro desea dar un strike?", "Comentario", "enviarStrike", "'" + correo + "'");
+}
+
+function enviarStrike (texto, correo) {
+    $.ajax ({
+        type: "POST",
+        dataType: "JSON",
+        url: "/FileSeller/usuario/strike/" + correo + "/" + $("#" + texto).val (),
+        data: {},
+        success: function (data) {
+            if (data["status"] == "OK")
+                mensaje ("El strike se registro con exito");
+            else if (data["status"] == "ELIMINADO")
+                mensaje ("El usuario llego a los 3 strikes y fue eliminado");
+            else
+                mensajeErr ("No se pudo registrar el strike");
+        },
+        error: function () {
+            mensajeErr ("No se pudo registrar el strike");
+        }
+    });
+}
