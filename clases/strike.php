@@ -19,19 +19,24 @@ class Strike extends ClaseBase {
     }
 
     public function registrarStrike ($usuario_correo, $comentario) {
-        if ($this->esStrikeDefinitivo ($usuario_correo))
-            $eliminado = "ELIMINADO";
-
         $u = (new Usuario ())->obtenerPorCorreo ($usuario_correo);
 
         if (!isset ($u))
             return false;
 
         $id_usuario = $u->getId ();
+        
+        if ($this->esStrikeDefinitivo ($id_usuario, $usuario_correo))
+            $eliminado = "ELIMINADO";
 
         $insert = DB::conexion ()->prepare ("INSERT INTO strikes (id_usuario, comentario) VALUES (?, ?)");
         $insert->bind_param ("is", $id_usuario, $comentario);
         $res = $insert->execute () ? "OK" : "ERR";
+
+        if ($res == "OK") {
+            $cant = $this->cantStrikes ($usuario_correo);
+            (new Notificacion ())->enviar ($id_usuario, ($cant == 1 ? "Primer" : "Segundo") .  " strike debido a " . $comentario);
+        }
 
         return isset ($eliminado) ? $eliminado : $res;
     }
@@ -63,7 +68,7 @@ class Strike extends ClaseBase {
         return isset ($res) ? $res : null;
     }
 
-    public function esStrikeDefinitivo ($usuario_correo) {
+    public function cantStrikes ($usuario_correo) {
         $u = (new Usuario ())->obtenerPorCorreo ($usuario_correo);
 
         if (!isset ($u))
@@ -74,8 +79,11 @@ class Strike extends ClaseBase {
         $stmt = DB::conexion ()->prepare ("SELECT COUNT(*) AS cant FROM strikes WHERE id_usuario = ?");
         $stmt->bind_param ("i", $id_usuario);
         $stmt->execute ();
-        $resultado = $stmt->get_result ()->fetch_object ();
-        if ($resultado->cant >= 2) {
+        return $stmt->get_result ()->fetch_object ()->cant;
+    }
+
+    public function esStrikeDefinitivo ($id_usuario, $usuario_correo) {
+        if ($this->cantStrikes ($usuario_correo) >= 2) {
             DB::conexion ()->query ("UPDATE usuarios SET activo = 0 WHERE id = " . $id_usuario);
             return true;
         } else
