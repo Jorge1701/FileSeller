@@ -57,7 +57,7 @@
 
                     <div class="user-body">
                         <div class="tab-content">
-                            
+
                             <!-- Pestaña archivos -->
                             <div id="archivos" class="active tab-pane slide-left">
                                 <table class="table">
@@ -144,6 +144,11 @@
                             <li class="nav-item">
                                 <a data-toggle="tab" class="{if isset($mensaje_editar)}active{/if} nav-link" href="#editar">Editar 
                                     <span class="fas fa-edit pestaña-icono"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="tab" class="nav-link" href="#seguidos">Seguidos 
+                                    <span class="fas fa-user-plus pestaña-icono"></span>
                                 </a>
                             </li>
                         </ul>
@@ -386,6 +391,21 @@
 
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <!-- Pestaña seguidos --> 
+                                    <div id="seguidos" class="tab-pane slide-left">
+                                        <h4>Seguidos</h4>
+                                        {$seguidos = $usuario->getSeguidos()}
+                                        {if isset($seguidos) && count($seguidos) != 0}
+                                        <div class="list-group"> 
+                                            {foreach $seguidos as $seguido}
+                                            <a href="{$url_base}usuario/perfil/{$seguido->getCorreo()}"class="list-group-item list-group-item-action" style="font-weight: bold; margin-bottom: 3px" title="Ver perfil de {$seguido->getNombre()} {$seguido->getApellido()}">{$seguido->getNombre()} {$seguido->getApellido()}</a>
+                                            {/foreach}
+                                        </div>
+                                        {else}
+                                        <h6>No estás seguiendo ningún usuario</h6>
+                                        {/if} 
                                     </div>
                                 </div>
                             </div>	
