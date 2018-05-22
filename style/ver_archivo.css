@@ -11,7 +11,7 @@
 }
 
 .panelMain {
-	margin: 2vw 2vw 0 2vw;
+	margin: 2vw;
 	background-color: white;
 	border: solid 1px black;
 	border-radius: 4pt;
@@ -112,4 +112,13 @@
 #comentarios .com_usuario a:hover {
 	color: #666;
 	text-decoration: none;
+}
+
+#parrafo {
+	height: 150pt;
+	border-radius: 5pt;
+	padding: 15pt;
+	background-color: #EEE;
+	overflow-x: hidden;
+	overflow-y: auto;
 }

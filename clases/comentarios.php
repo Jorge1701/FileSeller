@@ -1,6 +1,8 @@
 <?php
 
 class Comentarios extends ClaseBase {
+	private $palabras_a_censurar = ["puta", "puto"];
+
 	public $id = "";
 	public $id_archivo = "";
 	public $id_usuario = "";
@@ -21,6 +23,8 @@ class Comentarios extends ClaseBase {
 		$u = (new Usuario ())->obtenerPorCorreo ($usuario);
 		$a = (new Archivo ())->obtenerPorId ($archivo);
 
+		$comentario = $this->censurarComentario ($comentario);
+
 		DB::conexion ()->query ("INSERT INTO comentarios (id_archivo, id_usuario, comentario, duenio) VALUES (" . $archivo . ", " . $u->getId () . ", \"" . $comentario . "\", " . ($u->getId () == $a->getDuenio () ? "1" : "0") . ")");
 	}
 
@@ -34,6 +38,10 @@ class Comentarios extends ClaseBase {
 			$res[] = new Com ($fila->correo, $fila->nombre . " " . $fila->apellido, $fila->comentario, $fila->duenio, $fila->id);
 
 		return isset ($res) ? $res : null;
+	}
+
+	private function censurarComentario ($comentario) {
+		return str_ireplace ($this->palabras_a_censurar, "#!$@*!", $comentario);
 	}
 }
 

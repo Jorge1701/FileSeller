@@ -10,8 +10,14 @@
 	{include file="header.tpl"}
 
 	<div class="row panelMain">
-		<div class="col-lg-3 col-md-4 col-sm-5 col-xs-6 pizq">
+		<div class="col-lg-4 col-md-5 col-sm-5 col-xs-6 pizq">
 			<img src="{$url_base}{$archivo->getImg ()}" id="imgArchivo">
+		</div>
+		<div class="col-lg-8 col-md-7 col-sm-7 col-xs-6">
+			<h2 id="titulo">{$archivo->getNombre ()}</h2>
+			<p id="parrafo">
+				{$archivo->getDescripcion ()}
+			</p>
 			<h4>
 				Precio: {$archivo->getPrecio ()}
 			</h4>
@@ -30,13 +36,6 @@
 			<button id="btnDescargar" class="btn btn-success" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
 				Descargar <span class="fa fa-download"></span>
 			</button>
-
-		</div>
-		<div class="col-lg-9 col-md-8 col-sm-7 col-xs-6">
-			<h2 id="titulo">{$archivo->getNombre ()}</h2>
-			<p>
-				{$archivo->getDescripcion ()}
-			</p>
 		</div>
 	</div>
 	<div class="row panelMain panel-mio">
@@ -68,7 +67,7 @@
 			<form method="POST">
 				<div class="input-group">
 					<!-- Texto -->
-					<input type="text" class="form-control" placeholder="Comentario" name="comentario" required autofocus>
+					<input type="text" class="form-control" placeholder="Comentario" name="comentario" required>
 					<div class="input-group-btn">
 						<!-- Boton Enviar -->
 						<button class="btn btn-default" type="submit" id="btnEnviar">
