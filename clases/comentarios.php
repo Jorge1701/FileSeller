@@ -22,6 +22,10 @@ class Comentarios extends ClaseBase {
 		$a = (new Archivo ())->obtenerPorId ($archivo);
 
 		DB::conexion ()->query ("INSERT INTO comentarios (id_archivo, id_usuario, comentario, duenio) VALUES (" . $archivo . ", " . $u->getId () . ", \"" . $comentario . "\", " . ($u->getId () == $a->getDuenio () ? "1" : "0") . ")");
+
+		if($u->getId() != Auth::estaLogueado()){
+		(new Notificacion())->enviar($a->getDuenio(),"Su archivo <a href='/FileSeller/archivo/ver/".$a->getId()."'>".$a->getNombre()."</a> a recibido un comentario");
+		}
 	}
 
 	public function obtenerComentarios ($id_archivo) {
