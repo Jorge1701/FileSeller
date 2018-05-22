@@ -33,7 +33,7 @@ class Comentarios extends ClaseBase {
 	}
 
 	public function obtenerComentarios ($id_archivo) {
-		$stmt = DB::conexion ()->prepare ("SELECT u.correo AS correo, c.comentario AS comentario, c.duenio AS duenio, u.nombre AS nombre, u.apellido AS apellido, u.id AS id FROM comentarios AS c, usuarios AS u WHERE c.id_usuario = u.id AND c.id_archivo = " . $id_archivo);
+		$stmt = DB::conexion ()->prepare ("SELECT u.correo AS correo, c.comentario AS comentario, c.duenio AS duenio, u.nombre AS nombre, u.apellido AS apellido, u.id AS id FROM comentarios AS c, usuarios AS u WHERE c.id_usuario = u.id AND c.id_archivo = " . $id_archivo . " ORDER BY c.id");
 		
 		$stmt->execute ();
 		$resultado = $stmt->get_result ();
