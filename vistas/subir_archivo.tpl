@@ -29,7 +29,7 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text fa fa-dollar-sign"></span>
+							<span class="input-group-text fa fa-money-bill-alt"></span>
 						</div>
 						<input disabled name="precio" id="precio" type="number" class="form-control" placeholder="Precio" aria-label="Precio" aria-describedby="basic-addon1" autofocus title="Precio del archivo" {if isset($precio_archivo)} value ="{$precio_archivo}" {/if}>
 						<div class="input-group-append">  

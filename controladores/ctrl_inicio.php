@@ -77,6 +77,10 @@ class ControladorInicio extends ControladorIndex {
 		$tpl->mostrar('ayuda',$datos);	
 	}
 
+	function enviarNotificacion($params){
+		return (new Notificacion())->enviar($params[0],$params[1]);
+	}
+
 	function vistaNotificacion(){
 		if((new Notificacion())->vista(Auth::estaLogueado())){
 			header('Content-type: application/json');

@@ -84,6 +84,21 @@ class Notificacion extends ClaseBase{
         return $res;
     }
 
+    public function enviar($idUsuario, $contenido){
+        date_default_timezone_set('America/Montevideo');
+        $fecha = date("Y-m-d");
+        $hora = date("H:i:s");
+        $vista = 0;
+        $activa = 1;
+        $sql = $this->db->prepare("INSERT INTO notificaciones(vista,contenido,idusuario,fecha,hora,activa) VALUES(?,?,?,?,?,?)");
+        $sql->bind_param("isissi",$vista,$contenido,$idUsuario,$fecha,$hora,$activa);
+        if($sql->execute()){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+
     public function vista($idUsuario){
         ini_set("display_errors", 1);
         error_reporting(E_ALL & ~E_NOTICE);
