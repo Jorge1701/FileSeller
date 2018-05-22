@@ -90,6 +90,7 @@ class Notificacion extends ClaseBase{
         $hora = date("H:i:s");
         $vista = 0;
         $activa = 1;
+        
         $sql = $this->db->prepare("INSERT INTO notificaciones(vista,contenido,idusuario,fecha,hora,activa) VALUES(?,?,?,?,?,?)");
         $sql->bind_param("isissi",$vista,$contenido,$idUsuario,$fecha,$hora,$activa);
         if($sql->execute()){
