@@ -47,7 +47,7 @@ class ControladorArchivo extends ControladorIndex {
 
 					$contenido = "Su archivo: ".$a->getNombre()." ha sido eliminado por un admin, por mas info contactenos.";
 
-					if((new Notificacion())->agregarNotif($duenio->getId(),$contenido)){
+					if((new Notificacion())->enviar($duenio->getId(),$contenido)){
 						$flag = true;
 					}
 				}
