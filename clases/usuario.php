@@ -96,7 +96,7 @@ class Usuario extends ClaseBase{
 		return $this->activo;
 	}
 
-	public function getAdmin () {
+	public function esAdmin () {
 		return $this->admin;
 	}
 	
