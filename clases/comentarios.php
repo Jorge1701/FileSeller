@@ -27,13 +27,13 @@ class Comentarios extends ClaseBase {
 
 		DB::conexion ()->query ("INSERT INTO comentarios (id_archivo, id_usuario, comentario, duenio) VALUES (" . $archivo . ", " . $u->getId () . ", \"" . $comentario . "\", " . ($u->getId () == $a->getDuenio () ? "1" : "0") . ")");
 
-		if($u->getId() != Auth::estaLogueado()){
+		if($u->getId() != $a->getDuenio()){
 		(new Notificacion())->enviar($a->getDuenio(),"Su archivo <a href='/FileSeller/archivo/ver/".$a->getId()."'>".$a->getNombre()."</a> a recibido un comentario");
 		}
 	}
 
 	public function obtenerComentarios ($id_archivo) {
-		$stmt = DB::conexion ()->prepare ("SELECT u.correo AS correo, c.comentario AS comentario, c.duenio AS duenio, u.nombre AS nombre, u.apellido AS apellido, u.id AS id FROM comentarios AS c, usuarios AS u WHERE c.id_usuario = u.id AND c.id_archivo = " . $id_archivo);
+		$stmt = DB::conexion ()->prepare ("SELECT u.correo AS correo, c.comentario AS comentario, c.duenio AS duenio, u.nombre AS nombre, u.apellido AS apellido, u.id AS id FROM comentarios AS c, usuarios AS u WHERE c.id_usuario = u.id AND c.id_archivo = " . $id_archivo . " ORDER BY c.id");
 		
 		$stmt->execute ();
 		$resultado = $stmt->get_result ();
