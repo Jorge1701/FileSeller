@@ -41,11 +41,11 @@ class ControladorArchivo extends ControladorIndex {
 			$a = (new Archivo())->obtenerPorId($params[0]);
 			$duenio = (new usuario())->obtenerPorId($a->getDuenio());
 
-			if($usuario_logueado->getId() == $duenio->getId() || $usuario_logueado->getCorreo() == 'admin@prueba.com'){
+			if($usuario_logueado->getId() == $duenio->getId() || $usuario_logueado->esAdmin()){
 
-				if($usuario_logueado->getCorreo() == 'admin@prueba.com'){
+				if($usuario_logueado->esAdmin()){
 
-					$contenido = "Su archivo: ".$a->getNombre()." ha sido eliminado por un admin, por mas info contactenos.";
+					$contenido = "Su archivo "."<strong>".$a->getNombre()."</strong>"." ha sido eliminado por contenido indebido.";
 
 					if((new Notificacion())->enviar($duenio->getId(),$contenido)){
 						$flag = true;
@@ -69,8 +69,6 @@ class ControladorArchivo extends ControladorIndex {
 							"lista_archivos" => $nuevos_archivos,
 						);
 					}
-
-					
 
 					$tpl->mostrar("inicio",$datos);
 
