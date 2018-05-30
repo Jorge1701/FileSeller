@@ -183,12 +183,15 @@ class ControladorUsuario extends ControladorIndex {
             $usuario->setImagen($_POST["archivo_old"]);
         }
         $resultado = $usuario->editar();
+        $archivos = (new Archivo())->getArchivosUser(Auth::estaLogueado());
         if($resultado > 0){
             $datos = array(
+                "archivos" => $archivos,
                 "mensaje_editar" => "Los datos fueron actualizados correctamente",
             );
         }else{
             $datos = array(
+                "archivos" => $archivos,
                 "mensaje_editar" => "No se actualizó ningun dato",
             );
         }
