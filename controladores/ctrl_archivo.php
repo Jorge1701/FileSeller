@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 require_once ("clases/archivo.php");
 require_once ("controladores/ctrl_index.php");
@@ -8,7 +8,7 @@ require_once ("clases/comentarios.php");
 class ControladorArchivo extends ControladorIndex {
 
 	function descargar($params = array()) {
-		(new Archivo ())->bajarArchivo("uploads/" . $params[1]);
+		(new Archivo ())->bajar("uploads/" . $params[1]);
 	}
 
 	function ver($params = array()) {
@@ -41,18 +41,18 @@ class ControladorArchivo extends ControladorIndex {
 			$a = (new Archivo())->obtenerPorId($params[0]);
 			$duenio = (new usuario())->obtenerPorId($a->getDuenio());
 
-			if($usuario_logueado->getId() == $duenio->getId() || $usuario_logueado->getCorreo() == 'admin@prueba.com'){
+			if($usuario_logueado->getId() == $duenio->getId() || $usuario_logueado->esAdmin()){
 
-				if($usuario_logueado->getCorreo() == 'admin@prueba.com'){
+				if($usuario_logueado->esAdmin()){
 
-					$contenido = "Su archivo: ".$a->getNombre()." ha sido eliminado por un admin, por mas info contactenos.";
+					$contenido = "Su archivo "."<strong>".$a->getNombre()."</strong>"." ha sido eliminado por contenido indebido.";
 
 					if((new Notificacion())->enviar($duenio->getId(),$contenido)){
 						$flag = true;
 					}
 				}
 
-				if ((new Archivo())->eliminarArchivo($a->getId())) {
+				if ((new Archivo())->eliminar($a->getId())) {
 
 
 					$nuevos_archivos = (new Archivo())->getArchivosUser($duenio->getId());
@@ -70,39 +70,37 @@ class ControladorArchivo extends ControladorIndex {
 						);
 					}
 
-					
-
 					$tpl->mostrar("inicio",$datos);
 
-		}else{ //error al eliminar
+				}else{ //error al eliminar
 
+					$datos = array(
+						"archivo_subido" => "Hubo un error al procesar su solicitud",
+					);
+
+					$tpl->mostrar("inicio",$datos);
+				}
+
+			}else{
+
+				$datos = array(
+					"archivo_subido" => "Archivo Elimina.. opa te la creiste, suerte la proxima!",
+				);
+
+				$tpl->mostrar("inicio", $datos);
+
+			}
+
+
+		}else{//redirigir al inicio
 			$datos = array(
-				"archivo_subido" => "Hubo un error al procesar su solicitud",
+				"archivo_subido" => "Debe loguearse para ver esta pagina",
 			);
 
 			$tpl->mostrar("inicio",$datos);
 		}
 
-	}else{
-
-		$datos = array(
-			"archivo_subido" => "Archivo Elimina.. opa te la creiste, suerte la proxima!",
-		);
-
-		$tpl->mostrar("inicio", $datos);
-
 	}
-
-
-	}else{//redirigir al inicio
-		$datos = array(
-			"archivo_subido" => "Debe loguearse para ver esta pagina",
-		);
-
-		$tpl->mostrar("inicio",$datos);
-	}
-
-}
 
 
 

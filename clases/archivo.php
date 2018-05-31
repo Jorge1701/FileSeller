@@ -113,7 +113,7 @@ class Archivo extends ClaseBase {
         return $res;
     }
 
-    public function eliminarArchivo($idArchivo) {
+    public function eliminar($idArchivo) {
 
         $sql = $this->db->prepare("UPDATE archivos SET activo=0 WHERE id=?");
         $sql->bind_param("i", $idArchivo);
@@ -136,7 +136,7 @@ class Archivo extends ClaseBase {
         return $res;
     }
 
-    public function bajarArchivo($name) {
+    public function bajar($name) {
         header('Content-Description: File Transfer');
         header('Content-Type: application/force-download');
         header("Content-Disposition: attachment; filename=\"" . basename($name) . "\";");
@@ -151,12 +151,13 @@ class Archivo extends ClaseBase {
         return 0;
     }
 
-    public function subirArchivo($idDuenio) {
+    public function subir($idDuenio) {
         $nombre = $_POST["nombre"];
         $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
         $tamanio = $this->convertirTamanio($_FILES["archivo"]["size"]);
         $tipo = explode(".", $_FILES["archivo"]["name"])[1];  //$_FILES["archivo"]["type"];
-        $precio = $_POST["moneda"] . " " . $_POST["precio"];
+        $precio = isset($_POST["precio"]) ? $_POST["precio"] : "";
+        $precioCompleto = $_POST["moneda"] . " " .$precio;
         date_default_timezone_set('America/Montevideo');
         $fecSubido = date("Y-m-d");
         $horaSubido = date("H:i:s");
@@ -183,7 +184,7 @@ class Archivo extends ClaseBase {
             } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file) && $imgOk) {//Si el archivo se movio correctamente desde la carpeta temporal a la indicada, guardarlo en la BD.
                 $i = 1;
                 $sql = $this->db->prepare("INSERT INTO archivos (nombre,tipo,tamanio,precio,descripcion,ubicacion,duenio,fecSubido,horaSubido,img,activo) VALUES( ?,?,?,?,?,?,?,?,?,?,?)");
-                $sql->bind_param("ssssssisssi", $nombre, $tipo, $tamanio, $precio, $descripcion, $target_file, $idDuenio, $fecSubido, $horaSubido, $target_img,$i);
+                $sql->bind_param("ssssssisssi", $nombre, $tipo, $tamanio, $precioCompleto, $descripcion, $target_file, $idDuenio, $fecSubido, $horaSubido, $target_img,$i);
                 $sql->execute();
 
                 $uploadStatus = 0;

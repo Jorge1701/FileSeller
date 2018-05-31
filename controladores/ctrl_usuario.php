@@ -57,9 +57,12 @@ class ControladorUsuario extends ControladorIndex {
 
                     if ($usuario->registro($nombre, $apellido, $correo, $password, $url, $fecha, $accion)) {
 
-                        setcookie("correo", $_POST["correo"], time() + (86400 * 30), "/");
-                        setcookie("password", $_POST["password"], time() + (86400 * 30), "/");
-                        $this->redirect("inicio", "principal");
+                        $datos = array(
+                            "titulo" => "Registrarse",
+                            "mensaje" => "Registro Correcto",
+                        );
+
+                        $tpl->mostrar("inicio", $datos);
                     } else {
                         $datos = array(
                             "titulo" => "Registrarse",
@@ -85,36 +88,38 @@ class ControladorUsuario extends ControladorIndex {
                 $accion = 0;
 
                 if ($usuario->registro($nombre, $apellido, $correo, $password, "", $fecha, $accion)) {
-                    setcookie("correo", $_POST["correo"], time() + (86400 * 30), "/");
-                    setcookie("password", $_POST["password"], time() + (86400 * 30), "/");
-                    $this->redirect("inicio", "principal");
-                } else {
-                    $datos = array(
-                        "titulo" => "Registrarse",
-                        "mensaje" => "Error al ingresar al usuario.",
-                    );
+                   $datos = array(
+                    "titulo" => "Registrarse",
+                    "mensaje" => "Registro Correcto",
+                );
+                   $tpl->mostrar("inicio", $datos);
+               } else {
+                $datos = array(
+                    "titulo" => "Registrarse",
+                    "mensaje" => "Error al ingresar al usuario.",
+                );
 
-                    $tpl->mostrar("registro", $datos);
-                }
+                $tpl->mostrar("registro", $datos);
             }
-        } else {
-            $datos = array(
-                "titulo" => "Registrarse",
-                "mensaje" => "",
-                "active_registrarse" => "active",
-            );
-
-            $tpl->mostrar("registro", $datos);
         }
-    }
+    } else {
+        $datos = array(
+            "titulo" => "Registrarse",
+            "mensaje" => "",
+            "active_registrarse" => "active",
+        );
 
-    function perfil($correoUsuario) {
-        $id = Auth::estaLogueado();
-        $usuarioOtro = null;
-        $archivos = null;
-        $ctrlIndex = new ControladorIndex();
-        $urlIniciarConversacion = null;
-        $active_archivo = null;
+        $tpl->mostrar("registro", $datos);
+    }
+}
+
+function perfil($correoUsuario) {
+    $id = Auth::estaLogueado();
+    $usuarioOtro = null;
+    $archivos = null;
+    $ctrlIndex = new ControladorIndex();
+    $urlIniciarConversacion = null;
+    $active_archivo = null;
 
         if (isset ($correoUsuario[0]) && $correoUsuario[0] != null){     //Si una persona quiere consultar el perfil del duenio del archivo.         
             $usuarioOtro = (new Usuario())->obtenerPorCorreo($correoUsuario[0]); 
@@ -187,12 +192,15 @@ class ControladorUsuario extends ControladorIndex {
             $usuario->setImagen($_POST["archivo_old"]);
         }
         $resultado = $usuario->editar();
+        $archivos = (new Archivo())->getArchivosUser(Auth::estaLogueado());
         if($resultado > 0){
             $datos = array(
+                "archivos" => $archivos,
                 "mensaje_editar" => "Los datos fueron actualizados correctamente",
             );
         }else{
             $datos = array(
+                "archivos" => $archivos,
                 "mensaje_editar" => "No se actualizó ningun dato",
             );
         }
@@ -203,49 +211,49 @@ class ControladorUsuario extends ControladorIndex {
     function eliminarUsuario(){
         $id = Auth::estaLogueado();
         if(!$id){
-         (new ControladorIndex())->redirect("inicio","principal");
-     }
-     (new Usuario())->eliminar($id);
-     $this->logout();
- }
+           (new ControladorIndex())->redirect("inicio","principal");
+       }
+       (new Usuario())->eliminar($id);
+       $this->logout();
+   }
 
 
-    function seguir($params){
-        $usuario = new Usuario();
-        $usuario->setId($params[0]);
-        if($usuario->seguir($params[1])){
-            header('Content-type: application/json');
-            $response_array['status'] = 'success';
-            echo json_encode($response_array);
-        }else{
-            header('Content-type: application/json');
-            $response_array['status'] = 'error';
-            echo json_encode($response_array);
-        }
-    }
-
-    function dejarSeguir($params){
-        $usuario = new Usuario();
-        $usuario->setId($params[0]);
-        if($usuario->dejarSeguir($params[1])){
-            header('Content-type: application/json');
-            $response_array['status'] = 'success';
-            echo json_encode($response_array);
-        }else{
-            header('Content-type: application/json');
-            $response_array['status'] = 'error';
-            echo json_encode($response_array);
-        }
-    }
-
-    function strike ($params = array ()) {
+   function seguir($params){
+    $usuario = new Usuario();
+    $usuario->setId($params[0]);
+    if($usuario->seguir($params[1])){
         header('Content-type: application/json');
-        if (!isset ($params[0]) || !isset ($params[1]))
-            $response_array["status"] = "ERR";
-        else
-            $response_array["status"] = (new Strike ())->registrarStrike ($params[0], $params[1]);
+        $response_array['status'] = 'success';
+        echo json_encode($response_array);
+    }else{
+        header('Content-type: application/json');
+        $response_array['status'] = 'error';
         echo json_encode($response_array);
     }
+}
+
+function dejarSeguir($params){
+    $usuario = new Usuario();
+    $usuario->setId($params[0]);
+    if($usuario->dejarSeguir($params[1])){
+        header('Content-type: application/json');
+        $response_array['status'] = 'success';
+        echo json_encode($response_array);
+    }else{
+        header('Content-type: application/json');
+        $response_array['status'] = 'error';
+        echo json_encode($response_array);
+    }
+}
+
+function strike ($params = array ()) {
+    header('Content-type: application/json');
+    if (!isset ($params[0]) || !isset ($params[1]))
+        $response_array["status"] = "ERR";
+    else
+        $response_array["status"] = (new Strike ())->registrarStrike ($params[0], $params[1]);
+    echo json_encode($response_array);
+}
 }
 
 ?>
