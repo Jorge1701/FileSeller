@@ -14,7 +14,7 @@
 			<div class="col-md-6 col-md-offset-3 mx-auto card text-center">
 				<div class="mx-auto is"><h4>Subir archivo</h4></div>
 				<hr>
-				<form method="POST" enctype="multipart/form-data" action="{$url_subir_archivo}">
+				<form method="POST" enctype="multipart/form-data" id="formSubir" action="{$url_subir_archivo}">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text fa fa-file" id="basic-addon1"></span>
@@ -31,12 +31,16 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text fa fa-money-bill-alt"></span>
 						</div>
-						<input disabled name="precio" id="precio" type="number" class="form-control" placeholder="Precio" aria-label="Precio" aria-describedby="basic-addon1" autofocus title="Precio del archivo" {if isset($precio_archivo)} value ="{$precio_archivo}" {/if}>
-						<div class="input-group-append">  
+						<input name="precio" id="precio" type="number" class="form-control" placeholder="Precio" aria-label="Precio" aria-describedby="basic-addon1" autofocus title="Precio del archivo" {if isset($precio_archivo)} value ="{$precio_archivo}" {else} disabled {/if}>
+						<div class="input-group-append">
+							{$moneda = ""}
+							{if isset($moneda_archivo)}
+								{$moneda = $moneda_archivo}
+							{/if}  
 							<select class="btn btn-outline-secondary" id="moneda" title="Seleccionar tipo de moneda" name="moneda">
-								<option title="Gratis" value="Gratis">Gratis</option>
-								<option title="Pesos uruguayos" value="URU">$U</option>
-								<option title="Dolares estadounidenses" value="USD">USD</option>
+								<option {if $moneda == 'Gratis'} selected {/if} title="Gratis" value="Gratis">Gratis</option>
+								<option {if $moneda == 'URU'} selected {/if}title="Pesos uruguayos" value="URU">$U</option>
+								<option {if $moneda == 'USD'} selected {/if}title="Dolares estadounidenses" value="USD">USD</option>
 							</select>	
 						</div>
 					</div>
@@ -59,7 +63,8 @@
 					<br>
 					{/if}
 
-					<button id="btnLogin" class="btn btn-success btn-iniciar-sesion">Subir <i class="fa fa-upload"></i></button>
+					<button id="btnSubir" class="btn btn-success btn-iniciar-sesion">Subir <i class="fa fa-upload"></i></button>
+					<p id="imgCarga" hidden><img src="{$url_base}img/carga.gif" style="width: 50px; height: 50px;"></p>
 				</form>
 			</div>
 		</div>

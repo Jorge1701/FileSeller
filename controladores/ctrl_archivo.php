@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 require_once ("clases/archivo.php");
 require_once ("controladores/ctrl_index.php");
@@ -8,7 +8,7 @@ require_once ("clases/comentarios.php");
 class ControladorArchivo extends ControladorIndex {
 
 	function descargar($params = array()) {
-		(new Archivo ())->bajarArchivo("uploads/" . $params[1]);
+		(new Archivo ())->bajar("uploads/" . $params[1]);
 	}
 
 	function ver($params = array()) {
@@ -52,7 +52,7 @@ class ControladorArchivo extends ControladorIndex {
 					}
 				}
 
-				if ((new Archivo())->eliminarArchivo($a->getId())) {
+				if ((new Archivo())->eliminar($a->getId())) {
 
 
 					$nuevos_archivos = (new Archivo())->getArchivosUser($duenio->getId());
@@ -111,7 +111,7 @@ class ControladorArchivo extends ControladorIndex {
 				$tpl = Template::getInstance();
 				$id = Auth::estaLogueado();
 				if (isset($_FILES["archivo"]) && isset($_POST["nombre"])) {
-					$subidoOK = (new Archivo())->subirArchivo($id);
+					$subidoOK = (new Archivo())->subir($id);
 					if ($subidoOK == 0) {
 						$datos = array(
 							"archivo_subido" => "Su archivo fue subido exitosamente",
@@ -129,7 +129,8 @@ class ControladorArchivo extends ControladorIndex {
 						"active_subir_archivo" => "active",
 						"nombre_archivo" => $_POST["nombre"],
 						"descripcion_archivo" => $_POST["descripcion"],
-						"precio_archivo" => $_POST["precio"],
+						"precio_archivo" => isset($_POST["precio"]) ? $_POST["precio"] : "",
+						"moneda_archivo" => $_POST["moneda"],
 						"mensaje" => $mensaje,
 					);
 					$tpl->mostrar("subir_archivo", $datos);
