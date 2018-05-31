@@ -14,7 +14,7 @@
                 <div class="col-md-6 col-md-offset-3 mx-auto card text-center">
                     <div class="mx-auto is"><h4>Registrarse</h4></div>
                     <hr>
-                    <form method="post" enctype="multipart/form-data" action="{$url_registro}">
+                    <form id="formRegistro" method="post" enctype="multipart/form-data" action="{$url_registro}">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text fa fa-address-book" id="basic-addon1"></span>
