@@ -58,7 +58,7 @@ class Mensajes extends ClaseBase {
 
 	public function getMensajes ($usuario1, $usuario2) {
 		DB::conexion ()->query ("SET lc_time_names = 'es_MX'");
-		$stmt = DB::conexion ()->prepare ("SELECT DATE_FORMAT(dia, '%d de %M del %Y') AS dia, TIME_FORMAT(hora, '%H:%i') AS hora, mensaje, id_desde, u1.id AS 'id', visto FROM mensajes AS m, usuarios AS u1, usuarios AS u2 WHERE u1.correo = \"" . $usuario1 . "\" AND u2.correo = \"" . $usuario2 . "\" AND ((m.id_desde = u1.id AND m.id_para = u2.id) OR (m.id_desde = u2.id AND m.id_para = u1.id))");
+		$stmt = DB::conexion ()->prepare ("SELECT DATE_FORMAT(dia, '%d de %M del %Y') AS dia, TIME_FORMAT(hora, '%H:%i') AS hora, mensaje, id_desde AS id_desde, u1.id AS 'id', visto FROM mensajes AS m, usuarios AS u1, usuarios AS u2 WHERE u1.correo = \"" . $usuario1 . "\" AND u2.correo = \"" . $usuario2 . "\" AND ((m.id_desde = u1.id AND m.id_para = u2.id) OR (m.id_desde = u2.id AND m.id_para = u1.id))");
 
 		$stmt->execute ();
 		$resultado = $stmt->get_result ();
@@ -74,9 +74,14 @@ class Mensajes extends ClaseBase {
 		return isset ($res) ? $res : [];
 	}
 
+	public function hayConversacion ($id, $id2) {
+		$stmt = DB::conexion ()->prepare ("SELECT COUNT(*) AS c FROM mensajes AS m WHERE m.id_desde IN (SELECT id FROM usuarios WHERE id = ".$id." OR id = ".$id2.") AND m.id_para IN (SELECT id FROM usuarios WHERE id = ".$id." OR id = ".$id2.")");
+		$stmt->execute ();
+		return $stmt->get_result ()->fetch_object ()->c != 0;
+	}
+
 	public function getNotificacionesMensajes ($correo) {
-		$stmt = DB::conexion ()->prepare ("SELECT u2.nombre, u2.apellido, u2.correo, mensaje FROM mensajes AS m, usuarios AS u, usuarios AS u2 WHERE u.correo = \"" . $correo . "\" AND u.id = m.id_para AND m.visto = FALSE AND m.id_desde = u2.id AND m.id_m =
-(SELECT MAX(m2.id_m) FROM mensajes AS m2 WHERE m2.id_desde = m.id_desde AND m2.id_para = m.id_para)");
+		$stmt = DB::conexion ()->prepare ("SELECT u2.nombre, u2.apellido, u2.correo, mensaje FROM mensajes AS m, usuarios AS u, usuarios AS u2 WHERE u.correo = \"" . $correo . "\" AND u.id = m.id_para AND m.visto = FALSE AND m.id_desde = u2.id AND m.id_m = (SELECT MAX(m2.id_m) FROM mensajes AS m2 WHERE m2.id_desde = m.id_desde AND m2.id_para = m.id_para)");
 
 		$stmt->execute ();
 		$resultado = $stmt->get_result ();

@@ -9,6 +9,30 @@
 <body background="{$url_base}img/wallpaper.jpg">
 	{include file="header.tpl"}
 
+	<div hidden>
+		<div id="tempComentario" class="comentario">
+			<p class="com_usuario">
+				<a class="aColor" href="">
+					<span class="inactivoComentario">[ Usuario Inactivo ]</span> <span class="duenioComentario">[ Dueño ]</span> <span class="nomComentario">Ale</span>
+				</a>
+				<span class="fas fa-times"></span>
+			</p>
+			<p class="com_comentario">
+				Comentario
+			</p>
+		</div>
+
+		<div id="iniciesesion" class="comentario">
+			<p class="com_comentario" style="text-align: center">
+				<a href="/FileSeller/inicio/login/">Inicie Sesion</a> o <a href="/FileSeller/usuario/registro/">Cree una cuenta</a> para poder comentar.
+			</p>
+		</div>
+
+		<div id="msjNoHayComents">
+			No hay comentarios, se el primero!
+		</div>
+	</div>
+
 	<div class="row panelMain">
 		<div class="col-lg-4 col-md-5 col-sm-5 col-xs-6 pizq">
 			<img src="{$url_base}{$archivo->getImg ()}" id="imgArchivo">
@@ -41,43 +65,29 @@
 	<div class="row panelMain panel-mio">
 		<h2 id="tit_comentarios">Comentarios</h2>
 		<div id="comentarios">
-			{if isset ($comentarios)}
-				{foreach $comentarios as $c}
-					<div class="comentario {if $c->getDuenio ()}mio{else}otro{/if}">
-						<p class="com_usuario">
-							<a href="/FileSeller/usuario/perfil/{$c->getUsuario ()}" style="color: #{$c->getColor ()}">
-								{if $c->getDuenio ()}
-									[Dueño] 
-								{/if}
-								{$c->getNombre ()}
-							</a>
-						</p>
-						<p class="com_comentario">
-							{$c->getComentario ()}
-						</p>
-					</div>
-				{/foreach}
-			{else}
-				<div id="msjNoHayComents">
-					No hay comentarios, se el primero!
-				</div>
-			{/if}
+
 		</div>
 		<div id="enviar_comentario">
-			<form method="POST">
+			<form method="POST" id="enviar_mensaje">
 				<div class="input-group">
-					<!-- Texto -->
-					<input type="text" class="form-control" placeholder="Comentario" name="comentario" required>
-					<div class="input-group-btn">
-						<!-- Boton Enviar -->
-						<button class="btn btn-default" type="submit" id="btnEnviar">
-							<i class="fa fa-share-square"></i>
-						</button>
-					</div>
+				    <textarea required class="form-control custom-control" rows="1" style="resize:none" id="comentariooo" name="comentario"></textarea>
+			    	<span class="input-group-addon btn btn-primary" id="btnEnviar">Enviar</span>
 				</div>
 			</form>
 		</div>
 	</div>
 	{include file="include_js.tpl"}
+	{include file="dialogos.tpl"}
+	<script type="text/javascript">
+		var id = {$archivo->getId ()};
+		{if isset ($usuario)}
+		var admin = {$usuario->esAdmin ()};
+		var correoUsuario = "{$usuario->getCorreo ()}";
+		{else}
+		var admin = 0;
+		var correoUsuario = "";
+		{/if}
+	</script>
+	<script type="text/javascript" src="{$url_base}js/ver_archivo.js"></script>
 </body>
 </html>

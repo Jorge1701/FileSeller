@@ -74,77 +74,127 @@ class ControladorArchivo extends ControladorIndex {
 
 					$tpl->mostrar("inicio",$datos);
 
-					}else{ //error al eliminar
+		}else{ //error al eliminar
 
-						$datos = array(
-							"archivo_subido" => "Hubo un error al procesar su solicitud",
-						);
+			$datos = array(
+				"archivo_subido" => "Hubo un error al procesar su solicitud",
+			);
 
-						$tpl->mostrar("inicio",$datos);
-					}
-
-				}else{
-
-					$datos = array(
-						"archivo_subido" => "Archivo Elimina.. opa te la creiste, suerte la proxima!",
-					);
-
-					$tpl->mostrar("inicio", $datos);
-
-				}
-
-
-				}else{//redirigir al inicio
-					$datos = array(
-						"archivo_subido" => "Debe loguearse para ver esta pagina",
-					);
-
-					$tpl->mostrar("inicio",$datos);
-				}
-
-			}
-
-
-
-			function subir() {
-
-				$tpl = Template::getInstance();
-				$id = Auth::estaLogueado();
-				if (isset($_FILES["archivo"]) && isset($_POST["nombre"])) {
-					$subidoOK = (new Archivo())->subirArchivo($id);
-					if ($subidoOK == 0) {
-						$datos = array(
-							"archivo_subido" => "Su archivo fue subido exitosamente",
-                "active_incio" => "active", //Activar el boton inicio del header
-                "lista_archivos" => (new Archivo())->getListado(), //Lista de futuras recomendaciones
-            );
-						$tpl->mostrar("inicio", $datos);
-						return;
-					} elseif ($subidoOK == 1) {
-						$mensaje = "El archivo excede el tamaño maximo soportado (100MB)";
-					} else {
-						$mensaje = "Hubo un error al subir el archivo, es posible que haya un problema en la configuracion del servidor, o que no se haya podido mover el archivo.";
-					}
-					$datos = array(
-						"active_subir_archivo" => "active",
-						"nombre_archivo" => $_POST["nombre"],
-						"descripcion_archivo" => $_POST["descripcion"],
-						"precio_archivo" => $_POST["precio"],
-						"mensaje" => $mensaje,
-					);
-					$tpl->mostrar("subir_archivo", $datos);
-				} else {
-
-					if (!$id) {
-						(new ControladorIndex())->redirect("inicio", "principal");
-					}
-					$datos = array(
-						"active_perfil" => "active",
-					);
-					$tpl->mostrar("subir_archivo", $datos);
-				}
-			}
-
+			$tpl->mostrar("inicio",$datos);
 		}
 
-		?>
+	}else{
+
+		$datos = array(
+			"archivo_subido" => "Archivo Elimina.. opa te la creiste, suerte la proxima!",
+		);
+
+		$tpl->mostrar("inicio", $datos);
+
+	}
+
+
+	}else{//redirigir al inicio
+		$datos = array(
+			"archivo_subido" => "Debe loguearse para ver esta pagina",
+		);
+
+		$tpl->mostrar("inicio",$datos);
+	}
+
+}
+
+
+
+function subir() {
+
+	$tpl = Template::getInstance();
+	$id = Auth::estaLogueado();
+	if (isset($_FILES["archivo"]) && isset($_POST["nombre"])) {
+		$subidoOK = (new Archivo())->subirArchivo($id);
+		if ($subidoOK == 0) {
+			$datos = array(
+				"archivo_subido" => "Su archivo fue subido exitosamente",
+    "active_incio" => "active", //Activar el boton inicio del header
+    "lista_archivos" => (new Archivo())->getListado(), //Lista de futuras recomendaciones
+);
+			$tpl->mostrar("inicio", $datos);
+			return;
+		} elseif ($subidoOK == 1) {
+			$mensaje = "El archivo excede el tamaño maximo soportado (100MB)";
+		} else {
+			$mensaje = "Hubo un error al subir el archivo, es posible que haya un problema en la configuracion del servidor, o que no se haya podido mover el archivo.";
+		}
+		$datos = array(
+			"active_subir_archivo" => "active",
+			"nombre_archivo" => $_POST["nombre"],
+			"descripcion_archivo" => $_POST["descripcion"],
+			"precio_archivo" => $_POST["precio"],
+			"mensaje" => $mensaje,
+		);
+		$tpl->mostrar("subir_archivo", $datos);
+	} else {
+
+		if (!$id) {
+			(new ControladorIndex())->redirect("inicio", "principal");
+		}
+		$datos = array(
+			"active_perfil" => "active",
+		);
+		$tpl->mostrar("subir_archivo", $datos);
+	}
+}
+
+function comentar ($params = array ()) {
+	header ('Content-type: application/json');
+
+	if (!isset ($params[0]) || $params[0] == "" || !isset ($_POST["comentario"])) {
+		$response_array['status'] = 'error';
+		$response_array['error'] = 'No hay id de archivo';
+		echo json_encode ($response_array);
+		return;
+	}
+
+	(new Comentarios ())->enviarComentario ($params[0], (new Usuario ())->obtenerPorId (Auth::estaLogueado ())->getCorreo (), $_POST["comentario"]);
+
+	$response_array['status'] = 'success';
+	$response_array['comentarios'] = (new Comentarios ())->obtenerComentarios ($params[0]);
+
+	echo json_encode ($response_array);
+}
+
+function comentarios ($params = array ()) {
+	header ('Content-type: application/json');
+
+	if (!isset ($params[0]) || $params[0] == "") {
+		$response_array['status'] = 'error';
+		$response_array['error'] = 'No hay id de archivo';
+		echo json_encode ($response_array);
+		return;
+	}
+
+	$response_array['status'] = 'success';
+	$response_array['comentarios'] = (new Comentarios ())->obtenerComentarios ($params[0]);
+
+	echo json_encode ($response_array);
+}
+
+function eliminarComentario ($params = array ()) {
+	header ('Content-type: application/json');
+
+	if (!isset ($_POST["id"]) || $_POST["id"] == "") {
+		$response_array['status'] = 'error';
+		$response_array['error'] = 'No hay id de archivo';
+		echo json_encode ($response_array);
+		return;
+	}
+
+	$response_array['status'] = "success";
+	(new Comentarios ())->eliminar ($_POST["id"]);
+
+	echo json_encode ($response_array);
+}
+
+}
+
+?>

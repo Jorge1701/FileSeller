@@ -37,7 +37,9 @@
                     <div class="btn btn-primary btn-seguir" {if $seguido == true} hidden {/if} id="btnSeguir" onclick="seguir('{$usuario->getId()}','{$usuarioOtro->getId()}')">Seguir <span class="fa fa-user-plus"></span></div>
                     <div class="btn btn-secondary btn-dejar-seguir" {if $seguido == false} hidden {/if} id="btnDejarSeguir" onclick="dejarSeguir('{$usuario->getId()}','{$usuarioOtro->getId()}')">Dejar de seguir <span class="fa fa-user-times"></span></div>
                     <div class="btn btn-primary btn-seguir" id="btnMensaje" onclick="ir ('{$usuarioOtro->getCorreo ()}')">Mensaje Privado <span class="fa fa-envelope"></span></div>
+                    {if $usuario->esAdmin ()}
                     <div class="btn btn-danger btn-seguir" id="btnStrike" onclick="strike ('{$usuarioOtro->getCorreo ()}')">Strike <span class="fa fa-exclamation-circle"></span></div>
+                    {/if}
                     {/if}
                 </div>
 

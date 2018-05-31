@@ -116,9 +116,13 @@ class ControladorUsuario extends ControladorIndex {
         $urlIniciarConversacion = null;
         $active_archivo = null;
 
-        if (isset ($correoUsuario[0]) && $correoUsuario[0] != null){     //Si una persona quiere consultar el perfil del duenio del archivo.           
-            $usuarioOtro = (new Usuario())->obtenerPorCorreo($correoUsuario[0]);
-            if($usuarioOtro->getId() != $id){  //Si la persona que consulta no es el propio duenio. 
+        if (isset ($correoUsuario[0]) && $correoUsuario[0] != null){     //Si una persona quiere consultar el perfil del duenio del archivo.         
+            $usuarioOtro = (new Usuario())->obtenerPorCorreo($correoUsuario[0]); 
+            
+            if (!$usuarioOtro->getActivo ()) {
+                $ctrlIndex->redirect ("inicio", "principal");
+                return;
+            } else if($usuarioOtro->getId() != $id){  //Si la persona que consulta no es el propio duenio. 
                 $archivos = (new Archivo())->getArchivosUser($usuarioOtro->getId());
                 if(!$id){ //Si la persona que consulta no inicio session, redirigir al login al tratar de iniciar una conversacion
                     $urlIniciarConversacion = $ctrlIndex->getUrl("inicio","login");

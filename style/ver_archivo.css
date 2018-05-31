@@ -64,6 +64,10 @@
 	margin: 0 2vw 3vh 2vw;
 }
 
+#enviar_comentario form {
+	width: 100%;
+}
+
 .comentario {
 	width: 100%;
 	display: block;
@@ -121,4 +125,27 @@
 	background-color: #EEE;
 	overflow-x: hidden;
 	overflow-y: auto;
+}
+
+#campo-comentar {
+	width: 100%;
+	grid-row: 1fr 1fr;
+}
+
+#campo-comentar textarea {
+	width: 100%;
+}
+
+#campo-comentar div {
+	width: 100%;
+	text-align: right;
+	margin: 10pt;
+}
+
+.com_usuario > span {
+	float: right;
+}
+
+.com_usuario > span:hover {
+	cursor: pointer;
 }
