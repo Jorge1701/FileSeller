@@ -18,6 +18,14 @@ CREATE TABLE `archivos` (
   `activo` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `comentarios` (
+  `id` int(11) NOT NULL,
+  `id_archivo` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `comentario` varchar(256) DEFAULT NULL,
+  `duenio` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `mensajes` (
   `id_m` int(11) NOT NULL,
   `id_desde` int(11) DEFAULT NULL,
@@ -38,12 +46,16 @@ CREATE TABLE `notificaciones` (
   `activa` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `seguidos` (
   `idSeguidor` int(11) NOT NULL,
   `idSeguido` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `strikes` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `comentario` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
@@ -57,53 +69,70 @@ CREATE TABLE `usuarios` (
   `admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `comentarios` (
-  `id` int(11) NOT NULL,
-  `id_archivo` int(11) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  `comentario` varchar(256) DEFAULT NULL,
-  `duenio` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 ALTER TABLE `archivos`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `mensajes`
-ADD PRIMARY KEY (`id_m`);
+  ADD PRIMARY KEY (`id_m`);
 
 ALTER TABLE `notificaciones`
-ADD PRIMARY KEY (`id`),
-ADD KEY `idusuario` (`idusuario`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idusuario` (`idusuario`);
 
 ALTER TABLE `seguidos`
-ADD PRIMARY KEY (`idSeguidor`,`idSeguido`),
-ADD KEY `idSeguido` (`idSeguido`);
+  ADD PRIMARY KEY (`idSeguidor`,`idSeguido`),
+  ADD KEY `idSeguido` (`idSeguido`);
+
+ALTER TABLE `strikes`
+  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `usuarios`
-ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `comentarios`
-ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `archivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+ALTER TABLE `comentarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 ALTER TABLE `mensajes`
-MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
+--
+-- AUTO_INCREMENT for table `notificaciones`
+--
 ALTER TABLE `notificaciones`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
+--
+-- AUTO_INCREMENT for table `strikes`
+--
+ALTER TABLE `strikes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `usuarios`
+--
 ALTER TABLE `usuarios`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
-  ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- Constraints for dumped tables
+--
 
+--
+-- Constraints for table `notificaciones`
+--
 ALTER TABLE `notificaciones`
-ADD CONSTRAINT `notificaciones_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`id`);
+  ADD CONSTRAINT `notificaciones_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`id`);
 
+--
+-- Constraints for table `seguidos`
+--
 ALTER TABLE `seguidos`
-ADD CONSTRAINT `seguidos_ibfk_1` FOREIGN KEY (`idSeguido`) REFERENCES `usuarios` (`id`),
-ADD CONSTRAINT `seguidos_ibfk_2` FOREIGN KEY (`idSeguidor`) REFERENCES `usuarios` (`id`);
+  ADD CONSTRAINT `seguidos_ibfk_1` FOREIGN KEY (`idSeguido`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `seguidos_ibfk_2` FOREIGN KEY (`idSeguidor`) REFERENCES `usuarios` (`id`);
 COMMIT;

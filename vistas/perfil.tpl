@@ -37,6 +37,7 @@
                     <div class="btn btn-primary btn-seguir" {if $seguido == true} hidden {/if} id="btnSeguir" onclick="seguir('{$usuario->getId()}','{$usuarioOtro->getId()}')">Seguir <span class="fa fa-user-plus"></span></div>
                     <div class="btn btn-secondary btn-dejar-seguir" {if $seguido == false} hidden {/if} id="btnDejarSeguir" onclick="dejarSeguir('{$usuario->getId()}','{$usuarioOtro->getId()}')">Dejar de seguir <span class="fa fa-user-times"></span></div>
                     <div class="btn btn-primary btn-seguir" id="btnMensaje" onclick="ir ('{$usuarioOtro->getCorreo ()}')">Mensaje Privado <span class="fa fa-envelope"></span></div>
+                    <div class="btn btn-danger btn-seguir" id="btnStrike" onclick="strike ('{$usuarioOtro->getCorreo ()}')">Strike <span class="fa fa-exclamation-circle"></span></div>
                     {/if}
                 </div>
 
@@ -146,6 +147,11 @@
                                     <span class="fas fa-edit pestaña-icono"></span>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a data-toggle="tab" class="nav-link" href="#seguidos">Seguidos 
+                                    <span class="fas fa-user-plus pestaña-icono"></span>
+                                </a>
+                            </li>
                         </ul>
                         <div class="user-body">
                             <div class="tab-content">
@@ -173,6 +179,18 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    {if isset ($strikes)}
+                                        {assign num 1}
+                                        {foreach $strikes as $s}
+                                            <div class="alert alert-danger">
+                                              <strong>Strike {$num++}!</strong> {$s->getComentario ()}
+                                            </div>
+                                        {/foreach}
+                                        <div class="alert alert-warning">
+                                          Si recibe tres strikes su cuenta sera borrada permanentemente.
+                                        </div>
+                                    {/if}
+
                                 </div>
 
                                 <!-- Pestaña archivos --> 
@@ -387,6 +405,21 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Pestaña seguidos --> 
+                                    <div id="seguidos" class="tab-pane slide-left">
+                                        <h4>Seguidos</h4>
+                                        {$seguidos = $usuario->getSeguidos()}
+                                        {if isset($seguidos) && count($seguidos) != 0}
+                                        <div class="list-group"> 
+                                            {foreach $seguidos as $seguido}
+                                            <a href="{$url_base}usuario/perfil/{$seguido->getCorreo()}"class="list-group-item list-group-item-action" style="font-weight: bold; margin-bottom: 3px" title="Ver perfil de {$seguido->getNombre()} {$seguido->getApellido()}">{$seguido->getNombre()} {$seguido->getApellido()}</a>
+                                            {/foreach}
+                                        </div>
+                                        {else}
+                                        <h6>No estás seguiendo ningún usuario</h6>
+                                        {/if} 
+                                    </div>
                                 </div>
                             </div>	
                         </div>	
@@ -395,6 +428,7 @@
                 </div>
             </div>
             {include file="include_js.tpl"}
+            {include file="dialogos.tpl"}
             <script type="text/javascript" src="{$url_base}js/perfil.js"></script>
             <script type="text/javascript" src="{$url_base}js/registro.js"></script>
         </body>
