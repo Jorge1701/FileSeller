@@ -1,7 +1,6 @@
 <?php
-
-require_once ("clases/archivo.php");
 require_once ("controladores/ctrl_index.php");
+require_once ("clases/archivo.php");
 require_once ("clases/usuario.php");
 require_once ("clases/comentarios.php");
 
@@ -12,6 +11,37 @@ class ControladorArchivo extends ControladorIndex {
 	}
 
 	function ver($params = array()) {
+		$idUsuario = Auth::estaLogueado();
+		$archivo = (new Archivo())->obtenerPorId ($params[0]);
+		$duenio = (new usuario())->obtenerPorId($archivo->getDuenio());
+		$res = null;
+		$puntuo = $archivo->ya_puntuo($archivo->getId(),$idUsuario);
+		$puntuacion = $archivo->suma($archivo->getId()) / $archivo->cantidad($archivo->getId()) ;
+		if($idUsuario){
+
+			if (isset ($_POST["reporte"])) {
+				$descripcion="";
+				if (isset ($_POST["descripcion"]))
+					$descripcion=$_POST["descripcion"];
+				(new Archivo())->reportar($archivo->getId(),$_POST["reporte"],$descripcion);
+				header("Location: " . $_SERVER['REQUEST_URI']."/ok");
+			}
+			if (isset($params[1]) ) {
+				$res="ok";
+			}
+			if (isset ($_POST["puntuar"])) {
+				if ($puntuo == "si") {
+					(new Archivo())->actualizarPuntuacio($archivo->getId(),$idUsuario,$_POST["puntuar"]);
+					header("Location: " . $_SERVER['REQUEST_URI']."/ok");
+				}else{
+					(new Archivo())->puntuar($archivo->getId(),$idUsuario,$_POST["puntuar"]);
+					header("Location: " . $_SERVER['REQUEST_URI']);
+				}
+			}
+
+
+		}
+
 		if (isset ($_POST["comentario"])) {
 			$id = Auth::estaLogueado();
 			if ($id != null) {
@@ -20,13 +50,14 @@ class ControladorArchivo extends ControladorIndex {
 		}
 
 		$tpl = Template::getInstance();
-		$archivo = (new Archivo())->obtenerPorId($params[0]);
-		$duenio = (new usuario())->obtenerPorId($archivo->getDuenio());
 		$datos = array(
 			"archivo" => $archivo,
 			"duenio" => $duenio,
 			"url_ver_perfil_duenio" => (new ControladorIndex())->getUrl("usuario", "perfil"),
-			"comentarios" => (new Comentarios ())->obtenerComentarios ($params[0])
+			"comentarios" => (new Comentarios ())->obtenerComentarios ($params[0]),
+			"reporte" => $res,
+			"puntuo" => $puntuo,
+			"puntuacion"=>$puntuacion
 		);
 		$tpl->mostrar("ver_archivo", $datos);
 	}

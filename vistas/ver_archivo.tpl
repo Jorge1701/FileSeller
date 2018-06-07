@@ -5,11 +5,17 @@
 
 	<title>File Seller - Ver Archivo</title>
 	<link rel="stylesheet" type="text/css" href="{$url_base}style/ver_archivo.css">
+	
 </head>
-<body background="{$url_base}img/wallpaper.jpg">
-	{include file="header.tpl"}
 
-	<div class="row panelMain">
+{if $reporte eq "ok"}
+<body background="{$url_base}img/wallpaper.jpg" onload="reporteExito()">
+	{else}
+	<body background="{$url_base}img/wallpaper.jpg">
+		{/if}
+		{include file="header.tpl"}
+
+		<div class="row panelMain">
 		<div class="col-lg-4 col-md-5 col-sm-5 col-xs-6 pizq">
 			<img src="{$url_base}{$archivo->getImg ()}" id="imgArchivo">
 		</div>
@@ -22,20 +28,96 @@
 				Precio: {$archivo->getPrecio ()}
 			</h4>
 			<h5>
-				Puntuación:
+				Puntuacion:
 				<span id="estrellas">
 					<i class="fa fa-star"></i>
-					<i class="fa fa-star" aria-hidden="true"></i>
-					<i class="fa fa-star-half-full "></i>
-					<i class="fa fa-star-o"></i>
-					<i class="fa fa-star-o"></i>
-					2,5
 				</span>
+				{$puntuacion}
 			</h5>
-			<h5>Vendedor: <a href="{$url_ver_perfil_duenio}{$duenio->getCorreo()}" title="Ver perfil de {$duenio->getNombre()} {$duenio->getApellido()}">{$duenio->getNombre()} {$duenio->getApellido()}</a></h5>
-			<button id="btnDescargar" class="btn btn-success" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
-				Descargar <span class="fa fa-download"></span>
-			</button>
+			<div class="rating">
+				<div style="display: inline-block;" class="star-rating">
+					{if $reporte eq "no"}
+					<img src="{$url_base}img/vacia.png">
+					{else}
+					<img src="{$url_base}img/llena.png">
+					{/if}
+					<h6>Puntuar</h6></div>
+					<div style="display: none; " class="open-rating">
+						<img id="uno" onclick="puntuar('1')" src="{$url_base}img/vacia.png">
+						<img id="dos"  onclick="puntuar('2')"  src="{$url_base}img/vacia.png">
+						<img id="tres" onclick="puntuar('3')" src="{$url_base}img/vacia.png">
+						<img id="cuatro" onclick="puntuar('4')" src="{$url_base}img/vacia.png">
+						<img id="cinco" onclick="puntuar('5')" src="{$url_base}img/vacia.png">
+					</div>
+				</div>
+				<form id="form" method="POST">
+					<input hidden id="aux" type="text"  name="puntuar">
+				</form>
+				<h5>Vendedor: <a href="{$url_ver_perfil_duenio}{$duenio->getCorreo()}" title="Ver perfil de {$duenio->getNombre()} {$duenio->getApellido()}">{$duenio->getNombre()} {$duenio->getApellido()}</a></h5>
+				<button id="btnDescargar" class="btn btn-success" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
+					Descargar <span class="fa fa-download"></span>
+				</button>
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Reportar</button>
+			</div>
+
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">	
+							<h4 class="modal-title">Reportar</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body ">
+							<h5>Motivo Del Reporte</h5>
+							<form method="POST">
+								<input type="radio" value="Engañoso" name="reporte">Contenido Engañoso<br>
+								<input type="radio" value="Inapropiado" name="reporte">Contenido Inapropiado<br>
+								<input type="radio" value="Ilegal" name="reporte">Contenido Ilegal<br>
+								<input type="radio" value="Dañino" name="reporte">Contenido Dañino<br>
+								<input type="radio" value="Otros" name="reporte">Otros<br>
+								<h5>Descripcion Del Reporte (opcional)</h5>
+								<textarea name="descripcion" style="width: 80%;" maxlength="150"></textarea>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-default"  name="aceptar" >Aceptar</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="fin" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">	
+						<h4 class="modal-title">Reporte Finalizado</h4>
+						<button type="button" class="close" onclick="salir()">&times;</button>
+					</div>
+					<div class="modal-body">
+						<p>Su reporte a si concluido con exito, en breve los administradores revisaran el archivo.</p>
+						<p>Muchas Gracias.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default"  onclick="salir()">Salir</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-lg-8 col-md-8 col-sm-7 col-xs-6 panel">
+			<h2 id="titulo">{$archivo->getNombre ()}</h2>
+			<p>
+				{$archivo->getDescripcion ()}
+			</p>
 		</div>
 	</div>
 	<div class="row panelMain panel-mio">
@@ -78,6 +160,20 @@
 			</form>
 		</div>
 	</div>
+
 	{include file="include_js.tpl"}
+	<script>
+		
+		var url_ver_archivo = "{$url_ver_archivo}";
+		var url_base = "{$url_base}";
+		var url_puntuar = "{$url_puntuar}";
+		var idArchivo = "{$archivo->getId()}"
+
+
+	</script>
+	<script type="text/javascript" src="{$url_base}js/ver_archivo.js"></script>
 </body>
+
+
+
 </html>

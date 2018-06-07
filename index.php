@@ -20,7 +20,7 @@ $tpl->asignar("url_subir_archivo", $ctrlIndex->getUrl("archivo", "subir"));
 $tpl->asignar("url_ver_archivo", $ctrlIndex->getUrl("archivo", "ver"));
 $tpl->asignar("url_descargar_archivo", $ctrlIndex->getUrl("archivo", "descargar"));
 $tpl->asignar("url_eliminar_archivo", $ctrlIndex->getUrl("archivo", "eliminar"));
-
+$tpl->asignar ("url_puntuar", $ctrlIndex->getUrl("archivo","puntuar"));
 
 if (isset($_GET["url"])) {
     $partes = explode('/', $_GET["url"]);

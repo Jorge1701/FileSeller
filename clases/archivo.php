@@ -135,6 +135,72 @@ class Archivo extends ClaseBase {
         }
         return $res;
     }
+    public function reportar($id,$reporte,$descripcion){
+        ini_set("display_errors", 1);
+        error_reporting(E_ALL & ~E_NOTICE);
+
+        $sql = $this->db->prepare("INSERT INTO reportes(idArchivo,tipo,descripcion) VALUES(?,?,?)");
+        $sql->bind_param("iss",$id,$reporte,$descripcion);
+        if($sql->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+
+
+    }
+
+    public function ya_puntuo($idArchivo,$idUsuario)
+    {
+        $sql = $this->db->prepare("SELECT idUsuario from puntuacion where idArchivo=? and idUsuario=?");
+
+        $sql->bind_param("ii",$idArchivo,$idUsuario);
+
+        $sql->execute();
+
+        $res = $sql->get_result();
+        if($res->num_rows >= 1){
+            return "si";
+        }else
+        {return "no";}
+
+    }
+    public function suma($idArchivo){
+        $sum = DB::conexion ()->prepare("SELECT SUM(puntuacion) AS sum from puntuacion where idArchivo= \"" . $idArchivo . "\" ");
+        $sum->execute ();
+        $resultadoSum = $sum->get_result ();
+        return $resultadoSum->fetch_object ()->sum;
+
+    } 
+    public function cantidad($idArchivo){
+        $cant = DB::conexion ()->prepare("SELECT COUNT(*) AS cant from puntuacion where idArchivo= \"" . $idArchivo . "\" ");
+        $cant->execute ();
+        $resultadoCant = $cant->get_result ();
+        return $resultadoCant->fetch_object ()->cant;
+    }
+
+    public function puntuar($idArchivo,$idUsuario,$puntuacion){
+        $sql = $this->db->prepare("INSERT INTO puntuacion (idArchivo,idUsuario,puntuacion) VALUES(?,?,?)");
+        $sql->bind_param("iid",$idArchivo,$idUsuario,$puntuacion);
+        if($sql->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+    }
+    public function actualizarPuntuacio($idArchivo,$idUsuario,$puntuacion){
+
+        $sql = $this->db->prepare("UPDATE puntuacion SET puntuacion=? WHERE idArchivo=? AND idUsuario=?");
+        $sql->bind_param("dii",$puntuacion,$idArchivo,$idUsuario);
+        if($sql->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+    }
 
     public function bajarArchivo($name) {
         header('Content-Description: File Transfer');

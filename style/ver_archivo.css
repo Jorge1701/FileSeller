@@ -122,3 +122,28 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 }
+.open-rating img{
+	width: 22px;
+	height: 22px;
+
+}
+
+.open-rating {
+	border: 1px solid black;
+	height: 10%;
+	padding-top: 3.6%;
+	padding-bottom: 3.6%;
+	vertical-align: bottom;
+}
+.star-rating img{
+	width: 27px;
+	height: 27px;
+	display: inline;
+	margin-left: 27%;
+
+}
+.star-rating{
+	height: 10%;
+	border: 1px solid black;
+	vertical-align: bottom;
+}
