@@ -146,4 +146,154 @@
 	height: 10%;
 	border: 1px solid black;
 	vertical-align: bottom;
+@media screen and (max-width: 576px) {
+	.pizq {
+		border-bottom: solid 1px black;
+	}
+}
+
+@media screen and (min-width: 576px) {
+	.pizq {
+		border-right: solid 1px black;
+	}
+}
+
+.panelMain {
+	margin: 2vw;
+	background-color: white;
+	border: solid 1px black;
+	border-radius: 4pt;
+}
+
+.panel {
+	border: solid 1px black;
+}
+
+#imgArchivo {
+	width: 100%;
+	padding: 5%;
+}
+
+#titulo {
+	margin-top: 4vh;
+	margin-bottom: 2vh;
+}
+
+#titulo, #tit_comentarios {
+	text-align: center;
+	color: black;
+	font-weight: bold;
+}
+
+#tit_comentarios {
+	width: 100%;
+	margin: 1vh 2vw 0 2vw;
+	text-align: center;
+}
+
+#estrellas {
+	color: orange;
+}
+
+#btnDescargar {
+	float: right;
+	margin-top: 1vh;
+	margin-bottom: 2vh;
+}
+
+#comentarios {
+	width: 100%;
+	margin: 0 2vw;
+	clear: both;
+}
+
+#enviar_comentario {
+	width: 100%;
+	margin: 0 2vw 3vh 2vw;
+}
+
+#enviar_comentario form {
+	width: 100%;
+}
+
+.comentario {
+	width: 100%;
+	display: block;
+	margin: 3vh 0;
+	padding: .5vh 0;
+	border-radius: 3.5px;
+	background-color: #AFA;
+}
+
+.mio {
+	width: 75%;
+	margin-left: 25%;
+}
+
+.otro {
+	width: 75%;
+	background-color: #AAF;
+}
+
+.com_usuario {
+	margin: 0;
+	padding: 0 1vw;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.com_comentario {
+	margin: 0;
+	padding: 0 3vw;
+	font-size: 1.3em;
+	color: black;
+}
+
+#msjNoHayComents {
+	background: #CCC;
+	padding: 1vh 0;
+	text-align: center;
+	border-radius: .3em;
+	margin: 3vh 0;
+}
+
+#comentarios .com_usuario a {
+	color: black;
+	font-weight: bold;
+}
+
+#comentarios .com_usuario a:hover {
+	color: #666;
+	text-decoration: none;
+}
+
+#parrafo {
+	height: 150pt;
+	border-radius: 5pt;
+	padding: 15pt;
+	background-color: #EEE;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#campo-comentar {
+	width: 100%;
+	grid-row: 1fr 1fr;
+}
+
+#campo-comentar textarea {
+	width: 100%;
+}
+
+#campo-comentar div {
+	width: 100%;
+	text-align: right;
+	margin: 10pt;
+}
+
+.com_usuario > span {
+	float: right;
+}
+
+.com_usuario > span:hover {
+	cursor: pointer;
 }

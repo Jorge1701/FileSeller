@@ -37,7 +37,9 @@
                     <div class="btn btn-primary btn-seguir" {if $seguido == true} hidden {/if} id="btnSeguir" onclick="seguir('{$usuario->getId()}','{$usuarioOtro->getId()}')">Seguir <span class="fa fa-user-plus"></span></div>
                     <div class="btn btn-secondary btn-dejar-seguir" {if $seguido == false} hidden {/if} id="btnDejarSeguir" onclick="dejarSeguir('{$usuario->getId()}','{$usuarioOtro->getId()}')">Dejar de seguir <span class="fa fa-user-times"></span></div>
                     <div class="btn btn-primary btn-seguir" id="btnMensaje" onclick="ir ('{$usuarioOtro->getCorreo ()}')">Mensaje Privado <span class="fa fa-envelope"></span></div>
+                    {if $usuario->esAdmin ()}
                     <div class="btn btn-danger btn-seguir" id="btnStrike" onclick="strike ('{$usuarioOtro->getCorreo ()}')">Strike <span class="fa fa-exclamation-circle"></span></div>
+                    {/if}
                     {/if}
                 </div>
 
@@ -73,7 +75,7 @@
                                             <th scope="row">Nombre</th>
                                             <th scope="row">Tipo</th>
                                             <th scope="row">Precio</th>
-                                            {if $usuarioOtro->getCorreo() == "admin@prueba.com"}
+                                            {if isset($usuario) && $usuario->esAdmin()}
                                             <th scope="row">Acción</th>
                                             {/if}
                                         </tr>
@@ -85,8 +87,8 @@
                                             <td  onclick="window.location = '{$url_ver_archivo}{$archivo->getId ()}'">{$archivo->getTipo()}</td>
                                             <td  onclick="window.location = '{$url_ver_archivo}{$archivo->getId ()}'">{$archivo->getPrecio()}</td>
 
-                                            {if $usuarioOtro->getCorreo() =="admin@prueba.com"}
-                                            <td><button onclick="window.location = '{$url_eliminar_archivo}{$archivo->getId ()}'" class="btn btn-default btn-xs"><span class="fa fa-close"></span></button></td>{/if}
+                                            {if isset($usuario) && $usuario->esAdmin()}
+                                            <td><button onclick="window.location = '{$url_eliminar_archivo}{$archivo->getId ()}'" class="btn btn-default btn-xs"><span class="fas fa-times"></span></button></td>{/if}
                                         </tr>
                                         {/foreach}
                                         {else}   

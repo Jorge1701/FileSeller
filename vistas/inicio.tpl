@@ -26,6 +26,10 @@
 	<div class="row">
 		<div class="col-sm-9 col-md-9 mx-auto">
 			<div id="archivos" class="card">
+				{if isset($mensaje)} 
+				<div class="mensaje" style="background: #27D766FF; text-align: center; font-size: 24px; font-family: sans-serif;">{$mensaje}</div>
+				<br>
+				{/if}
 				<table class="table">
 					<thead>
 						<tr>
