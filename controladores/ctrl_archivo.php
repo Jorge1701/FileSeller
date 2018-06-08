@@ -18,50 +18,50 @@ class ControladorArchivo extends ControladorIndex {
 		$duenio = (new usuario())->obtenerPorId($archivo->getDuenio());
 		$res = null;
 		$puntuo = $archivo->ya_puntuo($archivo->getId(),$idUsuario);
-                $cant = $archivo->cantidad($archivo->getId());
-                $puntuacion = $cant == 0 ? $cant : $archivo->suma($archivo->getId()) / $cant  ;
-                if($idUsuario){
+    $cant = $archivo->cantidad($archivo->getId());
+    $puntuacion = $cant == 0 ? $cant : $archivo->suma($archivo->getId()) / $cant  ;
+    if($idUsuario){
 
-                   if (isset ($_POST["reporte"])) {
-                    $descripcion="";
-                    if (isset ($_POST["descripcion"]))
-                     $descripcion=$_POST["descripcion"];
-             (new Archivo())->reportar($archivo->getId(),$_POST["reporte"],$descripcion);
-             header("Location: " . $_SERVER['REQUEST_URI']."/ok");
-     }
-     if (isset($params[1]) ) {
-           if($params[1] == "ok")
-            $res="ok";
-    }
-    if (isset ($_POST["puntuar"])) {
-            if ($puntuo == "si") {
-             (new Archivo())->actualizarPuntuacio($archivo->getId(),$idUsuario,$_POST["puntuar"]);
-             header("Location: " . $_SERVER['REQUEST_URI']);
-     }else{
-             (new Archivo())->puntuar($archivo->getId(),$idUsuario,$_POST["puntuar"]);
-             header("Location: " . $_SERVER['REQUEST_URI']);
-     }
-}
+     if (isset ($_POST["reporte"])) {
+      $descripcion="";
+      if (isset ($_POST["descripcion"]))
+       $descripcion=$_POST["descripcion"];
+     (new Archivo())->reportar($archivo->getId(),$_POST["reporte"],$descripcion);
+     header("Location: " . $_SERVER['REQUEST_URI']."/ok");
+   }
+   if (isset($params[1]) ) {
+     if($params[1] == "ok")
+      $res="ok";
+  }
+  if (isset ($_POST["puntuar"])) {
+    if ($puntuo == "si") {
+     (new Archivo())->actualizarPuntuacio($archivo->getId(),$idUsuario,$_POST["puntuar"]);
+     header("Location: " . $_SERVER['REQUEST_URI']);
+   }else{
+     (new Archivo())->puntuar($archivo->getId(),$idUsuario,$_POST["puntuar"]);
+     header("Location: " . $_SERVER['REQUEST_URI']);
+   }
+ }
 
 
 }
 
 if (isset ($_POST["comentario"])) {
-   $id = Auth::estaLogueado();
-   if ($id != null) {
-    (new Comentarios ())->enviarComentario ($params[0], (new Usuario ())->obtenerPorId ($id)->getCorreo (), $_POST["comentario"]);
+ $id = Auth::estaLogueado();
+ if ($id != null) {
+  (new Comentarios ())->enviarComentario ($params[0], (new Usuario ())->obtenerPorId ($id)->getCorreo (), $_POST["comentario"]);
 }
 }
 
 $tpl = Template::getInstance();
 $datos = array(
-   "archivo" => $archivo,
-   "duenio" => $duenio,
-   "url_ver_perfil_duenio" => (new ControladorIndex())->getUrl("usuario", "perfil"),
-   "comentarios" => (new Comentarios ())->obtenerComentarios ($params[0]),
-   "reporte" => $res,
-   "puntuo" => $puntuo,
-   "puntuacion"=>$puntuacion
+ "archivo" => $archivo,
+ "duenio" => $duenio,
+ "url_ver_perfil_duenio" => (new ControladorIndex())->getUrl("usuario", "perfil"),
+ "comentarios" => (new Comentarios ())->obtenerComentarios ($params[0]),
+ "reporte" => $res,
+ "puntuo" => $puntuo,
+ "puntuacion"=>$puntuacion
 );
 $tpl->mostrar("ver_archivo", $datos);
 }
@@ -84,28 +84,28 @@ function eliminar($params = array()) {
 
      if((new Notificacion())->enviar($duenio->getId(),$contenido)){
       $flag = true;
-}
-}
+    }
+  }
 
-if ((new Archivo())->eliminar($a->getId())) {
+  if ((new Archivo())->eliminar($a->getId())) {
 
 
-     $nuevos_archivos = (new Archivo())->getArchivosUser($duenio->getId());
+   $nuevos_archivos = (new Archivo())->getArchivosUser($duenio->getId());
 
-     if($flag){
-      $datos = array(
-       "archivo_subido" => "Archivo eliminado correctamente",
-       "lista_archivos" => $nuevos_archivos,
-);
+   if($flag){
+    $datos = array(
+     "archivo_subido" => "Archivo eliminado correctamente",
+     "lista_archivos" => $nuevos_archivos,
+   );
 
-}else{
-      $datos = array(
-       "archivo_subido" => "Archivo eliminado correctamente(Fallo notificar)",
-       "lista_archivos" => $nuevos_archivos,
-);
-}
+  }else{
+    $datos = array(
+     "archivo_subido" => "Archivo eliminado correctamente(Fallo notificar)",
+     "lista_archivos" => $nuevos_archivos,
+   );
+  }
 
-$tpl->mostrar("inicio",$datos);
+  $tpl->mostrar("inicio",$datos);
 
 				}else{ //error al eliminar
 
@@ -208,88 +208,77 @@ $tpl->mostrar("inicio",$datos);
         			$moneda = $_POST["moneda"];
         			
         			$estado = (new Archivo())->editar($idArchivo,$nombre,$descripcion,$precio,$moneda);
-        			
-        			$archivo = (new Archivo())->getArchivo($idArchivo);
-        			$tpl = Template::getInstance();
-        			
+        				
         			if($estado == "ok"){
         				(new ControladorIndex())->redirect("archivo","ver",array($idArchivo));
                 return; 
-                $duenio = (new usuario())->obtenerPorId($archivo->getDuenio());
+              }else{
+                $tpl = Template::getInstance();
                 $datos = array(
-        					"mensaje_editar" => "Los cambios se realizaron correctamente",
-        					"archivo" => $archivo,
-        					"duenio" => $duenio,
-        					"url_ver_perfil_duenio" => (new ControladorIndex())->getUrl("usuario", "perfil"),
-        					"comentarios" => (new Comentarios ())->obtenerComentarios ($idArchivo)
-        				);
-        				$tpl->mostrar("ver_archivo", $datos);
-        			}else{
-        				$datos = array(
-        					"id_archivo" => $idArchivo,
-        					"nombre_archivo" => $nombre,
-        					"descripcion_archivo" => $descripcion,
-        					"moneda_archivo" => $moneda,
-        					"mensaje" => $estado,
-        				);
-        				$tpl->mostrar("editar_archivo", $datos);
-        			}
-        		}
+                 "id_archivo" => $idArchivo,
+                 "nombre_archivo" => $nombre,
+                 "descripcion_archivo" => $descripcion,
+                 "moneda_archivo" => $moneda,
+                 "mensaje" => $estado,
+               );
+                $tpl->mostrar("editar_archivo", $datos);
+              }
+            }
 
-        	}
+          }
 
 
 
-        	function comentar ($params = array ()) {
-        		header ('Content-type: application/json');
+          function comentar ($params = array ()) {
+            header ('Content-type: application/json');
 
-        		if (!isset ($params[0]) || $params[0] == "" || !isset ($_POST["comentario"])) {
-        			$response_array['status'] = 'error';
-        			$response_array['error'] = 'No hay id de archivo';
-        			echo json_encode ($response_array);
-        			return;
-        		}
+            if (!isset ($params[0]) || $params[0] == "" || !isset ($_POST["comentario"])) {
+             $response_array['status'] = 'error';
+             $response_array['error'] = 'No hay id de archivo';
+             echo json_encode ($response_array);
+             return;
+           }
 
-        		(new Comentarios ())->enviarComentario ($params[0], (new Usuario ())->obtenerPorId (Auth::estaLogueado ())->getCorreo (), $_POST["comentario"]);
+           (new Comentarios ())->enviarComentario ($params[0], (new Usuario ())->obtenerPorId (Auth::estaLogueado ())->getCorreo (), $_POST["comentario"]);
 
-        		$response_array['status'] = 'success';
-        		$response_array['comentarios'] = (new Comentarios ())->obtenerComentarios ($params[0]);
+           $response_array['status'] = 'success';
+           $response_array['comentarios'] = (new Comentarios ())->obtenerComentarios ($params[0]);
 
-        		echo json_encode ($response_array);
-        	}
+           echo json_encode ($response_array);
+         }
 
-        	function comentarios ($params = array ()) {
-        		header ('Content-type: application/json');
+         function comentarios ($params = array ()) {
+          header ('Content-type: application/json');
 
-        		if (!isset ($params[0]) || $params[0] == "") {
-        			$response_array['status'] = 'error';
-        			$response_array['error'] = 'No hay id de archivo';
-        			echo json_encode ($response_array);
-        			return;
-        		}
+          if (!isset ($params[0]) || $params[0] == "") {
+           $response_array['status'] = 'error';
+           $response_array['error'] = 'No hay id de archivo';
+           echo json_encode ($response_array);
+           return;
+         }
 
-        		$response_array['status'] = 'success';
-        		$response_array['comentarios'] = (new Comentarios ())->obtenerComentarios ($params[0]);
+         $response_array['status'] = 'success';
+         $response_array['comentarios'] = (new Comentarios ())->obtenerComentarios ($params[0]);
 
-        		echo json_encode ($response_array);
-        	}
+         echo json_encode ($response_array);
+       }
 
-        	function eliminarComentario ($params = array ()) {
-        		header ('Content-type: application/json');
+       function eliminarComentario ($params = array ()) {
+        header ('Content-type: application/json');
 
-        		if (!isset ($_POST["id"]) || $_POST["id"] == "") {
-        			$response_array['status'] = 'error';
-        			$response_array['error'] = 'No hay id de archivo';
-        			echo json_encode ($response_array);
-        			return;
-        		}
+        if (!isset ($_POST["id"]) || $_POST["id"] == "") {
+         $response_array['status'] = 'error';
+         $response_array['error'] = 'No hay id de archivo';
+         echo json_encode ($response_array);
+         return;
+       }
 
-        		$response_array['status'] = "success";
-        		(new Comentarios ())->eliminar ($_POST["id"]);
+       $response_array['status'] = "success";
+       (new Comentarios ())->eliminar ($_POST["id"]);
 
-        		echo json_encode ($response_array);
-        	}
+       echo json_encode ($response_array);
+     }
 
-        }
+   }
 
-        ?>
+   ?>
