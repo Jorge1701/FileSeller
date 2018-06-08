@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 require_once ("clases/archivo.php");
 require_once ("controladores/ctrl_index.php");
@@ -56,7 +56,7 @@ class ControladorArchivo extends ControladorIndex {
 
 
 					$nuevos_archivos = (new Archivo())->getArchivosUser($duenio->getId());
-					
+
 					if($flag){
 						$datos = array(
 							"archivo_subido" => "Archivo eliminado correctamente",
@@ -109,41 +109,100 @@ class ControladorArchivo extends ControladorIndex {
 				$tpl = Template::getInstance();
 				$id = Auth::estaLogueado();
 				if (isset($_FILES["archivo"]) && isset($_POST["nombre"])) {
-					$subidoOK = (new Archivo())->subir($id);
-					if ($subidoOK == 0) {
-						$datos = array(
-							"archivo_subido" => "Su archivo fue subido exitosamente",
-                "active_incio" => "active", //Activar el boton inicio del header
-                "lista_archivos" => (new Archivo())->getListado(), //Lista de futuras recomendaciones
-            );
-						$tpl->mostrar("inicio", $datos);
-						return;
-					} elseif ($subidoOK == 1) {
-						$mensaje = "El archivo excede el tamaño maximo soportado (100MB)";
-					} else {
-						$mensaje = "Hubo un error al subir el archivo, es posible que haya un problema en la configuracion del servidor, o que no se haya podido mover el archivo.";
-					}
-					$datos = array(
-						"active_subir_archivo" => "active",
-						"nombre_archivo" => $_POST["nombre"],
-						"descripcion_archivo" => $_POST["descripcion"],
-						"precio_archivo" => isset($_POST["precio"]) ? $_POST["precio"] : "",
-						"moneda_archivo" => $_POST["moneda"],
-						"mensaje" => $mensaje,
-					);
-					$tpl->mostrar("subir_archivo", $datos);
-				} else {
+					
+					$nombre = $_POST["nombre"];
+					$descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
+					$tamanio = $_FILES["archivo"]["size"];
+        			$tipo = explode(".", $_FILES["archivo"]["name"])[1];  //$_FILES["archivo"]["type"];
+        			$precio = isset($_POST["precio"]) ? $_POST["precio"] : "";
+        			$moneda = $_POST["moneda"];
+        			date_default_timezone_set('America/Montevideo');
+        			$fecSubido = date("Y-m-d H:i:s");
+        			
+        			$subidoOK = (new Archivo())->subir($id,$nombre,$descripcion,$tamanio,$tipo,$precio,$moneda,$fecSubido);
+        			if ($subidoOK == "ok") {
+        				$datos = array(
+        					"archivo_subido" => "Su archivo fue subido exitosamente",
+                			"active_incio" => "active", //Activar el boton inicio del header
+                			"lista_archivos" => (new Archivo())->getListado(), //Lista de futuras recomendaciones
+                		);
+        				$tpl->mostrar("inicio", $datos);
+        				return;
+        			} else {
+        				$datos = array(
+        					"active_subir_archivo" => "active",
+        					"nombre_archivo" => $_POST["nombre"],
+        					"descripcion_archivo" => $_POST["descripcion"],
+        					"precio_archivo" => isset($_POST["precio"]) ? $_POST["precio"] : "",
+        					"moneda_archivo" => $_POST["moneda"],
+        					"mensaje" => $subidoOK,
+        				);
+        				$tpl->mostrar("subir_archivo", $datos);
+        			}
+        		} else {
 
-					if (!$id) {
-						(new ControladorIndex())->redirect("inicio", "principal");
-					}
-					$datos = array(
-						"active_perfil" => "active",
-					);
-					$tpl->mostrar("subir_archivo", $datos);
-				}
-			}
+        			if (!$id) {
+        				(new ControladorIndex())->redirect("inicio", "principal");
+        			}
+        			$datos = array(
+        				"active_perfil" => "active",
+        			);
+        			$tpl->mostrar("subir_archivo", $datos);
+        		}
+        	}
 
-		}
+        	function editar($params){
+        		$idArchivo = $params[0];
+        		if($idArchivo != null){
+        			$archivo = (new Archivo())->getArchivo($idArchivo);
+        			if($archivo != null){
+        				$tpl = Template::getInstance();
+        				
+        				$datos = array(
+        					"id_archivo" => $idArchivo,
+        					"nombre_archivo" => $archivo->getNombre(),
+        					"descripcion_archivo" => $archivo->getDescripcion(),
+        					"precio_archivo" => $archivo->getPrecio() == "" ? null : $archivo->getPrecio(),
+        					"moneda_archivo" => $archivo->getMoneda(),
+        				);
+        				$tpl->mostrar("editar_archivo", $datos);
+        			}
+        		}else{
+        			$idArchivo = $_POST["id"];
+        			$nombre = $_POST["nombre"];
+        			$descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
+        			$precio = isset($_POST["precio"]) ? $_POST["precio"] : "";
+        			$moneda = $_POST["moneda"];
+        				
+        			$estado = (new Archivo())->editar($idArchivo,$nombre,$descripcion,$precio,$moneda);
+        			
+        			$archivo = (new Archivo())->getArchivo($idArchivo);
+        			$tpl = Template::getInstance();
+        				
+        			if($estado == "ok"){
+        				$duenio = (new usuario())->obtenerPorId($archivo->getDuenio());
+        				$datos = array(
+        					"mensaje_editar" => "Los cambios se realizaron correctamente",
+        					"archivo" => $archivo,
+        					"duenio" => $duenio,
+        					"url_ver_perfil_duenio" => (new ControladorIndex())->getUrl("usuario", "perfil"),
+        					"comentarios" => (new Comentarios ())->obtenerComentarios ($idArchivo)
+        				);
+        				$tpl->mostrar("ver_archivo", $datos);
+        			}else{
+        				$datos = array(
+        					"id_archivo" => $idArchivo,
+        					"nombre_archivo" => $nombre,
+        					"descripcion_archivo" => $descripcion,
+        					"moneda_archivo" => $moneda,
+        					"mensaje" => $estado,
+        				);
+        				$tpl->mostrar("editar_archivo", $datos);
+        			}
+        		}
 
-		?>
+        	}
+
+        }
+
+        ?>

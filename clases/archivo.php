@@ -10,11 +10,11 @@ class Archivo extends ClaseBase {
     private $tipo = "";
     private $tamanio = "";
     private $precio = "";
+    private $moneda = "";
     private $descripcion = "";
     private $ubicacion = "";
     private $duenio = 0;
     private $fecSubido = "";
-    private $horaSubido = "";
 
     public function __construct($obj = NULL) {
         if (isset($obj)) {
@@ -51,6 +51,10 @@ class Archivo extends ClaseBase {
         return $this->precio;
     }
 
+    public function getMoneda(){
+        return $this->moneda;
+    }
+
     public function getDescripcion() {
         return $this->descripcion;
     }
@@ -67,9 +71,6 @@ class Archivo extends ClaseBase {
         return $this->fecSubido;
     }
 
-    public function getHoraSubido() {
-        return $this->horaSubido;
-    }
 
     public function getArchivosUser($idUsuario) {
         $sql = "select * from archivos where activo=1 and duenio=$idUsuario";
@@ -151,40 +152,38 @@ class Archivo extends ClaseBase {
         return 0;
     }
 
-    public function subir($idDuenio) {
-        $nombre = $_POST["nombre"];
-        $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
-        $tamanio = $this->convertirTamanio($_FILES["archivo"]["size"]);
-        $tipo = explode(".", $_FILES["archivo"]["name"])[1];  //$_FILES["archivo"]["type"];
-        $precio = isset($_POST["precio"]) ? $_POST["precio"] : "";
-        $precioCompleto = $_POST["moneda"] . " " .$precio;
-        date_default_timezone_set('America/Montevideo');
-        $fecSubido = date("Y-m-d");
-        $horaSubido = date("H:i:s");
+    //--------------------------------------------------------------------------------------------------
 
+    /*public function subir($idDuenio,$nombre,$descripcion,$tamanio,$tipo,$precio,$moneda,$fecSubido) {
+
+        $tamanio = $this->convertirTamanio($tamanio);
 
         $target_dir = "uploads/";
-        $target_file = $target_dir . $idDuenio . "_" . $fecSubido . "_" . str_replace(":", "-", $horaSubido) . "_" . basename($_FILES["archivo"]["name"]);
+        $target_file = $target_dir . $idDuenio. "_" . str_replace(":", "-", $fecSubido) . "_" . basename($_FILES["archivo"]["name"]);
         $uploadStatus = -1;
 
         $target_img = "";
         $imgOk = false;
 
+        //Si no se subió imagen, obtener una imagen por defecto dependiendo el tipo de archivo subido.
         if (($_FILES["img"]["error"]) == UPLOAD_ERR_NO_FILE) {
             $target_img = $this->obtenerDefault($_FILES["archivo"]["name"]);
             $imgOk = true;
-        } else if ($_FILES['img']['error'] === UPLOAD_ERR_OK) {
-            $target_img = $target_dir . "muestra/" . $idDuenio . "_" . $fecSubido . "_" . str_replace(":", "-", $horaSubido) . "_" . basename($_FILES["img"]["name"]);
+        } else if ($_FILES['img']['error'] === UPLOAD_ERR_OK) { //Si se subió imagen, moverla a la carpeta muestra asignandole un nombre único.
+            $target_img = $target_dir . "muestra/" . $idDuenio . "_" . str_replace(":", "-", $fecSubido) . "_" . basename($_FILES["img"]["name"]);
             $imgOk = move_uploaded_file($_FILES["img"]["tmp_name"], $target_img);
         }
 
-        if ($_FILES['archivo']['error'] === UPLOAD_ERR_OK) {//Chekear que se haya subido correctamte
-            if ($_FILES["archivo"]["size"] > 104857600) {// Checkear tamaño, limite 100MB en este caso 
+
+        if ($_FILES['archivo']['error'] === UPLOAD_ERR_OK) {//Chekear que se haya subido correctamente el archivo.
+            if ($_FILES["archivo"]["size"] > 104857600) {// Checkear tamaño, limite 100MB. 
                 $uploadStatus = 1;
-            } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file) && $imgOk) {//Si el archivo se movio correctamente desde la carpeta temporal a la indicada, guardarlo en la BD.
-                $i = 1;
-                $sql = $this->db->prepare("INSERT INTO archivos (nombre,tipo,tamanio,precio,descripcion,ubicacion,duenio,fecSubido,horaSubido,img,activo) VALUES( ?,?,?,?,?,?,?,?,?,?,?)");
-                $sql->bind_param("ssssssisssi", $nombre, $tipo, $tamanio, $precioCompleto, $descripcion, $target_file, $idDuenio, $fecSubido, $horaSubido, $target_img,$i);
+            } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file) && $imgOk) {//Si el archivo se movio correctamente desde la carpeta temporal a la indicada y la imagen esta correcta, guardarlo en la BD.
+                ini_set("display_errors", 1);
+                error_reporting(E_ALL);
+
+                $sql = $this->db->prepare("INSERT INTO archivos (img,nombre,tipo,tamanio,precio,moneda,descripcion,ubicacion,duenio,fecSubido) VALUES(?,?,?,?,?,?,?,?,?,?)");
+                $sql->bind_param("ssssssssis", $target_img, $nombre, $tipo, $tamanio, $precio, $moneda, $descripcion, $target_file, $idDuenio, $fecSubido);
                 $sql->execute();
 
                 $uploadStatus = 0;
@@ -196,8 +195,65 @@ class Archivo extends ClaseBase {
         }
 
         return $uploadStatus;
+    }*/
+
+    public function subir($idDuenio,$nombre,$descripcion,$tamanio,$tipo,$precio,$moneda,$fecSubido){
+
+        $tamanio = $this->convertirTamanio($tamanio);
+
+        $pathDestinoArchivo = "uploads/" . $idDuenio. "_" . str_replace(":", "-", $fecSubido) . "_" . basename($_FILES["archivo"]["name"]);
+        $pathDestinoImagen = "uploads/muestra/" . $idDuenio . "_" . str_replace(":", "-", $fecSubido) . "_" . basename($_FILES["img"]["name"]);
+
+
+        $archivo = $this->subirArchivo($pathDestinoArchivo);
+        if($archivo == "ok"){
+
+         $imagen = $this->subirImagenArchivo($pathDestinoImagen,$_FILES["archivo"]["name"]);
+         if($imagen != "error"){
+
+            $sql = $this->db->prepare("INSERT INTO archivos (img,nombre,tipo,tamanio,precio,moneda,descripcion,ubicacion,duenio,fecSubido) VALUES(?,?,?,?,?,?,?,?,?,?)");
+            $sql->bind_param("ssssssssis", $imagen, $nombre, $tipo, $tamanio, $precio, $moneda, $descripcion, $pathDestinoArchivo, $idDuenio, $fecSubido);
+            $sql->execute();
+
+        }else{
+            return $imagen;
+        }
+
+    }
+    return $archivo;
+}
+
+private function subirArchivo($pathDestino){
+         if ($_FILES['archivo']['error'] == UPLOAD_ERR_OK) {//Chekear que se haya subido correctamente el archivo.
+            if ($_FILES["archivo"]["size"] > 104857600) {// Checkear tamaño, limite 100MB. 
+                return "El archivo excede el tamaño maximo soportado (100MB)";
+            } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $pathDestino)) {
+                return "ok";
+            }else{
+                return "Error: No se pudo subir el archivo, reitente.";
+            }
+        }else{
+            return "Error: No se pudo subir el archivo, reintente";
+        }
     }
 
+
+    private function subirImagenArchivo($pathDestino, $nombreArchivo){
+        //Si no se subió imagen, obtener una imagen por defecto dependiendo el tipo de archivo subido.
+        if (($_FILES["img"]["error"]) == UPLOAD_ERR_NO_FILE) {
+         return $this->obtenerDefault($nombreArchivo); 
+        } else if ($_FILES['img']['error'] === UPLOAD_ERR_OK) { //Si se subió imagen, moverla a la carpeta muestra.
+            if (!move_uploaded_file($_FILES["img"]["tmp_name"], $pathDestino)){
+                return "Error: No se pudo subir la imagen del archivo"; 
+            }else{
+                return $pathDestino;
+            }
+        }
+
+    }
+
+
+    //----------------------------------------------------------------------------------------------------
     private function obtenerDefault($nombre) {
         if (strpos($nombre, ".cpp") !== false)
             return "img/iconos_archivos/def_cpp.png";
@@ -255,6 +311,76 @@ class Archivo extends ClaseBase {
             }
         }
     }
+
+    public function editar($idArchivo,$nombre,$descripcion,$precio,$moneda){
+        $archivoAnterior = $this->getArchivo($idArchivo);
+        $imagenCambiada = false;
+        $archivoCambiado = false;
+        date_default_timezone_set('America/Montevideo');
+        $fecSubido = date("Y-m-d H:i:s");
+        $pathDestinoImagen = "uploads/muestra/" . $archivoAnterior->getDuenio() . "_" . str_replace(":", "-", $fecSubido) . "_" . basename($_FILES["img"]["name"]);
+
+
+        //Si se cambio el archivo
+        if(isset($_FILES["archivo"]) && $_FILES["archivo"]["error"] == UPLOAD_ERR_OK){
+
+          $tamanio = $_FILES["archivo"]["size"];
+          $tipo = explode(".", $_FILES["archivo"]["name"])[1];  //$_FILES["archivo"]["type"];
+
+          $pathDestinoArchivo = "uploads/" . $archivoAnterior->getDuenio(). "_" . str_replace(":", "-", $fecSubido) . "_" . basename($_FILES["archivo"]["name"]);
+
+          //Subir el nuevo archivo
+          $archivo = $this->subirArchivo($pathDestinoArchivo);
+          if($archivo == "ok"){
+            $archivoCambiado = true;
+        }else{
+            return $archivo;
+        }
+
+            //Si la imagen del archivo era una por defecto, se cambia por otra dependiendo del tipo del nuevo archivo.
+        if(strpos($archivoAnterior->getUbicacion(), 'iconos_archivos') !== false){
+            $imagen = $this->subirImagenArchivo($pathDestinoImagen,$_FILES["archivo"]["name"]);
+            if(strpos($imagen,'Error') == false ){
+                $imagenCambiada = true;
+            }else{
+                return "Error: No se pudo actualizar la imagen";
+            }
+        }else if($_FILES['img']['error'] === UPLOAD_ERR_OK){ // Si la imagen del archivo no era por defecto y se subio otra se cambia por la nueva.
+            if(move_uploaded_file($_FILES["img"]["tmp_name"], $pathDestinoImagen)){
+                $imagenCambiada = true;
+                $imagen = $pathDestinoImagen;
+            }else{
+                return "Error: No se pudo actualizar la imagen";
+            }
+        }
+    }else if($_FILES['img']['error'] === UPLOAD_ERR_OK){ // Si se cambio solo la imagen.
+        if(move_uploaded_file($_FILES["img"]["tmp_name"], $pathDestinoImagen)){
+            $imagenCambiada = true;
+            $imagen = $pathDestinoImagen;
+        }else{
+            return "Error: No se pudo actualizar la imagen";
+        }
+    }
+
+    if($imagenCambiada && $archivoCambiado){
+        $sql = $this->db->prepare("UPDATE archivos SET img='$imagen', nombre='$nombre', tipo='$tipo', tamanio='$tamanio',precio='$precio',moneda='$moneda',descripcion='$descripcion',ubicacion='$pathDestinoArchivo',fecSubido='$fecSubido' WHERE id=$idArchivo");     
+    }else if ($imagenCambiada) {
+        $sql = $this->db->prepare("UPDATE archivos SET img='$imagen', nombre='$nombre', precio='$precio',moneda='$moneda',descripcion='$descripcion' WHERE id=$idArchivo");
+    }else if($archivoCambiado){
+        $sql = $this->db->prepare("UPDATE archivos SET nombre='$nombre', tipo='$tipo', tamanio='$tamanio',precio='$precio',moneda='$moneda',descripcion='$descripcion',ubicacion='$pathDestinoArchivo',fecSubido='$fecSubido' WHERE id=$idArchivo");
+    }else{
+        $sql = $this->db->prepare("UPDATE archivos SET nombre='$nombre', precio='$precio',moneda='$moneda',descripcion='$descripcion' WHERE id=$idArchivo");
+    }
+
+    if($sql->execute()){
+        return "ok";
+    }else{
+        return "Error: No se pudieron persistir los datos";
+    }        
+
+
+
+}
 
 }
 
