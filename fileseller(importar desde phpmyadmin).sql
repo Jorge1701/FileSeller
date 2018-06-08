@@ -25,7 +25,27 @@ CREATE TABLE `comentarios` (
   `comentario` varchar(256) DEFAULT NULL,
   `duenio` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Estructura de tabla para la tabla `reportes`
+--
 
+CREATE TABLE `reportes` (
+  `idArchivo` int(250) NOT NULL,
+  `tipo` varchar(250) NOT NULL,
+  `descripcion` varchar(250) NOT NULL,
+  `idReporte` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+--
+-- Estructura de tabla para la tabla `puntuacion`
+--
+
+CREATE TABLE `puntuacion` (
+  `idArchivo` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `puntuacion` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `mensajes` (
   `id_m` int(11) NOT NULL,
   `id_desde` int(11) DEFAULT NULL,
@@ -135,4 +155,13 @@ ALTER TABLE `notificaciones`
 ALTER TABLE `seguidos`
   ADD CONSTRAINT `seguidos_ibfk_1` FOREIGN KEY (`idSeguido`) REFERENCES `usuarios` (`id`),
   ADD CONSTRAINT `seguidos_ibfk_2` FOREIGN KEY (`idSeguidor`) REFERENCES `usuarios` (`id`);
+COMMIT;
+
+-- Indices de la tabla `reportes`
+--
+ALTER TABLE `reportes`
+  ADD PRIMARY KEY (`idReporte`);
+
+ALTER TABLE `reportes`
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
