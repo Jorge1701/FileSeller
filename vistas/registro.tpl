@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        {include file="include_css.tpl"}
-        <link rel="stylesheet" type="text/css" href="{$url_base}style/login.css">
-        <title>Registrarse</title>
-    </head>
-    <body background="{$url_base}img/wallpaper.jpg">
-        {include file="header.tpl"}
-        <!-- ----------------------------------------------------------------------------- -->
+<head>
+    {include file="include_css.tpl"}
+    <link rel="stylesheet" type="text/css" href="{$url_base}style/login.css">
+    <title>Registrarse</title>
+</head>
+<body background="{$url_base}img/wallpaper.jpg">
+    {include file="header.tpl"}
+        <!-- ----------------------------------------------------------------------------- 
+        -->
+
+        {if isset($mensaje_registro)}
+        <div align="center">
+            <div class="col-lg-11 alert alert-success text-center">
+                <strong>{$mensaje_registro}</strong> 
+            </div>
+        </div>
+        {/if}
 
         <div class="container">
             <div class="row">
@@ -160,8 +169,8 @@
                         </div>
                         <!-- ESTO ROBADO -->
                         {if isset($mensaje)} 
-                            <div class="mensaje">{$mensaje}</div>
-                            <br>
+                        <div class="mensaje">{$mensaje}</div>
+                        <br>
                         {/if}
 
                         <!-- MODAL ERRORES DIA -->

@@ -18,92 +18,93 @@ class ControladorArchivo extends ControladorIndex {
 		$duenio = (new usuario())->obtenerPorId($archivo->getDuenio());
 		$res = null;
 		$puntuo = $archivo->ya_puntuo($archivo->getId(),$idUsuario);
-		$puntuacion = $archivo->suma($archivo->getId()) / $archivo->cantidad($archivo->getId()) ;
-		if($idUsuario){
+                $cant = $archivo->cantidad($archivo->getId());
+                $puntuacion = $cant == 0 ? $cant : $archivo->suma($archivo->getId()) / $cant  ;
+                if($idUsuario){
 
-			if (isset ($_POST["reporte"])) {
-				$descripcion="";
-				if (isset ($_POST["descripcion"]))
-					$descripcion=$_POST["descripcion"];
-				(new Archivo())->reportar($archivo->getId(),$_POST["reporte"],$descripcion);
-				header("Location: " . $_SERVER['REQUEST_URI']."/ok");
-			}
-			if (isset($params[1]) ) {
-				$res="ok";
-			}
-			if (isset ($_POST["puntuar"])) {
-				if ($puntuo == "si") {
-					(new Archivo())->actualizarPuntuacio($archivo->getId(),$idUsuario,$_POST["puntuar"]);
-					header("Location: " . $_SERVER['REQUEST_URI']."/ok");
-				}else{
-					(new Archivo())->puntuar($archivo->getId(),$idUsuario,$_POST["puntuar"]);
-					header("Location: " . $_SERVER['REQUEST_URI']);
-				}
-			}
-
-
-		}
-
-		if (isset ($_POST["comentario"])) {
-			$id = Auth::estaLogueado();
-			if ($id != null) {
-				(new Comentarios ())->enviarComentario ($params[0], (new Usuario ())->obtenerPorId ($id)->getCorreo (), $_POST["comentario"]);
-			}
-		}
-
-		$tpl = Template::getInstance();
-		$datos = array(
-			"archivo" => $archivo,
-			"duenio" => $duenio,
-			"url_ver_perfil_duenio" => (new ControladorIndex())->getUrl("usuario", "perfil"),
-			"comentarios" => (new Comentarios ())->obtenerComentarios ($params[0]),
-			"reporte" => $res,
-			"puntuo" => $puntuo,
-			"puntuacion"=>$puntuacion
-		);
-		$tpl->mostrar("ver_archivo", $datos);
-	}
-
-	function eliminar($params = array()) {
-		$tpl = Template::getInstance();
-		$usuario_logueado =  (new usuario())->obtenerPorId(Auth::estaLogueado());
-		$flag = false;
-
-		if($usuario_logueado != null){
-
-			$a = (new Archivo())->obtenerPorId($params[0]);
-			$duenio = (new usuario())->obtenerPorId($a->getDuenio());
-
-			if($usuario_logueado->getId() == $duenio->getId() || $usuario_logueado->esAdmin()){
-
-				if($usuario_logueado->esAdmin()){
-
-					$contenido = "Su archivo "."<strong>".$a->getNombre()."</strong>"." ha sido eliminado por contenido indebido.";
-
-					if((new Notificacion())->enviar($duenio->getId(),$contenido)){
-						$flag = true;
-					}
-				}
-
-				if ((new Archivo())->eliminar($a->getId())) {
+                   if (isset ($_POST["reporte"])) {
+                    $descripcion="";
+                    if (isset ($_POST["descripcion"]))
+                     $descripcion=$_POST["descripcion"];
+             (new Archivo())->reportar($archivo->getId(),$_POST["reporte"],$descripcion);
+             header("Location: " . $_SERVER['REQUEST_URI']."/ok");
+     }
+     if (isset($params[1]) ) {
+            $res="ok";
+    }
+    if (isset ($_POST["puntuar"])) {
+            if ($puntuo == "si") {
+             (new Archivo())->actualizarPuntuacio($archivo->getId(),$idUsuario,$_POST["puntuar"]);
+             header("Location: " . $_SERVER['REQUEST_URI']);
+     }else{
+             (new Archivo())->puntuar($archivo->getId(),$idUsuario,$_POST["puntuar"]);
+             header("Location: " . $_SERVER['REQUEST_URI']);
+     }
+}
 
 
-					$nuevos_archivos = (new Archivo())->getArchivosUser($duenio->getId());
+}
 
-					if($flag){
-						$datos = array(
-							"archivo_subido" => "Archivo eliminado correctamente",
-							"lista_archivos" => $nuevos_archivos,
-						);
+if (isset ($_POST["comentario"])) {
+   $id = Auth::estaLogueado();
+   if ($id != null) {
+    (new Comentarios ())->enviarComentario ($params[0], (new Usuario ())->obtenerPorId ($id)->getCorreo (), $_POST["comentario"]);
+}
+}
 
-					}else{
-						$datos = array(
-							"archivo_subido" => "Archivo eliminado correctamente(Fallo notificar)",
-							"lista_archivos" => $nuevos_archivos,
-						);
-					}
+$tpl = Template::getInstance();
+$datos = array(
+   "archivo" => $archivo,
+   "duenio" => $duenio,
+   "url_ver_perfil_duenio" => (new ControladorIndex())->getUrl("usuario", "perfil"),
+   "comentarios" => (new Comentarios ())->obtenerComentarios ($params[0]),
+   "reporte" => $res,
+   "puntuo" => $puntuo,
+   "puntuacion"=>$puntuacion
+);
+$tpl->mostrar("ver_archivo", $datos);
+}
 
-					$tpl->mostrar("inicio",$datos);
+function eliminar($params = array()) {
+  $tpl = Template::getInstance();
+  $usuario_logueado =  (new usuario())->obtenerPorId(Auth::estaLogueado());
+  $flag = false;
+
+  if($usuario_logueado != null){
+
+   $a = (new Archivo())->obtenerPorId($params[0]);
+   $duenio = (new usuario())->obtenerPorId($a->getDuenio());
+
+   if($usuario_logueado->getId() == $duenio->getId() || $usuario_logueado->esAdmin()){
+
+    if($usuario_logueado->esAdmin()){
+
+     $contenido = "Su archivo "."<strong>".$a->getNombre()."</strong>"." ha sido eliminado por contenido indebido.";
+
+     if((new Notificacion())->enviar($duenio->getId(),$contenido)){
+      $flag = true;
+}
+}
+
+if ((new Archivo())->eliminar($a->getId())) {
+
+
+     $nuevos_archivos = (new Archivo())->getArchivosUser($duenio->getId());
+
+     if($flag){
+      $datos = array(
+       "archivo_subido" => "Archivo eliminado correctamente",
+       "lista_archivos" => $nuevos_archivos,
+);
+
+}else{
+      $datos = array(
+       "archivo_subido" => "Archivo eliminado correctamente(Fallo notificar)",
+       "lista_archivos" => $nuevos_archivos,
+);
+}
+
+$tpl->mostrar("inicio",$datos);
 
 				}else{ //error al eliminar
 

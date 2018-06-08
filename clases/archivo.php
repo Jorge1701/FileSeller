@@ -140,16 +140,6 @@ public function buscar($filtro) {
     return $res;
 }
 
-public function getArchivo($idArchivo) {
-
-    $sql = "select * from archivos where id=$idArchivo and activo=1";
-    $res = NULL;
-    $resultado = $this->db->query($sql) or die("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
-    $fila = $resultado->fetch_object();
-    $res = new $this->modelo($fila);
-    return $res;
-}
-
 public function eliminar($idArchivo) {
 
     $sql = $this->db->prepare("UPDATE archivos SET activo=0 WHERE id=?");
@@ -161,16 +151,6 @@ public function eliminar($idArchivo) {
         return false;
     }
 
-}
-
-public function getListado() {
-    $sql = "SELECT * FROM `archivos` WHERE activo=1 AND duenio IN (SELECT id from `usuarios` WHERE activo=1)";
-    $res = NULL;
-    $resultado = $this->db->query($sql) or die("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
-    while ($fila = $resultado->fetch_object()) {
-        $res[] = new $this->modelo($fila);
-    }
-    return $res;
 }
 
 public function bajar($name) {

@@ -33,7 +33,7 @@
 					{$archivo->getDescripcion ()}
 				</p>
 				<h4>
-					Precio: {$archivo->getPrecio ()}
+					Precio: {$archivo->getMoneda()} {$archivo->getPrecio ()}
 				</h4>
 				<h5>
 					Puntuacion:
@@ -127,12 +127,12 @@
 			</div>
 
 
-			<div class="col-lg-8 col-md-8 col-sm-7 col-xs-6 panel">
+			<!--<div class="col-lg-8 col-md-8 col-sm-7 col-xs-6 panel">
 				<h2 id="titulo">{$archivo->getNombre ()}</h2>
 				<p>
 					{$archivo->getDescripcion ()}
 				</p>
-			</div>
+			</div> -->
 		</div>
 		<div class="row panelMain panel-mio">
 			<h2 id="tit_comentarios">Comentarios</h2>
@@ -155,7 +155,7 @@
 				{/foreach}
 				{else}
 				<div id="msjNoHayComents">
-					No hay comentarios, se el primero!
+					No hay comentarios, sé el primero!
 				</div>
 				{/if}
 			</div>

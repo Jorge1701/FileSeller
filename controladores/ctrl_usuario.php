@@ -59,27 +59,27 @@ class ControladorUsuario extends ControladorIndex {
 
                         $datos = array(
                             "titulo" => "Registrarse",
-                            "mensaje" => "Registro Correcto",
+                            "mensaje_registro" => "Registro Correcto",
                         );
 
-                        $tpl->mostrar("inicio", $datos);
+                        $tpl->mostrar("registro", $datos);
                     } else {
                         $datos = array(
                             "titulo" => "Registrarse",
-                            "mensaje" => "Error al ingresar al usuario.",
+                            "mensaje_registro" => "Error al ingresar al usuario.",
                         );
                         $tpl->mostrar("registro", $datos);
                     }
                 } else if ($img == -1) {
                     $datos = array(
                         "titulo" => "Registrarse",
-                        "mensaje" => "El archivo excedió el límite permitido (5MB).",
+                        "mensaje_registro" => "El archivo excedió el límite permitido (5MB).",
                     );
                     $tpl->mostrar("registro", $datos);
                 } else {
                     $datos = array(
                         "titulo" => "Registrarse",
-                        "mensaje" => "Ocurrió un error al procesar su archivo, verifique el formato.",
+                        "mensaje_registro" => "Ocurrió un error al procesar su archivo, verifique el formato.",
                     );
                     $tpl->mostrar("registro", $datos);
                 }
@@ -90,13 +90,13 @@ class ControladorUsuario extends ControladorIndex {
                 if ($usuario->registro($nombre, $apellido, $correo, $password, "", $fecha, $accion)) {
                    $datos = array(
                     "titulo" => "Registrarse",
-                    "mensaje" => "Registro Correcto",
+                    "mensaje_registro" => "Registro Correcto",
                 );
-                   $tpl->mostrar("inicio", $datos);
+                   $tpl->mostrar("registro", $datos);
                } else {
                 $datos = array(
                     "titulo" => "Registrarse",
-                    "mensaje" => "Error al ingresar al usuario.",
+                    "mensaje_registro" => "Error al ingresar al usuario.",
                 );
 
                 $tpl->mostrar("registro", $datos);
@@ -105,7 +105,6 @@ class ControladorUsuario extends ControladorIndex {
     } else {
         $datos = array(
             "titulo" => "Registrarse",
-            "mensaje" => "",
             "active_registrarse" => "active",
         );
 
