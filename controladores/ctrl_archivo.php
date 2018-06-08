@@ -210,7 +210,6 @@ class ControladorArchivo extends ControladorIndex {
         			$archivo = (new Archivo())->getArchivo($idArchivo);
         			$tpl = Template::getInstance();
         			
-                                return;
         			if($estado == "ok"){
         				$duenio = (new usuario())->obtenerPorId($archivo->getDuenio());
         				$datos = array(
