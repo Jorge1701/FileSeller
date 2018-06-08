@@ -291,7 +291,7 @@ private function subirArchivo($pathDestino){
         }
 
             //Si la imagen del archivo era una por defecto, se cambia por otra dependiendo del tipo del nuevo archivo.
-        if(strpos($archivoAnterior->getUbicacion(), 'iconos_archivos') !== false){
+        if(strpos($archivoAnterior->getImg(), 'iconos_archivos') !== false){
             $imagen = $this->subirImagenArchivo($pathDestinoImagen,$_FILES["archivo"]["name"]);
             if(strpos($imagen,'Error') == false ){
                 $imagenCambiada = true;
