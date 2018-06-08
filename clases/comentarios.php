@@ -19,6 +19,10 @@ class Comentarios extends ClaseBase {
         parent::__construct($tabla);
 	}
 
+	public function eliminar ($id) {
+		DB::conexion ()->query ("DELETE FROM comentarios WHERE id = " . $id);
+	}
+
 	public function enviarComentario ($archivo, $usuario, $comentario) {
 		$u = (new Usuario ())->obtenerPorCorreo ($usuario);
 		$a = (new Archivo ())->obtenerPorId ($archivo);
@@ -33,13 +37,13 @@ class Comentarios extends ClaseBase {
 	}
 
 	public function obtenerComentarios ($id_archivo) {
-		$stmt = DB::conexion ()->prepare ("SELECT u.correo AS correo, c.comentario AS comentario, c.duenio AS duenio, u.nombre AS nombre, u.apellido AS apellido, u.id AS id FROM comentarios AS c, usuarios AS u WHERE c.id_usuario = u.id AND c.id_archivo = " . $id_archivo . " ORDER BY c.id");
+		$stmt = DB::conexion ()->prepare ("SELECT c.id AS idCom, u.correo AS correo, c.comentario AS comentario, c.duenio AS duenio, u.nombre AS nombre, u.apellido AS apellido, u.id AS id, u.activo AS activo FROM comentarios AS c, usuarios AS u WHERE c.id_usuario = u.id AND c.id_archivo = " . $id_archivo . " ORDER BY c.id");
 		
 		$stmt->execute ();
 		$resultado = $stmt->get_result ();
 
 		while ($fila = $resultado->fetch_object ())
-			$res[] = new Com ($fila->correo, $fila->nombre . " " . $fila->apellido, $fila->comentario, $fila->duenio, $fila->id);
+			$res[] = new Comen ($fila->idCom, $fila->correo, $fila->nombre . " " . $fila->apellido, $fila->comentario, $fila->duenio, $fila->id, !$fila->activo);
 
 		return isset ($res) ? $res : null;
 	}
@@ -49,21 +53,33 @@ class Comentarios extends ClaseBase {
 	}
 }
 
-class Com {
-	private $usuario;
-	private $nombre;
-	private $comentario;
-	private $duenio;
-	private $color;
+class Comen {
+	public $idCom;
+	public $usuario;
+	public $nombre;
+	public $comentario;
+	public $duenio;
+	public $color;
+	public $inactivo;
 
-	public function __construct ($usuario, $nombre, $comentario, $duenio, $id) {
+	public function __construct ($idCom, $usuario, $nombre, $comentario, $duenio, $id, $inactivo) {
+		$this->idCom = $idCom;
 		$this->usuario = $usuario;
 		$this->nombre = $nombre;
 		$this->comentario = $comentario;
 		$this->duenio = $duenio;
+		$this->inactivo = $inactivo;
 
 		$hash = md5 ("function" . $id);
 		$this->color = substr ($hash, 0, 2) . substr ($hash, 2, 2). substr ($hash, 4, 2);
+	}
+
+	public function getId () {
+		return $this->idCom;
+	}
+	
+	public function setId ($idCom) {
+		$this->idCom = $idCom;
 	}
 
 	public function getColor () {
@@ -100,6 +116,13 @@ class Com {
 	
 	public function setDuenio ($duenio) {
 		$this->duenio = $duenio;
+	}
+	public function getInactivo () {
+		return $this->inactivo;
+	}
+	
+	public function setInactivo ($inactivo) {
+		$this->inactivo = $inactivo;
 	}
 }
 

@@ -10,11 +10,11 @@ CREATE TABLE `archivos` (
   `tipo` varchar(50) NOT NULL,
   `tamanio` varchar(25) NOT NULL,
   `precio` varchar(20) NOT NULL,
+  `moneda` varchar(20) NOT NULL,
   `descripcion` varchar(1000) NOT NULL,
   `ubicacion` varchar(300) NOT NULL,
   `duenio` int(11) NOT NULL,
-  `fecSubido` date NOT NULL,
-  `horaSubido` time NOT NULL,
+  `fecSubido` datetime(6) NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -93,7 +93,7 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `archivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 ALTER TABLE `comentarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
