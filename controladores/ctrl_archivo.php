@@ -30,6 +30,7 @@ class ControladorArchivo extends ControladorIndex {
              header("Location: " . $_SERVER['REQUEST_URI']."/ok");
      }
      if (isset($params[1]) ) {
+           if($params[1] == "ok")
             $res="ok";
     }
     if (isset ($_POST["puntuar"])) {
@@ -212,8 +213,10 @@ $tpl->mostrar("inicio",$datos);
         			$tpl = Template::getInstance();
         			
         			if($estado == "ok"){
-        				$duenio = (new usuario())->obtenerPorId($archivo->getDuenio());
-        				$datos = array(
+        				(new ControladorIndex())->redirect("archivo","ver",array($idArchivo));
+                return; 
+                $duenio = (new usuario())->obtenerPorId($archivo->getDuenio());
+                $datos = array(
         					"mensaje_editar" => "Los cambios se realizaron correctamente",
         					"archivo" => $archivo,
         					"duenio" => $duenio,

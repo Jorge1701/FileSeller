@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="{$url_base}style/ver_archivo.css">
 	
 </head>
-
+{$reporte}
 {if $reporte eq "ok"}
 <body background="{$url_base}img/wallpaper.jpg" onload="reporteExito()">
 	{else}
@@ -71,7 +71,7 @@
 					<button class="btn btn-info" style="margin-top: 7px" onclick="window.location='{$url_base}archivo/editar/{$archivo->getId()}'">Editar <span class="fas fa-edit"></span></button>
 					{/if}
 
-					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Reportar</button>
+					<button type="button" style="margin-top: 7px" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Reportar <span class="fas fa-exclamation-circle"></span></button>
 				</div>
 
 
