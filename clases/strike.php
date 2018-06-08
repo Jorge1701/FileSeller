@@ -87,7 +87,7 @@ class Strike extends ClaseBase {
             DB::conexion ()->query ("UPDATE usuarios SET activo = 0 WHERE id = " . $id_usuario);
             return true;
         } else
-            return false;
+        return false;
     }
 
     public function getId () {

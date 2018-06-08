@@ -4,98 +4,98 @@ require_once("clases/clase_base.php");
 
 class Archivo extends ClaseBase {
 
-    private $id = 0;
-    private $img = "";
-    private $nombre = "";
-    private $tipo = "";
-    private $tamanio = "";
-    private $precio = "";
-    private $descripcion = "";
-    private $ubicacion = "";
-    private $duenio = 0;
-    private $fecSubido = "";
-    private $horaSubido = "";
+ private $id = 0;
+ private $img = "";
+ private $nombre = "";
+ private $tipo = "";
+ private $tamanio = "";
+ private $precio = "";
+ private $moneda = "";
+ private $descripcion = "";
+ private $ubicacion = "";
+ private $duenio = 0;
+ private $fecSubido = "";
 
-    public function __construct($obj = NULL) {
-        if (isset($obj)) {
-            foreach ($obj as $key => $value) {
-                $this->$key = $value;
-            }
+ public function __construct($obj = NULL) {
+    if (isset($obj)) {
+        foreach ($obj as $key => $value) {
+            $this->$key = $value;
         }
-
-        parent::__construct("archivos");
     }
+
+    parent::__construct("archivos");
+}
 
 
     //Getters
-    public function getId() {
-        return $this->id;
-    }
+public function getId() {
+    return $this->id;
+}
 
-    public function getNombre() {
-        return $this->nombre;
-    }
+public function getNombre() {
+    return $this->nombre;
+}
 
-    public function getImg() {
-        return $this->img;
-    }
+public function getImg() {
+    return $this->img;
+}
 
-    public function getTipo() {
-        return $this->tipo;
-    }
+public function getTipo() {
+    return $this->tipo;
+}
 
-    public function getTamanio() {
-        return $this->tamanio;
-    }
+public function getTamanio() {
+    return $this->tamanio;
+}
 
-    public function getPrecio() {
-        return $this->precio;
-    }
+public function getPrecio() {
+    return $this->precio;
+}
 
-    public function getDescripcion() {
-        return $this->descripcion;
-    }
+public function getMoneda(){
+    return $this->moneda;
+}
 
-    public function getUbicacion() {
-        return $this->ubicacion;
-    }
+public function getDescripcion() {
+    return $this->descripcion;
+}
 
-    public function getDuenio() {
-        return $this->duenio;
-    }
+public function getUbicacion() {
+    return $this->ubicacion;
+}
 
-    public function getFecSubido() {
-        return $this->fecSubido;
-    }
+public function getDuenio() {
+    return $this->duenio;
+}
 
-    public function getHoraSubido() {
-        return $this->horaSubido;
-    }
+public function getFecSubido() {
+    return $this->fecSubido;
+}
 
-    public function getArchivosUser($idUsuario) {
-        $sql = "select * from archivos where activo=1 and duenio=$idUsuario";
-        $res = NULL;
-        $resultado = $this->db->query($sql) or die("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
-        while ($fila = $resultado->fetch_object()) {
-            $res[] = new $this->modelo($fila);
-        }
-        return $res;
-    }
 
-    public function getRecomendados($idUsuario){
+public function getArchivosUser($idUsuario) {
+    $sql = "select * from archivos where activo=1 and duenio=$idUsuario";
+    $res = NULL;
+    $resultado = $this->db->query($sql) or die("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+    while ($fila = $resultado->fetch_object()) {
+        $res[] = new $this->modelo($fila);
+    }
+    return $res;
+}
+
+public function getRecomendados($idUsuario){
         //alto ranking
-        $sql = "SELECT bla bla bla FROM `user` ORDER BY `point` DESC";
-    }
+    $sql = "SELECT bla bla bla FROM `user` ORDER BY `point` DESC";
+}
 
 
+public function buscar($filtro) {
+    if ($filtro == NULL)
+        return NULL;
 
-    public function buscar($filtro) {
-        if ($filtro == NULL)
-            return NULL;
-
-        $sql = "SELECT * FROM `archivos` WHERE activo=1 AND duenio IN (SELECT id from `usuarios` WHERE activo=1)";
-        $res = NULL;
-        $resultado = $this->db->query($sql) or die("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+    $sql = "SELECT * FROM `archivos` WHERE activo=1 AND duenio IN (SELECT id from `usuarios` WHERE activo=1)";
+    $res = NULL;
+    $resultado = $this->db->query($sql) or die("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
 
         while ($fila = $resultado->fetch_object()) {
             if (strpos($fila->nombre, $filtro) !== false || strpos($fila->descripcion, $filtro) !== false)
@@ -135,135 +135,112 @@ class Archivo extends ClaseBase {
         $resultado = $this->db->query($sql) or die("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
         while ($fila = $resultado->fetch_object()) {
             $res[] = new $this->modelo($fila);
-        }
-        return $res;
     }
-    public function reportar($id,$reporte,$descripcion){
-        ini_set("display_errors", 1);
-        error_reporting(E_ALL & ~E_NOTICE);
 
-        $sql = $this->db->prepare("INSERT INTO reportes(idArchivo,tipo,descripcion) VALUES(?,?,?)");
-        $sql->bind_param("iss",$id,$reporte,$descripcion);
-        if($sql->execute()){
-            return "ok";
+    return $res;
+}
+
+public function getArchivo($idArchivo) {
+
+    $sql = "select * from archivos where id=$idArchivo and activo=1";
+    $res = NULL;
+    $resultado = $this->db->query($sql) or die("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+    $fila = $resultado->fetch_object();
+    $res = new $this->modelo($fila);
+    return $res;
+}
+
+public function eliminar($idArchivo) {
+
+    $sql = $this->db->prepare("UPDATE archivos SET activo=0 WHERE id=?");
+    $sql->bind_param("i", $idArchivo);
+
+    if($sql->execute()){
+        return true;
+    }else{
+        return false;
+    }
+
+}
+
+public function getListado() {
+    $sql = "SELECT * FROM `archivos` WHERE activo=1 AND duenio IN (SELECT id from `usuarios` WHERE activo=1)";
+    $res = NULL;
+    $resultado = $this->db->query($sql) or die("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
+    while ($fila = $resultado->fetch_object()) {
+        $res[] = new $this->modelo($fila);
+    }
+    return $res;
+}
+
+public function bajar($name) {
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/force-download');
+    header("Content-Disposition: attachment; filename=\"" . basename($name) . "\";");
+    header('Content-Transfer-Encoding: binary');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize($name));
+    ob_clean();
+    flush();
+    readfile($name);
+    return 0;
+}
+
+    public function subir($idDuenio,$nombre,$descripcion,$tamanio,$tipo,$precio,$moneda,$fecSubido){
+
+        $tamanio = $this->convertirTamanio($tamanio);
+
+        $pathDestinoArchivo = "uploads/" . $idDuenio. "_" . str_replace(":", "-", $fecSubido) . "_" . basename($_FILES["archivo"]["name"]);
+        $pathDestinoImagen = "uploads/muestra/" . $idDuenio . "_" . str_replace(":", "-", $fecSubido) . "_" . basename($_FILES["img"]["name"]);
+
+
+        $archivo = $this->subirArchivo($pathDestinoArchivo);
+        if($archivo == "ok"){
+
+           $imagen = $this->subirImagenArchivo($pathDestinoImagen,$_FILES["archivo"]["name"]);
+           if($imagen != "error"){
+
+            $sql = $this->db->prepare("INSERT INTO archivos (img,nombre,tipo,tamanio,precio,moneda,descripcion,ubicacion,duenio,fecSubido) VALUES(?,?,?,?,?,?,?,?,?,?)");
+            $sql->bind_param("ssssssssis", $imagen, $nombre, $tipo, $tamanio, $precio, $moneda, $descripcion, $pathDestinoArchivo, $idDuenio, $fecSubido);
+            $sql->execute();
+
         }else{
-            return "error";
-        }
-
-
-
-    }
-
-    public function ya_puntuo($idArchivo,$idUsuario)
-    {
-        $sql = $this->db->prepare("SELECT idUsuario from puntuacion where idArchivo=? and idUsuario=?");
-
-        $sql->bind_param("ii",$idArchivo,$idUsuario);
-
-        $sql->execute();
-
-        $res = $sql->get_result();
-        if($res->num_rows >= 1){
-            return "si";
-        }else
-        {return "no";}
-
-    }
-    public function suma($idArchivo){
-        $sum = DB::conexion ()->prepare("SELECT SUM(puntuacion) AS sum from puntuacion where idArchivo= \"" . $idArchivo . "\" ");
-        $sum->execute ();
-        $resultadoSum = $sum->get_result ();
-        return $resultadoSum->fetch_object ()->sum;
-
-    } 
-    public function cantidad($idArchivo){
-        $cant = DB::conexion ()->prepare("SELECT COUNT(*) AS cant from puntuacion where idArchivo= \"" . $idArchivo . "\" ");
-        $cant->execute ();
-        $resultadoCant = $cant->get_result ();
-        return $resultadoCant->fetch_object ()->cant;
-    }
-
-    public function puntuar($idArchivo,$idUsuario,$puntuacion){
-        $sql = $this->db->prepare("INSERT INTO puntuacion (idArchivo,idUsuario,puntuacion) VALUES(?,?,?)");
-        $sql->bind_param("iid",$idArchivo,$idUsuario,$puntuacion);
-        if($sql->execute()){
-            return "ok";
-        }else{
-            return "error";
+            return $imagen;
         }
 
     }
-    public function actualizarPuntuacio($idArchivo,$idUsuario,$puntuacion){
+    return $archivo;
+}
 
-        $sql = $this->db->prepare("UPDATE puntuacion SET puntuacion=? WHERE idArchivo=? AND idUsuario=?");
-        $sql->bind_param("dii",$puntuacion,$idArchivo,$idUsuario);
-        if($sql->execute()){
-            return "ok";
-        }else{
-            return "error";
-        }
-
-    }
-
-    public function bajarArchivo($name) {
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/force-download');
-        header("Content-Disposition: attachment; filename=\"" . basename($name) . "\";");
-        header('Content-Transfer-Encoding: binary');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize($name));
-        ob_clean();
-        flush();
-        readfile($name);
-        return 0;
-    }
-
-    public function subirArchivo($idDuenio) {
-        $nombre = $_POST["nombre"];
-        $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
-        $tamanio = $this->convertirTamanio($_FILES["archivo"]["size"]);
-        $tipo = explode(".", $_FILES["archivo"]["name"])[1];  //$_FILES["archivo"]["type"];
-        $precio = $_POST["moneda"] . " " . $_POST["precio"];
-        date_default_timezone_set('America/Montevideo');
-        $fecSubido = date("Y-m-d");
-        $horaSubido = date("H:i:s");
-
-
-        $target_dir = "uploads/";
-        $target_file = $target_dir . $idDuenio . "_" . $fecSubido . "_" . str_replace(":", "-", $horaSubido) . "_" . basename($_FILES["archivo"]["name"]);
-        $uploadStatus = -1;
-
-        $target_img = "";
-        $imgOk = false;
-
-        if (($_FILES["img"]["error"]) == UPLOAD_ERR_NO_FILE) {
-            $target_img = $this->obtenerDefault($_FILES["archivo"]["name"]);
-            $imgOk = true;
-        } else if ($_FILES['img']['error'] === UPLOAD_ERR_OK) {
-            $target_img = $target_dir . "muestra/" . $idDuenio . "_" . $fecSubido . "_" . str_replace(":", "-", $horaSubido) . "_" . basename($_FILES["img"]["name"]);
-            $imgOk = move_uploaded_file($_FILES["img"]["tmp_name"], $target_img);
-        }
-
-        if ($_FILES['archivo']['error'] === UPLOAD_ERR_OK) {//Chekear que se haya subido correctamte
-            if ($_FILES["archivo"]["size"] > 104857600) {// Checkear tamaño, limite 100MB en este caso 
-                $uploadStatus = 1;
-            } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file) && $imgOk) {//Si el archivo se movio correctamente desde la carpeta temporal a la indicada, guardarlo en la BD.
-                $i = 1;
-                $sql = $this->db->prepare("INSERT INTO archivos (nombre,tipo,tamanio,precio,descripcion,ubicacion,duenio,fecSubido,horaSubido,img,activo) VALUES( ?,?,?,?,?,?,?,?,?,?,?)");
-                $sql->bind_param("ssssssisssi", $nombre, $tipo, $tamanio, $precio, $descripcion, $target_file, $idDuenio, $fecSubido, $horaSubido, $target_img,$i);
-                $sql->execute();
-
-                $uploadStatus = 0;
-            } else {
-                $uploadStatus = 2;
+private function subirArchivo($pathDestino){
+         if ($_FILES['archivo']['error'] == UPLOAD_ERR_OK) {//Chekear que se haya subido correctamente el archivo.
+            if ($_FILES["archivo"]["size"] > 104857600) {// Checkear tamaño, limite 100MB. 
+                return "El archivo excede el tamaño maximo soportado (100MB)";
+            } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $pathDestino)) {
+                return "ok";
+            }else{
+                return "Error: No se pudo subir el archivo, reitente.";
             }
-        } else {
-            $uploadStatus = 2;
+        }else{
+            return "Error: No se pudo subir el archivo, reintente";
+        }
+    }
+
+
+    private function subirImagenArchivo($pathDestino, $nombreArchivo){
+        //Si no se subió imagen, obtener una imagen por defecto dependiendo el tipo de archivo subido.
+        if (($_FILES["img"]["error"]) == UPLOAD_ERR_NO_FILE) {
+           return $this->obtenerDefault($nombreArchivo); 
+        } else if ($_FILES['img']['error'] === UPLOAD_ERR_OK) { //Si se subió imagen, moverla a la carpeta muestra.
+            if (!move_uploaded_file($_FILES["img"]["tmp_name"], $pathDestino)){
+                return "Error: No se pudo subir la imagen del archivo"; 
+            }else{
+                return $pathDestino;
+            }
         }
 
-        return $uploadStatus;
     }
 
     private function obtenerDefault($nombre) {
@@ -323,6 +300,139 @@ class Archivo extends ClaseBase {
             }
         }
     }
+
+    public function editar($idArchivo,$nombre,$descripcion,$precio,$moneda){
+        $archivoAnterior = $this->getArchivo($idArchivo);
+        $imagenCambiada = false;
+        $archivoCambiado = false;
+        date_default_timezone_set('America/Montevideo');
+        $fecSubido = date("Y-m-d H:i:s");
+        $pathDestinoImagen = "uploads/muestra/" . $archivoAnterior->getDuenio() . "_" . str_replace(":", "-", $fecSubido) . "_" . basename($_FILES["img"]["name"]);
+
+
+        //Si se cambio el archivo
+        if(isset($_FILES["archivo"]) && $_FILES["archivo"]["error"] == UPLOAD_ERR_OK){
+
+          $tamanio = $_FILES["archivo"]["size"];
+          $tipo = explode(".", $_FILES["archivo"]["name"])[1];  //$_FILES["archivo"]["type"];
+
+          $pathDestinoArchivo = "uploads/" . $archivoAnterior->getDuenio(). "_" . str_replace(":", "-", $fecSubido) . "_" . basename($_FILES["archivo"]["name"]);
+
+          //Subir el nuevo archivo
+          $archivo = $this->subirArchivo($pathDestinoArchivo);
+          if($archivo == "ok"){
+            $archivoCambiado = true;
+        }else{
+            return $archivo;
+        }
+
+            //Si la imagen del archivo era una por defecto, se cambia por otra dependiendo del tipo del nuevo archivo.
+        if(strpos($archivoAnterior->getImg(), 'iconos_archivos') !== false){
+            $imagen = $this->subirImagenArchivo($pathDestinoImagen,$_FILES["archivo"]["name"]);
+            if(strpos($imagen,'Error') == false ){
+                $imagenCambiada = true;
+            }else{
+                return "Error: No se pudo actualizar la imagen";
+            }
+        }else if($_FILES['img']['error'] === UPLOAD_ERR_OK){ // Si la imagen del archivo no era por defecto y se subio otra se cambia por la nueva.
+            if(move_uploaded_file($_FILES["img"]["tmp_name"], $pathDestinoImagen)){
+                $imagenCambiada = true;
+                $imagen = $pathDestinoImagen;
+            }else{
+                return "Error: No se pudo actualizar la imagen";
+            }
+        }
+    }else if($_FILES['img']['error'] === UPLOAD_ERR_OK){ // Si se cambio solo la imagen.
+        if(move_uploaded_file($_FILES["img"]["tmp_name"], $pathDestinoImagen)){
+            $imagenCambiada = true;
+            $imagen = $pathDestinoImagen;
+        }else{
+            return "Error: No se pudo actualizar la imagen";
+        }
+    }
+
+    if($imagenCambiada && $archivoCambiado){
+        $sql = $this->db->prepare("UPDATE archivos SET img='$imagen', nombre='$nombre', tipo='$tipo', tamanio='$tamanio',precio='$precio',moneda='$moneda',descripcion='$descripcion',ubicacion='$pathDestinoArchivo',fecSubido='$fecSubido' WHERE id=$idArchivo");     
+    }else if ($imagenCambiada) {
+        $sql = $this->db->prepare("UPDATE archivos SET img='$imagen', nombre='$nombre', precio='$precio',moneda='$moneda',descripcion='$descripcion' WHERE id=$idArchivo");
+    }else if($archivoCambiado){
+        $sql = $this->db->prepare("UPDATE archivos SET nombre='$nombre', tipo='$tipo', tamanio='$tamanio',precio='$precio',moneda='$moneda',descripcion='$descripcion',ubicacion='$pathDestinoArchivo',fecSubido='$fecSubido' WHERE id=$idArchivo");
+    }else{
+        $sql = $this->db->prepare("UPDATE archivos SET nombre='$nombre', precio='$precio',moneda='$moneda',descripcion='$descripcion' WHERE id=$idArchivo");
+    }
+
+    if($sql->execute()){
+        return "ok";
+    }else{
+        return "Error: No se pudieron persistir los datos";
+    }        
+}
+
+public function reportar($id,$reporte,$descripcion){
+    ini_set("display_errors", 1);
+    error_reporting(E_ALL & ~E_NOTICE);
+
+    $sql = $this->db->prepare("INSERT INTO reportes(idArchivo,tipo,descripcion) VALUES(?,?,?)");
+    $sql->bind_param("iss",$id,$reporte,$descripcion);
+    if($sql->execute()){
+        return "ok";
+    }else{
+        return "error";
+    }
+
+}
+
+public function ya_puntuo($idArchivo,$idUsuario)
+{
+    $sql = $this->db->prepare("SELECT idUsuario from puntuacion where idArchivo=? and idUsuario=?");
+
+    $sql->bind_param("ii",$idArchivo,$idUsuario);
+
+    $sql->execute();
+
+    $res = $sql->get_result();
+    if($res->num_rows >= 1){
+        return "si";
+    }else
+    {return "no";}
+
+}
+public function suma($idArchivo){
+    $sum = DB::conexion ()->prepare("SELECT SUM(puntuacion) AS sum from puntuacion where idArchivo= \"" . $idArchivo . "\" ");
+    $sum->execute ();
+    $resultadoSum = $sum->get_result ();
+    return $resultadoSum->fetch_object ()->sum;
+
+} 
+public function cantidad($idArchivo){
+    $cant = DB::conexion ()->prepare("SELECT COUNT(*) AS cant from puntuacion where idArchivo= \"" . $idArchivo . "\" ");
+    $cant->execute ();
+    $resultadoCant = $cant->get_result ();
+    return $resultadoCant->fetch_object ()->cant;
+}
+
+public function puntuar($idArchivo,$idUsuario,$puntuacion){
+    $sql = $this->db->prepare("INSERT INTO puntuacion (idArchivo,idUsuario,puntuacion) VALUES(?,?,?)");
+    $sql->bind_param("iid",$idArchivo,$idUsuario,$puntuacion);
+    if($sql->execute()){
+        return "ok";
+    }else{
+        return "error";
+    }
+
+}
+public function actualizarPuntuacio($idArchivo,$idUsuario,$puntuacion){
+
+    $sql = $this->db->prepare("UPDATE puntuacion SET puntuacion=? WHERE idArchivo=? AND idUsuario=?");
+    $sql->bind_param("dii",$puntuacion,$idArchivo,$idUsuario);
+    if($sql->execute()){
+        return "ok";
+    }else{
+        return "error";
+    }
+
+}
+
 
 }
 
