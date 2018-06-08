@@ -1,0 +1,26 @@
+th,td{
+	text-align:center;
+}
+#scroll{
+	overflow:scroll;
+	overflow-x: hidden;
+	max-height: 300px;
+}
+.basura , .plus {
+	font-size:25px;
+	color:black;
+}
+
+
+.basura:hover{
+	font-size:28px;
+	color:red;
+}
+.plus:hover{
+	font-size:28px;
+	color:blue;
+}
+#eliminar{
+	
+	margin-top: 5px;
+}

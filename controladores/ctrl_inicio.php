@@ -4,21 +4,45 @@ require_once ("clases/usuario.php");
 require_once ("clases/auth.php");
 require_once ("clases/archivo.php");
 require_once ("clases/notificacion.php");
+require_once ("clases/reporte.php");
 
 class ControladorInicio extends ControladorIndex {
 	
 	function principal () {
 
-		//obtener el id de usuario, para obtener el ranking
+		$id = Auth::estaLogueado();
+		if($id!=null){
+			$usuario = (new Usuario())->obtenerPorId($id);
+			if( $usuario->esAdmin() == 1){
+				/*if($_POST["cant"]){
+					$cant = (new Reporte())->cantidad($_POST["cant"]);
+					echo $cant;
+				}*/
+				$datosAdmin = array(
+					"active_inicio" => "active",
+					"lista_reportes" => (new Reporte())->getReportes(),
+				);
+				$tpl = Template::getInstance();
+				$tpl->mostrar('inicioAdmin',$datosAdmin);
+			}else{
+				$datos = array(
+					"active_inicio" => "active",
+					"lista_archivos" => (new Archivo())->getListado(),
+				);
+				$tpl = Template::getInstance();
+				$tpl->mostrar('inicio',$datos);
+			}
+		}else{
+				$datos = array(
+					"active_inicio" => "active",
+					"lista_archivos" => (new Archivo())->getListado(),
+				);
+				$tpl = Template::getInstance();
+				$tpl->mostrar('inicio',$datos);
+			}
 
-		//$id = Auth::estaLogueado();
 
-		$datos = array(
-			"active_inicio" => "active",
-			"lista_archivos" => (new Archivo())->getListado(),
-		);
-		$tpl = Template::getInstance();
-		$tpl->mostrar('inicio',$datos);
+		
 	}
 
 	function login(){

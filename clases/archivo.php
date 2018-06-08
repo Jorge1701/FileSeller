@@ -26,6 +26,7 @@ class Archivo extends ClaseBase {
         parent::__construct("archivos");
     }
 
+
     //Getters
     public function getId() {
         return $this->id;
@@ -87,6 +88,7 @@ class Archivo extends ClaseBase {
     }
 
 
+
     public function buscar($filtro) {
         if ($filtro == NULL)
             return NULL;
@@ -124,7 +126,8 @@ class Archivo extends ClaseBase {
             return false;
         }
         
-    }
+    }   
+
 
     public function getListado() {
         $sql = "SELECT * FROM `archivos` WHERE activo=1 AND duenio IN (SELECT id from `usuarios` WHERE activo=1)";
