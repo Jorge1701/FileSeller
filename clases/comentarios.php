@@ -45,7 +45,7 @@ class Comentarios extends ClaseBase {
 		while ($fila = $resultado->fetch_object ())
 			$res[] = new Comen ($fila->idCom, $fila->correo, $fila->nombre . " " . $fila->apellido, $fila->comentario, $fila->duenio, $fila->id, !$fila->activo);
 
-		return isset ($res) ? $res : null;
+		return isset ($res) ? $res : [];
 	}
 
 	private function censurarComentario ($comentario) {
