@@ -86,9 +86,15 @@
 						<input hidden id="aux" type="text"  name="puntuar">
 					</form>
 					<h5>Vendedor: <a href="{$url_ver_perfil_duenio}{$duenio->getCorreo()}" title="Ver perfil de {$duenio->getNombre()} {$duenio->getApellido()}">{$duenio->getNombre()} {$duenio->getApellido()}</a></h5>
+					{if $archivo->getMoneda() == "Gratis"}
 					<button id="btnDescargar" class="btn btn-success" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
 						Descargar <span class="fa fa-download"></span>
 					</button>
+					{else}
+					<button id="btnComprar" class="btn btn-success">
+						Comprar <i class="fa fa-dollar-sign"></i>
+					</button>
+					{/if}
 
 					
 					{if $usuario != null && $usuario->getId() == $archivo->getDuenio()}

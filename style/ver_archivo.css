@@ -47,7 +47,8 @@
 	color: orange;
 }
 
-#btnDescargar {
+#btnDescargar,
+#btnComprar {
 	float: right;
 	margin-top: 1vh;
 	margin-bottom: 2vh;
