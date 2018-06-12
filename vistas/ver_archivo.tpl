@@ -7,13 +7,37 @@
 	<link rel="stylesheet" type="text/css" href="{$url_base}style/ver_archivo.css">
 	
 </head>
-
+{$reporte}
 {if $reporte eq "ok"}
 <body background="{$url_base}img/wallpaper.jpg" onload="reporteExito()">
 	{else}
 	<body background="{$url_base}img/wallpaper.jpg">
 		{/if}
 		{include file="header.tpl"}
+
+			<div hidden>
+				<div id="tempComentario" class="comentario">
+					<p class="com_usuario">
+						<a class="aColor" href="">
+							<span class="inactivoComentario">[ Usuario Inactivo ]</span> <span class="duenioComentario">[ Dueño ]</span> <span class="nomComentario">Ale</span>
+						</a>
+						<span class="fas fa-times"></span>
+					</p>
+					<p class="com_comentario">
+						Comentario
+					</p>
+				</div>
+		
+				<div id="iniciesesion" class="comentario">
+					<p class="com_comentario" style="text-align: center">
+						<a href="/FileSeller/inicio/login/">Inicie Sesion</a> o <a href="/FileSeller/usuario/registro/">Cree una cuenta</a> para poder comentar.
+					</p>
+				</div>
+		
+				<div id="msjNoHayComents">
+					No hay comentarios, se el primero!
+				</div>
+			</div>
 
 		{if isset($mensaje_editar)}
 		<div align="center">
@@ -71,7 +95,7 @@
 					<button class="btn btn-info" style="margin-top: 7px" onclick="window.location='{$url_base}archivo/editar/{$archivo->getId()}'">Editar <span class="fas fa-edit"></span></button>
 					{/if}
 
-					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Reportar</button>
+					<button type="button" style="margin-top: 7px" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Reportar <span class="fas fa-exclamation-circle"></span></button>
 				</div>
 
 
@@ -134,54 +158,39 @@
 				</p>
 			</div> -->
 		</div>
+		
+
 		<div class="row panelMain panel-mio">
 			<h2 id="tit_comentarios">Comentarios</h2>
 			<div id="comentarios">
-				{if isset ($comentarios)}
-				{foreach $comentarios as $c}
-				<div class="comentario {if $c->getDuenio ()}mio{else}otro{/if}">
-					<p class="com_usuario">
-						<a href="/FileSeller/usuario/perfil/{$c->getUsuario ()}" style="color: #{$c->getColor ()}">
-							{if $c->getDuenio ()}
-							[Dueño] 
-							{/if}
-							{$c->getNombre ()}
-						</a>
-					</p>
-					<p class="com_comentario">
-						{$c->getComentario ()}
-					</p>
-				</div>
-				{/foreach}
-				{else}
-				<div id="msjNoHayComents">
-					No hay comentarios, sé el primero!
-				</div>
-				{/if}
 			</div>
 			<div id="enviar_comentario">
-				<form method="POST">
+				<form method="POST" id="enviar_mensaje">
 					<div class="input-group">
-						<!-- Texto -->
-						<input type="text" class="form-control" placeholder="Comentario" name="comentario" required>
-						<div class="input-group-btn">
-							<!-- Boton Enviar -->
-							<button class="btn btn-default" type="submit" id="btnEnviar">
-								<i class="fa fa-share-square"></i>
-							</button>
-						</div>
+					    <textarea required class="form-control custom-control" rows="1" style="resize:none" id="comentariooo" name="comentario"></textarea>
+				    	<span class="input-group-addon btn btn-primary" id="btnEnviar">Enviar</span>
 					</div>
 				</form>
 			</div>
 		</div>
 
+		{include file="dialogos.tpl"}
 		{include file="include_js.tpl"}
 		<script>
 
 			var url_ver_archivo = "{$url_ver_archivo}";
 			var url_base = "{$url_base}";
 			var url_puntuar = "{$url_puntuar}";
-			var idArchivo = "{$archivo->getId()}"
+			var idArchivo = "{$archivo->getId()}";
+			{if isset($usuario)}
+				var id = {$usuario->getId ()};
+				var correoUsuario = "{$usuario->getCorreo ()}";
+				var admin = {$usuario->esAdmin ()};
+			{else}
+				var correoUsuario = "";
+				var id = 0;
+				var admin = 0;
+			{/if}
 
 
 		</script>

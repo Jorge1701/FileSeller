@@ -147,3 +147,11 @@
 	border: 1px solid black;
 	vertical-align: bottom;
 }
+
+.com_usuario > span {
+	float: right;
+}
+
+.com_usuario > span:hover {
+	cursor: pointer;
+}

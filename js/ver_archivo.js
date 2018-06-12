@@ -106,6 +106,7 @@ var msjNoHayComents = $("#msjNoHayComents");
 var tempIniciesesion = $("#iniciesesion");
 
 $(document).ready (function () {
+	console.log ("AS");
 	if (correoUsuario == "")
 		$("#enviar_comentario").hide ();
 
@@ -115,9 +116,10 @@ $(document).ready (function () {
 function cargarComentarios () {
 	$.ajax ({
 		type: "POST",
-		url: "/FileSeller/archivo/comentarios/" + id,
+		url: "/FileSeller/archivo/comentarios/" + idArchivo,
 		dataType: "JSON",
 		success: function (data) {
+			console.log (data);
 			comentarios.html ("");
 			if (data["status"] == "error") {
 				alert (data["error"]);
@@ -192,7 +194,7 @@ btnEnviar.click (function () {
 
 	$.ajax ({
 		type: "POST",
-		url: "/FileSeller/archivo/comentar/" + id,
+		url: "/FileSeller/archivo/comentar/" + idArchivo,
 		dataType: "JSON",
 		data: {
 			comentario: txtComentario.val ()
