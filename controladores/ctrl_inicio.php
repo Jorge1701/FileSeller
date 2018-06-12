@@ -27,15 +27,16 @@ class ControladorInicio extends ControladorIndex {
 			}else{
 				$datos = array(
 					"active_inicio" => "active",
-					"lista_archivos" => (new Archivo())->getListado(),
+					"lista_archivos" => (new Archivo())->getRecomendados(),
 				);
 				$tpl = Template::getInstance();
 				$tpl->mostrar('inicio',$datos);
 			}
 		}else{
+			
 				$datos = array(
 					"active_inicio" => "active",
-					"lista_archivos" => (new Archivo())->getListado(),
+					"lista_archivos" => (new Archivo())->getRecomendados(),
 				);
 				$tpl = Template::getInstance();
 				$tpl->mostrar('inicio',$datos);

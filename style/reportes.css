@@ -6,11 +6,20 @@ th,td{
 	overflow-x: hidden;
 	max-height: 300px;
 }
-.basura , .plus {
+.basura , .plus ,{
 	font-size:25px;
 	color:black;
 }
-
+.fa-sort-alpha-down , .fa-sort-alpha-up{
+	color: black;
+	float:right;
+}
+.fa-sort-alpha-down:hover{
+	font-size: 20px;
+}
+.fa-sort-alpha-up:hover{
+	font-size: 20px;
+}
 
 .basura:hover{
 	font-size:28px;
@@ -20,7 +29,7 @@ th,td{
 	font-size:28px;
 	color:blue;
 }
-#eliminar{
-	
-	margin-top: 5px;
+#eliminar , #strike{
+	margin-top: 20px;
+	margin-left: 60px;
 }

@@ -15,7 +15,8 @@ CREATE TABLE `archivos` (
   `ubicacion` varchar(300) NOT NULL,
   `duenio` int(11) NOT NULL,
   `fecSubido` datetime(6) NOT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT '1'
+  `activo` tinyint(1) NOT NULL DEFAULT '1',
+  `puntuacion_general` float DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `comentarios` (
