@@ -64,7 +64,7 @@
 					<span id="estrellas">
 						<i class="fa fa-star"></i>
 					</span>
-					{$puntuacion}
+					{$puntuacion|number_format:1}
 				</h5>
 				<div class="rating">
 					<div  class="star-rating">

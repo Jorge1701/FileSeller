@@ -16,17 +16,17 @@ class ControladorArchivo extends ControladorIndex {
     function cantidad($params = array ()) {
       header ('Content-type: application/json');
       if (!isset ($params[0]) || $params[0] == ""  ) {
-         $response_array['status'] = 'error';
-         $response_array['error'] = 'No hay id de reporte';
-         echo json_encode ($response_array);
-         return;
-     }
-     $response_array['status'] = 'success';
-     $response_array['cantidad'] =  (new Reporte ())->cantidad($params[0],$params[1]);
-     echo json_encode ($response_array);
- }
+       $response_array['status'] = 'error';
+       $response_array['error'] = 'No hay id de reporte';
+       echo json_encode ($response_array);
+       return;
+   }
+   $response_array['status'] = 'success';
+   $response_array['cantidad'] =  (new Reporte ())->cantidad($params[0],$params[1]);
+   echo json_encode ($response_array);
+}
 
- function ver($params = array()) {
+function ver($params = array()) {
     $idUsuario = Auth::estaLogueado();
     $archivo = (new Archivo())->obtenerPorId($params[0]);
     $duenio = (new usuario())->obtenerPorId($archivo->getDuenio());
@@ -66,6 +66,14 @@ class ControladorArchivo extends ControladorIndex {
         }
     }
 
+
+    $editado = null;
+    if (isset($params[1])) {
+        if ($params[1] == "ok_edit"){
+            $editado = "Editado correctamente";
+        }
+    }
+
     $tpl = Template::getInstance();
     $datos = array(
         "archivo" => $archivo,
@@ -74,7 +82,8 @@ class ControladorArchivo extends ControladorIndex {
         "comentarios" => (new Comentarios ())->obtenerComentarios($params[0]),
         "reporte" => $res,
         "puntuo" => $puntuo,
-        "puntuacion" => $puntuacion
+        "puntuacion" => $puntuacion,
+        "mensaje_editar" => $editado
     );
     $tpl->mostrar("ver_archivo", $datos);
 }
@@ -215,7 +224,7 @@ function eliminar($params = array()) {
             $estado = (new Archivo())->editar($idArchivo, $nombre, $descripcion, $precio, $moneda);
 
             if ($estado == "ok") {
-                (new ControladorIndex())->redirect("archivo", "ver", array($idArchivo));
+                (new ControladorIndex())->redirect("archivo", "ver", array($idArchivo,"ok_edit"));
                 return;
             } else {
                 $tpl = Template::getInstance();
@@ -285,28 +294,28 @@ function eliminar($params = array()) {
       header ('Content-type: application/json');
 
       if (!isset ($_POST["id"]) || $_POST["id"] == "") {
-       $response_array['status'] = 'error';
-       $response_array['error'] = 'No hay id de reporte';
-       echo json_encode ($response_array);
-       return;
-   }
+         $response_array['status'] = 'error';
+         $response_array['error'] = 'No hay id de reporte';
+         echo json_encode ($response_array);
+         return;
+     }
 
-   $response_array['status'] = (new Reporte ())->eliminarReporte($_POST["id"]);
-   echo json_encode ($response_array);
+     $response_array['status'] = (new Reporte ())->eliminarReporte($_POST["id"]);
+     echo json_encode ($response_array);
 
-}
+ }
 
-function eliminarArchivo($params = array ()) {
+ function eliminarArchivo($params = array ()) {
     header ('Content-type: application/json');
     if (!isset ($_POST["id"]) || $_POST["id"] == "") {
-       $response_array['status'] = 'error';
-       $response_array['error'] = 'No hay id de archivo';
-       echo json_encode ($response_array);
-       return;
-   }
+     $response_array['status'] = 'error';
+     $response_array['error'] = 'No hay id de archivo';
+     echo json_encode ($response_array);
+     return;
+ }
 
-   $response_array['status'] = (new Archivo())->eliminar(($_POST["id"]));
-   echo json_encode ($response_array);
+ $response_array['status'] = (new Archivo())->eliminar(($_POST["id"]));
+ echo json_encode ($response_array);
 }
 
 
