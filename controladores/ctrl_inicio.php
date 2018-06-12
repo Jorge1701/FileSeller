@@ -33,6 +33,7 @@ class ControladorInicio extends ControladorIndex {
 				$tpl->mostrar('inicio',$datos);
 			}
 		}else{
+			
 				$datos = array(
 					"active_inicio" => "active",
 					"lista_archivos" => (new Archivo())->getRecomendados(),

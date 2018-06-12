@@ -123,19 +123,23 @@
 	overflow-y: auto;
 }
 .open-rating img{
+	position: relative;
+	top:2vh;
 	width: 22px;
 	height: 22px;
 
 }
 
 .open-rating {
+	display: inline-block;
+	visibility: hidden;
 	border: 1px solid black;
 	height: 10%;
-	padding-top: 3.6%;
 	padding-bottom: 3.6%;
 	vertical-align: bottom;
 }
-.star-rating img{
+.star-rating img{	
+
 	width: 27px;
 	height: 27px;
 	display: inline;
@@ -143,11 +147,11 @@
 
 }
 .star-rating{
+	display: inline-block;
 	height: 10%;
 	border: 1px solid black;
 	vertical-align: bottom;
 }
-
 .com_usuario > span {
 	float: right;
 }
