@@ -107,6 +107,8 @@ function cargarConversacion (id, nombre, contacto) {
 		i++;
 	}
 	$("#id" + id).find (".contacto").addClass ("seleccionado");
+	console.log (id);
+	console.log ($("#id" + id).find (".txtNombreContacto"));
 	$("#id" + id).find (".num-msj").hide ();
 	llenarMensajes (contacto);
 }

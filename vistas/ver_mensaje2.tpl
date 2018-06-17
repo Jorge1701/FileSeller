@@ -14,7 +14,7 @@
 			<div class="contacto">
 				<img src="{$url_base}img/icono.png" class="rounded-circle img-usuario">
 				<span class="txtNombreContacto"></span>
-				<span class="num-msj"></span>
+				<span class="num-msj">0</span>
 			</div>
 		</span>
 
