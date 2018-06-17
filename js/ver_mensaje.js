@@ -84,8 +84,12 @@ function cargarContactos (seleccionado = "", cargar = "") {
 						}
 						if (c.cant == 0) {
 							contacto.find (".num-msj").hide ();
-						} else {
+						} else
 							contacto.find (".num-msj").html (c.cant);
+						if (c.cant != 0 && seleccionado != "" && seleccionado == c.correo) {
+							contacto.find (".num-msj").css ("background", "yellow");
+							contacto.find (".num-msj").css ("color", "black");
+							borrarUno ();
 						}
 						$("#contactos").append (contacto);
 					}
@@ -99,7 +103,44 @@ function cargarContactos (seleccionado = "", cargar = "") {
 	});
 }
 
+function borrarUno () {
+	let d = document.querySelectorAll (".navbar ul li a.fa-inbox span");
+	d[1].innerText = d[1].innerText - 1;
+
+	let notificaciones = document.querySelectorAll ("#notif-mensajes .notification");
+	for (let i = 0; i < notificaciones.length; i++)
+		if (notificaciones[i].getAttribute ('onclick').includes (contCargado))
+			notificaciones[i].remove ();
+
+	if (document.querySelectorAll ("#notif-mensajes .notification").length == 0) {
+		let nohay = document.createElement ("tr");
+		let asd = document.createElement ("th");
+		asd.innerText = "No tienes mensajes nuevos";
+		nohay.appendChild (asd);
+		document.querySelector ("#notif-mensajes tbody").appendChild (nohay);
+	}
+
+	if (d[1].innerText == "0") {
+		d[0].style.display = "none";
+		d[1].style.display = "none";
+	}
+}
+
+let convCargada = false;
+let idConv = 1;
+let contCargado = null;
+
 function cargarConversacion (id, nombre, contacto) {
+	if (convCargada) {
+		let cantConvCargada = $("#id" + idConv).find (".num-msj").html ();
+		if (cantConvCargada !== undefined && cantConvCargada != 0) {
+			$("#id" + idConv).find (".num-msj").html ("0");
+			$("#id" + idConv).find (".num-msj").hide ();
+		}
+	}
+	convCargada = true;
+	idConv = id;
+	contCargado = contacto;
 	$("#txtNombre").html (nombre);
 	var i = 0;
 	while ($("#id" + i).length != 0) {
@@ -107,9 +148,14 @@ function cargarConversacion (id, nombre, contacto) {
 		i++;
 	}
 	$("#id" + id).find (".contacto").addClass ("seleccionado");
-	console.log (id);
-	console.log ($("#id" + id).find (".txtNombreContacto"));
-	$("#id" + id).find (".num-msj").hide ();
+
+	let cant = $("#id" + id).find (".num-msj").html ();
+	if (cant !== undefined && cant != 0)
+		borrarUno ();
+
+	$("#id" + id).find (".num-msj").css ("background", "yellow");
+	$("#id" + id).find (".num-msj").css ("color", "black");
+
 	llenarMensajes (contacto);
 }
 
@@ -125,7 +171,6 @@ function llenarMensajes (contacto) {
 				alert (data["error"]);
 				return;
 			}
-
 			if (data["mensajes"].length == 0) {
 				noHayMensajes.find (".nombre").html (contacto);
 				$("#listaMsjs").append (noHayMensajes);
@@ -148,7 +193,6 @@ function llenarMensajes (contacto) {
 					}
 
 					if (!leido && m.propio && !m.visto) {
-						console.log ("no leido");
 						var nnn = tmepleidohaqui.clone ();
 						nnn.find (".nombre").html (contacto);
 						$("#listaMsjs").append (nnn);

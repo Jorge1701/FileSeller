@@ -81,7 +81,7 @@
 				</a>
 
 
-				<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
+				<div class="dropdown-menu dropdown-menu-right menu-notificaciones" id="notif-mensajes">
 					<h6 class="menu-notificaciones-titulo"><span class="fa fa-inbox"></span> Mensajes</h6>
 					<table class="table">
 						<tbody>
