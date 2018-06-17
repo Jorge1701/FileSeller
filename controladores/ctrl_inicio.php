@@ -59,7 +59,10 @@ class ControladorInicio extends ControladorIndex {
 				}
 				$this->redirect("inicio","principal");
 			}else{
+				$usuario = $usr->obtenerPorCorreo ($correo);
 				$mensaje = "Email/Contraseña incorrectos";
+				if ($usuario != null && !$usuario->getActivo ())
+					$mensaje = "Su cuenta fue desactivada, contactese con un administrador";
 				$datos = array(
 					"titulo" => "Iniciar sesión",
 					"mensaje" => $mensaje,
