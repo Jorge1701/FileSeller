@@ -39,7 +39,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 
 {include file="include_js.tpl"}
 </body>
