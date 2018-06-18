@@ -26,7 +26,7 @@ $("#campanaNotif").click(function(){
 	});
 });
 
-$('.notification div').bind('click', function (e) {
+$('.notification').bind('click', function (e) {
 	e.stopPropagation() 
 });
 
