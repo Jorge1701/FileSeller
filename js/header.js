@@ -39,9 +39,8 @@ function eliminarNotificacion(idNotif){
 		success: function (data) {
 			if (data.status == 'success') {
 				$('#'+idNotif).remove();
-
-				if($("#tabla_notificaciones tr").length == 0){
-					$("#tabla_notificaciones tbody").html("<tr><th>Todas las notificaciones han sido eliminadas</th></tr>");
+				if($("#notificaciones tr").length == 0){
+					$(".menu-notificaciones table tbody").html("<tr><th>Todas las notificaciones han sido eliminadas</th></tr>");
 				}
 			}
 		},

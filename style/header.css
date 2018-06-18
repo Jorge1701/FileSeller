@@ -17,8 +17,11 @@ b{
 }
 
 .menu-notificaciones{
+  max-height: 490px;
   width: 400px;
+  overflow: auto;
 }
+
 .notification:hover {
   background-color: hsla(0, 0%, 20%, 0.04);
 }
