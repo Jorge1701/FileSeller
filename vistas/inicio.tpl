@@ -33,41 +33,35 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<h4 class="titulo_lista_archivos">Archivos</h4>
+							<h4 class="titulo_lista_archivos">Archivos destacados</h4>
 						</tr>
 					</thead>
-					
-					<tr>
-						<th scope="row"></th>
-						<th scope="row">Nombre</th>
-						<th scope="row">Tipo</th>
-					</tr>
+					<tbody>
+						<tr>
+							<th ></th>
+							<th scope="row">Nombre</th>
+							<th scope="row">Tipo</th>
+						</tr>
+						{if isset($lista_archivos)}
+						{foreach $lista_archivos as $a}
+						<tr class="fila_archivo_inicio "  onclick="verArchivo(this)" >
+							<td><img class="img-archivo" src="{$url_base}{$a->getImg()}"></td>
+							<td>{$a->getNombre()}</td>
+							<td>{$a->getTipo()}</td>
+							<td hidden >{$a->getId()}</td>
+						</tr>
+						{/foreach}
+						{else}	
+						<tr>
+							<td class="noArchivos" colspan="3">No hay archivos subidos en la pagina</td>
+						</tr>
+						{/if}
+					</tbody>
 				</table>
-				<div id="scroll">
-					<table class="table" > 
-						<tbody>
-							{if isset($lista_archivos)}
-							{foreach $lista_archivos as $a}
-							<tr class="fila_archivo_inicio "  onclick="verArchivo(this)" >
-								<td><img class="img-archivo" src="{$url_base}{$a->getImg()}"></td>
-								<td>{$a->getNombre()}</td>
-								<td>{$a->getTipo()}</td>
-								<td hidden >{$a->getId()}</td>
-							</tr>
-
-							{/foreach}
-						</tbody>
-					</table>
-				</div>
-				{else}	
-			</tbody>
-		</table>
-		<div class="noArchivos">No hay archivos subidos en la pagina</div>
-		{/if}
-	</div>	
-</div>
-</div>
-{include file="include_js.tpl"}
+			</div>	
+		</div>
+	</div>
+	{include file="include_js.tpl"}
 </body>
 <script >
 	function verArchivo(id){

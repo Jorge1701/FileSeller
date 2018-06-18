@@ -40,8 +40,8 @@
 				</a>
 
 				<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
-					<h6 class="menu-notificaciones-titulo"><span class="fas fa-bell"></span> Notificaciónes</h6>
-					<table class="table">
+					<h6 class="menu-notificaciones-titulo"><span class="fas fa-bell"></span> Notificaciones</h6>
+					<table id="tabla_notificaciones" class="table">
 						<tbody>
 							{if !empty($notifs)}
 							{foreach $notifs as $notif}
