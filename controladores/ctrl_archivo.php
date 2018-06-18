@@ -90,18 +90,17 @@ class ControladorArchivo extends ControladorIndex {
 
                     $nuevos_archivos = (new Archivo())->getArchivosUser($duenio->getId());
 
-                    if ($flag) {
+                    if ($flag && $usuario_logueado->esAdmin()) {
                         $datos = array(
                             "archivo_subido" => "Archivo eliminado correctamente",
                             "lista_archivos" => $nuevos_archivos,
                         );
                     } else {
                         $datos = array(
-                            "archivo_subido" => "Archivo eliminado correctamente(Fallo notificar)",
+                            "archivo_subido" => "Archivo eliminado correctamente(Fallo al notificaral usuario)",
                             "lista_archivos" => $nuevos_archivos,
                         );
                     }
-
                     $tpl->mostrar("inicio", $datos);
                 } else { //error al eliminar
                     $datos = array(
