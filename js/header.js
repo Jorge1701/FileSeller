@@ -26,6 +26,10 @@ $("#campanaNotif").click(function(){
 	});
 });
 
+$('.notification').bind('click', function (e) {
+	e.stopPropagation() 
+});
+
 function eliminarNotificacion(idNotif){
 	$.ajax({
 		type: "POST",
@@ -34,7 +38,10 @@ function eliminarNotificacion(idNotif){
 		data: {},
 		success: function (data) {
 			if (data.status == 'success') {
-				$('#'+idNotif).hide();
+				$('#'+idNotif).remove();
+				if($("#notificaciones tr").length == 0){
+					$(".menu-notificaciones table tbody").html("<tr><th>Todas las notificaciones han sido eliminadas</th></tr>");
+				}
 			}
 		},
 		error: function (data) {

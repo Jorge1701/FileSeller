@@ -33,6 +33,7 @@ class ControladorInicio extends ControladorIndex {
 				$tpl->mostrar('inicio',$datos);
 			}
 		}else{
+			
 				$datos = array(
 					"active_inicio" => "active",
 					"lista_archivos" => (new Archivo())->getRecomendados(),
@@ -58,7 +59,10 @@ class ControladorInicio extends ControladorIndex {
 				}
 				$this->redirect("inicio","principal");
 			}else{
+				$usuario = $usr->obtenerPorCorreo ($correo);
 				$mensaje = "Email/Contraseña incorrectos";
+				if ($usuario != null && !$usuario->getActivo ())
+					$mensaje = "Su cuenta fue desactivada debido a \"" . $usr->obtenerRazonDeEliminacion ($usuario->getId ()) . "\", contactese con un administrador";
 				$datos = array(
 					"titulo" => "Iniciar sesión",
 					"mensaje" => $mensaje,

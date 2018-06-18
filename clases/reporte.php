@@ -39,8 +39,8 @@ class Reporte extends ClaseBase {
     }*/
 
     public function getReportes() { 
-        //0:idArchivo , 1:nombreArchivo , 2:idReporte, 3:tipo, 4:descripcion
-        $stmt = DB::conexion ()->prepare("SELECT r.idArchivo AS idA, a.nombre ,r.idReporte AS idR ,r.tipo,r.descripcion FROM reportes as r , archivos as a WHERE r.idArchivo = a.id ");
+        //0:idArchivo , 1:nombreArchivo , 2:idReporte, 3:tipo, 4:descripcion , 5:correo
+        $stmt = DB::conexion ()->prepare("SELECT r.idArchivo AS idA, a.nombre ,r.idReporte AS idR ,r.tipo,r.descripcion,u.correo FROM reportes as r , archivos as a, usuarios as u WHERE r.idArchivo = a.id AND a.duenio=u.id ");
         $stmt->execute();
         $resultado = $stmt->get_result();
         $res = null;
@@ -50,11 +50,10 @@ class Reporte extends ClaseBase {
         return $res;
     }
 
+
     public function eliminarReporte($idReporte) {
-
-        $sql = $this->db->prepare("UPDATE Reportes SET activo=0 WHERE idReporte=?");
+        $sql = $this->db->prepare("DELETE FROM `reportes` WHERE `idReporte`=?");
         $sql->bind_param("i", $idReporte);
-
         if($sql->execute()){
             return true;
         }else{
@@ -62,21 +61,34 @@ class Reporte extends ClaseBase {
         }
 
     }
-/*
-    public function cantidad($idArchivo){
-        $cant = DB::conexion ()->prepare("SELECT COUNT(*) AS cant from reportes where idArchivo= \"" . $idArchivo . "\" ");
-        $cant->execute ();
-        $resultadoCant = $cant->get_result ();
-        return $resultadoCant->fetch_object ()->cant;
+    
+    public function cantidad($idArchivo,$tipo){
+        $cant=DB::conexion ()->prepare("SELECT COUNT(*) AS cant from reportes where idArchivo= \"" . $idArchivo . "\" and tipo= \"" . $tipo . "\"");
+        $cant->execute();
+        $resultadoCant = $cant->get_result();
+        return $resultadoCant->fetch_object()->cant;
     }
-    */
 
-    public function getListado() {
-        $sql = "SELECT * FROM `Reportes` ";
-        $res = NULL;
-        $resultado = $this->db->query($sql) or die("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
-        while ($fila = $resultado->fetch_object()) {
-            $res[] = new $this->modelo($fila);
+    public function getReportesOrdenadoPorArchivo() { 
+        //0:idArchivo , 1:nombreArchivo , 2:idReporte, 3:tipo, 4:descripcion
+        $stmt = DB::conexion ()->prepare("SELECT r.idArchivo AS idA, a.nombre ,r.idReporte AS idR ,r.tipo,r.descripcion FROM reportes as r , archivos as a WHERE r.idArchivo = a.id ORDER BY r.idArchivo DESC");
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $res = null;
+        while($fila = $resultado->fetch_array(MYSQLI_NUM) ){
+            $res[] = $fila;
+        }
+        return $res;
+    }
+
+    public function getReportesOrdenadoPorTipo() { 
+        //0:idArchivo , 1:nombreArchivo , 2:idReporte, 3:tipo, 4:descripcion
+        $stmt = DB::conexion ()->prepare("SELECT r.idArchivo AS idA, a.nombre ,r.idReporte AS idR ,r.tipo,r.descripcion FROM reportes as r , archivos as a WHERE r.idArchivo = a.id ORDER BY r.tipo DESC");
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $res = null;
+        while($fila = $resultado->fetch_array(MYSQLI_NUM) ){
+            $res[] = $fila;
         }
         return $res;
     }

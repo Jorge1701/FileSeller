@@ -39,8 +39,8 @@
 					{/if}
 				</a>
 
-				<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
-					<h6 class="menu-notificaciones-titulo"><span class="fas fa-bell"></span> Notificaciónes</h6>
+				<div class="dropdown-menu dropdown-menu-right menu-notificaciones" id="notificaciones">
+					<h6 class="menu-notificaciones-titulo"><span class="fas fa-bell"></span> Notificaciones</h6>
 					<table class="table">
 						<tbody>
 							{if !empty($notifs)}
@@ -81,7 +81,7 @@
 				</a>
 
 
-				<div class="dropdown-menu dropdown-menu-right menu-notificaciones">
+				<div class="dropdown-menu dropdown-menu-right menu-notificaciones" id="notif-mensajes">
 					<h6 class="menu-notificaciones-titulo"><span class="fa fa-inbox"></span> Mensajes</h6>
 					<table class="table">
 						<tbody>

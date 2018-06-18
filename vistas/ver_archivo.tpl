@@ -15,29 +15,29 @@
 		{/if}
 		{include file="header.tpl"}
 
-			<div hidden>
-				<div id="tempComentario" class="comentario">
-					<p class="com_usuario">
-						<a class="aColor" href="">
-							<span class="inactivoComentario">[ Usuario Inactivo ]</span> <span class="duenioComentario">[ Dueño ]</span> <span class="nomComentario">Ale</span>
-						</a>
-						<span class="fas fa-times"></span>
-					</p>
-					<p class="com_comentario">
-						Comentario
-					</p>
-				</div>
-		
-				<div id="iniciesesion" class="comentario">
-					<p class="com_comentario" style="text-align: center">
-						<a href="/FileSeller/inicio/login/">Inicie Sesion</a> o <a href="/FileSeller/usuario/registro/">Cree una cuenta</a> para poder comentar.
-					</p>
-				</div>
-		
-				<div id="msjNoHayComents">
-					No hay comentarios, se el primero!
-				</div>
+		<div hidden>
+			<div id="tempComentario" class="comentario">
+				<p class="com_usuario">
+					<a class="aColor" href="">
+						<span class="inactivoComentario">[ Usuario Inactivo ]</span> <span class="duenioComentario">[ Dueño ]</span> <span class="nomComentario">Ale</span>
+					</a>
+					<span class="fas fa-times"></span>
+				</p>
+				<p class="com_comentario">
+					Comentario
+				</p>
 			</div>
+
+			<div id="iniciesesion" class="comentario">
+				<p class="com_comentario" style="text-align: center">
+					<a href="/FileSeller/inicio/login/">Inicie Sesion</a> o <a href="/FileSeller/usuario/registro/">Cree una cuenta</a> para poder comentar.
+				</p>
+			</div>
+
+			<div id="msjNoHayComents">
+				No hay comentarios, se el primero!
+			</div>
+		</div>
 
 		{if isset($mensaje_editar)}
 		<div align="center">
@@ -64,31 +64,41 @@
 					<span id="estrellas">
 						<i class="fa fa-star"></i>
 					</span>
-					{$puntuacion}
+					{$puntuacion|number_format:1}
 				</h5>
 				<div class="rating">
-					<div style="display: inline-block;" class="star-rating">
-						{if $reporte eq "no"}
+					<div  class="star-rating">
+						{if $puntuo eq "no"}
 						<img src="{$url_base}img/vacia.png">
 						{else}
 						<img src="{$url_base}img/llena.png">
 						{/if}
 						<h6>Puntuar</h6></div>
-						<div style="display: none; " class="open-rating">
-							<img id="uno" onclick="puntuar('1')" src="{$url_base}img/vacia.png">
-							<img id="dos"  onclick="puntuar('2')"  src="{$url_base}img/vacia.png">
-							<img id="tres" onclick="puntuar('3')" src="{$url_base}img/vacia.png">
-							<img id="cuatro" onclick="puntuar('4')" src="{$url_base}img/vacia.png">
-							<img id="cinco" onclick="puntuar('5')" src="{$url_base}img/vacia.png">
+						<div   class="open-rating">
+							<img class="1" onclick="puntuar('1')" src="{$url_base}img/vacia.png">
+							<img class="2" onclick="puntuar('2')"  src="{$url_base}img/vacia.png">
+							<img class="3" onclick="puntuar('3')" src="{$url_base}img/vacia.png">
+							<img class="4" onclick="puntuar('4')" src="{$url_base}img/vacia.png">
+							<img class="5" onclick="puntuar('5')" src="{$url_base}img/vacia.png">
 						</div>
 					</div>
 					<form id="form" method="POST">
 						<input hidden id="aux" type="text"  name="puntuar">
 					</form>
 					<h5>Vendedor: <a href="{$url_ver_perfil_duenio}{$duenio->getCorreo()}" title="Ver perfil de {$duenio->getNombre()} {$duenio->getApellido()}">{$duenio->getNombre()} {$duenio->getApellido()}</a></h5>
+					{if isset($usuario) && $usuario->esAdmin ()}
+					<button id="btnDescargarAdm" class="btn btn-info" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
+						Descargar Como Admin <span class="fa fa-download"></span>
+					</button>
+					{else if $archivo->getMoneda() == "Gratis"}
 					<button id="btnDescargar" class="btn btn-success" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
 						Descargar <span class="fa fa-download"></span>
 					</button>
+					{else}
+					<button id="btnComprar" class="btn btn-success">
+						Comprar <i class="fa fa-dollar-sign"></i>
+					</button>
+					{/if}
 
 					
 					{if $usuario != null && $usuario->getId() == $archivo->getDuenio()}
@@ -167,8 +177,8 @@
 			<div id="enviar_comentario">
 				<form method="POST" id="enviar_mensaje">
 					<div class="input-group">
-					    <textarea required class="form-control custom-control" rows="1" style="resize:none" id="comentariooo" name="comentario"></textarea>
-				    	<span class="input-group-addon btn btn-primary" id="btnEnviar">Enviar</span>
+						<textarea required class="form-control custom-control" rows="1" style="resize:none" id="comentariooo" name="comentario"></textarea>
+						<span class="input-group-addon btn btn-primary" id="btnEnviar">Enviar</span>
 					</div>
 				</form>
 			</div>
@@ -177,23 +187,24 @@
 		{include file="dialogos.tpl"}
 		{include file="include_js.tpl"}
 		<script>
-
+			var puntuo = "{$puntuo}";
 			var url_ver_archivo = "{$url_ver_archivo}";
 			var url_base = "{$url_base}";
 			var url_puntuar = "{$url_puntuar}";
 			var idArchivo = "{$archivo->getId()}";
 			{if isset($usuario)}
-				var id = {$usuario->getId ()};
-				var correoUsuario = "{$usuario->getCorreo ()}";
-				var admin = {$usuario->esAdmin ()};
+			var id = {$usuario->getId ()};
+			var correoUsuario = "{$usuario->getCorreo ()}";
+			var admin = {$usuario->esAdmin ()};
 			{else}
-				var correoUsuario = "";
-				var id = 0;
-				var admin = 0;
+			var correoUsuario = "";
+			var id = 0;
+			var admin = 0;
 			{/if}
 
 
 		</script>
+
 		<script type="text/javascript" src="{$url_base}js/ver_archivo.js"></script>
 	</body>
 

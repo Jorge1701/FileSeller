@@ -116,6 +116,13 @@ class Usuario extends ClaseBase{
 		return $this->seguidos;
 	}
 
+	public function obtenerRazonDeEliminacion ($id) {
+		$stmt = DB::conexion ()->prepare ("SELECT comentario FROM strikes WHERE id_usuario = ? ORDER BY id DESC LIMIT 1");
+		$stmt->bind_param ("i", $id);
+		$stmt->execute ();
+		return $stmt->get_result ()->fetch_object ()->comentario;
+	}
+
 	public function obtenerPorCorreo($corre){
 		$sql="select * from usuarios where correo='$corre'";
 		$res=NULL;

@@ -8,9 +8,11 @@
 
 .fila_archivo_inicio:hover {
 	background-color: hsla(0, 0%, 20%, 0.04);
+	cursor: pointer;
 }
 
 .titulo_lista_archivos{
+	text-align: center;
 	padding: 10pt 0pt 10pt 10pt;
 }
 
