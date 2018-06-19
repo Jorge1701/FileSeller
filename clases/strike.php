@@ -38,7 +38,7 @@ class Strike extends ClaseBase {
             (new Notificacion ())->enviar ($id_usuario, ($cant == 1 ? "Primer" : "Segundo") .  " strike debido a " . $comentario);
         }
 
-        return isset ($eliminado) ? $eliminado : $res;
+        return isset ($eliminado) ? $eliminado : $res;  
     }
 
     public function obtenerStrikes ($usuario_correo) {

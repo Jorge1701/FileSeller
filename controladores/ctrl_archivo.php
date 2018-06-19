@@ -158,24 +158,24 @@ function eliminar($params = array()) {
 
                 $tpl->mostrar("inicio", $datos);
             }
-        } else {//redirigir al inicio
-            $datos = array(
-                "archivo_subido" => "Debe loguearse para ver esta pagina",
-            );
-
-            $tpl->mostrar("inicio", $datos);
         }
+    } else {//redirigir al inicio
+        $datos = array(
+            "archivo_subido" => "Debe loguearse para ver esta pagina",
+        );
+
+        $tpl->mostrar("inicio", $datos);
     }
+}
 
-    function subir() {
+function subir() {
+    $tpl = Template::getInstance();
+    $id = Auth::estaLogueado();
+    if (isset($_FILES["archivo"]) && isset($_POST["nombre"])) {
 
-        $tpl = Template::getInstance();
-        $id = Auth::estaLogueado();
-        if (isset($_FILES["archivo"]) && isset($_POST["nombre"])) {
-
-            $nombre = $_POST["nombre"];
-            $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
-            $tamanio = $_FILES["archivo"]["size"];
+        $nombre = $_POST["nombre"];
+        $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
+        $tamanio = $_FILES["archivo"]["size"];
             $tipo = explode(".", $_FILES["archivo"]["name"])[1];  //$_FILES["archivo"]["type"];
             $precio = isset($_POST["precio"]) ? $_POST["precio"] : "";
             $moneda = $_POST["moneda"];
@@ -330,11 +330,14 @@ function eliminar($params = array()) {
      return;
  }
 
- $response_array['status'] = (new Archivo())->eliminar(($_POST["id"]));
- echo json_encode ($response_array);
+ $archivo = (new Archivo())->getArchivo($_POST["id"]);
+ if((new Archivo())->eliminar($_POST["id"])){
+   $response_array['status'] = true;
+   $contenido = "Su archivo " . "<strong>" . $archivo->getNombre() . "</strong>" . " ha sido eliminado por contenido ".$_POST["razon"].".";
+    (new Notificacion())->enviar($archivo->getDuenio(), $contenido);
+    echo json_encode ($response_array);
+
+    }
 }
 
-
-}
-
-?>
+} ?>

@@ -88,12 +88,12 @@ class ControladorUsuario extends ControladorIndex {
                 $accion = 0;
 
                 if ($usuario->registro($nombre, $apellido, $correo, $password, "", $fecha, $accion)) {
-                   $datos = array(
+                 $datos = array(
                     "titulo" => "Registrarse",
                     "mensaje_registro" => "Registro Correcto",
                 );
-                   $tpl->mostrar("registro", $datos);
-               } else {
+                 $tpl->mostrar("registro", $datos);
+             } else {
                 $datos = array(
                     "titulo" => "Registrarse",
                     "mensaje_registro" => "Error al ingresar al usuario.",
@@ -210,14 +210,14 @@ function perfil($correoUsuario) {
     function eliminarUsuario(){
         $id = Auth::estaLogueado();
         if(!$id){
-           (new ControladorIndex())->redirect("inicio","principal");
-       }
-       (new Usuario())->eliminar($id);
-       $this->logout();
-   }
+         (new ControladorIndex())->redirect("inicio","principal");
+     }
+     (new Usuario())->eliminar($id);
+     $this->logout();
+ }
 
 
-   function seguir($params){
+ function seguir($params){
     $usuario = new Usuario();
     $usuario->setId($params[0]);
     if($usuario->seguir($params[1])){
@@ -251,8 +251,10 @@ function strike ($params = array ()) {
         $response_array["status"] = "ERR";
     else
         $response_array["status"] = (new Strike ())->registrarStrike ($params[0], $params[1]);
+    
     echo json_encode($response_array);
 }
+
 }
 
 ?>

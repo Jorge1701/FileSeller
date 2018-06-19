@@ -178,7 +178,7 @@
 				<form method="POST" id="enviar_mensaje">
 					<div class="input-group">
 						<textarea required class="form-control custom-control" rows="1" style="resize:none" id="comentariooo" name="comentario"></textarea>
-						<span class="input-group-addon btn btn-primary" id="btnEnviar">Enviar</span>
+						<button class="input-group-addon btn btn-primary" id="btnEnviar">Enviar</button>
 					</div>
 				</form>
 			</div>
