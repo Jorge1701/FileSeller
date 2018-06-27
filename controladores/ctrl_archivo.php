@@ -74,6 +74,8 @@ function ver($params = array()) {
         }
     }
 
+    $comprado = (new Archivo ())->verificarCompra($idUsuario,$archivo->getId());
+
     $tpl = Template::getInstance();
     $datos = array(
         "archivo" => $archivo,
@@ -83,7 +85,8 @@ function ver($params = array()) {
         "reporte" => $res,
         "puntuo" => $puntuo,
         "puntuacion" => $puntuacion,
-        "mensaje_editar" => $editado
+        "mensaje_editar" => $editado,
+        "comprado" => $comprado
     );
     $tpl->mostrar("ver_archivo", $datos);
 }
@@ -334,10 +337,44 @@ function subir() {
  if((new Archivo())->eliminar($_POST["id"])){
    $response_array['status'] = true;
    $contenido = "Su archivo " . "<strong>" . $archivo->getNombre() . "</strong>" . " ha sido eliminado por contenido ".$_POST["razon"].".";
-    (new Notificacion())->enviar($archivo->getDuenio(), $contenido);
-    echo json_encode ($response_array);
+   (new Notificacion())->enviar($archivo->getDuenio(), $contenido);
+   echo json_encode ($response_array);
 
+}
+}
+
+function comprar($params){
+
+    $archivo = (new Archivo())->obtenerPorId($params[0]);
+    $usuario = (new usuario())->obtenerPorId(Auth::estaLogueado());
+
+    date_default_timezone_set('America/Montevideo');
+    $fecha = date("Y-m-d H:i:s");
+
+    header('Content-type: application/json');
+
+    if($usuario != null && $archivo != null){
+
+        if((new Archivo())->comprarArchivo($archivo,$usuario->getId(),$fecha)){
+            $response_array['status'] = 'success';
+
+            echo json_encode($response_array);
+            return;
+
+        }else{
+            $response_array['status'] = 'error';
+
+            echo json_encode($response_array);
+            return;
+        }
+        
+    }else{
+        $response_array['status'] = 'error';
+
+        echo json_encode($response_array);
+        return;
     }
+
 }
 
 } ?>

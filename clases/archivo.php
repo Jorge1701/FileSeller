@@ -126,7 +126,7 @@ public function getArchivo($idArchivo) {
 }
 
 public function eliminarArchivo($idArchivo) {
-    
+
     $sql = $this->db->prepare("UPDATE archivos SET activo=0 WHERE id=?");
     $sql->bind_param("i", $idArchivo);
 
@@ -419,7 +419,27 @@ public function actualizarPuntuacio($idArchivo,$idUsuario,$puntuacion){
 
 }
 
+public function comprarArchivo($archivo,$idUsuario,$fecha){
+    $sql = $this->db->prepare("INSERT INTO compras (idArchivo,idUsuario,fecha,moneda,precio) VALUES(?,?,?,?,?)");
+    $sql->bind_param("iisss",$archivo->id,$idUsuario,$fecha,$archivo->moneda,$archivo->precio);
+    if($sql->execute()){
+        return true;
+    }else{
+        return false;
+    }
 
 }
 
-?>
+public function verificarCompra($idUsuario,$idArchivo){
+    $sql = $this->db->prepare("SELECT * FROM compras WHERE idUsuario=? AND idArchivo=?");
+    $sql->bind_param("ii",$idUsuario,$idArchivo);
+    $sql->execute();
+    $resultado = $sql->get_result();
+    if($resultado->num_rows > 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+}?>

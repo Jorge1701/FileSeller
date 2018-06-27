@@ -38,7 +38,7 @@
 				No hay comentarios, se el primero!
 			</div>
 		</div>
-
+		
 		{if isset($mensaje_editar)}
 		<div align="center">
 			<div class="col-lg-11 alert alert-success text-center">
@@ -90,12 +90,12 @@
 					<button id="btnDescargarAdm" class="btn btn-info" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
 						Descargar Como Admin <span class="fa fa-download"></span>
 					</button>
-					{else if $archivo->getMoneda() == "Gratis"}
+					{else if $archivo->getMoneda() == "Gratis" || $comprado}
 					<button id="btnDescargar" class="btn btn-success" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
 						Descargar <span class="fa fa-download"></span>
 					</button>
 					{else}
-					<button id="btnComprar" class="btn btn-success">
+					<button id="btnComprar" class="btn btn-success" data-toggle="modal" data-target="#modalCompras">
 						Comprar <i class="fa fa-dollar-sign"></i>
 					</button>
 					{/if}
@@ -160,6 +160,45 @@
 				</div>
 			</div>
 
+			<!-- MODAL -->
+			<div class="modal fade" id="modalCompras" role="dialog">
+				<div class="modal-dialog">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">	
+							<h4 style="text-align: center;">Comprar Archivo</h4>
+							<button type="button" class="close" onclick="salir()">&times;</button>
+						</div>
+						<div class="modal-body" style="text-align: center;">
+							<p id="mensajeCompra"></p>
+							<strong>Nro Tarjeta</strong><br><input type="text" id="nroTarjeta" placeholder="Ej 123456789"><br>
+							<strong>PIN</strong><br><input type="password" id="pin" placeholder="Ej 1234">
+						</div>
+						<div class="modal-footer" style="text-align: center;">
+							<button type="button" class="btn btn-success"  onclick="comprarArchivo({$archivo->getId()});">Comprar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- MODAL -->
+			<div class="modal fade" id="compraExito" role="dialog">
+				<div class="modal-dialog">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">	
+							<h4 style="text-align: center;">Compra Exitosa</h4>
+							<button type="button" class="close" onclick="salir()">&times;</button>
+						</div>
+						<div class="modal-body" style="text-align: center;">
+							<strong>Su compra ha sido realizada con éxito</strong>
+						</div>
+						<div class="modal-footer" style="text-align: center;">
+							<button type="button" class="btn btn-success"  onclick="salir();">Aceptar</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<!--<div class="col-lg-8 col-md-8 col-sm-7 col-xs-6 panel">
 				<h2 id="titulo">{$archivo->getNombre ()}</h2>
@@ -192,6 +231,7 @@
 			var url_base = "{$url_base}";
 			var url_puntuar = "{$url_puntuar}";
 			var idArchivo = "{$archivo->getId()}";
+			var ubicacion = "{$archivo->getUbicacion()}";
 			{if isset($usuario)}
 			var id = {$usuario->getId ()};
 			var correoUsuario = "{$usuario->getCorreo ()}";
