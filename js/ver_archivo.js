@@ -11,6 +11,48 @@ function reporteExito(){
 
 }
 
+function comprarArchivo(idArchivo){
+
+	var mensaje = document.getElementById("mensajeCompra");
+	var nro_tarjeta = $("#nroTarjeta").val();
+	var pin = $("#pin").val();
+
+	if(nro_tarjeta == ""){
+		mensaje.style.color = 'red';
+		mensaje.innerText = 'Número de tarjeta inválido';
+		return;
+	}
+
+	if(pin == ""){
+		mensaje.style.color = 'red';
+		mensaje.innerText = 'Pin inválido';
+		return;
+	}
+
+
+	$.ajax ({
+		type: "POST",
+		url: "/FileSeller/archivo/comprar/" + idArchivo,
+		dataType: "JSON",
+		success: function (data) {
+			
+			if(data.status == 'error'){
+				mensaje.style.color = 'red';
+				mensaje.innerText = 'Ha ocurrido un error con su compra';
+			}else{	
+				$("#btnDescargar").trigger("click");
+				$("#modalCompras").modal("hide");
+				$("#compraExito").modal("show");
+				window.location='/FileSeller/archivo/descargar/'+ubicacion;
+				//salir();
+			}
+		},
+		error: function () {
+			alert ("Error!");
+		}
+	});
+}
+
 function puntuar(punto){
 	$("#aux").val(punto);
 	document.getElementById("form").submit();
@@ -69,6 +111,7 @@ var comentarios = $("#comentarios");
 var tempComentario = $("#tempComentario");
 var msjNoHayComents = $("#msjNoHayComents");
 var tempIniciesesion = $("#iniciesesion");
+let formEnviar = $("#enviar_mensaje");
 
 
 
@@ -97,7 +140,6 @@ function cargarComentarios () {
 		url: "/FileSeller/archivo/comentarios/" + idArchivo,
 		dataType: "JSON",
 		success: function (data) {
-			console.log (data);
 			comentarios.html ("");
 			if (data["status"] == "error") {
 				alert (data["error"]);
@@ -165,8 +207,15 @@ function eliminarPosta (id) {
 		}
 	});
 }
+;
 
-btnEnviar.click (function () {
+txtComentario[0].onkeypress = function(e){
+	if((e.keyCode ? e.keyCode: e.which) == 13)
+		formEnviar.submit();
+};
+
+
+formEnviar.submit (function () {
 	if (txtComentario.val ().trim () == "")
 		return;
 
@@ -190,5 +239,5 @@ btnEnviar.click (function () {
 			alert ("Error!");
 		}
 	});
-	console.log (txtComentario.val ());
+	return false;
 });

@@ -19,10 +19,12 @@ function AZT(){
 
 var idA=null;
 var correoDuenio=null;
+var tipoReporte = "";
 //0:idArchivo , 1:nombreArchivo , 2:idReporte, 3:tipo, 4:descripcion, 5:correo
 function masInfo(idArchivo,nombre,idReporte,tipo,descripcion,correo){
 	idA=idArchivo;
 	correoDuenio = correo;
+	tipoReporte = tipo;
 	$('#listMas').empty();
 	$('#listMas').append('<li class="list-group-item"><strong>Nombre:</strong> '+nombre+'</li>');
 	$('#listMas').append('<li class="list-group-item"><strong>Tipo De Reporte:</strong> '+tipo+'</li>');
@@ -56,7 +58,8 @@ function eliminarArchivo(){
 		type: "POST",
 		url: "/FileSeller/archivo/eliminarArchivo/",
 		data: {
-			id: idA
+			id: idA,
+			razon: tipoReporte
 		},
 		dataType: "JSON",
 		success: function (data) {

@@ -74,6 +74,8 @@ function ver($params = array()) {
         }
     }
 
+    $comprado = (new Archivo ())->verificarCompra($idUsuario,$archivo->getId());
+
     $tpl = Template::getInstance();
     $datos = array(
         "archivo" => $archivo,
@@ -83,7 +85,8 @@ function ver($params = array()) {
         "reporte" => $res,
         "puntuo" => $puntuo,
         "puntuacion" => $puntuacion,
-        "mensaje_editar" => $editado
+        "mensaje_editar" => $editado,
+        "comprado" => $comprado
     );
     $tpl->mostrar("ver_archivo", $datos);
 }
@@ -126,7 +129,23 @@ function eliminar($params = array()) {
                     );
                 }
 
-                $tpl->mostrar("inicio", $datos);
+                if ((new Archivo())->eliminar($a->getId())) {
+
+
+                    $nuevos_archivos = (new Archivo())->getArchivosUser($duenio->getId());
+
+                    if ($flag && $usuario_logueado->esAdmin()) {
+                        $datos = array(
+                            "archivo_subido" => "Archivo eliminado correctamente",
+                            "lista_archivos" => $nuevos_archivos,
+                        );
+                    } else {
+                        $datos = array(
+                            "archivo_subido" => "Archivo eliminado correctamente(Fallo al notificaral usuario)",
+                            "lista_archivos" => $nuevos_archivos,
+                        );
+                    }
+                    $tpl->mostrar("inicio", $datos);
                 } else { //error al eliminar
                     $datos = array(
                         "archivo_subido" => "Hubo un error al procesar su solicitud",
@@ -142,24 +161,24 @@ function eliminar($params = array()) {
 
                 $tpl->mostrar("inicio", $datos);
             }
-        } else {//redirigir al inicio
-            $datos = array(
-                "archivo_subido" => "Debe loguearse para ver esta pagina",
-            );
-
-            $tpl->mostrar("inicio", $datos);
         }
+    } else {//redirigir al inicio
+        $datos = array(
+            "archivo_subido" => "Debe loguearse para ver esta pagina",
+        );
+
+        $tpl->mostrar("inicio", $datos);
     }
+}
 
-    function subir() {
+function subir() {
+    $tpl = Template::getInstance();
+    $id = Auth::estaLogueado();
+    if (isset($_FILES["archivo"]) && isset($_POST["nombre"])) {
 
-        $tpl = Template::getInstance();
-        $id = Auth::estaLogueado();
-        if (isset($_FILES["archivo"]) && isset($_POST["nombre"])) {
-
-            $nombre = $_POST["nombre"];
-            $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
-            $tamanio = $_FILES["archivo"]["size"];
+        $nombre = $_POST["nombre"];
+        $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
+        $tamanio = $_FILES["archivo"]["size"];
             $tipo = explode(".", $_FILES["archivo"]["name"])[1];  //$_FILES["archivo"]["type"];
             $precio = isset($_POST["precio"]) ? $_POST["precio"] : "";
             $moneda = $_POST["moneda"];
@@ -314,11 +333,48 @@ function eliminar($params = array()) {
      return;
  }
 
- $response_array['status'] = (new Archivo())->eliminar(($_POST["id"]));
- echo json_encode ($response_array);
+ $archivo = (new Archivo())->getArchivo($_POST["id"]);
+ if((new Archivo())->eliminar($_POST["id"])){
+   $response_array['status'] = true;
+   $contenido = "Su archivo " . "<strong>" . $archivo->getNombre() . "</strong>" . " ha sido eliminado por contenido ".$_POST["razon"].".";
+   (new Notificacion())->enviar($archivo->getDuenio(), $contenido);
+   echo json_encode ($response_array);
+
+}
 }
 
+function comprar($params){
+
+    $archivo = (new Archivo())->obtenerPorId($params[0]);
+    $usuario = (new usuario())->obtenerPorId(Auth::estaLogueado());
+
+    date_default_timezone_set('America/Montevideo');
+    $fecha = date("Y-m-d H:i:s");
+
+    header('Content-type: application/json');
+
+    if($usuario != null && $archivo != null){
+
+        if((new Archivo())->comprarArchivo($archivo,$usuario->getId(),$fecha)){
+            $response_array['status'] = 'success';
+
+            echo json_encode($response_array);
+            return;
+
+        }else{
+            $response_array['status'] = 'error';
+
+            echo json_encode($response_array);
+            return;
+        }
+        
+    }else{
+        $response_array['status'] = 'error';
+
+        echo json_encode($response_array);
+        return;
+    }
 
 }
 
-?>
+} ?>
