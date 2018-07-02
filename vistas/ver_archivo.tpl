@@ -95,9 +95,11 @@
 						Descargar <span class="fa fa-download"></span>
 					</button>
 					{else}
+					{if $usuario != null}
 					<button id="btnComprar" class="btn btn-success" data-toggle="modal" data-target="#modalCompras">
 						Comprar <i class="fa fa-dollar-sign"></i>
 					</button>
+					{/if}
 					{/if}
 
 					

@@ -14,7 +14,7 @@
 	</div>
 	{if !$encontrados}
 		<div class="container no-encontrado">
-			No se encontro ningun archivo.
+			No se encontro ningún archivo.
 		</div>
 	{else}
 		<div id="listado">
