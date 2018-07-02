@@ -62,7 +62,7 @@ class ControladorInicio extends ControladorIndex {
 				$usuario = $usr->obtenerPorCorreo ($correo);
 				$mensaje = "Email/Contraseña incorrectos";
 				if ($usuario != null && !$usuario->getActivo ())
-					$mensaje = "Su cuenta fue desactivada debido a \"" . $usr->obtenerRazonDeEliminacion ($usuario->getId ()) . "\", contactese con un administrador";
+					$mensaje = "Su cuenta fue desactivada debido a \"" . $usr->obtenerRazonDeEliminacion ($usuario->getId ()) . "\".";
 				$datos = array(
 					"titulo" => "Iniciar sesión",
 					"mensaje" => $mensaje,

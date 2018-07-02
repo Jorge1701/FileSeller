@@ -179,7 +179,8 @@ function subir() {
         $nombre = $_POST["nombre"];
         $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
         $tamanio = $_FILES["archivo"]["size"];
-            $tipo = explode(".", $_FILES["archivo"]["name"])[1];  //$_FILES["archivo"]["type"];
+            $tipo = explode(".", $_FILES["archivo"]["name"]);  //$_FILES["archivo"]["type"];
+            $tipo = $tipo[count($tipo)-1];
             $precio = isset($_POST["precio"]) ? $_POST["precio"] : "";
             $moneda = $_POST["moneda"];
             date_default_timezone_set('America/Montevideo');
