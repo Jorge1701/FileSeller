@@ -103,12 +103,12 @@ public function buscar($filtro) {
     if ($filtro == NULL)
         return NULL;
 
-    $sql = "SELECT * FROM `archivos` WHERE activo=1 AND duenio IN (SELECT id from `usuarios` WHERE activo=1)";
+    $sql = "SELECT a.*, u.nombre AS nomDuenio, u.apellido FROM `archivos` as a, usuarios as u WHERE a.duenio = u.id AND a.activo=1 AND a.duenio IN (SELECT u2.id from `usuarios` as u2 WHERE u2.activo=1)";
     $res = NULL;
     $resultado = $this->db->query($sql) or die("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
 
     while ($fila = $resultado->fetch_object()) {
-        if (strpos($fila->nombre, $filtro) !== false || strpos($fila->descripcion, $filtro) !== false)
+        if (strpos($fila->nombre, $filtro) !== false || strpos($fila->descripcion, $filtro) !== false || strpos($fila->tipo, $filtro) !== false || strpos($fila->nomDuenio, $filtro) !== false || strpos($fila->apellido, $filtro) !== false)
             $res[] = new $this->modelo($fila);
     }
 
