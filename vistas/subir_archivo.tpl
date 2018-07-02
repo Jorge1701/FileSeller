@@ -31,7 +31,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text fa fa-money-bill-alt"></span>
 						</div>
-						<input name="precio" id="precio" type="number" class="form-control" placeholder="Precio" aria-label="Precio" aria-describedby="basic-addon1" autofocus title="Precio del archivo" {if isset($precio_archivo)} value ="{$precio_archivo}" {else} disabled {/if}>
+						<input name="precio" id="precio" type="number" step="0.01" class="form-control" placeholder="Precio" aria-label="Precio" aria-describedby="basic-addon1" autofocus title="Precio del archivo" {if isset($precio_archivo)} value ="{$precio_archivo}" {else} disabled {/if}>
 						<div class="input-group-append">
 							{$moneda = ""}
 							{if isset($moneda_archivo)}

@@ -47,7 +47,14 @@
 						<tr class="fila_archivo_inicio "  onclick="verArchivo(this)" >
 							<td><img class="img-archivo" src="{$url_base}{$a->getImg()}"></td>
 							<td>{$a->getNombre()}</td>
-							<td>{$a->getTipo()}</td>
+							<td>
+								<!-- Por algun motivo algunos exe te marcan '3' el tipo, pues eso... -->
+								{if $a->getTipo() eq 3}
+									exe
+								{else}
+									{$a->getTipo()}
+								{/if}
+							</td>
 							<td hidden >{$a->getId()}</td>
 						</tr>
 						{/foreach}
