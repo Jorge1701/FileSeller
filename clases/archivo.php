@@ -108,7 +108,7 @@ public function buscar($filtro) {
     $resultado = $this->db->query($sql) or die("<h3 style='text-align: center; margin-top: 5%'>Fallo en la consulta</h3>");
 
     while ($fila = $resultado->fetch_object()) {
-        if (strpos($fila->nombre, $filtro) !== false || strpos($fila->descripcion, $filtro) !== false || strpos($fila->tipo, $filtro) !== false || strpos($fila->nomDuenio, $filtro) !== false || strpos($fila->apellido, $filtro) !== false)
+        if (strpos(strtolower($fila->nombre), strtolower($filtro)) !== false || strpos(strtolower($fila->descripcion), strtolower($filtro)) !== false || strpos(strtolower($fila->tipo), strtolower($filtro)) !== false || strpos(strtolower($fila->nomDuenio), strtolower($filtro)) !== false || strpos(strtolower($fila->apellido), strtolower($filtro)) !== false)
             $res[] = new $this->modelo($fila);
     }
 
