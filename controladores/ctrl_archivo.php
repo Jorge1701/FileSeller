@@ -51,9 +51,15 @@ function ver($params = array()) {
             $puntuo = $archivo->ya_puntuo($archivo->getId(), $idUsuario);
             if ($puntuo != "no") {
                 (new Archivo())->actualizarPuntuacio($archivo->getId(), $idUsuario, $_POST["puntuar"]);
+                $cant = $archivo->cantidad($archivo->getId());
+                $puntuacion = $cant == 0 ? $cant : $archivo->suma($archivo->getId()) / $cant;
+                (new Archivo())->puntuacionGeneral($puntuacion,$archivo->getId());
                 header("Location: " . $_SERVER['REQUEST_URI']);
             } else {
                 (new Archivo())->puntuar($archivo->getId(), $idUsuario, $_POST["puntuar"]);
+                $cant = $archivo->cantidad($archivo->getId());
+                $puntuacion = $cant == 0 ? $cant : $archivo->suma($archivo->getId()) / $cant;
+                (new Archivo())->puntuacionGeneral($puntuacion,$archivo->getId());
                 header("Location: " . $_SERVER['REQUEST_URI']);
             }
         }

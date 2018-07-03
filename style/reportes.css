@@ -29,7 +29,8 @@ th,td{
 	font-size:28px;
 	color:blue;
 }
-#eliminar , #strike{
-	margin-top: 20px;
-	margin-left: 60px;
+.contenedorBtn{
+	display: block;
+	margin-top: 5vh;
+	text-align: center;
 }

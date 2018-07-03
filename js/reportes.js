@@ -13,18 +13,28 @@ function AZT(){
 	var i =document.getElementById("faTipo") ;
 	i.className = (i.className == "fa fa-sort-alpha-up") ? "fa fa-sort-alpha-down":"fa fa-sort-alpha-up";
 }
+function verPerfil(correo){
+window.location=url_perfil+correo;
+url_perfil
+}
 
 
+function verArchivo2(id){
+	window.location=url_ver_archivo+id;
+}
 
+function verArchivo(){
+	window.location=url_ver_archivo+idA;
+}
 
 var idA=null;
+var tipoReporte = null;
 var correoDuenio=null;
-var tipoReporte = "";
 //0:idArchivo , 1:nombreArchivo , 2:idReporte, 3:tipo, 4:descripcion, 5:correo
 function masInfo(idArchivo,nombre,idReporte,tipo,descripcion,correo){
 	idA=idArchivo;
-	correoDuenio = correo;
 	tipoReporte = tipo;
+	correoDuenio = correo;
 	$('#listMas').empty();
 	$('#listMas').append('<li class="list-group-item"><strong>Nombre:</strong> '+nombre+'</li>');
 	$('#listMas').append('<li class="list-group-item"><strong>Tipo De Reporte:</strong> '+tipo+'</li>');
@@ -52,6 +62,7 @@ function masInfo(idArchivo,nombre,idReporte,tipo,descripcion,correo){
 }
 
 
+
 function eliminarArchivo(){
 	console.log("Id Archvio "+idA);
 	$.ajax({
@@ -59,7 +70,7 @@ function eliminarArchivo(){
 		url: "/FileSeller/archivo/eliminarArchivo/",
 		data: {
 			id: idA,
-			razon: tipoReporte
+			tipo:tipoReporte
 		},
 		dataType: "JSON",
 		success: function (data) {
