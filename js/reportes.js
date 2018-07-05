@@ -33,6 +33,7 @@ var correoDuenio=null;
 //0:idArchivo , 1:nombreArchivo , 2:idReporte, 3:tipo, 4:descripcion, 5:correo
 function masInfo(idArchivo,nombre,idReporte,tipo,descripcion,correo){
 	idA=idArchivo;
+	idR=idReporte;
 	tipoReporte = tipo;
 	correoDuenio = correo;
 	$('#listMas').empty();
@@ -78,6 +79,7 @@ function eliminarArchivo(){
 				alert (data["error"]);
 				return;
 			}else{
+				finReporte();
 				$('#OkEliminar').modal();			
 			}
 
@@ -118,6 +120,32 @@ function eliminarReporte(){
 	});
 
 }
+function finReporte(){
+	
+	$.ajax({
+		type: "POST",
+		url: "/FileSeller/archivo/eliminarReporte/",
+		data: {
+			id: idR
+		},
+		dataType: "JSON",
+		success: function (data) {
+			if (data["status"] == "error") {
+				alert (data["error"]);
+				return;
+			}else{
+				var fila = document.getElementById(idR);
+				fila.parentNode.removeChild(fila);
+			}
+
+		},		
+		error: function () {
+			console.log("Error Funcion Eliminar Reporte");
+		}
+
+	});
+
+}
 function darStrike(){
 	var mensaje = $('#mensaje').val().trim();
 	$.ajax({
@@ -129,6 +157,7 @@ function darStrike(){
 				alert (data["error"]);
 				return;
 			}else{
+				finReporte();
 				$('#OkStrike').modal();	
 			}
 		},		

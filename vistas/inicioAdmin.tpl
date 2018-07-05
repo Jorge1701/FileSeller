@@ -16,7 +16,7 @@
 				<thead>
 					<tr>
 						<th scope="col">Nombre De Archivo<i id="faArchivo" onclick="AZA()" class="fa fa-sort-alpha-down" aria-hidden="true"></i></th>
-						<th scope="col" >Duenio</th>
+						<th scope="col" >Dueño</th>
 						<th scope="col">Tipo De Reporte<i id="faTipo" onclick="AZT()" class="fa fa-sort-alpha-down" aria-hidden="true"></i> </th>
 						<th scope="col" width="10%">Ver Mas</th>
 						<th scope="col" width="15%">Eliminar Reporte</th>

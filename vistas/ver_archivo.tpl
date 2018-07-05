@@ -11,7 +11,7 @@
 {if $reporte eq "ok"}
 <body background="{$url_base}img/wallpaper.jpg" onload="reporteExito()">
 	{else}
-	<body background="{$url_base}img/wallpaper.jpg">
+	<body background="{$url_base}img/wallpaper.jpg" onload="esadmin()">
 		{/if}
 		{include file="header.tpl"}
 
@@ -39,6 +39,7 @@
 			</div>
 		</div>
 		
+
 		{if isset($mensaje_editar)}
 		<div align="center">
 			<div class="col-lg-11 alert alert-success text-center">
@@ -74,7 +75,7 @@
 						<img src="{$url_base}img/llena.png">
 						{/if}
 						<h6>Puntuar</h6></div>
-						<div   class="open-rating">
+						<div onmouseleave="CargarEstrellas()" class="open-rating">
 							<img class="1" onclick="puntuar('1')" src="{$url_base}img/vacia.png">
 							<img class="2" onclick="puntuar('2')"  src="{$url_base}img/vacia.png">
 							<img class="3" onclick="puntuar('3')" src="{$url_base}img/vacia.png">
@@ -86,33 +87,22 @@
 						<input hidden id="aux" type="text"  name="puntuar">
 					</form>
 					<h5>Vendedor: <a href="{$url_ver_perfil_duenio}{$duenio->getCorreo()}" title="Ver perfil de {$duenio->getNombre()} {$duenio->getApellido()}">{$duenio->getNombre()} {$duenio->getApellido()}</a></h5>
-					{if isset($usuario) && $usuario->esAdmin ()}
-					<button id="btnDescargarAdm" class="btn btn-info" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
-						Descargar Como Admin <span class="fa fa-download"></span>
-					</button>
-					{else if $archivo->getMoneda() == "Gratis" || $comprado}
 					<button id="btnDescargar" class="btn btn-success" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
 						Descargar <span class="fa fa-download"></span>
 					</button>
-					{else}
-					<button id="btnComprar" class="btn btn-success" data-toggle="modal" data-target="#modalCompras">
-						Comprar <i class="fa fa-dollar-sign"></i>
-					</button>
-					{/if}
 
 					
 					{if $usuario != null && $usuario->getId() == $archivo->getDuenio()}
 					<button class="btn btn-info" style="margin-top: 7px" onclick="window.location='{$url_base}archivo/editar/{$archivo->getId()}'">Editar <span class="fas fa-edit"></span></button>
 					{/if}
 
-					<button type="button" style="margin-top: 7px" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Reportar <span class="fas fa-exclamation-circle"></span></button>
+					<button id="reportar" type="button" style="margin-top: 7px" class="btn btn-danger" data-toggle="modal" onclick="reportar()">Reportar <span class="fas fa-exclamation-circle"></span></button>
 				</div>
 
 
 				<!-- Modal -->
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog">
-
 						<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">	
@@ -122,7 +112,7 @@
 							<div class="modal-body ">
 								<h5>Motivo Del Reporte</h5>
 								<form method="POST">
-									<input type="radio" value="Engañoso" name="reporte">Contenido Engañoso<br>
+									<input required type="radio" value="Engañoso" name="reporte">Contenido Engañoso<br>
 									<input type="radio" value="Inapropiado" name="reporte">Contenido Inapropiado<br>
 									<input type="radio" value="Ilegal" name="reporte">Contenido Ilegal<br>
 									<input type="radio" value="Dañino" name="reporte">Contenido Dañino<br>
@@ -160,41 +150,24 @@
 				</div>
 			</div>
 
-			<!-- MODAL -->
-			<div class="modal fade" id="modalCompras" role="dialog">
-				<div class="modal-dialog">
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">	
-							<h4 style="text-align: center;">Comprar Archivo</h4>
-							<button type="button" class="close" onclick="salir()">&times;</button>
-						</div>
-						<div class="modal-body" style="text-align: center;">
-							<p id="mensajeCompra"></p>
-							<strong>Nro Tarjeta</strong><br><input type="text" id="nroTarjeta" placeholder="Ej 123456789"><br>
-							<strong>PIN</strong><br><input type="password" id="pin" placeholder="Ej 1234">
-						</div>
-						<div class="modal-footer" style="text-align: center;">
-							<button type="button" class="btn btn-success"  onclick="comprarArchivo({$archivo->getId()});">Comprar</button>
-						</div>
-					</div>
-				</div>
-			</div>
 
-			<!-- MODAL -->
-			<div class="modal fade" id="compraExito" role="dialog">
+			<!-- Modal -->
+			<div class="modal fade" id="registrar" role="dialog">
 				<div class="modal-dialog">
+
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">	
-							<h4 style="text-align: center;">Compra Exitosa</h4>
-							<button type="button" class="close" onclick="salir()">&times;</button>
+							<h4 class="modal-title">Iniciar Sesio o Registrarse</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
-						<div class="modal-body" style="text-align: center;">
-							<strong>Su compra ha sido realizada con éxito</strong>
+						<div class="modal-body">
+							<p class="com_comentario" style="text-align: center">
+								<a href="/FileSeller/inicio/login/">Inicie Sesion</a> o <a href="/FileSeller/usuario/registro/">Cree una cuenta</a> para poder puntuar, reportar o comentar.
+							</p>
 						</div>
-						<div class="modal-footer" style="text-align: center;">
-							<button type="button" class="btn btn-success"  onclick="salir();">Aceptar</button>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal" >Salir</button>
 						</div>
 					</div>
 				</div>
@@ -217,7 +190,7 @@
 				<form method="POST" id="enviar_mensaje">
 					<div class="input-group">
 						<textarea required class="form-control custom-control" rows="1" style="resize:none" id="comentariooo" name="comentario"></textarea>
-						<button class="input-group-addon btn btn-primary" id="btnEnviar">Enviar</button>
+						<span class="input-group-addon btn btn-primary" id="btnEnviar">Enviar</span>
 					</div>
 				</form>
 			</div>
@@ -231,17 +204,15 @@
 			var url_base = "{$url_base}";
 			var url_puntuar = "{$url_puntuar}";
 			var idArchivo = "{$archivo->getId()}";
-			var ubicacion = "{$archivo->getUbicacion()}";
 			{if isset($usuario)}
 			var id = {$usuario->getId ()};
-			var correoUsuario = "{$usuario->getCorreo ()}";
+			var correoUsuario = "{$usuario->getCorreo()}";
 			var admin = {$usuario->esAdmin ()};
 			{else}
 			var correoUsuario = "";
 			var id = 0;
 			var admin = 0;
 			{/if}
-
 
 		</script>
 
