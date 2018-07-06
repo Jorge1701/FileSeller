@@ -36,6 +36,8 @@ function masInfo(idArchivo,nombre,idReporte,tipo,descripcion,correo){
 	idR=idReporte;
 	tipoReporte = tipo;
 	correoDuenio = correo;
+	$('#sp').attr('style','visibility: hidden');
+
 	$('#listMas').empty();
 	$('#listMas').append('<li class="list-group-item"><strong>Nombre:</strong> '+nombre+'</li>');
 	$('#listMas').append('<li class="list-group-item"><strong>Tipo De Reporte:</strong> '+tipo+'</li>');
@@ -66,6 +68,8 @@ function masInfo(idArchivo,nombre,idReporte,tipo,descripcion,correo){
 
 function eliminarArchivo(){
 	console.log("Id Archvio "+idA);
+	console.log("Tipo reporte "+tipoReporte);
+	tipoReporte
 	$.ajax({
 		type: "POST",
 		url: "/FileSeller/archivo/eliminarArchivo/",
@@ -147,6 +151,10 @@ function finReporte(){
 
 }
 function darStrike(){
+	if($('#mensaje').val().trim() == ""){
+		$('#sp').attr('style','visibility: visible ; color: red;margin-left: 1vw');
+		return;
+	}
 	var mensaje = $('#mensaje').val().trim();
 	$.ajax({
 		type: "POST",
@@ -158,6 +166,8 @@ function darStrike(){
 				return;
 			}else{
 				finReporte();
+				
+				$('#strike').modal("toggle");	
 				$('#OkStrike').modal();	
 			}
 		},		

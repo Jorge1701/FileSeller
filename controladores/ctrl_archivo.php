@@ -338,12 +338,12 @@ function subir() {
      $response_array['error'] = 'No hay id de archivo';
      echo json_encode ($response_array);
      return;
- }
+     }
 
  $archivo = (new Archivo())->getArchivo($_POST["id"]);
  if((new Archivo())->eliminar($_POST["id"])){
    $response_array['status'] = true;
-   $contenido = "Su archivo " . "<strong>" . $archivo->getNombre() . "</strong>" . " ha sido eliminado por contenido ".$_POST["razon"].".";
+   $contenido = "Su archivo " . "<strong>" . $archivo->getNombre() . "</strong>" . " ha sido eliminado por contenido ".$_POST["tipo"].".";
    (new Notificacion())->enviar($archivo->getDuenio(), $contenido);
    echo json_encode ($response_array);
 

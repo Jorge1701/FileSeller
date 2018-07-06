@@ -93,8 +93,10 @@
 				<p>Mensaje</p>
 				<textarea id="mensaje"> </textarea>
 			</div>
+			<span  id="sp" style="color: red;margin-left: 1vw;visibility: hidden;">Se debe ingresar un mensaje</span> 
+
 			<div class="modal-footer">
-				<button type="button" onclick="darStrike()" data-dismiss="modal" class="btn btn-danger">Confirmar</button>
+				<button type="button" onclick="darStrike()" class="btn btn-danger">Confirmar</button>
 			</div>
 		</div>
 	</div>
