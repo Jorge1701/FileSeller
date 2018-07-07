@@ -3,12 +3,24 @@ function salir(){
 	window.location=url_ver_archivo+idArchivo;
 }
 
-
+function esadmin(){
+	if(admin==1){
+		$(".rating").css('display', 'none');
+		$("#reportar").css('display', 'none');
+	}
+}
 
 function reporteExito(){
 	window.onload($("#fin").modal());
 
 
+}
+function reportar(){
+	if(correoUsuario==""){
+		$('#registrar').modal();
+	}else{
+		$('#myModal').modal();
+	}
 }
 
 function comprarArchivo(idArchivo){
@@ -61,22 +73,27 @@ function puntuar(punto){
 
 
 $('.star-rating').click(function(){
-	if ($('.open-rating').css('visibility') == 'hidden' ) {
-		$('.open-rating').attr('style','visibility: visible');
-	}else{
 
-		$('.open-rating').attr('style','visibility: hidden');
-	}
-});
+	if(correoUsuario==""){
+		$('#registrar').modal();	
+	}else{
+		if ($('.open-rating').css('visibility') == 'hidden' ) {
+			$('.open-rating').attr('style','visibility: visible');
+		}else{
+
+			$('.open-rating').attr('style','visibility: hidden');
+		}}
+	});
 
 $('.1').hover(function() {
+	$('.5,.4,.3,.2').attr('src',url_base+'img/vacia.png');
 	$('.1').attr('src',url_base+'img/llena.png');
-
 }, function() {
 	$('.1').attr('src',url_base+'img/vacia.png');
 });
 
 $('.2').hover(function() {
+	$('.5,.4,.3,.2,.1').attr('src',url_base+'img/vacia.png');
 	$('.2,.1').attr('src',url_base+'img/llena.png');
 
 }, function() {
@@ -84,6 +101,7 @@ $('.2').hover(function() {
 });
 
 $('.3').hover(function() {
+	$('.5,.4,.3,.2,.1').attr('src',url_base+'img/vacia.png');
 	$('.3,.2,.1').attr('src',url_base+'img/llena.png');
 
 }, function() {
@@ -91,6 +109,7 @@ $('.3').hover(function() {
 });
 
 $('.4').hover(function() {
+	$('.5,.4,.3,.2,.1').attr('src',url_base+'img/vacia.png');
 	$('.4,.3,.2,.1').attr('src',url_base+'img/llena.png');
 
 }, function() {
@@ -116,7 +135,6 @@ let formEnviar = $("#enviar_mensaje");
 
 
 $(document).ready (function () {
-	
 	if (correoUsuario == "")
 		$("#enviar_comentario").hide ();
 	CargarEstrellas();
@@ -125,7 +143,6 @@ $(document).ready (function () {
 
 
 function CargarEstrellas(){
-
 	if( puntuo !="no"){
 		for (var i = puntuo; i >= 1; i--) {
 			$('.'+i).attr('src',url_base+'img/llena.png');

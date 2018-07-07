@@ -13,11 +13,10 @@
 	<div class="row">
 		<div class="col-sm-9 col-md-9 mx-auto">
 			<table class="table table-bordered"  style="background-color: white">
-
 				<thead>
 					<tr>
-
 						<th scope="col">Nombre De Archivo<i id="faArchivo" onclick="AZA()" class="fa fa-sort-alpha-down" aria-hidden="true"></i></th>
+						<th scope="col" >Dueño</th>
 						<th scope="col">Tipo De Reporte<i id="faTipo" onclick="AZT()" class="fa fa-sort-alpha-down" aria-hidden="true"></i> </th>
 						<th scope="col" width="10%">Ver Mas</th>
 						<th scope="col" width="15%">Eliminar Reporte</th>
@@ -27,10 +26,11 @@
 					{if isset($lista_reportes)}
 					{foreach $lista_reportes as $r}
 					<tr id="{$r[2]}">
-						<!-- 0:idArchivo , 1:nombreArchivo , 2:idReporte, 3:tipo, 4:descripcion , 5:idDuenio -->
-						<td>{$r[1]}</td>
+						<!--0:idArchivo , 1:nombreArchivo , 2:idReporte, 3:tipo, 4:descripcion, 5:correo -->
+						<td><a href="#" onclick="verArchivo2('{$r[0]}')">{$r[1]}</a></td>
+						<td><a title="{$r[5]}" href="#" onclick="verPerfil('{$r[5]}')" >{$r[6]} {$r[7]}</a></td>
 						<td>{$r[3]}</td>
-						<td><i onClick="masInfo('{$r[0]}','{$r[1]}','{$r[2]}','{$r[3]}','{$r[4]}','{$r[5]}') " class="fa fa-plus-circle plus"></i>
+						<td><i onclick="masInfo('{$r[0]}','{$r[1]}','{$r[2]}','{$r[3]}','{$r[4]}','{$r[5]}')" class="fa fa-plus-circle plus"></i>
 						</td>
 						<td><i data-toggle="modal" data-target="#eliminar" onclick="setIdReporte('{$r[2]}')" class="fa fa-trash basura"></i>
 						</td>
@@ -93,8 +93,10 @@
 				<p>Mensaje</p>
 				<textarea id="mensaje"> </textarea>
 			</div>
+			<span  id="sp" style="color: red;margin-left: 1vw;visibility: hidden;">Se debe ingresar un mensaje</span> 
+
 			<div class="modal-footer">
-				<button type="button" onclick="darStrike()" data-dismiss="modal" class="btn btn-danger">Confirmar</button>
+				<button type="button" onclick="darStrike()" class="btn btn-danger">Confirmar</button>
 			</div>
 		</div>
 	</div>
@@ -112,8 +114,11 @@
 			<div class="modal-body">
 				<ul id="listMas" class="list-group">
 				</ul>
-				<button id="eliminar" type="button"  data-dismiss="modal"  class="btn btn-danger" data-toggle="modal"  data-target="#eliminarA"  >Eliminar Archivo</button>
-				<button id="strike" type="button"  data-dismiss="modal" class="btn btn-danger" data-toggle="modal" data-target="#strike"  >Dar strike a usuario</button>
+				<div class="contenedorBtn">
+				<button  type="button"  data-dismiss="modal"  class="btn btn-danger botones" data-toggle="modal"onclick="verArchivo()">Ver Archivo</button>
+				<button   type="button"  data-dismiss="modal"  class="btn btn-danger botones" data-toggle="modal"  data-target="#eliminarA"  >Eliminar Archivo</button>
+				<button type="button"  data-dismiss="modal" class="btn btn-danger botones" data-toggle="modal" data-target="#strike"  >Dar strike a usuario</button>
+				</div>
 			</div>
 
 			<div class="modal-footer">
@@ -160,7 +165,10 @@
 		</div>
 	</div>
 </div>   
-
+<script type="text/javascript">
+	var url_ver_archivo = "{$url_ver_archivo}";
+	var url_perfil = "{$url_perfil}";
+</script>
 {include file="include_js.tpl"}
 <script type="text/javascript" src="{$url_base}js/reportes.js"></script>
 

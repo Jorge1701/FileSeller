@@ -51,9 +51,15 @@ function ver($params = array()) {
             $puntuo = $archivo->ya_puntuo($archivo->getId(), $idUsuario);
             if ($puntuo != "no") {
                 (new Archivo())->actualizarPuntuacio($archivo->getId(), $idUsuario, $_POST["puntuar"]);
+                $cant = $archivo->cantidad($archivo->getId());
+                $puntuacion = $cant == 0 ? $cant : $archivo->suma($archivo->getId()) / $cant;
+                (new Archivo())->puntuacionGeneral($puntuacion,$archivo->getId());
                 header("Location: " . $_SERVER['REQUEST_URI']);
             } else {
                 (new Archivo())->puntuar($archivo->getId(), $idUsuario, $_POST["puntuar"]);
+                $cant = $archivo->cantidad($archivo->getId());
+                $puntuacion = $cant == 0 ? $cant : $archivo->suma($archivo->getId()) / $cant;
+                (new Archivo())->puntuacionGeneral($puntuacion,$archivo->getId());
                 header("Location: " . $_SERVER['REQUEST_URI']);
             }
         }
@@ -332,12 +338,12 @@ function subir() {
      $response_array['error'] = 'No hay id de archivo';
      echo json_encode ($response_array);
      return;
- }
+     }
 
  $archivo = (new Archivo())->getArchivo($_POST["id"]);
  if((new Archivo())->eliminar($_POST["id"])){
    $response_array['status'] = true;
-   $contenido = "Su archivo " . "<strong>" . $archivo->getNombre() . "</strong>" . " ha sido eliminado por contenido ".$_POST["razon"].".";
+   $contenido = "Su archivo " . "<strong>" . $archivo->getNombre() . "</strong>" . " ha sido eliminado por contenido ".$_POST["tipo"].".";
    (new Notificacion())->enviar($archivo->getDuenio(), $contenido);
    echo json_encode ($response_array);
 

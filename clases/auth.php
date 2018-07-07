@@ -9,7 +9,7 @@ class Auth extends ControladorIndex
 		Session::init();
 		if (isset($_SESSION['usuario_id'])) {
 			$u = (new Usuario ())->obtenerPorId ($_SESSION["usuario_id"]);
-			if ($u->getActivo ())
+			if ($u->getActivo())
 				return $_SESSION['usuario_id'];
 			else {
 				return false;

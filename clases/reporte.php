@@ -40,7 +40,7 @@ class Reporte extends ClaseBase {
 
     public function getReportes() { 
         //0:idArchivo , 1:nombreArchivo , 2:idReporte, 3:tipo, 4:descripcion , 5:correo
-        $stmt = DB::conexion ()->prepare("SELECT r.idArchivo AS idA, a.nombre ,r.idReporte AS idR ,r.tipo,r.descripcion,u.correo FROM reportes as r , archivos as a, usuarios as u WHERE r.idArchivo = a.id AND a.duenio=u.id ");
+        $stmt = DB::conexion ()->prepare("SELECT r.idArchivo AS idA, a.nombre ,r.idReporte AS idR ,r.tipo,r.descripcion,u.correo,u.nombre,u.apellido FROM reportes as r , archivos as a, usuarios as u WHERE r.idArchivo = a.id AND a.duenio=u.id ");
         $stmt->execute();
         $resultado = $stmt->get_result();
         $res = null;

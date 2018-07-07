@@ -407,6 +407,16 @@ public function puntuar($idArchivo,$idUsuario,$puntuacion){
     }
 
 }
+public function puntuacionGeneral($puntuacion,$idArchivo){
+    $sql = $this->db->prepare("UPDATE archivos SET puntuacion_general=? WHERE id=?");
+    $sql->bind_param("di",$puntuacion,$idArchivo);
+    if($sql->execute()){
+        return "ok";
+    }else{
+        return "error";
+    }
+
+}
 public function actualizarPuntuacio($idArchivo,$idUsuario,$puntuacion){
 
     $sql = $this->db->prepare("UPDATE puntuacion SET puntuacion=? WHERE idArchivo=? AND idUsuario=?");

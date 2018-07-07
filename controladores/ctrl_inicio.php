@@ -9,7 +9,6 @@ require_once ("clases/reporte.php");
 class ControladorInicio extends ControladorIndex {
 	
 	function principal () {
-
 		$id = Auth::estaLogueado();
 		if($id!=null){
 			$usuario = (new Usuario())->obtenerPorId($id);
