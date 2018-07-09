@@ -189,7 +189,7 @@
                                   </div>
                                   {/foreach}
                                   <div class="alert alert-warning">
-                                      Si recibe tres strikes su cuenta sera borrada permanentemente.
+                                      Si recibe tres strikes su cuenta será borrada permanentemente.
                                   </div>
                                   {/if}
 

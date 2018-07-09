@@ -30,12 +30,12 @@
 
 			<div id="iniciesesion" class="comentario">
 				<p class="com_comentario" style="text-align: center">
-					<a href="/FileSeller/inicio/login/">Inicie Sesion</a> o <a href="/FileSeller/usuario/registro/">Cree una cuenta</a> para poder comentar.
+					<a href="/FileSeller/inicio/login/">Inicie sesión</a> o <a href="/FileSeller/usuario/registro/">cree una cuenta</a> para poder comentar.
 				</p>
 			</div>
 
 			<div id="msjNoHayComents">
-				No hay comentarios, se el primero!
+				No hay comentarios, sé el primero!
 			</div>
 		</div>
 		
@@ -61,14 +61,14 @@
 					Precio: {$archivo->getMoneda()} {$archivo->getPrecio ()}
 				</h4>
 				<h5>
-					Puntuacion:
+					Puntuación:
 					<span id="estrellas">
 						<i class="fa fa-star"></i>
 					</span>
 					{$puntuacion|number_format:1}
 				</h5>
 				<div class="rating">
-					<div  class="star-rating">
+					    <div  class="star-rating">
 						{if $puntuo eq "no"}
 						<img src="{$url_base}img/vacia.png">
 						{else}
@@ -104,10 +104,10 @@
 					{/if}
 					
 					{if $usuario != null && $usuario->getId() == $archivo->getDuenio()}
-					<button class="btn btn-info" style="margin-top: 7px" onclick="window.location='{$url_base}archivo/editar/{$archivo->getId()}'">Editar <span class="fas fa-edit"></span></button>
+					<button class="btn btn-info" style="margin-top: 7px; margin-bottom: 2vh" onclick="window.location='{$url_base}archivo/editar/{$archivo->getId()}'">Editar <span class="fas fa-edit"></span></button>
 					{/if}
 
-					<button id="reportar" type="button" style="margin-top: 7px" class="btn btn-danger" data-toggle="modal" onclick="reportar()">Reportar <span class="fas fa-exclamation-circle"></span></button>
+					<button id="reportar" type="button" style="margin-top: 7px; margin-bottom: 2vh" class="btn btn-danger" data-toggle="modal" onclick="reportar()">Reportar <span class="fas fa-exclamation-circle"></span></button>
 				</div>
 
 
@@ -121,14 +121,14 @@
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 							</div>
 							<div class="modal-body ">
-								<h5>Motivo Del Reporte</h5>
+								<h5>Motivo del reporte</h5>
 								<form method="POST">
-									<input required type="radio" value="Engañoso" name="reporte">Contenido Engañoso<br>
-									<input type="radio" value="Inapropiado" name="reporte">Contenido Inapropiado<br>
-									<input type="radio" value="Ilegal" name="reporte">Contenido Ilegal<br>
-									<input type="radio" value="Dañino" name="reporte">Contenido Dañino<br>
-									<input type="radio" value="Otros" name="reporte">Otros<br>
-									<h5>Descripcion Del Reporte (opcional)</h5>
+									<input required type="radio" value="Engañoso" name="reporte"> Contenido engañoso<br>
+									<input type="radio" value="Inapropiado" name="reporte"> Contenido inapropiado<br>
+									<input type="radio" value="Ilegal" name="reporte"> Contenido ilegal<br>
+									<input type="radio" value="Dañino" name="reporte"> Contenido dañino<br>
+									<input type="radio" value="Otros" name="reporte"> Otros<br>
+									<h5>Descripción del reporte (opcional)</h5>
 									<textarea name="descripcion" style="width: 80%;" maxlength="150"></textarea>
 								</div>
 								<div class="modal-footer">
@@ -147,12 +147,12 @@
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">	
-							<h4 class="modal-title">Reporte Finalizado</h4>
+							<h4 class="modal-title">Reporte finalizado</h4>
 							<button type="button" class="close" onclick="salir()">&times;</button>
 						</div>
 						<div class="modal-body">
-							<p>Su reporte a si concluido con exito, en breve los administradores revisaran el archivo.</p>
-							<p>Muchas Gracias.</p>
+							<p>Su reporte ha sido concluido con éxito, en breve los administradores revisarán el archivo.</p>
+							<p>Muchas gracias.</p>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"  onclick="salir()">Salir</button>
@@ -169,12 +169,12 @@
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">	
-							<h4 class="modal-title">Iniciar Sesio o Registrarse</h4>
+							<h4 class="modal-title">Iniciar sesión o Registrarse</h4>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
 						<div class="modal-body">
 							<p class="com_comentario" style="text-align: center">
-								<a href="/FileSeller/inicio/login/">Inicie Sesion</a> o <a href="/FileSeller/usuario/registro/">Cree una cuenta</a> para poder puntuar, reportar o comentar.
+								<a href="/FileSeller/inicio/login/">Inicie sesión</a> o <a href="/FileSeller/usuario/registro/">cree una cuenta</a> para poder puntuar, reportar o comentar.
 							</p>
 						</div>
 						<div class="modal-footer">
@@ -190,7 +190,7 @@
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">	
-							<h4 style="text-align: center;">Comprar Archivo</h4>
+							<h4 style="text-align: center;">Comprar archivo</h4>
 							<button type="button" class="close" onclick="salir()">&times;</button>
 						</div>
 						<div class="modal-body" style="text-align: center;">
@@ -211,7 +211,7 @@
 					<!-- Modal content-->
 					<div class="modal-content">
 						<div class="modal-header">	
-							<h4 style="text-align: center;">Compra Exitosa</h4>
+							<h4 style="text-align: center;">Compra exitosa</h4>
 							<button type="button" class="close" onclick="salir()">&times;</button>
 						</div>
 						<div class="modal-body" style="text-align: center;">
@@ -241,7 +241,7 @@
 				<form method="POST" id="enviar_mensaje">
 					<div class="input-group">
 						<textarea required class="form-control custom-control" rows="1" style="resize:none" id="comentariooo" name="comentario"></textarea>
-						<span class="input-group-addon btn btn-primary" id="btnEnviar">Enviar</span>
+						<button class="input-group-addon btn btn-primary" id="btnEnviar">Enviar</button>
 					</div>
 				</form>
 			</div>

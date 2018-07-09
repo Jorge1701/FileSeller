@@ -124,12 +124,20 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 }
+
+.rating img{
+	cursor: pointer;
+}
+
+.rating h6{
+	cursor: pointer;
+}
+
 .open-rating img{
 	position: relative;
 	top:2vh;
 	width: 22px;
 	height: 22px;
-
 }
 
 .open-rating {

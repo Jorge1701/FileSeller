@@ -72,7 +72,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<p>Esta seguro que quiere eliminar el archivo</p>
+				<p>¿Está seguro que quiere eliminar el archivo?</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" onclick="eliminarArchivo()" data-dismiss="modal" class="btn btn-danger">Seguro</button>
@@ -91,9 +91,9 @@
 			</div>
 			<div class="modal-body">
 				<p>Mensaje</p>
-				<textarea id="mensaje"> </textarea>
+				<textarea style="width: 100%" id="mensaje"></textarea>
 			</div>
-			<span  id="sp" style="color: red;margin-left: 1vw;visibility: hidden;">Se debe ingresar un mensaje</span> 
+				<span  id="sp" style="color: red;margin-left: 1vw;visibility: hidden;">Se debe ingresar un mensaje</span> 
 
 			<div class="modal-footer">
 				<button type="button" onclick="darStrike()" class="btn btn-danger">Confirmar</button>

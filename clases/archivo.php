@@ -207,11 +207,11 @@ return $archivo;
 private function subirArchivo($pathDestino){
          if ($_FILES['archivo']['error'] == UPLOAD_ERR_OK) {//Chekear que se haya subido correctamente el archivo.
             if ($_FILES["archivo"]["size"] > 104857600) {// Checkear tamaño, limite 100MB. 
-                return "El archivo excede el tamaño maximo soportado (100MB)";
+                return "El archivo excede el tamaño máximo soportado (100MB)";
             } elseif (move_uploaded_file($_FILES["archivo"]["tmp_name"], $pathDestino)) {
                 return "ok";
             }else{
-                return "Error: No se pudo subir el archivo, reitente.";
+                return "Error: No se pudo subir el archivo, reintente.";
             }
         }else{
             return "Error: No se pudo subir el archivo, reintente";
