@@ -107,7 +107,7 @@
 					<img src="{$url_base}{$usuario->getImagen()}" title="Cuenta de File Seller" class="rounded-circle img-user">
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#" onClick="window.location='{$url_perfil}'"><i class="fas fa-user menu-perfil" aria-hidden="true"></i>Mi Perfil</a>
+					<a class="dropdown-item" href="#" onClick="window.location='{$url_perfil}'"><i class="fas fa-user menu-perfil" aria-hidden="true"></i>Mi perfil</a>
 					<a class="dropdown-item" href="#" onClick="window.location='{$url_subir_archivo}'"><i class="fas fa-upload menu-perfil" ></i>Subir archivo </a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="#" onClick="window.location='{$url_logout}'"><i class="fas fa-sign-out-alt menu-perfil"></i>Cerrar sesión</a>

@@ -40,8 +40,8 @@ function masInfo(idArchivo,nombre,idReporte,tipo,descripcion,correo){
 
 	$('#listMas').empty();
 	$('#listMas').append('<li class="list-group-item"><strong>Nombre:</strong> '+nombre+'</li>');
-	$('#listMas').append('<li class="list-group-item"><strong>Tipo De Reporte:</strong> '+tipo+'</li>');
-	$('#listMas').append('<li class="list-group-item"><strong>Descripcion:</strong> '+descripcion+'</li>');
+	$('#listMas').append('<li class="list-group-item"><strong>Tipo de reporte:</strong> '+tipo+'</li>');
+	$('#listMas').append('<li class="list-group-item"><strong>Descripción:</strong> '+descripcion+'</li>');
 	console.log("/FileSeller/archivo/cantidad/"+idA+"/"+tipo);
 	$.ajax({
 		type: "POST",
@@ -52,7 +52,7 @@ function masInfo(idArchivo,nombre,idReporte,tipo,descripcion,correo){
 				alert (data["error"]);
 				return;
 			}else{
-				$('#listMas').append('<li class="list-group-item"><strong>Cantidad De Reportes Iguales:</strong> '+data["cantidad"]+'</li>');
+				$('#listMas').append('<li class="list-group-item"><strong>Cantidad de reportes iguales:</strong> '+data["cantidad"]+'</li>');
 				$('#masInfo').modal();				
 			}
 

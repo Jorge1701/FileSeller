@@ -60,6 +60,7 @@
 				<h4>
 					Precio: {$archivo->getMoneda()} {$archivo->getPrecio ()}
 				</h4>
+				<h5>Vendedor: <a href="{$url_ver_perfil_duenio}{$duenio->getCorreo()}" title="Ver perfil de {$duenio->getNombre()} {$duenio->getApellido()}">{$duenio->getNombre()} {$duenio->getApellido()}</a></h5>
 				<h5>
 					Puntuación:
 					<span id="estrellas">
@@ -68,7 +69,7 @@
 					{$puntuacion|number_format:1}
 				</h5>
 				<div class="rating">
-					    <div  class="star-rating">
+					<div  class="star-rating">
 						{if $puntuo eq "no"}
 						<img src="{$url_base}img/vacia.png">
 						{else}
@@ -86,8 +87,8 @@
 					<form id="form" method="POST">
 						<input hidden id="aux" type="text"  name="puntuar">
 					</form>
-					<h5>Vendedor: <a href="{$url_ver_perfil_duenio}{$duenio->getCorreo()}" title="Ver perfil de {$duenio->getNombre()} {$duenio->getApellido()}">{$duenio->getNombre()} {$duenio->getApellido()}</a></h5>
-						{if isset($usuario) && $usuario->esAdmin ()}
+					
+					{if isset($usuario) && $usuario->esAdmin ()}
 					<button id="btnDescargarAdm" class="btn btn-info" onclick="window.location='{$url_descargar_archivo}'+'{$archivo->getUbicacion()}'">
 						Descargar Como Admin <span class="fa fa-download"></span>
 					</button>

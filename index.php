@@ -9,7 +9,7 @@ $ctrlIndex = new ControladorIndex ();
 
 $tpl = Template::getInstance();
 $tpl->asignar("url_base", "http://localhost/FileSeller/");
-$tpl->asignar("nombre_proyecto", "File Seller");
+$tpl->asignar("nombre_proyecto", "FileSeller");
 $tpl->asignar("url_perfil", $ctrlIndex->getUrl("usuario", "perfil"));
 $tpl->asignar("url_inicio", $ctrlIndex->getUrl("inicio", "principal"));
 $tpl->asignar("url_login", $ctrlIndex->getUrl("inicio", "login"));

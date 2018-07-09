@@ -15,11 +15,11 @@
 			<table class="table table-bordered"  style="background-color: white">
 				<thead>
 					<tr>
-						<th scope="col">Nombre De Archivo<i id="faArchivo" onclick="AZA()" class="fa fa-sort-alpha-down" aria-hidden="true"></i></th>
+						<th scope="col">Nombre de archivo<i id="faArchivo" onclick="AZA()" class="fa fa-sort-alpha-down" aria-hidden="true"></i></th>
 						<th scope="col" >Dueño</th>
-						<th scope="col">Tipo De Reporte<i id="faTipo" onclick="AZT()" class="fa fa-sort-alpha-down" aria-hidden="true"></i> </th>
-						<th scope="col" width="10%">Ver Mas</th>
-						<th scope="col" width="15%">Eliminar Reporte</th>
+						<th scope="col">Tipo de reporte<i id="faTipo" onclick="AZT()" class="fa fa-sort-alpha-down" aria-hidden="true"></i> </th>
+						<th scope="col" width="10%">Ver más</th>
+						<th scope="col" width="15%">Eliminar reporte</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -54,7 +54,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<p>Esta seguro que quiere eliminar el reporte</p>
+				<p>¿Esta seguro que quiere eliminar el reporte?</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" onclick="eliminarReporte()" class="btn btn-danger">Seguro</button>
@@ -106,7 +106,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Mas Informacion</h5>
+				<h5 class="modal-title">Más información</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -115,8 +115,8 @@
 				<ul id="listMas" class="list-group">
 				</ul>
 				<div class="contenedorBtn">
-				<button  type="button"  data-dismiss="modal"  class="btn btn-danger botones" data-toggle="modal"onclick="verArchivo()">Ver Archivo</button>
-				<button   type="button"  data-dismiss="modal"  class="btn btn-danger botones" data-toggle="modal"  data-target="#eliminarA"  >Eliminar Archivo</button>
+				<button  type="button"  data-dismiss="modal"  class="btn btn-danger botones" data-toggle="modal"onclick="verArchivo()">Ver archivo</button>
+				<button   type="button"  data-dismiss="modal"  class="btn btn-danger botones" data-toggle="modal"  data-target="#eliminarA"  >Eliminar archivo</button>
 				<button type="button"  data-dismiss="modal" class="btn btn-danger botones" data-toggle="modal" data-target="#strike"  >Dar strike a usuario</button>
 				</div>
 			</div>
